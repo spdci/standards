@@ -173,7 +173,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/on-search:
   post: 
@@ -224,7 +224,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
    
  /registry/subscribe:
@@ -278,7 +278,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/on-subscribe:
   post: 
@@ -331,7 +331,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/notify:
   post: 
@@ -382,7 +382,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/unsubscribe:
   post: 
@@ -435,7 +435,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/on-unsubscribe:
   post: 
@@ -487,7 +487,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
 #  /registry/subscriptions:
 #   post: 
@@ -540,7 +540,7 @@ paths:
 #         '500':
 #           $ref: "#/components/responses/HttpErrorResponse"
 #     security:
-#       - x-access-token: [ ]
+#       - Authorization: [ ]
 #     deprecated: false
 #  /registry/on-subscriptions:
 #   post: 
@@ -593,7 +593,7 @@ paths:
 #         '500':
 #           $ref: "#/components/responses/HttpErrorResponse"
 #     security:
-#       - x-access-token: [ ]
+#       - Authorization: [ ]
 #     deprecated: false
  /registry/txn/status:
   post: 
@@ -645,7 +645,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/txn/on-status:
   post: 
@@ -696,7 +696,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
  /registry/sync/search:
   post: 
@@ -762,7 +762,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
 #  /registry/sync/subscribe:
 #   post: 
@@ -832,7 +832,7 @@ paths:
 #         '500':
 #           $ref: "#/components/responses/HttpErrorResponse"
 #     security:
-#       - x-access-token: [ ]
+#       - Authorization: [ ]
 #     deprecated: false
 #  /registry/sync/subscriptions:
 #   post: 
@@ -894,7 +894,7 @@ paths:
 #         '500':
 #           $ref: "#/components/responses/HttpErrorResponse"
 #     security:
-#       - x-access-token: [ ]
+#       - Authorization: [ ]
 #     deprecated: false
 #  /registry/sync/unsubscribe:
 #   post: 
@@ -965,7 +965,7 @@ paths:
 #         '500':
 #           $ref: "#/components/responses/HttpErrorResponse"
 #     security:
-#       - x-access-token: [ ]
+#       - Authorization: [ ]
 #     deprecated: false
  /registry/sync/txn/status:
   post: 
@@ -1030,7 +1030,7 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - x-access-token: [ ]
+      - Authorization: [ ]
     deprecated: false
 components:
   schemas:
@@ -1039,6 +1039,8 @@ components:
       $ref: ../extensions/cdpi/PersonId.yaml
 
     ###### src/extensions/dci schema objects
+    dci_CRVSPerson: 
+      $ref: ../extensions/dci/CRVSPerson.yaml
     dci_IdentifierType: 
       $ref: ../extensions/dci/IdentifierType.yaml
     dci_IdentifierTypeValue: 
@@ -1201,6 +1203,8 @@ components:
       $ref: ../common/schema/LanguageCode.yaml
     LatLong: 
       $ref: ../common/schema/LatLong.yaml
+    Meta:
+      $ref: ../common/schema/Meta.yaml
     MsgCallbackHeader_V1.0.0: 
       $ref: ../common/schema/MsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
@@ -1234,5 +1238,5 @@ components:
     Response:
       $ref: ../common/response/Response.yaml    
   securitySchemes:
-    x-access-token:
-      $ref: ../common/security/x-access-token.yaml
+    Authorization:
+      $ref: ../common/security/Authorization.yaml

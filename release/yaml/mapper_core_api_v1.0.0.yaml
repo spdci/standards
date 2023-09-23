@@ -1,41 +1,19 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
-  title: Interoperability APIs - Federated Registry Data & Credential Access
-  x-logo:
-    url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
-    backgroundColor: '#FFFFFF'
-    altText: Digital Convergence Initiative
-  description: |-
-    The CRVS interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between CRVS registry and SP system.
-    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
-    That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
-
-    1. Search: The Search API provides functionality to search based on demographic, identifiers and custom query
-    2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in crvs registry it sends event details on notify end point
-    3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
-
-    Gitbook reference link:
-    - [CRVS - V1.0 ](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs)
-
-    Code directory links:
-    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.01-identifier_type)
-    - [Marital Status](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.02-marital_status)
-    - [Sex](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.03-sex)
-    - [Vital event types](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.04-vital_events)   
-
-    Each request is build up of three parts
-    - signature 
-    - header 
-    - message
+  title: Interoperability APIs - Financial Address Mapper Mgmt
+  description: |
+    1. Category: Financial [Address Mapper](https://g2pconnect.cdpi.dev/protocol/interfaces/beneficiary-management/mapper-architecture)
+    2. Feature: Manage financial address mapper registry
+    3. Specification Level: **Draft**
   version: 1.0.0
   contact:
-    name: DCI Social Protection
-    email: info@spdci.org
+    name: G2P Connect
+    email: info@g2pconnect.global
   license:
-    name: DCI Social Protection License
-    url: 'https://github.com/spdci/standards/blob/draft/LICENSE.md'
+    name: CDPI CC BY-SA 4.0e
+    url: 'https://github.com/G2P-Connect/specs/blob/main/LICENSE'
 servers:
-  - url: 'https://sandbox.spdci.org/namespace/v1.0.0'
+  - url: 'https://sandbox.dpg.org/namespace/v1.0.0'
     description: Sandbox Server
 tags:
   - name: Async
@@ -46,46 +24,54 @@ tags:
     description: Schemas
   - name: Status Codes
     description: Status Codes
-  - name: SearchRequest
-    x-displayName: SearchRequest
+  - name: LinkRequest
+    x-displayName: LinkRequest
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchRequest" />    
-  - name: SearchResponse
-    x-displayName: SearchResponse
+      <SchemaDefinition schemaRef="#/components/schemas/LinkRequest" />    
+  - name: LinkResponse
+    x-displayName: LinkResponse
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchResponse" />  
-  - name: SearchStatusReasonCode
-    x-displayName: SearchStatusReasonCode
+      <SchemaDefinition schemaRef="#/components/schemas/LinkResponse" />    
+  - name: LinkStatusReasonCode
+    x-displayName: LinkStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
-  - name: SubscribeRequest
-    x-displayName: SubscribeRequest
+      <SchemaDefinition schemaRef="#/components/schemas/LinkStatusReasonCode" />   
+  - name: ResolveRequest
+    x-displayName: ResolveRequest
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
-  - name: SubscribeResponse
-    x-displayName: SubscribeResponse
+      <SchemaDefinition schemaRef="#/components/schemas/ResolveRequest" />    
+  - name: ResolveResponse
+    x-displayName: ResolveResponse
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
-  - name: SubscribeStatusReasonCode
-    x-displayName: SubscribeStatusReasonCode
+      <SchemaDefinition schemaRef="#/components/schemas/ResolveResponse" />    
+  - name: ResolveStatusReasonCode
+    x-displayName: ResolveStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
-  - name: NotifyEventRequest
-    x-displayName: NotifyEventRequest
+      <SchemaDefinition schemaRef="#/components/schemas/ResolveStatusReasonCode" />
+  - name: UpdateRequest
+    x-displayName: UpdateRequest
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
-  - name: UnSubscribeRequest
-    x-displayName: UnSubscribeRequest
+      <SchemaDefinition schemaRef="#/components/schemas/UpdateRequest" />    
+  - name: UpdateResponse
+    x-displayName: UpdateResponse
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeRequest" />    
-  - name: UnSubscribeResponse
-    x-displayName: UnSubscribeResponse
+      <SchemaDefinition schemaRef="#/components/schemas/UpdateResponse" />   
+  - name: UpdateStatusReasonCode
+    x-displayName: UpdateStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeResponse" />  
-  - name: UnSubscribeStatusReasonCode
-    x-displayName: UnSubscribeStatusReasonCode
+      <SchemaDefinition schemaRef="#/components/schemas/UpdateStatusReasonCode" /> 
+  - name: UnlinkRequest
+    x-displayName: UnlinkRequest
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/UnlinkRequest" />    
+  - name: UnlinkResponse
+    x-displayName: UnlinkResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/UnlinkResponse" />   
+  - name: UnlinkStatusReasonCode
+    x-displayName: UnlinkStatusReasonCode
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/UnlinkStatusReasonCode" />  
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -105,27 +91,28 @@ x-tagGroups:
       - Sync
   - name: Schema Objects
     tags:
-      - SearchRequest
-      - SearchResponse
-      - SubscribeRequest
-      - SubscribeResponse
-      - NotifyEventRequest
-      - UnSubscribeRequest
-      - UnSubscribeResponse
+      - LinkRequest
+      - LinkResponse
+      - ResolveRequest
+      - ResolveResponse
+      - UpdateRequest
+      - UpdateResponse
+      - UnlinkRequest
+      - UnlinkResponse
       - TxnStatusRequest
       - TxnStatusResponse
-      - EncryptedMessage
   - name: Status Codes
     tags:
-      - SearchStatusReasonCode
-      - SubscribeStatusReasonCode
-      - UnSubscribeStatusReasonCode
+      - LinkStatusReasonCode
+      - ResolveStatusReasonCode
+      - UpdateStatusReasonCode
+      - UnlinkStatusReasonCode
 paths:
-  /registry/search:
+  /mapper/link:
     post:
-      summary: /registry/search
-      description: Search person(s) in registry using identifier or custome attributes
-      operationId: post_reg_search
+      summary: /mapper/link
+      description: Linking ID to Financial Address in the mapper registry
+      operationId: post_mapper_link
       tags:
         - Async
       requestBody:
@@ -144,12 +131,12 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - search
+                            - link
                 message:
                   type: object
                   description: The search data using which registry search to be performed
                   oneOf:
-                    - $ref: '#/components/schemas/SearchRequest'
+                    - $ref: '#/components/schemas/LinkRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -161,7 +148,7 @@ paths:
                 - properties:
                     action:
                       enum:
-                        - search
+                        - link
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -174,11 +161,11 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/on-search:
+  /mapper/on-link:
     post:
-      summary: /registry/on-search
-      description: Search results through callback
-      operationId: post_reg_on-search
+      summary: /mapper/on-link
+      description: Linking response throuhg callback
+      operationId: post_mapper_on-link
       tags:
         - Async
       requestBody:
@@ -197,11 +184,11 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - on-search
+                            - on-link
                 message:
                   type: object
                   oneOf:
-                    - $ref: '#/components/schemas/SearchResponse'
+                    - $ref: '#/components/schemas/LinkResponse'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -212,7 +199,7 @@ paths:
                 - properties:
                     action:
                       enum:
-                        - on-search
+                        - on-link
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -225,11 +212,11 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/subscribe:
+  /mapper/update:
     post:
-      summary: /registry/subscribe
-      description: Subscribe to a life event with registry
-      operationId: post_reg_subscribe
+      summary: /mapper/update
+      description: Updating fa details against an id in mapper registry
+      operationId: put_g2p_mapper_update
       tags:
         - Async
       requestBody:
@@ -248,12 +235,12 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - subscribe
+                            - update
                 message:
                   type: object
-                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber
+                  description: The search data using which registry search to be performed
                   oneOf:
-                    - $ref: '#/components/schemas/SubscribeRequest'
+                    - $ref: '#/components/schemas/UpdateRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -265,7 +252,7 @@ paths:
                 - properties:
                     action:
                       enum:
-                        - subscribe
+                        - update
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -278,64 +265,11 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/on-subscribe:
+  /mapper/on-update:
     post:
-      summary: /registry/on-subscribe
-      description: Subscribe results through callback
-      operationId: post_reg_on-subscribe
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - on-subscribe
-                message:
-                  type: object
-                  description: Subscription information
-                  oneOf:
-                    - $ref: '#/components/schemas/SubscribeResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - on-subscribe
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/notify:
-    post:
-      summary: /registry/notify
-      description: Registry to notify a life event to subscrbiers
-      operationId: post_reg_notify
+      summary: /mapper/on-update
+      description: Update response through callback
+      operationId: put_mapper_on-update
       tags:
         - Async
       requestBody:
@@ -354,11 +288,11 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - notify
+                            - on-update
                 message:
                   type: object
                   oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/UpdateResponse'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -369,7 +303,7 @@ paths:
                 - properties:
                     action:
                       enum:
-                        - notify
+                        - on-update
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -378,15 +312,15 @@ paths:
         '500':
           $ref: '#/components/responses/HttpErrorResponse'
         default:
-          $ref: '#/components/responses/HttpErrorResponse'
+          $ref: '#/components/responses/Response'
       security:
         - Authorization: []
       deprecated: false
-  /registry/unsubscribe:
+  /mapper/unlink:
     post:
-      summary: /registry/unsubscribe
-      description: Unsubscribe existing subscription(s) by subscription_code
-      operationId: post_reg_unsubscribe
+      summary: /mapper/unlink
+      description: Unlinking id from mapper registry
+      operationId: post_mapper_unlink
       tags:
         - Async
       requestBody:
@@ -405,12 +339,11 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - unsubscribe
+                            - unlink
                 message:
                   type: object
-                  description: The unsubscribe request that contain subscription ids which to be removed from subscription list
                   oneOf:
-                    - $ref: '#/components/schemas/UnSubscribeRequest'
+                    - $ref: '#/components/schemas/UnlinkRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -422,7 +355,7 @@ paths:
                 - properties:
                     action:
                       enum:
-                        - unsubscribe
+                        - unlink
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -435,11 +368,62 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/on-unsubscribe:
+  /mapper/on-unlink:
     post:
-      summary: /registry/on-unsubscribe
-      description: Unsubscribe response as a callback
-      operationId: post_reg_on-unsubscribe
+      summary: /mapper/on-unlink
+      description: Unlinking response through callback end point
+      operationId: post_mapper_on-unlink
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - on-unlink
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/UnlinkResponse'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - on-unlink
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
+  /mapper/resolve:
+    post:
+      summary: /mapper/resolve
+      description: Resolve fa / beneficiary id to a store of value
+      operationId: post_mapper_resolve
       tags:
         - Async
       requestBody:
@@ -458,11 +442,11 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - on-unsubscribe
+                            - resolve
                 message:
                   type: object
                   oneOf:
-                    - $ref: '#/components/schemas/UnSubscribeResponse'
+                    - $ref: '#/components/schemas/ResolveRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -474,7 +458,7 @@ paths:
                 - properties:
                     action:
                       enum:
-                        - on-unsubscribe
+                        - resolve
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -487,11 +471,63 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/txn/status:
+  /mapper/on-resolve:
     post:
-      summary: /registry/txn/status
-      description: Perform async status check of previous civil registry transanctions using transaction_id and/or reference_id(s)
-      operationId: post_reg_txnstatus
+      summary: /mapper/on-resolve
+      description: Resolve response through callback end point
+      operationId: post_mapper_on-resolve
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - on-resolve
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/ResolveResponse'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - on-resolve
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
+  /mapper/txn/status:
+    post:
+      summary: /mapper/txn/status
+      description: |
+        Perform async status check of previous mapper transanctions using transaction_id and/or reference_id(s)
+      operationId: post_mapper_txnstatus
       tags:
         - Async
       requestBody:
@@ -539,11 +575,11 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/txn/on-status:
+  /mapper/txn/on-status:
     post:
-      summary: /registry/txn/on-status
-      description: Response to async status check of previous civil registrt transanctions using callback
-      operationId: post_reg_on-txnstatus
+      summary: /mapper/txn/on-status
+      description: Response to async status check of previous mapper transanctions using callback
+      operationId: post_mapper_on-txnstatus
       tags:
         - Async
       requestBody:
@@ -590,11 +626,11 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/sync/search:
+  /mapper/sync/link:
     post:
-      summary: /registry/sync/search
-      description: Search person(s) in registry using identifier or custome attributes
-      operationId: post_reg_sync_search
+      summary: /mapper/sync/link
+      description: Linking ID to Financial Address in the mapper registry
+      operationId: post_reg_sync_link
       tags:
         - Sync
       requestBody:
@@ -613,12 +649,12 @@ paths:
                     - properties:
                         action:
                           enum:
-                            - search
+                            - link
                 message:
                   type: object
-                  description: The search data using which registry search to be performed
-                  oneOf:
-                    - $ref: '#/components/schemas/SearchRequest'
+                  description: The link data to map id to fa
+                  anyOf:
+                    - $ref: '#/components/schemas/LinkRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -631,7 +667,7 @@ paths:
         '500':
           $ref: '#/components/responses/HttpErrorResponse'
         default:
-          description: Registry search response
+          description: Linking response throuhg callback
           content:
             application/json:
               schema:
@@ -649,7 +685,205 @@ paths:
                   message:
                     type: object
                     oneOf:
-                      - $ref: '#/components/schemas/SearchResponse'
+                      - $ref: '#/components/schemas/LinkResponse'
+                      - $ref: '#/components/schemas/EncryptedMessage'
+                required:
+                  - header
+      security:
+        - Authorization: []
+      deprecated: false
+  /mapper/sync/update:
+    post:
+      summary: /mapper/sync/update
+      description: Update ID or Financial Address in the mapper registry
+      operationId: post_reg_sync_update
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - link
+                message:
+                  type: object
+                  description: The link data to map id to fa
+                  anyOf:
+                    - $ref: '#/components/schemas/UpdateRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          description: Linking response throuhg callback
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/MsgSignature'
+                  header:
+                    allOf:
+                      - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                      - properties:
+                          action:
+                            enum:
+                              - on-search
+                  message:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/UpdateResponse'
+                      - $ref: '#/components/schemas/EncryptedMessage'
+                required:
+                  - header
+      security:
+        - Authorization: []
+      deprecated: false
+  /mapper/sync/unlink:
+    post:
+      summary: /mapper/sync/unlink
+      description: Unlink ID to Financial Address in the mapper registry
+      operationId: post_reg_sync_unlink
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - link
+                message:
+                  type: object
+                  description: Request message to unlink id from fa
+                  anyOf:
+                    - $ref: '#/components/schemas/UnlinkRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          description: Unlink response throuhg callback
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/MsgSignature'
+                  header:
+                    allOf:
+                      - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                      - properties:
+                          action:
+                            enum:
+                              - on-search
+                  message:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/UnlinkResponse'
+                      - $ref: '#/components/schemas/EncryptedMessage'
+                required:
+                  - header
+      security:
+        - Authorization: []
+      deprecated: false
+  /mapper/sync/resolve:
+    post:
+      summary: /mapper/sync/resolve
+      description: Resolve ID to a Financial Address in the mapper registry
+      operationId: post_reg_sync_resolve
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - link
+                message:
+                  type: object
+                  description: Request message to resolve id to a fa
+                  anyOf:
+                    - $ref: '#/components/schemas/ResolveRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          description: Resolve response through callback
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/MsgSignature'
+                  header:
+                    allOf:
+                      - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                      - properties:
+                          action:
+                            enum:
+                              - on-search
+                  message:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/ResolveResponse'
                       - $ref: '#/components/schemas/EncryptedMessage'
                 required:
                   - header
@@ -659,7 +893,7 @@ paths:
   /registry/sync/txn/status:
     post:
       summary: /registry/sync/txn/status
-      description: Sync status check of registry Async APIs
+      description: Perform sync status check of previous civil registry transanctions using transaction_id and/or reference_id(s)
       operationId: post_reg_sync_txnstatus
       tags:
         - Sync
@@ -724,7 +958,7 @@ paths:
 components:
   schemas:
     cdpi_PersonId:
-      type: object
+      type: string
       description: |
         1. Person id is case insensitve normative represenation as id-type:id@provider <br>
         2. This will enumerate foundational and functioanl id's to easily resolvable addressess <br>
@@ -736,244 +970,27 @@ components:
         Note: id provider should be made configurable and solutions should adapt to the local jurisdiction and policies.
       format: '^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$'
       example: 'vid:54321@nid'
-    dci_CRVSPerson:
-      type: object
-      description: |
-        @context: "https://example.org/schema/CRVSPerson" <br>
-        @type: "Consent"
-      example:
-        '@context': 'https://example.org/schema/CRVSPerson'
-        '@type': CRVSPerson
-        '@vocab': 'https://spdci.org/'
-        schema: 'http://schema.org/'
-        rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-        xsd: 'http://www.w3.org/2001/XMLSchema#'
-        CRVSPerson:
-          '@id': 'https://spdci.org/CRVSPerson'
-          '@type': 'rdfs:Class'
-          '@context':
-            name:
-              '@id': 'schema:name'
-              '@type': 'xsd:string'
-            givenName:
-              '@id': 'schema:givenName'
-              '@type': 'xsd:string'
-            familyName:
-              '@id': 'schema:familyName'
-              '@type': 'xsd:string'
-            additionalName:
-              '@id': 'schema:additionalName'
-              '@type': 'xsd:string'
-            gender:
-              '@id': 'schema:gender'
-              '@type': 'xsd:string'
-            birthDate:
-              '@id': 'schema:birthDate'
-              '@type': 'xsd:date'
-            birthPlace:
-              '@id': 'schema:birthPlace'
-              '@type': 'schema:GeoCoordinates'
-            deathDate:
-              '@id': 'schema:deathDate'
-              '@type': 'xsd:date'
-            deathPlace:
-              '@id': 'schema:deathPlace'
-              '@type': 'schema:GeoCoordinates'
-            maritalStatus:
-              '@id': 'schema:maritalStatus'
-              '@type': 'xsd:string'
-            honorificPrefix:
-              '@id': 'schema:honorificPrefix'
-              '@type': 'xsd:string'
-            honorificSuffix:
-              '@id': 'schema:honorificSuffix'
-              '@type': 'xsd:string'
-            emails:
-              '@container': '@set'
-              '@id': 'schema:email'
-              '@type': 'xsd:string'
-            telephones:
-              '@container': '@set'
-              '@id': 'schema:telephone'
-              '@type': 'xsd:string'
-            address:
-              '@id': 'schema:address'
-              '@type': 'schema:GeoCoordinates'
-            marriageDate:
-              '@id': 'https://spdci.org/marriageDate'
-              '@type': 'xsd:date'
-            divorceDate:
-              '@id': 'https://spdci.org/divorceDate'
-              '@type': 'xsd:date'
-            parents:
-              '@id': 'schema:parents'
-              '@type': 'https://spdci.org/CRVSPerson'
-        '@id': 'https://spdci.org/CRVSPerson'
-    dci_IdentifierType:
+    cdpi_FinancialAddress:
       type: string
       description: |
-        An identifier type includes unique numbers legally assigned to individuals. <br>
-        Reference: [Types of ID](https://id4d.worldbank.org/guide/types-id-systems)
-
-        UIN : Unique Identification Number <br>
-        BRN : Birth Registration Number or Birth Serial Number <br>
-        MRN : Marriage Registration Number <br>
-        DRN : Death Registration Number <br>
-      enum:
-        - UIN
-        - BRN
-        - MRN
-        - DRN
-    dci_IdentifierTypeValue:
-      type: object
-      properties:
-        identifier_type:
-          $ref: '#/components/schemas/dci_IdentifierType'
-        identifier_value:
-          type: string
-          description: Value of the identifier
-    dci_MaritalStatus:
-      type: string
-      description: |
-        Marital status reference database: Standardized codes/values representing different marital status categories <br>
-        Reference: [FHIR Marital Status](https://hl7.org/fhir/DSTU2/valueset-marital-status.html)<br>
-
-        Code : Values - Description <br>
-        S : Never Married - No marriage contract has ever been entered <br>
-        M : Married - A current marriage contract is active <br>
-        W : Widow - The spouse has died <br>
-        A : Annulled - Marriage contract has been declared null and to not have existed <br>
-        D : Divorced - Marriage contract has been declared dissolved and inactive <br>
-        L : Legally Separated - Legally Separated <br>
-        U : Unmarried - The person is not presently married. The marital history is not known or stated. <br>
-      enum:
-        - S
-        - M
-        - W
-        - A
-        - D
-        - L
-        - U
-    dci_Name:
-      type: object
-      description: |
-        The name data object represents a person's name with various components. <br>
-        Reference: [FHIR XPN - extended person name](https://v2plus.hl7.org/2021Jan/data-type/XPN.html#XPN-1) <br>
-        Note: Note: In some cultures, people can have multiple Surname(s), Given name(s), Second name(s), Suffix(s), or Prefix(s) to their name; all can be present in the respective attributes, being separated by separator character like space or /.
-      properties:
-        sur_name:
-          type: string
-          description: Surname(s) or last name(s) of the applicant
-        given_name:
-          type: string
-          description: Given name(s) or first name(s) of the applicant
-        second_name:
-          type: string
-          description: Second name(s) or middle name(s) of the applicant
-        suffix:
-          type: string
-          description: Suffix part of the applicant's name
-        prefix:
-          type: string
-          description: Prefix part of the applicant's name
-    dci_PersonRecord:
-      description: |
-        1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-        3. Allowes Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-      properties:
-        identifier_type:
-          $ref: '#/components/schemas/dci_IdentifierType'
-        identifier:
-          type: string
-          description: Value of the identifier
-        name:
-          $ref: '#/components/schemas/dci_Name'
-        phone_number:
-          description: 'Applicant preferred phone number as in [E.164](https://www.itu.int/rec/T-REC-E.164-201011-I/en)'
-          type: string
-        phone_number_verified:
-          description: True if the End-User's phone number has been verified; otherwise false.
-          type: string
-        email:
-          description: 'Applicant preferred e-mail address as in [RFC 5322](https://datatracker.ietf.org/doc/html/rfc5322) [addr-spec](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1) [specification](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)'
-          type: string
-        email_verified:
-          description: 'Email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating.'
-          type: boolean
-        sex:
-          $ref: '#/components/schemas/dci_Sex'
-        birthdate:
-          description: 'Represents Date and time of the applicant''s birth as in [ISO 8601](https://www.iso.org/standard/40874.html)'
-          type: string
-        birthplace:
-          $ref: '#/components/schemas/openid_Address'
-        deathdate:
-          $ref: '#/components/schemas/DateTime'
-        deathplace:
-          $ref: '#/components/schemas/openid_Address'
-        address:
-          $ref: '#/components/schemas/openid_Address'
-        marital_status:
-          $ref: '#/components/schemas/dci_MaritalStatus'
-        marriagedate:
-          $ref: '#/components/schemas/DateTime'
-        divorcedate:
-          $ref: '#/components/schemas/DateTime'
-        parent1_identifier:
-          type: object
-          properties:
-            identifier_type:
-              $ref: '#/components/schemas/dci_IdentifierType'
-            identifier:
-              type: string
-              description: Value of the identifier
-        parent2_identifier:
-          type: object
-          properties:
-            identifier_type:
-              $ref: '#/components/schemas/dci_IdentifierType'
-            identifier:
-              type: string
-              description: Value of the identifier
-    dci_RecordType:
-      type: string
-      description: |
-        Predefined registry record to return in respone as object
-      enum:
-        - person
-        - other
-    dci_Sex:
-      type: string
-      description: |
-        Standardized codes/values representing diverse Sex categories.
-        Reference: [FHIR Administrative Gender](https://build.fhir.org/valueset-administrative-gender.html)
-        1 : Male
-        2 : Female
-        3 : Others
-        4 : Unknown
-      enum:
-        - male
-        - female
-        - other
-        - unknown
-    dci_VitalEvents:
-      type: string
-      description: |
-        Standardized codes/values represent vital events in an individual's life. 
-        Reference: [Vital Events Statistics](https://mospi.gov.in/sites/default/files/publication_reports/vital_statistics_2010_0.pdf)<br>
-        1 : Live Birth <br>
-        2 : Death <br>
-        3 : Fetal death <br>
-        4 : Marriage <br>
-        5 : Divorce <br>
-        6 : Adoption <br>
-      enum:
-        - live_birth
-        - death
-        - fetal_death
-        - marriage
-        - divorce
-        - adoption
+        1. Financial address is case insensitive normative represenation of a store of value account represented as id-type:id@provider
+        2. Every payer/payee financial address must resolve to an actual store of value account number for processing the payment instruction
+        3. It is recommended the mapping between id and store of value account details to be held only at final store of value entity and intermediaries can hold 
+        3. Few examples: <br>
+            - token@id-provider e.g token:12345@national-id <br>
+            - uid@pymt-rail e.g uid:12345@national-id <br>
+            - vid@id-provider e.g vid:12345@national-id <br>
+            - mobile@mobile-provider e.g mobile:12345@mobile-pymt <br>
+            - account-id@bank-psp-code e.g account:12345@national-bank <br>
+            - account-no@ifsc-code.ifsc.pymt-rail e.g account:12345@abcd0000001.ifsc.pymt-rail <br>
+            - user-id@psp-code e.g. joeuser@national-bank <br>
+            - token@psp-code e.g token:123456@a123 <br>
+            - code@purpose-code.voucher-provider e.g voucher:12345@food.coupon-network <br>
+      format: '^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$'
+      example: 'token:12345@gtbank'
+    cdpi_FinancialAddressList:
+      items:
+        $ref: '#/components/schemas/cdpi_FinancialAddress'
     GooglePlusCode:
       type: object
       description: 'Refer [Plus Codes](https://github.com/google/open-location-code/wiki/Plus-codes-API) for more details'
@@ -993,363 +1010,6 @@ components:
                   $ref: '#/components/schemas/LatLong'
             location:
               $ref: '#/components/schemas/LatLong'
-    mosip_EventType:
-      type: string
-      description: |
-        Standardized codes/values represent key events to [integrate](https://docs.mosip.io/1.2.0/integrations/mosip-opencrvs-integration#scope) with civil registries. <br><br>
-        **Sample flow to explain birth registration between MOSIP and CRVS systems:**
-        1. Step 1: MOSIP subscribes to BIRTH_REGISTERED event with CRVS for RegistrationRecord
-        2. Step 2: CRVS subscribes to BIRTH_REGISTERED event with MOSIP for MOSIPVerifiableCredential
-        3. Step 3: CRVS notifies RegistrationRecord data to MOSIP 
-        4. Step 4: MOSIP notifies MOSIPVerifiableCredential data to CRVS <br>
-
-        **Sample flow to explain data modification (push) flow from MOSIP to CRVS systems:**
-          1. Step 1: CRVS subscribes to DATA_MODIFICATION event with MOSIP for MOSIPToken data
-          2. Step 2: MOSIP notifies MOSIPToken data to CRVS<br>
-
-        **Note:** 
-        1. Data modifiation (pull) flow can be accomodated with sync/search or existing mosip's eKyc auth api.
-        2. Death, Death Reversal fllows same pattern as described in for birth registration.
-      enum:
-        - BIRTH_REGISTERED
-        - DEATH_REGISTERED
-        - DEATH_REVERSAL
-        - DATA_MODIFICATION
-    mosip_LangaugeValue:
-      type: object
-      description: multi language value object
-      properties:
-        langugage:
-          type: string
-          example: eng
-        value:
-          type: string
-          example: value
-    mosip_LanguageValueList:
-      type: array
-      items:
-        $ref: '#/components/schemas/mosip_LangaugeValue'
-    mosip_MOSIPVerifiableCredential:
-      type: object
-      description: 'MOSIP Verifiable Credential for a [person](https://github.com/opencrvs/mosip-mediator/blob/master/samples/decrypted-sample-received-credentials.json)'
-      properties:
-        issuedTo:
-          description: ''
-          type: string
-        protectedAttributes:
-          type: array
-          items:
-            type: string
-        credentialSubject:
-          description: MOSIP Verifiable Credential for Proof of identity
-          type: object
-          properties:
-            gender:
-              $ref: '#/components/schemas/mosip_LanguageValueList'
-            city:
-              $ref: '#/components/schemas/mosip_LanguageValueList'
-            postalCode:
-              type: string
-              example: '14022'
-            fullName:
-              type: string
-              example: Thirteen Mosip
-            dateOfBirth:
-              type: string
-              example: '2022'
-            province:
-              $ref: '#/components/schemas/mosip_LanguageValueList'
-            phone:
-              type: string
-              example: '9898989898'
-            addressLine1:
-              $ref: '#/components/schemas/mosip_LanguageValueList'
-            addressLine2:
-              $ref: '#/components/schemas/mosip_LanguageValueList'
-            id:
-              type: string
-              example: '2835824850916304'
-            UIN:
-              type: string
-              example: '7346597054'
-            region:
-              $ref: '#/components/schemas/mosip_LanguageValueList'
-            email:
-              type: string
-              example: thirteen.mosip.123@mailinator.com
-        id:
-          type: string
-          example: 'http://mosip.io/credentials/e2039315-87b0-4012-942e-e0d7c879994b'
-        type:
-          type: array
-          items:
-            type: string
-            example: MOSIPVerifiableCredential
-        consent:
-          type: string
-        issuer:
-          type: string
-          example: 'https://mosip.io/issuers/'
-    mosip_RecordType:
-      type: string
-      description: |
-        Predefined registry record to return in respone as object
-      enum:
-        - RegistrationRecord
-        - MOSIPVerifiableCredential
-    mosip_RegistrationRecord:
-      type: object
-      description: 'Birth Registration record to sync with MOSIP. [Reference](https://github.com/mosip/mosip-opencrvs/blob/develop/mediator/src/main/java/io/mosip/opencrvs/dto/SyncDto.java)'
-      properties:
-        registrationId:
-          type: string
-        packetId:
-          type: string
-        additionalInfoReqId:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        registrationType:
-          type: string
-        packetHashValue:
-          type: string
-        packetSize:
-          type: integer
-        supervisorStatus:
-          type: string
-        supervisorComment:
-          type: string
-        opentionalValues:
-          type: array
-          items:
-            type: string
-        langCode:
-          type: string
-        createDateTime:
-          $ref: '#/components/schemas/DateTime'
-        updateDateTime:
-          $ref: '#/components/schemas/DateTime'
-        deletedDateTime:
-          $ref: '#/components/schemas/DateTime'
-        isActive:
-          type: boolean
-        isDeleted:
-          type: boolean
-    nid_DeceasedRecord:
-      type: object
-      description: Deceased record obtainable from registries
-      properties:
-        reference_number:
-          description: 'unique reference number mantained in the registry for recording death record or '
-          type: string
-        name:
-          description: 'End-User''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
-          type: string
-        gender:
-          description: 'End-User''s gender. Values defined by this specification are female, male, transgender.'
-          type: string
-        dob:
-          description: Date of Birth in DDMMYYYY format
-          type: string
-        dod:
-          description: Date of Death in DDMMYYYY format
-          type: string
-        reported_date:
-          description: Date in DDMMYYYY format to record on which the death incident reported
-          type: string
-        demo_check_status:
-          description: whether demo check has been undertaken or not
-          type: boolean
-        demo_check_date:
-          description: Date in DDMMYYYY format to capture the Demo Check Date
-          type: string
-        document:
-          $ref: '#/components/schemas/nid_Document'
-    nid_Document:
-      type: object
-      description: 'Supporting document of the Resident,Reference document collected for registering the deceased information,Document encoded as Base64 string'
-      properties:
-        document_name:
-          description: Name of the document
-          type: string
-        document:
-          description: Bases 64 encoded document
-          type: string
-    nid_EKycDetails:
-      type: object
-      description: 'eKYC details of the resident ,ekyc Details undertaken by the Resident'
-      properties:
-        ekyc_date:
-          description: Date on which eKYC has been done. A null value indicates that eKYC has not been undertaken
-          type: string
-    nid_RecordType:
-      type: string
-      description: |
-        Predefined registry record to return in respone as object
-      enum:
-        - resident_record
-        - deceased_record
-    nid_ResidentAddress:
-      type: object
-      description: Address of the Resident in English Language
-      properties:
-        care_of:
-          description: Care of information
-          type: string
-        building:
-          description: Building identity
-          type: string
-        street:
-          description: Street details
-          type: string
-        landmark:
-          description: Landmark details
-          type: string
-        pincode:
-          description: Pincode
-          type: string
-        po-name:
-          description: Post office name
-          type: string
-        vtc:
-          description: Village Town City Code
-          type: string
-        vtc-name:
-          description: Village/Town/City Name
-          type: string
-        sub-district-name:
-          description: Sub District Name
-          type: string
-        district-name:
-          description: District Name
-          type: string
-        state:
-          description: State Name
-          type: string
-        country:
-          description: Country Name
-          type: string
-    nid_ResidentLocalAddress:
-      type: object
-      description: Resident Local Address
-      properties:
-        local-careof:
-          description: Care of information in local language
-          type: string
-        local-building:
-          description: Building information in local language
-          type: string
-        local-street:
-          description: Street information in local language
-          type: string
-        local-landmark:
-          description: Landmark information in local language
-          type: string
-        local-locality:
-          description: locality information in local language
-          type: string
-        pincode:
-          description: pincode
-          type: string
-        po-name-local:
-          description: Post office name in local
-          type: string
-        local-vtc:
-          description: vtc information in local language
-          type: string
-        local-subdistrict:
-          description: Sub district information in local language
-          type: string
-        local-district:
-          description: district information in local language
-          type: string
-        local-state:
-          description: State information in local language
-          type: string
-        local-country:
-          description: Country information in local language
-          type: string
-    nid_ResidentLocalName:
-      type: object
-      description: Resident Local Name
-      properties:
-        language_code:
-          $ref: '#/components/schemas/LanguageCode'
-        local_name:
-          description: Local name of the Resident
-          type: string
-    nid_ResidentNationality:
-      type: object
-      description: 'Resident Nationality Information,Nationality information of the Resident'
-      properties:
-        nationality:
-          description: Nationality information of the Resident
-          type: string
-        passport_number:
-          description: Passport number of the Resident
-          type: string
-        passport_valid_upto:
-          description: Passport validity date in DDMMYYYY format
-          type: string
-        visa_number:
-          description: Visa number of the Resident
-          type: string
-        visa_vald_upto:
-          description: Visa validity details
-          type: string
-        oci_number:
-          description: OCI card deatils
-          type: string
-        oci_valid_upto:
-          description: OCI Validity date in DDMMYYYY format
-          type: string
-    nid_ResidentPhoto:
-      type: object
-      description: 'Resident Photo,Image encoded as Base64 string'
-      properties:
-        photo:
-          description: Photo encoded as Base64 string
-          type: string
-    nid_ResidentRecord:
-      type: object
-      description: Resident Information
-      properties:
-        name:
-          description: 'End-User''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
-          type: string
-        gender:
-          description: 'End-User''s gender. Values defined by this specification are female, male, transgender.'
-          type: string
-        dob:
-          description: Date of Birth in DDMMYYYY format
-          type: string
-        dob_type:
-          description: 'Date of Birth Type i.e Declared, Approximate, Verified'
-          type: string
-        phone:
-          description: 'Phone number of the resident. If the number contains an extension, it is RECOMMENDED that the extension be represented using the RFC 3966 [RFC3966] extension syntax, for example, +1 (604) 555-1234;ext=5678.'
-          type: string
-        email:
-          description: 'End-User''s preferred e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique, as discussed in Section 5.7.'
-          type: string
-        address:
-          $ref: '#/components/schemas/nid_ResidentAddress'
-        local_name:
-          $ref: '#/components/schemas/nid_ResidentLocalName'
-        local_address:
-          $ref: '#/components/schemas/nid_ResidentLocalAddress'
-        photo:
-          $ref: '#/components/schemas/nid_ResidentPhoto'
-        nationality:
-          $ref: '#/components/schemas/nid_ResidentNationality'
-        kyc_status:
-          $ref: '#/components/schemas/nid_EKycDetails'
-        document:
-          $ref: '#/components/schemas/nid_Document'
     openid_Address:
       title: Address
       type: object
@@ -1533,25 +1193,35 @@ components:
               type: string
       required:
         - type
-    RegistryQueries:
-      description: |
-        1. Implementing systems can define schemas.
-        2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
-        3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
-          - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
-          - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
-          - search all farmers with land area less than 2 acers in district code 504
-      oneOf:
-        - $ref: '#/components/schemas/ExpTemplate'
-        - $ref: '#/components/schemas/IdentifierTypeValue'
-        - $ref: '#/components/schemas/ExpPredicateWithConditionList'
-    NotifyEventRequest:
+    AccountProviderInfo:
       type: object
-      description: Registry to notify a event to subscrbiers
+      description: Store of value account provider info
+      properties:
+        name:
+          type: string
+          description: 'entity name like bank name, prepaid card/voucher issuing system, etc.,'
+          example: National Bank of a Country
+        code:
+          type: string
+          description: 'code to identify the entity like bank, prepaid card/voucher issuing system, etc.,'
+          example: BANKXXX
+        subcode:
+          type: string
+          description: 'sub code like entity''s branch code, etc.,'
+        additional_info:
+          description: 'Additional info, if any'
+          type: string
+          maxLength: 999
+      required:
+        - name
+        - code
+    LinkRequest:
+      type: object
+      description: ID to Store of value account linking request
       properties:
         transaction_id:
           $ref: '#/components/schemas/TransactionId'
-        notify_event:
+        link_request:
           type: array
           items:
             type: object
@@ -1560,137 +1230,31 @@ components:
                 $ref: '#/components/schemas/ReferenceId'
               timestamp:
                 $ref: '#/components/schemas/DateTime'
-              data:
-                type: object
-                description: |
-                  Registry data being notified as an outcome of event subscription with registry
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_type:
-                    $ref: '#/components/schemas/RegistryType'
-                  reg_event_type:
-                    $ref: '#/components/schemas/RegistryEventType'
-                  reg_record_type:
-                    $ref: '#/components/schemas/RegistryRecordType'
-                  reg_records:
-                    $ref: '#/components/schemas/RegistryRecord'
-                required:
-                  - reg_record_type
-                  - reg_records
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              fa:
+                $ref: '#/components/schemas/cdpi_FinancialAddress'
+              name:
+                description: 'End-User''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
+                type: string
+              phone_number:
+                description: 'number contains an extension, it is RECOMMENDED that the extension be represented using the RFC 3966 [RFC3966] extension syntax, for example, +1 (604) 555-1234;ext=5678.'
+                type: string
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
               locale:
                 $ref: '#/components/schemas/LanguageCode'
             required:
               - reference_id
               - timestamp
-              - data
+              - id
+              - fa
       required:
         - transaction_id
-        - notify_event
-    RegistryEventType:
-      type: string
-      description: |
-        @context: "https://example.org/schema/RegistryEventType" <br>
-        @type: "VitalEvent" <br>
-
-        **Notes:**
-          1. Registry event type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. example: "ns:org:RegistryEventType:LiveBirth"
-      example: 'ns:org:RegistryEventType:LiveBirth'
-    RegistryRecord:
+        - link_request
+    LinkResponse:
       type: object
-      description: |
-        @context: "https://example.org/schema/RecordType" <br>
-        @type: "CRVSPerson" <br>
-        @container: "@set" <br>
-
-        **Notes:**
-          1. Record type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable identifiers.
-      example:
-        $ref: '#/components/schemas/dci_CRVSPerson'
-    RegistryRecordType:
-      type: string
-      description: |
-        @context: "https://example.org/schema/RegistryRecordType" <br>
-        @type: "RegistryRecordType" <br>
-
-        **Notes:**
-          1. Registry record type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable result sets 
-          3. Referenced in search_request and notify events
-          4. example: "ns:dci:RegistryRecordType:CRVSPerson" 
-      example: 'ns:dci:RegistryRecordType:CRVSPerson'
-    RegistryType:
-      type: string
-      description: |
-        @context: "https://example.org/schema/RegistryType" <br>
-        @type: "RegistryType" <br>
-
-        **Notes:**
-          1. Registry type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable functional registries 
-          3. example: "ns:org:RegistryType:Civil"
-      example: 'ns:org:RegistryType:Civil'
-    SearchRequest:
-      type: object
-      description: |
-        1. Functional registry specific extension to search.
-        2. Additional checks using conditioanl expressions is possible.
-        3. Allows Country/Registry specific implementation extensions using key/value pairs.
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/TransactionId'
-        search_request:
-          type: array
-          description: |
-            1. Batch requests enabel multiple individual requests with respective consent/authorize codes
-          items:
-            type: object
-            properties:
-              reference_id:
-                $ref: '#/components/schemas/ReferenceId'
-              timestamp:
-                $ref: '#/components/schemas/DateTime'
-              search_criteria:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_type:
-                    $ref: '#/components/schemas/RegistryType'
-                  reg_event_type:
-                    $ref: '#/components/schemas/RegistryEventType'
-                  query_type:
-                    $ref: '#/components/schemas/QueryType'
-                  query:
-                    $ref: '#/components/schemas/RegistryQueries'
-                  sort:
-                    $ref: '#/components/schemas/SearchSortList'
-                  pagination:
-                    $ref: '#/components/schemas/PaginationRequest'
-                  consent:
-                    $ref: '#/components/schemas/Consent'
-                  authorize:
-                    $ref: '#/components/schemas/Authorize'
-                required:
-                  - query_type
-                  - query
-              locale:
-                $ref: '#/components/schemas/LanguageCode'
-            required:
-              - reference_id
-              - timestamp
-              - search_criteria
-      required:
-        - transaction_id
-        - search_request
-    SearchResponse:
-      type: object
-      description: Response to search request. Multiple repsonses for each page can be pushed to the caller as an implementation!
+      description: Beneficiary ID to Store of value account linking response
       properties:
         transaction_id:
           $ref: '#/components/schemas/TransactionId'
@@ -1701,7 +1265,7 @@ components:
           type: string
           maxLength: 99
           example: '9876543210'
-        search_response:
+        link_response:
           type: array
           items:
             type: object
@@ -1710,35 +1274,18 @@ components:
                 $ref: '#/components/schemas/ReferenceId'
               timestamp:
                 $ref: '#/components/schemas/DateTime'
+              fa:
+                $ref: '#/components/schemas/cdpi_FinancialAddress'
               status:
                 $ref: '#/components/schemas/RequestStatus'
               status_reason_code:
-                $ref: '#/components/schemas/SearchStatusReasonCode'
+                $ref: '#/components/schemas/LinkStatusReasonCode'
               status_reason_message:
-                description: Status reason code message. Helps actionanble messaging for systems/end users
+                description: Status reascon code message. Helps actionanble messaging for systems/end users
                 type: string
                 maxLength: 999
-              data:
-                type: object
-                description: |
-                  Search result record as an outcome of search/subscribe action
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_type:
-                    $ref: '#/components/schemas/RegistryType'
-                  reg_event_type:
-                    $ref: '#/components/schemas/RegistryEventType'
-                  reg_record_type:
-                    $ref: '#/components/schemas/RegistryRecordType'
-                  reg_records:
-                    $ref: '#/components/schemas/RegistryRecord'
-                required:
-                  - reg_record_type
-                  - reg_records
-              pagination:
-                $ref: '#/components/schemas/Pagination'
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
               locale:
                 $ref: '#/components/schemas/LanguageCode'
             required:
@@ -1747,27 +1294,29 @@ components:
               - status
       required:
         - transaction_id
-        - correlation_id
-        - search_response
-    SearchStatusReasonCode:
+        - link_response
+    LinkStatusReasonCode:
       type: string
-      description: Identity verification request status reason codes
+      description: FA Mapper Link status reason codes
       enum:
         - rjct.reference_id.invalid
         - rjct.reference_id.duplicate
         - rjct.timestamp.invalid
-        - rjct.search_criteria.invalid
-        - rjct.filter.invalid
-        - rjct.sort.invalid
-        - rjct.pagination.invalid
-        - rjct.search.too_many_records_found
-    SubscribeRequest:
+        - rjct.id.invalid
+        - rjct.fa.invalid
+        - rjct.name.invalid
+        - rjct.mobile_number.invalid
+        - rjct.unknown.retry
+        - rjct.other.error
+    ResolveRequest:
       type: object
-      description: Subscribe to a life event with crvs
+      description: |
+        1. If id is null then only verify and resolve fa is linked to store of value account. Verification is done by entity issuing fa.
+        2. If id is not null then verify and resolve fa is linked store of value account. Additionally verify fa and id are issued to the same individual. If both conditions pass then resolve status can be set to yes.
       properties:
         transaction_id:
           $ref: '#/components/schemas/TransactionId'
-        subscribe_request:
+        resolve_request:
           type: array
           items:
             type: object
@@ -1776,48 +1325,39 @@ components:
                 $ref: '#/components/schemas/ReferenceId'
               timestamp:
                 $ref: '#/components/schemas/DateTime'
-              subscribe_criteria:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_type:
-                    $ref: '#/components/schemas/RegistryType'
-                  reg_event_type:
-                    $ref: '#/components/schemas/RegistryEventType'
-                  frequency:
-                    $ref: '#/components/schemas/EventFrequency'
-                  filter_type:
-                    $ref: '#/components/schemas/QueryType'
-                  filter:
-                    $ref: '#/components/schemas/RegistryQueries'
-                  notify_record_type:
-                    $ref: '#/components/schemas/RegistryRecordType'
-                  authorize:
-                    $ref: '#/components/schemas/Authorize'
-                required:
-                  - reg_event_type
-                  - filter
-                  - notify_record_type
+              fa:
+                $ref: '#/components/schemas/cdpi_FinancialAddress'
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              name:
+                description: 'End-User''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
+                type: string
+              scope:
+                description: Resolve scope to return only yes_no or account provider or id details. Additional authorization based on caller to be enforced by the implementing system to return any sensitive data.
+                type: string
+                enum:
+                  - yes_no
+                  - details
+                default: yes_no
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
               locale:
                 $ref: '#/components/schemas/LanguageCode'
             required:
               - reference_id
               - timestamp
-              - subscribe_criteria
       required:
         - transaction_id
-        - subscribe_request
-    SubscribeResponse:
+        - resolve_request
+    ResolveResponse:
       type: object
-      description: Response to subscribe request.
+      description: Resolve financial address to store of value account info response
       properties:
         transaction_id:
           $ref: '#/components/schemas/TransactionId'
         correlation_id:
-          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-        subscribe_response:
+          $ref: '#/components/schemas/LinkResponse/properties/correlation_id'
+        resolve_response:
           type: array
           items:
             type: object
@@ -1826,20 +1366,22 @@ components:
                 $ref: '#/components/schemas/ReferenceId'
               timestamp:
                 $ref: '#/components/schemas/DateTime'
+              fa:
+                $ref: '#/components/schemas/cdpi_FinancialAddress'
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              account_provider_info:
+                $ref: '#/components/schemas/AccountProviderInfo'
               status:
                 $ref: '#/components/schemas/RequestStatus'
               status_reason_code:
-                $ref: '#/components/schemas/SubscribeStatusReasonCode'
+                $ref: '#/components/schemas/ResolveStatusReasonCode'
               status_reason_message:
-                description: Status reason code message. Helps actionanble messaging for systems/end users
+                description: Status reascon code message. Helps actionanble messaging for systems/end users
                 type: string
                 maxLength: 999
-              subscriptions:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SubscriptionInfo'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
               locale:
                 $ref: '#/components/schemas/LanguageCode'
             required:
@@ -1848,68 +1390,24 @@ components:
               - status
       required:
         - transaction_id
-        - correlation_id
-        - subscribe_response
-    SubscribeStatusReasonCode:
+        - resolve_response
+    ResolveStatusReasonCode:
       type: string
-      description: Identity verification request status reason codes
+      description: FA Mapper Resolve status reason codes
       enum:
         - rjct.reference_id.invalid
         - rjct.reference_id.duplicate
         - rjct.timestamp.invalid
-        - rjct.notify_types.invalid
-        - rjct.notify_details.invalid
-        - rjct.person_id.invalid
-        - rjct.event.already_subscribed
-    SubscriptionCode:
-      type: string
-      description: |
-        Unique code to identify the subscription request by the entity providing subscription service.
-        Helps to check status, unsubscribe etc.,
-      maxLength: 99
-    SubscriptionCodeList:
-      items:
-        $ref: '#/components/schemas/SubscriptionCode'
-    SubscriptionInfo:
-      type: object
-      properties:
-        version:
-          type: string
-          default: 1.0.0
-        code:
-          $ref: '#/components/schemas/SubscriptionCode'
-        status:
-          $ref: '#/components/schemas/SubscriptionStatus'
-        timestamp:
-          $ref: '#/components/schemas/DateTime'
-        reg_type:
-          $ref: '#/components/schemas/RegistryType'
-        reg_event_type:
-          $ref: '#/components/schemas/RegistryEventType'
-        frequency:
-          $ref: '#/components/schemas/EventFrequency'
-        filter_type:
-          $ref: '#/components/schemas/QueryType'
-        filter:
-          $ref: '#/components/schemas/RegistryQueries'
-        notify_record_type:
-          $ref: '#/components/schemas/RegistryRecordType'
-          required:
-            - reg_event_type
-            - filter
-            - notify_record_type
-        locale:
-          $ref: '#/components/schemas/LanguageCode'
-      required:
-        - subscription_code
-        - timestamp
-        - subscribe_criteria
-    SubscriptionStatus:
-      type: string
-      description: subscription status
-      enum:
-        - subscribe
-        - unsubscribe
+        - rjct.id.invalid
+        - rjct.fa.invalid
+        - rjct.resolve_type.not_supported
+        - succ.fa.active
+        - succ.fa.inactive
+        - succ.fa.not_found
+        - succ.fa.not_linked_to_id
+        - succ.id.active
+        - succ.id.inactive
+        - succ.id.not_found
     TxnStatusRequest:
       type: object
       description: Request to fetch txn status on various service requests
@@ -1925,22 +1423,21 @@ components:
               type: string
               description: txn type to fetch status
               enum:
-                - search
-                - subscribe
-                - unsubscribe
+                - link
+                - resolve
+                - update
+                - unlink
             attribute_type:
               type: string
               enum:
                 - transaction_id
                 - reference_id_list
                 - correlation_id
-                - subscription_code_list
             attribute_value:
               oneOf:
                 - $ref: '#/components/schemas/TransactionId'
                 - $ref: '#/components/schemas/ReferenceIdList'
-                - $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-                - $ref: '#/components/schemas/SubscriptionCodeList'
+                - $ref: '#/components/schemas/LinkResponse/properties/correlation_id'
             locale:
               $ref: '#/components/schemas/LanguageCode'
           required:
@@ -1958,7 +1455,7 @@ components:
         transaction_id:
           $ref: '#/components/schemas/TransactionId'
         correlation_id:
-          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
+          $ref: '#/components/schemas/LinkResponse/properties/correlation_id'
         txnstatus_response:
           type: object
           properties:
@@ -1966,16 +1463,18 @@ components:
               type: string
               description: txn type to fetch status
               enum:
-                - on-search
-                - on-subscribe
-                - on-unsubscribe
+                - on-link
+                - on-resolve
+                - on-update
+                - on-unlink
             txn_status:
               oneOf:
-                - $ref: '#/components/schemas/SearchResponse'
-                - $ref: '#/components/schemas/SubscribeResponse'
-                - $ref: '#/components/schemas/UnSubscribeResponse'
+                - $ref: '#/components/schemas/LinkResponse'
+                - $ref: '#/components/schemas/ResolveResponse'
+                - $ref: '#/components/schemas/UpdateResponse'
+                - $ref: '#/components/schemas/UnlinkResponse'
           example:
-            $ref: '#/components/schemas/SearchResponse'
+            $ref: '#/components/schemas/LinkResponse'
           required:
             - txn_type
             - txn_status
@@ -1983,67 +1482,166 @@ components:
         - transaction_id
         - correlation_id
         - txnstatus_response
-    UnSubscribeRequest:
+    UnlinkRequest:
       type: object
-      description: Un-Subscribe to registred subscriptions
+      description: ID to Store of value account unlinking request. Unlink request removes entry against requested id/fa pair.
       properties:
         transaction_id:
           $ref: '#/components/schemas/TransactionId'
-        timesstamp:
-          $ref: '#/components/schemas/DateTime'
-        subscription_codes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionCode'
-      required:
-        - transaction_id
-        - timestamp
-        - sunscription_codes
-    UnSubscribeResponse:
-      type: object
-      description: Un-Subscribe to a life event with crvs
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/TransactionId'
-        correlation_id:
-          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-        timesatmp:
-          $ref: '#/components/schemas/DateTime'
-        status:
-          $ref: '#/components/schemas/RequestStatus'
-        status_reason_code:
-          $ref: '#/components/schemas/UnSubscribeStatusReasonCode'
-        status_reason_message:
-          description: Status reason code message. Helps actionanble messaging for systems/end users
-          type: string
-          maxLength: 999
-        subscription_status:
+        unlink_request:
           type: array
           items:
             type: object
             properties:
-              code:
-                $ref: '#/components/schemas/SubscriptionCode'
-              status:
-                $ref: '#/components/schemas/SubscriptionStatus'
+              reference_id:
+                $ref: '#/components/schemas/ReferenceId'
+              timestamp:
+                $ref: '#/components/schemas/DateTime'
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              fa:
+                $ref: '#/components/schemas/cdpi_FinancialAddress'
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
+              locale:
+                $ref: '#/components/schemas/LanguageCode'
             required:
-              - code
+              - reference_id
+              - timestamp
+              - id
+      required:
+        - transaction_id
+        - unlink_request
+    UnlinkResponse:
+      type: object
+      description: ID to Store of value account unlinking response
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/TransactionId'
+        correlation_id:
+          $ref: '#/components/schemas/LinkResponse/properties/correlation_id'
+        unlink_response:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/ReferenceId'
+              timestamp:
+                $ref: '#/components/schemas/DateTime'
+              status:
+                $ref: '#/components/schemas/RequestStatus'
+              status_reason_code:
+                $ref: '#/components/schemas/UnlinkStatusReasonCode'
+              status_reason_message:
+                description: 'Status reascon code message, if any, Helps actionanble messaging for systems/end users'
+                type: string
+                maxLength: 999
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
+              locale:
+                $ref: '#/components/schemas/LanguageCode'
+            required:
+              - reference_id
+              - timestamp
               - status
       required:
         - transaction_id
-        - correlation_id
-        - timestamp
-        - status
-    UnSubscribeStatusReasonCode:
+        - unlink_response
+    UnlinkStatusReasonCode:
       type: string
-      description: Identity verification request status reason codes
+      description: FA Mapper Unlink status reason codes
       enum:
         - rjct.reference_id.invalid
         - rjct.reference_id.duplicate
         - rjct.timestamp.invalid
-        - rjct.subscription_code.invalid
-        - rjct.requester.invalid
-        - rjct.event.already_unsubscribed
+        - rjct.beneficiary_name.invalid
+    UpdateRequest:
+      type: object
+      description: ID to Store of value account update request. ID can only unlinked.
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/TransactionId'
+        update_request:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/ReferenceId'
+              timestamp:
+                $ref: '#/components/schemas/DateTime'
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              fa:
+                $ref: '#/components/schemas/cdpi_FinancialAddress'
+              name:
+                description: 'End-User''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
+                type: string
+              phone_number:
+                description: 'number contains an extension, it is RECOMMENDED that the extension be represented using the RFC 3966 [RFC3966] extension syntax, for example, +1 (604) 555-1234;ext=5678.'
+                type: string
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
+              locale:
+                $ref: '#/components/schemas/LanguageCode'
+            required:
+              - reference_id
+              - timestamp
+              - id
+              - fa
+      required:
+        - transaction_id
+        - update_request
+    UpdateResponse:
+      type: object
+      description: ID to Store of value account update response
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/TransactionId'
+        correlation_id:
+          $ref: '#/components/schemas/LinkResponse/properties/correlation_id'
+        update_response:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_id:
+                $ref: '#/components/schemas/ReferenceId'
+              timestamp:
+                $ref: '#/components/schemas/DateTime'
+              id:
+                $ref: '#/components/schemas/cdpi_PersonId'
+              status:
+                $ref: '#/components/schemas/RequestStatus'
+              status_reason_code:
+                $ref: '#/components/schemas/UpdateStatusReasonCode'
+              status_reason_message:
+                description: 'Status reascon code message, if any, Helps actionanble messaging for systems/end users'
+                type: string
+                maxLength: 999
+              additional_info:
+                $ref: '#/components/schemas/AttributeNameValueList'
+              locale:
+                $ref: '#/components/schemas/LanguageCode'
+            required:
+              - reference_id
+              - timestamp
+              - fa
+              - status
+      required:
+        - transaction_id
+        - update_response
+    UpdateStatusReasonCode:
+      type: string
+      description: FA Mapper Update status reason codes
+      enum:
+        - rjct.reference_id.invalid
+        - rjct.reference_id.duplicate
+        - rjct.timestamp.invalid
+        - rjct.beneficiary_name.invalid
     Ack:
       type: string
       description: |
@@ -2090,26 +1688,6 @@ components:
         - type: boolean
         - type: object
       example: '1980'
-    Authorize:
-      type: object
-      description: |
-        @context: "https://example.org/schema/Authorize" <br>
-        @type: "Authorize"
-      example:
-        '@context': 'https://example.org/schema/Authorize'
-        '@type': Authorize
-        ts:
-          $ref: '#/components/schemas/DateTime'
-        purpose:
-          text:
-            type: string
-          code:
-            type: string
-            description: 'From a fixed set, documented at refUri'
-          refUri:
-            type: string
-            format: uri
-            description: Uri to provide more info on authorize codes
     Consent:
       type: object
       description: |
@@ -2156,13 +1734,13 @@ components:
             - alg
             - enc
             - kid
-        ciphertext:
+        data:
           type: string
           description: This is the result of encrypting the plaintext using the CEK and the IV. It's Base64Url-encoded.
         encrypted_key:
           type: string
           description: The base64-url encoded encrypted key
-        tag:
+        auth_tag:
           type: string
           description: 'This is a Base64Url-encoded value that provides evidence of the integrity and authenticity of the ciphertext, Initialization Vector, and Additional Authenticated Data'
         iv:
@@ -2170,9 +1748,9 @@ components:
           description: This is a Base64Url-encoded random bit string to be used as the Initialization Vector (IV) when encrypting the plaintext to produce the ciphertext. The size of the IV depends on the encryption algorithm used.
       required:
         - header
-        - ciphertext
+        - data
         - encrypted_key
-        - tag
+        - auth_tag
         - iv
     Error:
       description: |
@@ -2204,26 +1782,6 @@ components:
           type: string
           description: message to describe above error code
           maxLength: 999
-    EventFrequency:
-      type: object
-      description: |
-        1. Frequency at which subscribed services should be notified. 
-        2. start_time, end_time represent data range where the notification frequency is applicable 
-      properties:
-        start_time:
-          $ref: '#/components/schemas/DateTime'
-        end_time:
-          $ref: '#/components/schemas/DateTime'
-        frequency:
-          type: string
-          description: |
-            Frequency at which notification is required. This will be in the form of cron expression. 
-            Example - "0 0 0 5,15 * ? *" 
-            which says At 00:00:00am, on the 5th and 15th day, every month
-      required:
-        - start_time
-        - end_time
-        - frequency
     ExpCondition:
       type: string
       description: Condition in an expression
@@ -2334,37 +1892,6 @@ components:
       required:
         - action
         - fileName
-    IdentifierType:
-      type: string
-      description: |
-        @context: "https://example.org/schema/IdType" <br>
-        @type: "IdType" <br>
-
-        **Notes:**
-          1. Identifier type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. e.g: UIN, MOBILE, BRN, MRN, DRN, etc., 
-      example: UIN
-    IdentifierTypeValue:
-      type: object
-      description: Identifier type and value object
-      properties:
-        type:
-          type: string
-          description: |
-            @context: "https://example.org/schema/IdType" <br>
-            @type: "IdType" <br>
-
-            **Notes:**
-              1. Identifier type values defined as per implementation context.
-              2. Usually a list of **enum** values of all possible queryable identifiers.
-              3. e.g: UIN, MOBILE, BRN, MRN, DRN, etc., 
-          example: UIN
-        value:
-          allOf:
-            - description: Identifier Value of the subject.
-            - $ref: '#/components/schemas/AttributeValue'
-          example: '12314567890'
     LanguageCode:
       type: string
       description: indicates language code. G2P Connect supports country codes as per ISO 639.3 standard
@@ -2551,16 +2078,6 @@ components:
           example: 5
       required:
         - page_size
-    QueryType:
-      type: string
-      description: |
-        1. Query format allow multiple ways to search registry
-        2. Templatized query expressions with placeholder for conditional values
-      enum:
-        - idtype-value
-        - expression
-        - predicate
-      example: idtype-value
     ReferenceId:
       type: string
       description: Unique reference_id set by txn initiating system for each request in a batch
@@ -2609,6 +2126,49 @@ components:
       type: string
       maxLength: 99
       example: 0123456789
+  parameters:
+    accept-language:
+      in: header
+      name: accept-language
+      description: 'Default value: en'
+      required: false
+      schema:
+        type: string
+        example: en
+    timestamp:
+      in: header
+      name: timestamp
+      description: 'request timestamp in HTTP Date format - Tue, 06 Mar 2020 21:00:00 GMT'
+      required: true
+      schema:
+        type: string
+        example: 'Tue, 06 Mar 2020 21:00:00 GMT'
+    transaction_id:
+      in: path
+      name: transaction_id
+      description: 'Unique transaction id set by sender as part of the initiating request to co-relate requests across interface end point, sessions, etc., For e.g transaction_id be used to find status using GET call or correlate the transaction as part of the callback call.'
+      required: true
+      schema:
+        type: string
+        maxLength: 99
+        example: 012345678901234567890
+    summary_only:
+      in: path
+      name: summary_only
+      description: 'Optional. Defualt is false, If summary_only set to true then only the message header with stats / status to be returend as part of implementation'
+      required: true
+      schema:
+        type: boolean
+        default: true
+    beneficiary_id:
+      in: path
+      name: beneficiary_id
+      required: true
+      description: '<br> 1. Beneficiary id is a normative represenation represented as id@id-provider <br> 2. This will enumerate foundational and functioanl id''s to easily resolvable addressess <br> 3. Few examples: <br> - id@id-provider e.g 12345@mosip, 12345@PhilID <br> - id@civil-registry.issuing-agency e.g 12345@crvs.rwanda, 12345@ejanma.karnataka - id@functional-identifier.issuing-agency e.g 12345@voter.Rwanda, 12345@DL.karnataka, 12345@fruits.karnataka <br> Note: id-provider should be made configurable and DPGs operating should adapt to the local jurisdiction and policies. e.g fruits.karnataka represents farmer registry in karnataka state govt.<br>'
+      schema:
+        type: string
+        format: '^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$'
+        example: 12345@mosip
   responses:
     HttpErrorResponse:
       description: HTTP layer error details
@@ -2645,7 +2205,7 @@ components:
                   error:
                     $ref: '#/components/schemas/Error'
                   correlation_id:
-                    $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
+                    $ref: '#/components/schemas/LinkResponse/properties/correlation_id'
                 required:
                   - ack_status
                   - timestamp
