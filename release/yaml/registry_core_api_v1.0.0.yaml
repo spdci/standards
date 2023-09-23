@@ -1,17 +1,39 @@
 openapi: 3.0.3
 info:
-  title: Interoperability APIs - Federated Registry Data Access
-  description: |
-    1. Category: Civil & Other Federated [Registries](https://g2pconnect.cdpi.dev/protocol/interfaces/registries) 
-    2. Feature: Enables Data & Verifiable Credential Access
-    2. Specification Level: **Draft**
+  title: Interoperability APIs - Foundational/Functional registries
+  x-logo:
+    url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
+    backgroundColor: '#FFFFFF'
+    altText: Digital Convergence Initiative
+  description: |-
+    The CRVS interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between CRVS registry and SP system.
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
+
+    1. Search: The Search API provides functionality to search based on demographic, identifiers and custom query
+    2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in crvs registry it sends event details on notify end point
+    3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
+
+    Gitbook reference link:
+    - [CRVS - V1.0 ](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs)
+
+    Code directory links:
+    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.01-identifier_type)
+    - [Marital Status](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.02-marital_status)
+    - [Sex](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.03-sex)
+    - [Vital event types](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.04-vital_events)   
+
+    Each request is build up of three parts
+    - signature 
+    - header 
+    - message
   version: 1.0.0
   contact:
-    name: G2P Connect
-    email: info@cdpi.dev
+    name: DCI Social Protection
+    email: info@spdci.org
   license:
-    name: CDPI CC BY-SA 4.0
-    url: 'https://github.com/G2P-Connect/specs/blob/draft/LICENSE.md'
+    name: DCI Social Protection License
+    url: 'https://github.com/spdci/standards/blob/draft/LICENSE.md'
 servers:
   - url: 'https://sandbox.spdci.org/namespace/v1.0.0'
     description: Sandbox Server
