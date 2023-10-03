@@ -18,10 +18,10 @@ info:
     - [CRVS - V1.0 ](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs)
 
     Code directory links:
-    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.01-identifier_type)
-    - [Marital Status](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.02-marital_status)
-    - [Sex](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.03-sex)
-    - [Vital event types](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/wUwmJRFD0Hn6jI5xMat1/standards/1.-crvs/4.2-data-standards/4.2.2-code-directory#cd.04-vital_events)   
+    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.01-identifier_type)
+    - [Marital Status](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.02-marital_status)
+    - [Sex](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.03-sex)
+    - [Vital event types](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.04-vital_events)   
     
     Each request is build up of three parts
     - signature 
