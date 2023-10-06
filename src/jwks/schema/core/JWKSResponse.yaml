@@ -1,0 +1,10 @@
+type: object
+properties:
+  keys:
+    description: "An array of public JWKs used for encryption & verification"
+    type: array
+    items:
+      $ref: './JWK.yaml'
+required:
+  - keys
+description: "JSON Web Key Set"

@@ -1,0 +1,20 @@
+type: object
+properties:
+  kty:
+    description: "The cryptographic algorithm family used with the key"
+    type: string
+  kid:
+    description: "The thumbprint of the key according to rfc 7638 which will be used to match a JWS or JWE 'kid' Header Parameter value"
+    type: string
+  use:
+    description: "The intended use of the key"
+    type: string
+  alg:
+    description: "Identify the algorithm intented for use with the key"
+    type: string
+required:
+  - kty
+  - kid
+  - use
+  - alg
+description: "JSON Web Key Set"
