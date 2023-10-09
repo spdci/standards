@@ -20,19 +20,15 @@ paths:
   /.well-known/jwks.json:
     get:
       summary: 'JWKs : /.well-known/jwks.json'
-      description: This end point is in compliance with IETF RFC 7517 to share the encryption & signature verification public keys over HTTPS channel
+      description: This end point is in compliance with RFC 7517 to share the encryption & signature verification public keys over HTTPS channel
       operationId: get_jwks_json
-      parameters:
-        - $ref: '#/components/parameters/accept-language'
-        - $ref: '#/components/parameters/timestamp'
-        - $ref: '#/components/parameters/message_id_hdr'
       responses:
         '200':
           description: JSON Web Key Set Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JSONWebKeySetResponse'
+                $ref: '#/components/schemas/JWKSResponse'
         '404':
           $ref: '#/components/responses/HttpErrorResponse'
         '500':
@@ -40,62 +36,46 @@ paths:
       deprecated: false
 components:
   schemas:
-    JSONWebKeySetResponse:
+    JWKSResponse:
       type: object
       properties:
         keys:
-          description: An array of public JWKs used for encryption & verification
+          description: 'An array of public JWKs used for encryption & verification. In addition to the common properties, each JWK will have properties that are key type specific.'
           type: array
           items:
-            $ref: '#/components/schemas/JSONWebKey'
+            $ref: '#/components/schemas/JWKSResponse/components/schemas/JWK'
       required:
         - keys
       description: JSON Web Key Set
-    JSONWebKey:
-      type: object
-      properties:
-        kty:
-          description: The cryptographic algorithm family used with the key
-          type: string
-        kid:
-          description: The thumbprint of the key according to rfc 7638 which will be used to match a JWS or JWE 'kid' Header Parameter value
-          type: string
-        use:
-          description: The intended use of the key
-          type: string
-        alg:
-          description: Identify the algorithm intented for use with the key
-          type: string
-      required:
-        - kty
-        - kid
-        - use
-        - alg
-      description: JSON Web Key Set
-  parameters:
-    accept-language:
-      in: header
-      name: accept-language
-      description: 'Default value: en'
-      required: false
-      schema:
-        type: string
-        example: en
-    timestamp:
-      in: header
-      name: timestamp
-      description: 'request timestamp in HTTP Date format - Tue, 06 Mar 2020 21:00:00 GMT'
-      required: true
-      schema:
-        type: string
-        example: 'Tue, 06 Mar 2020 21:00:00 GMT'
-    message_id_hdr:
-      in: header
-      name: message_id
-      description: Unique message id to communicate between sender and receiver systems and it's scope is restricted to transport layer only to successfully devier the message between sender and receiver.
-      schema:
-        type: string
-        example: '123456789020211216223812'
+      components:
+        schemas:
+          JWK:
+            type: object
+            additionalProperties: true
+            properties:
+              kty:
+                description: The cryptographic algorithm family used with the key
+                type: string
+                example: RSA
+              kid:
+                description: The thumbprint of the key according to RFC 7638 which will be used to match a JWS or JWE 'kid' header parameter value
+                type: string
+              use:
+                description: The intended use of the key
+                type: string
+                enum:
+                  - sig
+                  - enc
+              alg:
+                description: Identify the algorithm intented for use with the key
+                type: string
+                example: RS256
+            required:
+              - kty
+              - kid
+              - use
+              - alg
+            description: JSON Web Key Set
   responses:
     HttpErrorResponse:
       description: HTTP layer error details

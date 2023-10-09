@@ -4,7 +4,7 @@ info:
   x-logo:
     url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
     backgroundColor: '#FFFFFF'
-    altText: 'Digital Convergence Initiative'    
+    altText: 'Digital Convergence Initiative'
   description: Provide JSON Web Key Set to registered clients/services.
   version: 1.0.0
   contact:
@@ -20,19 +20,15 @@ paths:
  /.well-known/jwks.json:
   get: 
     summary: "JWKs : /.well-known/jwks.json"
-    description: "This end point is in compliance with IETF RFC 7517 to share the encryption & signature verification public keys over HTTPS channel"
+    description: "This end point is in compliance with RFC 7517 to share the encryption & signature verification public keys over HTTPS channel"
     operationId: get_jwks_json
-    parameters:
-      - $ref: "#/components/parameters/accept-language"
-      - $ref: "#/components/parameters/timestamp"
-      - $ref: "#/components/parameters/message_id_hdr"
     responses:
       '200': 
         description: "JSON Web Key Set Response"
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/JSONWebKeySetResponse"
+              $ref: "#/components/schemas/JWKSResponse"
       '404':
         $ref: "#/components/responses/HttpErrorResponse"
       '500':
@@ -40,17 +36,8 @@ paths:
     deprecated: false
 components:
   schemas:
-    JSONWebKeySetResponse:
+    JWKSResponse:
       $ref: schema/core/JWKSResponse.yaml
-    JSONWebKey:
-      $ref: schema/core/JWK.yaml
-  parameters:
-    accept-language:
-      $ref: "../common/parameter/accept-language.yaml"
-    timestamp:
-      $ref: "../common/parameter/timestamp.yaml"
-    message_id_hdr:
-      $ref: "../common/parameter/message_id_hdr.yaml"
   responses:
     HttpErrorResponse:
       $ref: "../common/response/HttpErrorResponse.yaml"
