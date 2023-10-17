@@ -1,0 +1,8 @@
+type: array
+description: "An array of all Places in the system with names and parent id's"
+items:
+  $ref: "#/components/schemas/Place"
+components:
+  schemas:
+    Place:
+      $ref: ./Place.yaml

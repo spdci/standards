@@ -1,0 +1,21 @@
+description: Place
+type: object
+properties:
+  id:
+    type: string
+    description: The identifier of the place
+    example: 1
+  name:
+    type: string
+    description: The human-readable name of the place
+    example: Karnataka
+  address:
+    type: string
+    description: Full mailing address, formatted for display or use on a mailing label. This field may contain multiple lines, separated by newlines.
+  containedInPlace:
+    description: Identifier of the parent location, set it to null if it is the root location
+    type: ["null", string]
+required:
+  - id
+  - name
+  - containedInPlace
