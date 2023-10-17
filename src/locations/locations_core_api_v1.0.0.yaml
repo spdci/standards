@@ -28,16 +28,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LocationsResponse"
+                $ref: schema/core/LocationHierarchy.yaml
         "404":
           $ref: "#/components/responses/HttpErrorResponse"
         "500":
           $ref: "#/components/responses/HttpErrorResponse"
       deprecated: false
 components:
-  schemas:
-    LocationsResponse:
-      $ref: schema/core/LocationsResponse.yaml
   responses:
     HttpErrorResponse:
       $ref: "../common/response/HttpErrorResponse.yaml"

@@ -1,17 +1,21 @@
 description: Place
 type: object
 properties:
-  id:
+  "@type":
+    type: string
+    const: "Place"
+  identifier:
     type: string
     description: The identifier of the place
-    example: 1
+    example: "crvs:12345678-1234-1234-1234-123456789abc"
   name:
     type: string
     description: The human-readable name of the place
     example: Karnataka
-  address:
+  additionalType:
     type: string
-    description: Full mailing address, formatted for display or use on a mailing label. This field may contain multiple lines, separated by newlines.
+    description: Additional type of the place
+    example: "crvs:HEALTH_FACILITY"
   containedInPlace:
     description: Identifier of the parent location, set it to null if it is the root location
     type: ["null", string]

@@ -28,45 +28,75 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LocationsResponse'
+                description: LocationHierarchy
+                type: object
+                properties:
+                  '@context':
+                    type: object
+                    description: JSON-LD Schema Context
+                    properties:
+                      '@context':
+                        type: string
+                        const: 'http://spdci.org/'
+                      xsd:
+                        type: string
+                        const: 'http://www.w3.org/2001/XMLSchema#'
+                      schema:
+                        type: string
+                        const: 'http://schema.org/'
+                    required:
+                      - '@context'
+                      - xsd
+                      - schema
+                  '@type':
+                    type: string
+                    const: LocationHierarchy
+                  lastUpdated:
+                    example: '2023-10-17T11:26:02.512+00:00'
+                    description: |
+                      1. All dates and timestamps are represented in [ISO 8601](https://www.iso.org/standard/40874.html) format including timezone - e.g 2022-12-04T17:20:07-04:00.
+                    type: string
+                    format: date-time
+                  locations:
+                    type: array
+                    description: An array of all Places in the system with names and parent id's
+                    items:
+                      description: Place
+                      type: object
+                      properties:
+                        '@type':
+                          type: string
+                          const: Place
+                        identifier:
+                          type: string
+                          description: The identifier of the place
+                          example: 'crvs:12345678-1234-1234-1234-123456789abc'
+                        name:
+                          type: string
+                          description: The human-readable name of the place
+                          example: Karnataka
+                        additionalType:
+                          type: string
+                          description: Additional type of the place
+                          example: 'crvs:HEALTH_FACILITY'
+                        containedInPlace:
+                          description: 'Identifier of the parent location, set it to null if it is the root location'
+                          type:
+                            - 'null'
+                            - string
+                      required:
+                        - id
+                        - name
+                        - containedInPlace
+                required:
+                  - '@context'
+                  - '@type'
         '404':
           $ref: '#/components/responses/HttpErrorResponse'
         '500':
           $ref: '#/components/responses/HttpErrorResponse'
       deprecated: false
 components:
-  schemas:
-    LocationsResponse:
-      type: array
-      description: An array of all Places in the system with names and parent id's
-      items:
-        $ref: '#/components/schemas/LocationsResponse/components/schemas/Place'
-      components:
-        schemas:
-          Place:
-            description: Place
-            type: object
-            properties:
-              id:
-                type: string
-                description: The identifier of the place
-                example: 1
-              name:
-                type: string
-                description: The human-readable name of the place
-                example: Karnataka
-              address:
-                type: string
-                description: 'Full mailing address, formatted for display or use on a mailing label. This field may contain multiple lines, separated by newlines.'
-              containedInPlace:
-                description: 'Identifier of the parent location, set it to null if it is the root location'
-                type:
-                  - 'null'
-                  - string
-            required:
-              - id
-              - name
-              - containedInPlace
   responses:
     HttpErrorResponse:
       description: HTTP layer error details
