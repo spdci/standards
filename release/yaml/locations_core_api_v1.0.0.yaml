@@ -68,9 +68,23 @@ paths:
                           type: string
                           const: Place
                         identifier:
-                          type: string
-                          description: The identifier of the place
-                          example: 'crvs:12345678-1234-1234-1234-123456789abc'
+                          type: array
+                          items:
+                            description: PropertyValue
+                            type: object
+                            properties:
+                              '@type':
+                                type: string
+                                const: PropertyValue
+                              name:
+                                type: string
+                                description: The identifier name
+                                example: crvs-location
+                              identifier:
+                                type: string
+                                description: The identifier itself
+                                example: 12345678-1234-1234-1234-123456789abc
+                          description: The identifiers of the place
                         name:
                           type: string
                           description: The human-readable name of the place
