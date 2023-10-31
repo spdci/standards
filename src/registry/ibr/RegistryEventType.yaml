@@ -1,0 +1,11 @@
+type: string
+description: |
+  The type of grouping to which a beneficiary belongs.
+
+  1 : Register <br>
+  2 : Payment <br>
+  3 : Deregister <br>  
+enum:
+  - "REGISTER"
+  - "PAYMENT"
+  - "DEREGISTER"
