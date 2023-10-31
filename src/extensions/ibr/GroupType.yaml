@@ -1,0 +1,11 @@
+type: string
+description: |
+  The type of grouping to which a beneficiary belongs.
+
+  1 : Household <br>
+  2 : Family <br>
+  3 : Group <br>  
+enum:
+  - "1"
+  - "2"
+  - "3"
