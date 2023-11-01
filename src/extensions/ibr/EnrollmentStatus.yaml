@@ -1,0 +1,13 @@
+type: string
+description: |
+  The beneficiaries status with a specific program
+
+  1 : Active <br>
+  2 : Deceased <br>
+  3 : Graduated <br>
+  4 : Suspended <br> 
+enum:
+  - "1"
+  - "2" 
+  - "3" 
+  - "4"  
