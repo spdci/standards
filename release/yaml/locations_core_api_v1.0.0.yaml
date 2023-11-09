@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: Interoperability APIs - Locations
+  x-logo:
+    url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
+    backgroundColor: '#FFFFFF'
+    altText: Digital Convergence Initiative
+  description: Provide the location structure tree of the CRVS system
+  version: 1.0.0
+  contact:
+    name: DCI Social Protection
+    email: info@spdci.org
+  license:
+    name: DCI Social Protection License
+    url: 'https://github.com/spdci/standards/blob/draft/LICENSE.md'
+servers:
+  - url: 'https://sandbox.spdci.org/namespace/v1.0.0'
+    description: Sandbox Server
+paths:
+  /.well-known/locations.json:
+    get:
+      summary: 'Locations : /.well-known/locations.json'
+      description: This endpoint can be used to build a location tree of the CRVS system or to find a specific location details
+      operationId: get_locations_json
+      responses:
+        '200':
+          description: Locations response
+          content:
+            application/json:
+              schema:
+                description: LocationHierarchy
+                type: object
+                properties:
+                  '@context':
+                    type: object
+                    description: JSON-LD Schema Context
+                    properties:
+                      '@context':
+                        type: string
+                        const: 'http://spdci.org/'
+                      xsd:
+                        type: string
+                        const: 'http://www.w3.org/2001/XMLSchema#'
+                      schema:
+                        type: string
+                        const: 'http://schema.org/'
+                    required:
+                      - '@context'
+                      - xsd
+                      - schema
+                  '@type':
+                    type: string
+                    const: LocationHierarchy
+                  lastUpdated:
+                    example: '2023-10-17T11:26:02.512+00:00'
+                    description: |
+                      1. All dates and timestamps are represented in [ISO 8601](https://www.iso.org/standard/40874.html) format including timezone - e.g 2022-12-04T17:20:07-04:00.
+                    type: string
+                    format: date-time
+                  locations:
+                    type: array
+                    description: An array of all Places in the system with names and parent id's
+                    items:
+                      description: Place
+                      type: object
+                      properties:
+                        '@type':
+                          type: string
+                          const: Place
+                        identifier:
+                          type: array
+                          items:
+                            description: PropertyValue
+                            type: object
+                            properties:
+                              '@type':
+                                type: string
+                                const: PropertyValue
+                              name:
+                                type: string
+                                description: The identifier name
+                                example: crvs-location
+                              identifier:
+                                type: string
+                                description: The identifier itself
+                                example: 12345678-1234-1234-1234-123456789abc
+                          description: The identifiers of the place
+                        name:
+                          type: string
+                          description: The human-readable name of the place
+                          example: Karnataka
+                        additionalType:
+                          type: string
+                          description: Additional type of the place
+                          example: 'crvs:HEALTH_FACILITY'
+                        containedInPlace:
+                          description: 'Identifier of the parent location, set it to null if it is the root location'
+                          type:
+                            - 'null'
+                            - string
+                      required:
+                        - id
+                        - name
+                        - containedInPlace
+                required:
+                  - '@context'
+                  - '@type'
+        '404':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+      deprecated: false
+components:
+  responses:
+    HttpErrorResponse:
+      description: HTTP layer error details
+      content:
+        application/json:
+          schema:
+            type: object
+            description: 'HTTP transport layer error codes. Used by components like gateways, LB responding with HTTP status codes 1xx, 2xx, 3xx, 4xx and 5xx'
+            properties:
+              errors:
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: error code
+                    message:
+                      type: string
+                      description: error message
