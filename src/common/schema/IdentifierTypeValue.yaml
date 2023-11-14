@@ -4,7 +4,7 @@ properties:
   type:
     type: string
     description: |
-      @context: "https://example.org/schema/IdType" <br>
+      @context: "https://spdci.github.io/schemas//IdType" <br>
       @type: "IdType" <br>
       
       **Notes:**

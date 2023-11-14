@@ -32,7 +32,10 @@ properties:
               default: 1.0.0
             reg_records:
               description: |
-                The "IBRPerson" object contains fields expected in response of search
+                The "Person" object contains fields expected in response of search
+                @context: "https://spdci.github.io/schemas/extensions/ibr/v1/Person" <br>
+                @type: "Person" <br>
+                @container: "@set" <br>
               type: array
               items:
                 allOf:

@@ -4,7 +4,7 @@ properties:
   attribute_name:
     type: string
     description: |
-      @context: "https://example.org/schema/QueryAttributes" <br>
+      @context: "https://spdci.github.io/schemas//QueryAttributes" <br>
       @type: "QueryAttributes" <br>
       
       **Notes:**

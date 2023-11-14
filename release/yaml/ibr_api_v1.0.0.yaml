@@ -736,17 +736,17 @@ components:
     dci_CRVSPerson:
       type: object
       description: |
-        @context: "https://example.org/schema/CRVSPerson" <br>
+        @context: "https://spdci.github.io/schemas//CRVSPerson" <br>
         @type: "Consent"
       example:
-        '@context': 'https://example.org/schema/CRVSPerson'
+        '@context': 'https://spdci.github.io/schemas/extensions/dci/v1/Person'
         '@type': CRVSPerson
         '@vocab': 'https://spdci.org/'
         schema: 'http://schema.org/'
         rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
         xsd: 'http://www.w3.org/2001/XMLSchema#'
         CRVSPerson:
-          '@id': 'https://spdci.org/CRVSPerson'
+          '@id': 'https://spdci.org/schemas/extensions/dci/v1/Person'
           '@type': 'rdfs:Class'
           '@context':
             name:
@@ -1588,49 +1588,46 @@ components:
     RegistryEventType:
       type: string
       description: |
-        @context: "https://example.org/schema/RegistryEventType" <br>
+        @context: "https://spdci.github.io/schemas/common/v1/RegistryEventType" <br>
         @type: "VitalEvent" <br>
 
         **Notes:**
           1. Registry event type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. example: "ns:org:RegistryEventType:LiveBirth"
-      example: 'ns:org:RegistryEventType:LiveBirth'
+          3. example: "spdci-common:RegistryEventType:LiveBirth"
+      example: 'spdci-common:RegistryEventType:LiveBirth'
     RegistryRecord:
       type: object
       description: |
-        @context: "https://example.org/schema/RecordType" <br>
-        @type: "CRVSPerson" <br>
-        @container: "@set" <br>
-
-        **Notes:**
-          1. Record type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable identifiers.
+        The "Person" object contains fields expected in response of search
+        @context: "https://spdci.github.io/schemas/extensions/dci/v1/Person" <br>
+        @type: "Person" <br>
+        @container: "@set" <br> 
       example:
         $ref: '#/components/schemas/dci_CRVSPerson'
     RegistryRecordType:
       type: string
       description: |
-        @context: "https://example.org/schema/RegistryRecordType" <br>
+        @context: "https://spdci.github.io/schemas/extensions/dci/v1/" <br>
         @type: "RegistryRecordType" <br>
 
         **Notes:**
           1. Registry record type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable result sets 
           3. Referenced in search_request and notify events
-          4. example: "ns:dci:RegistryRecordType:CRVSPerson" 
-      example: 'ns:dci:RegistryRecordType:CRVSPerson'
+          4. example: "spdci-extensions-dci:Person" 
+      example: 'spdci-extensions-dci:Person'
     RegistryType:
       type: string
       description: |
-        @context: "https://example.org/schema/RegistryType" <br>
+        @context: "https://spdci.github.io/schemas/common/v1/RegistryType" <br>
         @type: "RegistryType" <br>
 
         **Notes:**
           1. Registry type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable functional registries 
-          3. example: "ns:org:RegistryType:Civil"
-      example: 'ns:org:RegistryType:Civil'
+          3. example: "spdci-common:RegistryType:Civil"
+      example: 'spdci-common:RegistryType:Civil'
     SearchRequest:
       type: object
       description: |
@@ -1733,7 +1730,10 @@ components:
                     default: 1.0.0
                   reg_records:
                     description: |
-                      The "IBRPerson" object contains fields expected in response of search
+                      The "Person" object contains fields expected in response of search
+                      @context: "https://spdci.github.io/schemas/extensions/ibr/v1/Person" <br>
+                      @type: "Person" <br>
+                      @container: "@set" <br>
                     type: array
                     items:
                       allOf:
@@ -1775,6 +1775,7 @@ components:
                               description: Value of the household identifier
                             programms:
                               type: array
+                              description: TO_DO
                               items:
                                 type: object
                                 description: |
@@ -1811,6 +1812,7 @@ components:
                                       - '4'
                             benefits:
                               type: array
+                              description: TO_DO
                               items:
                                 type: object
                                 description: |
@@ -1840,6 +1842,7 @@ components:
                                     description: This can be any value like monetery value like currency value or any objects received
                             payments:
                               type: array
+                              description: TO_DO
                               items:
                                 type: object
                                 description: |
@@ -2251,7 +2254,7 @@ components:
         name:
           type: string
           description: |
-            @context: "https://example.org/schema/Attribute" <br>
+            @context: "https://spdci.github.io/schemas//Attribute" <br>
             @type: "Attribute" <br>
 
             **Notes:**
@@ -2280,10 +2283,10 @@ components:
     Authorize:
       type: object
       description: |
-        @context: "https://example.org/schema/Authorize" <br>
+        @context: "https://spdci.github.io/schemas//Authorize" <br>
         @type: "Authorize"
       example:
-        '@context': 'https://example.org/schema/Authorize'
+        '@context': 'https://spdci.github.io/schemas//Authorize'
         '@type': Authorize
         ts:
           $ref: '#/components/schemas/DateTime'
@@ -2300,10 +2303,10 @@ components:
     Consent:
       type: object
       description: |
-        @context: "https://example.org/schema/Consent" <br>
+        @context: "https://spdci.github.io/schemas//Consent" <br>
         @type: "Consent"
       example:
-        '@context': 'https://example.org/schema/Consent'
+        '@context': 'https://spdci.github.io/schemas//Consent'
         '@type': Consent
         ts:
           $ref: '#/components/schemas/DateTime'
@@ -2437,7 +2440,7 @@ components:
         attribute_name:
           type: string
           description: |
-            @context: "https://example.org/schema/QueryAttributes" <br>
+            @context: "https://spdci.github.io/schemas//QueryAttributes" <br>
             @type: "QueryAttributes" <br>
 
             **Notes:**
@@ -2484,7 +2487,7 @@ components:
         type:
           type: string
           description: |
-            @context: "https://example.org/schema/QueryType" <br>
+            @context: "https://spdci.github.io/schemas//QueryType" <br>
             @type: "Queryype" <br>
 
             **Notes:**
@@ -2494,7 +2497,7 @@ components:
         value:
           type: object
           description: |
-            @context: "https://example.org/schema/QueryExpression" <br>
+            @context: "https://spdci.github.io/schemas//QueryExpression" <br>
             @type: "QueryExpression" <br>
 
             **Notes:**
@@ -2524,7 +2527,7 @@ components:
     IdentifierType:
       type: string
       description: |
-        @context: "https://example.org/schema/IdType" <br>
+        @context: "https://spdci.github.io/schemas//IdType" <br>
         @type: "IdType" <br>
 
         **Notes:**
@@ -2539,7 +2542,7 @@ components:
         type:
           type: string
           description: |
-            @context: "https://example.org/schema/IdType" <br>
+            @context: "https://spdci.github.io/schemas//IdType" <br>
             @type: "IdType" <br>
 
             **Notes:**
@@ -2558,18 +2561,18 @@ components:
       pattern: '^[a-z]{3,3}$'
       example: en
     LatLong:
-      type: object
-      properties:
+      '@context':
+        xsd: 'http://www.w3.org/2001/XMLSchema#'
         latitude:
-          type: string
-          example: 11°24'12.2"N
+          '@id': 'http://www.w3.org/2003/01/geo/wgs84_pos#lat'
+          '@type': 'xsd:decimal'
         longitude:
-          type: string
-          example: 88°50'26.5"E
+          '@id': 'http://www.w3.org/2003/01/geo/wgs84_pos#long'
+          '@type': 'xsd:decimal'
     Meta:
       type: object
       description: |
-        @context: "https://example.org/schema/Meta" <br>
+        @context: "https://spdci.github.io/schemas//Meta" <br>
         @type: "@context" <br>
           
         **Notes:**
@@ -2771,7 +2774,7 @@ components:
         attribute_name:
           type: string
           description: |
-            @context: "https://example.org/schema/Attribute" <br>
+            @context: "https://spdci.github.io/schemas//Attribute" <br>
             @type: "Attribute" <br>
 
             **Notes:**

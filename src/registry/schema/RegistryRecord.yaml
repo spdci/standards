@@ -1,11 +1,8 @@
 type: object
 description: |
-  @context: "https://example.org/schema/RecordType" <br>
-  @type: "CRVSPerson" <br>
-  @container: "@set" <br>
-
-  **Notes:**
-    1. Record type values defined as per implementation context.
-    2. Usually a list of **enum** values of all possible queryable identifiers.
+  The "Person" object contains fields expected in response of search
+  @context: "https://spdci.github.io/schemas/extensions/dci/v1/Person" <br>
+  @type: "Person" <br>
+  @container: "@set" <br> 
 example: 
-  $ref: "../../extensions/dci/CRVSPerson.yaml"
+  $ref: "../../extensions/dci/Person.yaml"
