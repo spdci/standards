@@ -1,13 +1,8 @@
-{
-  "@context": {
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "latitude": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
-      "@type": "xsd:decimal"
-    },
-    "longitude": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
-      "@type": "xsd:decimal"
-    }
-  }
-}
+type: object
+properties:
+  latitude:
+    type: string
+    example: 11°24'12.2"N 
+  longitude:
+    type: string
+    example: 88°50'26.5"E 
