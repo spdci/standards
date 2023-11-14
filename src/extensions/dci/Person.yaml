@@ -1,16 +1,16 @@
 type: object
 description: |
-  @context: "https://example.org/schema/CRVSPerson" <br>
+  @context: "https://spdci.github.io/schemas//CRVSPerson" <br>
   @type: "Consent"
 example:
-  "@context": "https://example.org/schema/CRVSPerson"
+  "@context": "https://spdci.github.io/schemas/extensions/dci/v1/Person"
   "@type": "CRVSPerson"
   "@vocab": "https://spdci.org/"
   "schema": "http://schema.org/"
   "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
   "xsd": "http://www.w3.org/2001/XMLSchema#"
   "CRVSPerson": 
-    "@id": "https://spdci.org/CRVSPerson"
+    "@id": "https://spdci.org/schemas/extensions/dci/v1/Person"
     "@type": "rdfs:Class"
     "@context": 
       "name":

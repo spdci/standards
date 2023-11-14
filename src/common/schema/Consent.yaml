@@ -1,9 +1,9 @@
 type: object
 description: |
-  @context: "https://example.org/schema/Consent" <br>
+  @context: "https://spdci.github.io/schemas//Consent" <br>
   @type: "Consent"
 example:
-  "@context": "https://example.org/schema/Consent"
+  "@context": "https://spdci.github.io/schemas//Consent"
   "@type": "Consent"
   ts:
     $ref: ./DateTime.yaml
