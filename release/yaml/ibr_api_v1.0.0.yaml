@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Interoperability APIs - Integrated Beneficiary Registry
   x-logo:
-    url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
+    url: 'https://standards.spdci.org/api-documentation/draft/dci-logo.png'
     backgroundColor: '#FFFFFF'
     altText: Digital Convergence Initiative
   description: |-
@@ -912,7 +912,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://spdci.github.io/schemas//QueryType" <br>
+                              @context: "https://standards.spdci.org/schemas//QueryType" <br>
                               @type: "Queryype" <br>
 
                               **Notes:**
@@ -922,7 +922,7 @@ components:
                           value:
                             type: object
                             description: |
-                              @context: "https://spdci.github.io/schemas//QueryExpression" <br>
+                              @context: "https://standards.spdci.org/schemas//QueryExpression" <br>
                               @type: "QueryExpression" <br>
 
                               **Notes:**
@@ -936,7 +936,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://spdci.github.io/schemas//IdType" <br>
+                              @context: "https://standards.spdci.org/schemas//IdType" <br>
                               @type: "IdType" <br>
 
                               **Notes:**
@@ -970,7 +970,7 @@ components:
                                 attribute_name:
                                   type: string
                                   description: |
-                                    @context: "https://spdci.github.io/schemas//QueryAttributes" <br>
+                                    @context: "https://standards.spdci.org/schemas//QueryAttributes" <br>
                                     @type: "QueryAttributes" <br>
 
                                     **Notes:**
@@ -1016,7 +1016,7 @@ components:
                         attribute_name:
                           type: string
                           description: |
-                            @context: "https://spdci.github.io/schemas//Attribute" <br>
+                            @context: "https://standards.spdci.org/schemas//Attribute" <br>
                             @type: "Attribute" <br>
 
                             **Notes:**
@@ -1047,10 +1047,10 @@ components:
                   consent:
                     type: object
                     description: |
-                      @context: "https://spdci.github.io/schemas//Consent" <br>
+                      @context: "https://standards.spdci.org/schemas//Consent" <br>
                       @type: "Consent"
                     example:
-                      '@context': 'https://spdci.github.io/schemas//Consent'
+                      '@context': 'https://standards.spdci.org/schemas//Consent'
                       '@type': Consent
                       ts:
                         $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
@@ -1067,10 +1067,10 @@ components:
                   authorize:
                     type: object
                     description: |
-                      @context: "https://spdci.github.io/schemas//Authorize" <br>
+                      @context: "https://standards.spdci.org/schemas//Authorize" <br>
                       @type: "Authorize"
                     example:
-                      '@context': 'https://spdci.github.io/schemas//Authorize'
+                      '@context': 'https://standards.spdci.org/schemas//Authorize'
                       '@type': Authorize
                       ts:
                         $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
@@ -1764,7 +1764,7 @@ components:
                   reg_type:
                     type: string
                     description: |
-                      @context: "https://spdci.github.io/schemas/common/v1/RegistryType" <br>
+                      @context: "https://standards.spdci.org/schemas/common/v1/RegistryType" <br>
                       @type: "RegistryType" <br>
 
                       **Notes:**
@@ -1775,7 +1775,7 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      @context: "https://spdci.github.io/schemas/common/v1/RegistryEventType" <br>
+                      @context: "https://standards.spdci.org/schemas/common/v1/RegistryEventType" <br>
                       @type: "VitalEvent" <br>
 
                       **Notes:**
@@ -1786,7 +1786,7 @@ components:
                   reg_record_type:
                     type: string
                     description: |
-                      @context: "https://spdci.github.io/schemas/extensions/dci/v1/" <br>
+                      @context: "https://standards.spdci.org/schemas/extensions/dci/v1/" <br>
                       @type: "RegistryRecordType" <br>
 
                       **Notes:**
@@ -1799,16 +1799,16 @@ components:
                     type: object
                     description: |
                       The "Person" object contains fields expected in response of search
-                      @context: "https://spdci.github.io/schemas/extensions/dci/v1/Person" <br>
+                      @context: "https://standards.spdci.org/schemas/extensions/dci/v1/Person" <br>
                       @type: "Person" <br>
                       @container: "@set" <br> 
                     example:
                       type: object
                       description: |
-                        @context: "https://spdci.github.io/schemas//CRVSPerson" <br>
+                        @context: "https://standards.spdci.org/schemas//CRVSPerson" <br>
                         @type: "Consent"
                       example:
-                        '@context': 'https://spdci.github.io/schemas/extensions/dci/v1/Person'
+                        '@context': 'https://standards.spdci.org/schemas/extensions/dci/v1/Person'
                         '@type': CRVSPerson
                         '@vocab': 'https://spdci.org/'
                         schema: 'http://schema.org/'
@@ -2084,7 +2084,7 @@ components:
         meta:
           type: object
           description: |
-            @context: "https://spdci.github.io/schemas//Meta" <br>
+            @context: "https://standards.spdci.org/schemas//Meta" <br>
             @type: "@context" <br>
               
             **Notes:**

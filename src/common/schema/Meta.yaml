@@ -1,6 +1,6 @@
 type: object
 description: |
-  @context: "https://spdci.github.io/schemas//Meta" <br>
+  @context: "https://standards.spdci.org/schemas//Meta" <br>
   @type: "@context" <br>
     
   **Notes:**

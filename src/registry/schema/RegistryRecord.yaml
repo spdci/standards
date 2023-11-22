@@ -1,7 +1,7 @@
 type: object
 description: |
   The "Person" object contains fields expected in response of search
-  @context: "https://spdci.github.io/schemas/extensions/dci/v1/Person" <br>
+  @context: "https://standards.spdci.org/schemas/extensions/dci/v1/Person" <br>
   @type: "Person" <br>
   @container: "@set" <br> 
 example: 

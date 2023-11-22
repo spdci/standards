@@ -1,7 +1,7 @@
 # API documentation
 
 The APIs are accessible through
-    1. DCI:  [standards](https://spdci.github.io/standards/release/index.html)
+    1. DCI:  [standards](https://standards.spdci.org/standards/release/index.html)
     2. G2P Community: [specifications](https://g2p-connect.github.io/specs/release/index.html)
 
 ## Discussion forum 

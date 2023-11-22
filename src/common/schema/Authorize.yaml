@@ -1,9 +1,9 @@
 type: object
 description: |
-  @context: "https://spdci.github.io/schemas//Authorize" <br>
+  @context: "https://standards.spdci.org/schemas//Authorize" <br>
   @type: "Authorize"
 example:
-  "@context": "https://spdci.github.io/schemas//Authorize"
+  "@context": "https://standards.spdci.org/schemas//Authorize"
   "@type": "Authorize"
   ts:
     $ref: ./DateTime.yaml
