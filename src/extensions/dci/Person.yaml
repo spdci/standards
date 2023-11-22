@@ -1,9 +1,9 @@
 type: object
 description: |
-  @context: "https://spdci.github.io/schemas//CRVSPerson" <br>
+  @context: "https://standards.spdci.org/schemas//CRVSPerson" <br>
   @type: "Consent"
 example:
-  "@context": "https://spdci.github.io/schemas/extensions/dci/v1/Person"
+  "@context": "https://standards.spdci.org/schemas/extensions/dci/v1/Person"
   "@type": "CRVSPerson"
   "@vocab": "https://spdci.org/"
   "schema": "http://schema.org/"
