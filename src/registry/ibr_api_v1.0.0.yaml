@@ -56,22 +56,6 @@ tags:
     x-displayName: SearchStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
-  - name: SubscribeRequest
-    x-displayName: SubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
-  - name: SubscribeResponse
-    x-displayName: SubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
-  - name: SubscribeStatusReasonCode
-    x-displayName: SubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
-  - name: NotifyEventRequest
-    x-displayName: NotifyEventRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
   - name: UnSubscribeRequest
     x-displayName: UnSubscribeRequest
     description: |
@@ -84,6 +68,15 @@ tags:
     x-displayName: UnSubscribeStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
+  - name: ReceiptRequest
+    x-displayName: ReceiptRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
+  - name: ReceiptResponse
+    x-displayName: ReceiptResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
+
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -105,19 +98,14 @@ x-tagGroups:
     tags:
       - SearchRequest
       - SearchResponse 
-      - SubscribeRequest
-      - SubscribeResponse
-      - NotifyEventRequest
-      - UnSubscribeRequest
-      - UnSubscribeResponse 
+      - ReceiptRequest
+      - ReceiptResponse
       - TxnStatusRequest
       - TxnStatusResponse
       - EncryptedMessage
   - name: Status Codes
     tags: 
       - SearchStatusReasonCode
-      - SubscribeStatusReasonCode
-      - UnSubscribeStatusReasonCode
 paths:
  /registry/search:
   post: 
@@ -250,7 +238,7 @@ paths:
                             - subscribe
                 message:
                   type: object
-                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber
+                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber, The IBR supports benefit_disbusrement,programme_exited events as of now
                   oneOf:
                     - $ref: "#/components/schemas/SubscribeRequest"
                     - $ref: "#/components/schemas/EncryptedMessage"
@@ -330,57 +318,7 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/notify:
-  post: 
-    summary: "/registry/notify"
-    description: Registry to notify a life event to subscrbiers
-    operationId: post_reg_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
+
  /registry/unsubscribe:
   post: 
     summary: "/registry/unsubscribe"
@@ -474,6 +412,58 @@ paths:
                   action:
                     enum:
                       - on-unsubscribe
+    responses:
+        default:
+          $ref: "#/components/responses/Response"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
+
+ /registry/on-notify:
+  post: 
+    summary: "/registry/on-notify"
+    description: Registry to notify a life event to subscrbiers
+    operationId: post_reg_on_notify
+    tags: 
+      -  Async
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/ReceiptResponse'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
     responses:
         default:
           $ref: "#/components/responses/Response"
@@ -590,6 +580,7 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
+
  /registry/sync/search:
   post: 
     summary: "/registry/sync/search"
@@ -647,6 +638,109 @@ paths:
                       - $ref: '#/components/schemas/EncryptedMessage'
                 required:
                   - header
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
+ /registry/receipts:
+  post: 
+    summary: "/registry/receipts"
+    description: Registry receive receipts from SP system
+    operationId: post_reg_receipts
+    tags: 
+      -  Sync
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/ReceiptRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/Response"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
+ 
+ /registry/sync/notify:
+  post: 
+    summary: "/registry/sync/notify"
+    description: Registry to notify a life event to subscrbiers
+    operationId: post_reg_sync_notify
+    tags: 
+      -  Sync
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
         '401':
           $ref: "#/components/responses/HttpErrorResponse"
         '403':
@@ -721,99 +815,13 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
+
 components:
-  schemas:
-    ###### src/extensions/cdpi schema objects
-    cdpi_PersonId: 
-      $ref: ../extensions/cdpi/PersonId.yaml
-
-    ###### src/extensions/dci schema objects
-    dci_CRVSPerson: 
-      $ref: ../extensions/dci/Person.yaml
-    dci_IdentifierType: 
-      $ref: ../extensions/dci/IdentifierType.yaml
-    dci_IdentifierTypeValue: 
-      $ref: ../extensions/dci/IdentifierTypeValue.yaml
-    dci_MaritalStatus: 
-      $ref: ../extensions/dci/MaritalStatus.yaml
-    dci_Name: 
-      $ref: ../extensions/dci/Name.yaml
-    dci_PersonRecord: 
-      $ref: ../extensions/dci/PersonRecord.yaml
-    dci_RecordType: 
-      $ref: ../extensions/dci/RecordType.yaml
-    dci_Sex: 
-      $ref: ../extensions/dci/Sex.yaml
-    dci_VitalEvents: 
-      $ref: ../extensions/dci/VitalEvents.yaml
-
-    ###### src/extensions/fhir schema objects
-    
-    ###### src/extensions/google schema objects
-    GooglePlusCode: 
-      $ref: ../extensions/google/GooglePlusCode.yaml
-
-    ###### src/extensions/mosip schema objects
-    mosip_EventType: 
-      $ref: ../extensions/mosip/EventType.yaml
-    mosip_LangaugeValue: 
-      $ref: ../extensions/mosip/LangaugeValue.yaml
-    mosip_LanguageValueList: 
-      $ref: ../extensions/mosip/LanguageValueList.yaml
-    mosip_MOSIPVerifiableCredential: 
-      $ref: ../extensions/mosip/MOSIPVerifiableCredential.yaml
-    mosip_RecordType: 
-      $ref: ../extensions/mosip/RecordType.yaml
-    mosip_RegistrationRecord: 
-      $ref: ../extensions/mosip/RegistrationRecord.yaml  
-        
-    ###### src/extensions/nid schema objects
-    nid_DeceasedRecord: 
-      $ref: ../extensions/nid/DeceasedRecord.yaml
-    nid_Document: 
-      $ref: ../extensions/nid/Document.yaml
-    nid_EKycDetails: 
-      $ref: ../extensions/nid/EKycDetails.yaml
-    nid_RecordType: 
-      $ref: ../extensions/nid/RecordType.yaml
-    nid_ResidentAddress:
-      $ref: ../extensions/nid/ResidentAddress.yaml
-    nid_ResidentLocalAddress:
-      $ref: ../extensions/nid/ResidentLocalAddress.yaml
-    nid_ResidentLocalName:
-      $ref: ../extensions/nid/ResidentLocalName.yaml
-    nid_ResidentNationality:
-      $ref: ../extensions/nid/ResidentNationality.yaml
-    nid_ResidentPhoto:
-      $ref: ../extensions/nid/ResidentPhoto.yaml
-    nid_ResidentRecord:
-      $ref: ../extensions/nid/ResidentRecord.yaml
-    
-    ###### src/extensions/openid schema objects
-    openid_Address: 
-      $ref: ../extensions/openid/Address.yaml
-    openid_PersonRecord:
-      $ref: ../extensions/openid/PersonRecord.yaml
-    openid_PersonDocDetails: 
-      $ref: ../extensions/openid/PersonDocDetails.yaml
-
-    ###### src/registry/schema objects
-    RegistryQueries: 
-      $ref: schema/RegistryQueries.yaml
-    # FetchSubscriptionsRequest: 
-    #   $ref: schema/FetchSubscriptionsRequest.yaml
-    # FetchSubscriptionsResponse:
-    #   $ref: schema/FetchSubscriptionsResponse.yaml
-    NotifyEventRequest: 
-      $ref: schema/NotifyEventRequest.yaml
-    RegistryEventType:
-      $ref: schema/RegistryEventType.yaml
-    RegistryRecord:
-      $ref: schema/RegistryRecord.yaml
-    RegistryRecordType: 
-      $ref: schema/RegistryRecordType.yaml
-    RegistryType: 
-      $ref: schema/RegistryType.yaml
+  schemas: 
+    ReceiptRequest: 
+      $ref: ibr/ReceiptRequest.yaml
+    ReceiptResponse: 
+      $ref: ibr/ReceiptResponse.yaml
     SearchRequest: 
       $ref: ibr/SearchRequest.yaml
     SearchResponse: 
@@ -826,74 +834,24 @@ components:
       $ref: schema/SubscribeResponse.yaml
     SubscribeStatusReasonCode: 
       $ref: schema/SubscribeStatusReasonCode.yaml
-    SubscriptionCode: 
-      $ref: schema/SubscriptionCode.yaml
-    SubscriptionCodeList: 
-      $ref: schema/SubscriptionCodeList.yaml
-    SubscriptionInfo:
-      $ref: schema/SubscriptionInfo.yaml
-    SubscriptionStatus:
-        $ref: schema/SubscriptionStatus.yaml
     TxnStatusRequest: 
-      $ref: schema/TxnStatusRequest.yaml            
+      $ref: ibr/TxnStatusRequest.yaml            
     TxnStatusResponse: 
-      $ref: schema/TxnStatusResponse.yaml  
+      $ref: ibr/TxnStatusResponse.yaml  
     UnSubscribeRequest: 
       $ref: schema/UnSubscribeRequest.yaml
     UnSubscribeResponse: 
       $ref: schema/UnSubscribeResponse.yaml
     UnSubscribeStatusReasonCode: 
       $ref: schema/UnSubscribeStatusReasonCode.yaml           
-  
-    ###### Common schema objects
-    Ack: 
-      $ref: ../common/schema/Ack.yaml
-    AdditionalInfo:
-      $ref: ../common/schema/AdditionalInfo.yaml
-    AttributeNameValue: 
-      $ref: ../common/schema/AttributeNameValue.yaml
-    AttributeNameValueList: 
-      $ref: ../common/schema/AttributeNameValueList.yaml
-    AttributeValue: 
-      $ref: ../common/schema/AttributeValue.yaml
-    Authorize: 
-      $ref: ../common/schema/Authorize.yaml      
-    Consent: 
-      $ref: ../common/schema/Consent.yaml
-    DateTime: 
-      $ref: ../common/schema/DateTime.yaml
+    NotifyEventRequest: 
+      $ref: schema/NotifyEventRequest.yaml    
     EncryptedMessage: 
       $ref: ../common/schema/EncryptedMessage.yaml
     Error: 
       $ref: ../common/schema/Error.yaml
-    EventFrequency:
-      $ref: ../common/schema/EventFrequency.yaml
-    ExpCondition: 
-      $ref: ../common/schema/ExpCondition.yaml
-    ExpOperator: 
-      $ref: ../common/schema/ExpOperator.yaml
-    ExpPredicate: 
-      $ref: ../common/schema/ExpPredicate.yaml
-    ExpPredicateList: 
-      $ref: ../common/schema/ExpPredicateList.yaml
-    ExpPredicateWithCondition: 
-      $ref: ../common/schema/ExpPredicateWithCondition.yaml
-    ExpPredicateWithConditionList: 
-      $ref: ../common/schema/ExpPredicateWithConditionList.yaml
-    ExpTemplate:
-      $ref: ../common/schema/ExpTemplate.yaml
     FileInfo: 
       $ref: ../common/schema/FileInfo.yaml
-    IdentifierType: 
-      $ref: ../common/schema/IdentifierType.yaml
-    IdentifierTypeValue: 
-      $ref: ../common/schema/IdentifierTypeValue.yaml
-    LanguageCode: 
-      $ref: ../common/schema/LanguageCode.yaml
-    LatLong: 
-      $ref: ../common/schema/LatLong.yaml
-    Meta:
-      $ref: ../common/schema/Meta.yaml
     MsgCallbackHeader_V1.0.0: 
       $ref: ../common/schema/MsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
@@ -902,24 +860,6 @@ components:
       $ref: ../common/schema/MsgHeaderStatusReasonCode.yaml
     MsgSignature: 
       $ref:  ../common/schema/MsgSignature.yaml
-    Pagination: 
-      $ref: ../common/schema/Pagination.yaml
-    PaginationRequest: 
-      $ref: ../common/schema/PaginationRequest.yaml
-    QueryType:
-      $ref: ../common/schema/QueryType.yaml
-    ReferenceId: 
-      $ref: ../common/schema/ReferenceId.yaml
-    ReferenceIdList: 
-      $ref: ../common/schema/ReferenceIdList.yaml
-    RequestStatus: 
-      $ref: ../common/schema/RequestStatus.yaml
-    SearchSort: 
-      $ref: ../common/schema/SearchSort.yaml
-    SearchSortList: 
-      $ref: ../common/schema/SearchSortList.yaml
-    TransactionId:  
-      $ref: ../common/schema/TransactionId.yaml
 
   responses: 
     HttpErrorResponse:
