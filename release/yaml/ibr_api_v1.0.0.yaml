@@ -1235,14 +1235,14 @@ components:
                                   description: |
                                     Refer [Plus Codes](https://github.com/google/open-location-code/wiki/Plus-codes-API) for more details
                                   oneOf:
-                                    - '@context':
-                                        xsd: 'http://www.w3.org/2001/XMLSchema#'
+                                    - type: object
+                                      properties:
                                         latitude:
-                                          '@id': 'http://www.w3.org/2003/01/geo/wgs84_pos#lat'
-                                          '@type': 'xsd:decimal'
+                                          type: string
+                                          example: 11°24'12.2"N
                                         longitude:
-                                          '@id': 'http://www.w3.org/2003/01/geo/wgs84_pos#long'
-                                          '@type': 'xsd:decimal'
+                                          type: string
+                                          example: 88°50'26.5"E
                                     - type: object
                                       description: 'Refer [Plus Codes](https://github.com/google/open-location-code/wiki/Plus-codes-API) for more details'
                                       properties:
@@ -1606,7 +1606,8 @@ components:
               description: txn type to fetch status
               enum:
                 - search
-                - notify
+                - subscibe
+                - receipt
             attribute_type:
               type: string
               enum:
@@ -1649,7 +1650,8 @@ components:
               description: txn type to fetch status
               enum:
                 - search
-                - notify
+                - subscibe
+                - receipt
             txn_status:
               oneOf:
                 - $ref: '#/components/schemas/SearchResponse'
