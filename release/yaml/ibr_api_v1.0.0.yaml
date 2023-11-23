@@ -912,7 +912,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://schema.spdci.org/QueryType" <br>
+                              @context: "https://schema.spdci.org/common/v1/QueryType.jsonld" <br>
                               @type: "Queryype" <br>
 
                               **Notes:**
@@ -922,7 +922,7 @@ components:
                           value:
                             type: object
                             description: |
-                              @context: "https://schema.spdci.org/QueryExpression" <br>
+                              @context: "https://schema.spdci.org/common/v1/QueryExpression.jsonld" <br>
                               @type: "QueryExpression" <br>
 
                               **Notes:**
@@ -936,7 +936,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://schema.spdci.org/IdType" <br>
+                              @context: "https://schema.spdci.org/common/v1/identifier_type.jsonld" <br>
                               @type: "IdType" <br>
 
                               **Notes:**
@@ -1016,7 +1016,7 @@ components:
                         attribute_name:
                           type: string
                           description: |
-                            @context: "https://schema.spdci.org/Attribute" <br>
+                            @context: "https://schema.spdci.org/common/v1/Attribute.jsonld" <br>
                             @type: "Attribute" <br>
 
                             **Notes:**
@@ -1146,7 +1146,7 @@ components:
                             3. Allowes Country/Registry specific implementation extensions using Attribute Name/Value pairs.
                           properties:
                             identifier:
-                              description: Information of identifer of the person
+                              description: Information of identifier of the person
                               type: object
                               properties:
                                 identifier_type:
@@ -1335,11 +1335,11 @@ components:
                                       - '4'
                             benefits:
                               type: array
-                              description: Benifits received by the person
+                              description: Benefits received by the person
                               items:
                                 type: object
                                 description: |
-                                  The Benefit object provide information about benifits
+                                  The Benefit object provide information about benefits
                                 properties:
                                   benefit_type:
                                     type: string
@@ -1766,7 +1766,7 @@ components:
                   reg_type:
                     type: string
                     description: |
-                      @context: "https://schema.spdci.org/common/v1/RegistryType" <br>
+                      @context: "https://schema.spdci.org/common/v1/RegistryType.jsonld" <br>
                       @type: "RegistryType" <br>
 
                       **Notes:**
@@ -2086,7 +2086,7 @@ components:
         meta:
           type: object
           description: |
-            @context: "https://schema.spdci.org/Meta" <br>
+            @context: "https://schema.spdci.org/common/v1/Meta" <br>
             @type: "@context" <br>
               
             **Notes:**
