@@ -1,6 +1,6 @@
 type: object
 description: | 
-  The Benefit object provide information about benifits
+  The Benefit object provide information about benefits
 properties:
   benefit_type:
     $ref: BenefitType.yaml

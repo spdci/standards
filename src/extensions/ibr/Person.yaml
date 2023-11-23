@@ -5,7 +5,7 @@ description: |
 properties:
   identifier:
     $ref: IdentifierTypeValue.yaml
-    description: "Information of identifer of the person"
+    description: "Information of identifier of the person"
   name: 
     $ref: ../dci/Name.yaml
   sex:
@@ -33,7 +33,7 @@ properties:
       $ref: Programme.yaml
   benefits:
     type: array
-    description: "Benifits received by the person"
+    description: "Benefits received by the person"
     items:
       $ref: Benefit.yaml
   payments:

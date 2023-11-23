@@ -1,39 +1,39 @@
 type: object
 description: Resident Local Address
 properties:
-  local-careof:
+  local_careof:
     description: Care of information in local language
     type: string
-  local-building:
+  local_building:
     description: Building information in local language
     type: string
-  local-street:
-    description: Street information in local language
+  local_street:
+    description: Street information in local languages
     type: string
-  local-landmark:
+  local_landmark:
     description: Landmark information in local language
     type: string
-  local-locality:
+  local_locality:
     description: locality information in local language
     type: string
   pincode:
     description: pincode
     type: string
-  po-name-local:
+  po_name_local:
     description: Post office name in local
     type: string
-  local-vtc:
+  local_vtc:
     description: vtc information in local language
     type: string
-  local-subdistrict:
+  local_subdistrict:
     description: Sub district information in local language
     type: string
-  local-district:
+  local_district:
     description: district information in local language
     type: string
-  local-state:
+  local_state:
     description: State information in local language
     type: string
-  local-country:
+  local_country:
     description: Country information in local language
     type: string
