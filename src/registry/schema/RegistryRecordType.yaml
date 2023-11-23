@@ -1,6 +1,6 @@
 type: string
 description: |
-  @context: "https://standards.spdci.org/schemas/extensions/dci/v1/" <br>
+  @context: "https://schema.spdci.org/extensions/dci/v1/" <br>
   @type: "RegistryRecordType" <br>
   
   **Notes:**

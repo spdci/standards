@@ -1,6 +1,6 @@
 type: object
 description: |
-  @context: "https://standards.spdci.org/schemas//Consent" <br>
+  @context: "https://schema.spdci.org/Consent" <br>
   @type: "Consent"
 example:
   "@context": "https://standards.spdci.org/schemas//Consent"

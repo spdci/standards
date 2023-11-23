@@ -1,6 +1,6 @@
 type: object
 description: |
-  @context: "https://standards.spdci.org/schemas//Authorize" <br>
+  @context: "https://schema.spdci.org/Authorize" <br>
   @type: "Authorize"
 example:
   "@context": "https://standards.spdci.org/schemas//Authorize"

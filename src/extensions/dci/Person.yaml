@@ -1,6 +1,6 @@
 type: object
 description: |
-  @context: "https://standards.spdci.org/schemas//CRVSPerson" <br>
+  @context: "https://schema.spdci.org/CRVSPerson" <br>
   @type: "Consent"
 example:
   "@context": "https://standards.spdci.org/schemas/extensions/dci/v1/Person"
