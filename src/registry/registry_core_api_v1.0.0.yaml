@@ -928,10 +928,6 @@ paths:
     deprecated: false
 components:
   schemas:
-    ###### src/extensions/cdpi schema objects
-    cdpi_PersonId: 
-      $ref: ../extensions/cdpi/PersonId.yaml
-
     ###### src/extensions/dci schema objects
     dci_Person: 
       $ref: ../extensions/dci/Person.yaml

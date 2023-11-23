@@ -723,19 +723,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    cdpi_PersonId:
-      type: string
-      description: |
-        1. Person id is case insensitve normative represenation as id-type:id@provider <br>
-        2. This will enumerate foundational and functioanl id's to easily resolvable addressess <br>
-        3. This property is intended to unambiguously refer to an object, such as a person, beneficiary, user, etc., <br>
-        4. Few examples: <br>
-            - id@identifier-type.id-provider e.g token:12345@nid, vid:543215@nid <br>
-            - id@civil-registry.issuing-agency e.g id:12345@civil-reg, brn:12345@civil-reg, mrn:12345@civil-reg <br>
-            - id@functional-identifier.issuing-agency e.g id:12345@voter-id, id:12345@driving-license, mobile:12345@farmer-reg <br>
-        Note: id provider should be made configurable and solutions should adapt to the local jurisdiction and policies.
-      format: '^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$'
-      example: 'vid:54321@nid'
     dci_Person:
       type: object
       description: |
@@ -1033,14 +1020,14 @@ components:
       type: object
       description: 'MOSIP Verifiable Credential for a [person](https://github.com/opencrvs/mosip-mediator/blob/master/samples/decrypted-sample-received-credentials.json)'
       properties:
-        issuedTo:
+        issued_to:
           description: ''
           type: string
-        protectedAttributes:
+        protected_attributes:
           type: array
           items:
             type: string
-        credentialSubject:
+        credential_subject:
           description: MOSIP Verifiable Credential for Proof of identity
           type: object
           properties:
@@ -1048,13 +1035,13 @@ components:
               $ref: '#/components/schemas/mosip_LanguageValueList'
             city:
               $ref: '#/components/schemas/mosip_LanguageValueList'
-            postalCode:
+            postal_code:
               type: string
               example: '14022'
-            fullName:
+            full_name:
               type: string
               example: Thirteen Mosip
-            dateOfBirth:
+            dateofbirth:
               type: string
               example: '2022'
             province:
@@ -1062,14 +1049,14 @@ components:
             phone:
               type: string
               example: '9898989898'
-            addressLine1:
+            addressline1:
               $ref: '#/components/schemas/mosip_LanguageValueList'
-            addressLine2:
+            addressline2:
               $ref: '#/components/schemas/mosip_LanguageValueList'
             id:
               type: string
               example: '2835824850916304'
-            UIN:
+            uin:
               type: string
               example: '7346597054'
             region:
@@ -1101,11 +1088,11 @@ components:
       type: object
       description: 'Birth Registration record to sync with MOSIP. [Reference](https://github.com/mosip/mosip-opencrvs/blob/develop/mediator/src/main/java/io/mosip/opencrvs/dto/SyncDto.java)'
       properties:
-        registrationId:
+        registration_id:
           type: string
         packetId:
           type: string
-        additionalInfoReqId:
+        additional_info_reqId:
           type: string
         name:
           type: string
@@ -1113,31 +1100,31 @@ components:
           type: string
         phone:
           type: string
-        registrationType:
+        registration_type:
           type: string
-        packetHashValue:
+        packet_hash_value:
           type: string
-        packetSize:
+        packet_size:
           type: integer
-        supervisorStatus:
+        supervisor_status:
           type: string
-        supervisorComment:
+        supervisor_comment:
           type: string
-        opentionalValues:
+        opentional_values:
           type: array
           items:
             type: string
-        langCode:
+        lang_code:
           type: string
-        createDateTime:
+        create_date_time:
           $ref: '#/components/schemas/DateTime'
-        updateDateTime:
+        update_date_time:
           $ref: '#/components/schemas/DateTime'
-        deletedDateTime:
+        deleted_date_time:
           $ref: '#/components/schemas/DateTime'
-        isActive:
+        is_active:
           type: boolean
-        isDeleted:
+        is_deleted:
           type: boolean
     nid_DeceasedRecord:
       type: object
@@ -1218,13 +1205,13 @@ components:
         vtc:
           description: Village Town City Code
           type: string
-        vtc-name:
+        vtc_name:
           description: Village/Town/City Name
           type: string
-        sub-district-name:
+        sub_district_name:
           description: Sub District Name
           type: string
-        district-name:
+        district_name:
           description: District Name
           type: string
         state:
@@ -2103,7 +2090,7 @@ components:
           code:
             type: string
             description: 'From a fixed set, documented at refUri'
-          refUri:
+          ref_uri:
             type: string
             format: uri
             description: Uri to provide more info on authorize codes
@@ -2123,7 +2110,7 @@ components:
           code:
             type: string
             description: 'From a fixed set, documented at refUri'
-          refUri:
+          ref_uri:
             type: string
             format: uri
             description: Uri to provide more info on consent codes
@@ -2368,14 +2355,14 @@ components:
       pattern: '^[a-z]{3,3}$'
       example: en
     LatLong:
-      '@context':
-        xsd: 'http://www.w3.org/2001/XMLSchema#'
+      type: object
+      properties:
         latitude:
-          '@id': 'http://www.w3.org/2003/01/geo/wgs84_pos#lat'
-          '@type': 'xsd:decimal'
+          type: string
+          example: 11°24'12.2"N
         longitude:
-          '@id': 'http://www.w3.org/2003/01/geo/wgs84_pos#long'
-          '@type': 'xsd:decimal'
+          type: string
+          example: 88°50'26.5"E
     Meta:
       type: object
       description: |

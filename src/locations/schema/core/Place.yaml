@@ -13,11 +13,11 @@ properties:
     type: string
     description: The human-readable name of the place
     example: Karnataka
-  additionalType:
+  additional_type:
     type: string
     description: Additional type of the place
     example: "crvs:HEALTH_FACILITY"
-  containedInPlace:
+  contained_in_place:
     description: Identifier of the parent location, set it to null if it is the root location
     type: ["null", string]
 required:
