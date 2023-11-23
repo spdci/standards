@@ -912,7 +912,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://standards.spdci.org/schemas//QueryType" <br>
+                              @context: "https://schema.spdci.org/QueryType" <br>
                               @type: "Queryype" <br>
 
                               **Notes:**
@@ -922,7 +922,7 @@ components:
                           value:
                             type: object
                             description: |
-                              @context: "https://standards.spdci.org/schemas//QueryExpression" <br>
+                              @context: "https://schema.spdci.org/QueryExpression" <br>
                               @type: "QueryExpression" <br>
 
                               **Notes:**
@@ -936,7 +936,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://standards.spdci.org/schemas//IdType" <br>
+                              @context: "https://schema.spdci.org/IdType" <br>
                               @type: "IdType" <br>
 
                               **Notes:**
@@ -970,7 +970,7 @@ components:
                                 attribute_name:
                                   type: string
                                   description: |
-                                    @context: "https://standards.spdci.org/schemas//QueryAttributes" <br>
+                                    @context: "https://schema.spdci.org/QueryAttributes" <br>
                                     @type: "QueryAttributes" <br>
 
                                     **Notes:**
@@ -1016,7 +1016,7 @@ components:
                         attribute_name:
                           type: string
                           description: |
-                            @context: "https://standards.spdci.org/schemas//Attribute" <br>
+                            @context: "https://schema.spdci.org/Attribute" <br>
                             @type: "Attribute" <br>
 
                             **Notes:**
@@ -1047,7 +1047,7 @@ components:
                   consent:
                     type: object
                     description: |
-                      @context: "https://standards.spdci.org/schemas//Consent" <br>
+                      @context: "https://schema.spdci.org/Consent" <br>
                       @type: "Consent"
                     example:
                       '@context': 'https://standards.spdci.org/schemas//Consent'
@@ -1067,7 +1067,7 @@ components:
                   authorize:
                     type: object
                     description: |
-                      @context: "https://standards.spdci.org/schemas//Authorize" <br>
+                      @context: "https://schema.spdci.org/Authorize" <br>
                       @type: "Authorize"
                     example:
                       '@context': 'https://standards.spdci.org/schemas//Authorize'
@@ -1766,7 +1766,7 @@ components:
                   reg_type:
                     type: string
                     description: |
-                      @context: "https://standards.spdci.org/schemas/common/v1/RegistryType" <br>
+                      @context: "https://schema.spdci.org/common/v1/RegistryType" <br>
                       @type: "RegistryType" <br>
 
                       **Notes:**
@@ -1777,7 +1777,7 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      @context: "https://standards.spdci.org/schemas/common/v1/RegistryEventType" <br>
+                      @context: "https://schema.spdci.org/common/v1/RegistryEventType" <br>
                       @type: "VitalEvent" <br>
 
                       **Notes:**
@@ -1788,7 +1788,7 @@ components:
                   reg_record_type:
                     type: string
                     description: |
-                      @context: "https://standards.spdci.org/schemas/extensions/dci/v1/" <br>
+                      @context: "https://schema.spdci.org/extensions/dci/v1/" <br>
                       @type: "RegistryRecordType" <br>
 
                       **Notes:**
@@ -1801,13 +1801,13 @@ components:
                     type: object
                     description: |
                       The "Person" object contains fields expected in response of search
-                      @context: "https://standards.spdci.org/schemas/extensions/dci/v1/Person" <br>
+                      @context: "https://schema.spdci.org/extensions/dci/v1/Person" <br>
                       @type: "Person" <br>
                       @container: "@set" <br> 
                     example:
                       type: object
                       description: |
-                        @context: "https://standards.spdci.org/schemas//CRVSPerson" <br>
+                        @context: "https://schema.spdci.org/CRVSPerson" <br>
                         @type: "Consent"
                       example:
                         '@context': 'https://standards.spdci.org/schemas/extensions/dci/v1/Person'
@@ -2086,7 +2086,7 @@ components:
         meta:
           type: object
           description: |
-            @context: "https://standards.spdci.org/schemas//Meta" <br>
+            @context: "https://schema.spdci.org/Meta" <br>
             @type: "@context" <br>
               
             **Notes:**
