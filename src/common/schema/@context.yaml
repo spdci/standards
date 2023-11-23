@@ -3,13 +3,13 @@ description: JSON-LD Schema Context
 properties:
   "@context":
     type: string
-    const: http://spdci.org/
+    #const: http://spdci.org/
   xsd:
     type: string
-    const: http://www.w3.org/2001/XMLSchema#
+    #const: http://www.w3.org/2001/XMLSchema#
   schema:
     type: string
-    const: http://schema.org/
+    #const: http://schema.org/
 required:
   - "@context"
   - xsd
