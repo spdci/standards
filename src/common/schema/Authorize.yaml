@@ -13,7 +13,7 @@ example:
     code: 
       type: string
       description: From a fixed set, documented at refUri
-    refUri:
+    ref_uri:
         type: string
         format: uri
         description: Uri to provide more info on authorize codes

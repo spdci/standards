@@ -22,13 +22,13 @@ properties:
   vtc:
     description: Village Town City Code
     type: string
-  vtc-name:
+  vtc_name:
     description: Village/Town/City Name
     type: string
-  sub-district-name:
+  sub_district_name:
     description: Sub District Name
     type: string
-  district-name:
+  district_name:
     description: District Name
     type: string
   state:
