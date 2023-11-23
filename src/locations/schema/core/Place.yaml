@@ -3,7 +3,7 @@ type: object
 properties:
   "@type":
     type: string
-    const: "Place"
+    #const: "Place"
   identifier:
     type: array
     items:
@@ -19,7 +19,7 @@ properties:
     example: "crvs:HEALTH_FACILITY"
   containedInPlace:
     description: Identifier of the parent location, set it to null if it is the root location
-    type: ["null", string]
+    type: string
 required:
   - id
   - name
