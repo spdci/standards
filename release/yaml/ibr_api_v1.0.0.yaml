@@ -6,7 +6,7 @@ info:
     backgroundColor: '#FFFFFF'
     altText: Digital Convergence Initiative
   description: |-
-    The Social Registry interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between social registry and SP system.
+    The IBR(Integrated Beneficiary Registry) interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between IBR registry and SP system.
     You can now help us improve the API whether it's by making changes to the definition itself or to the code.
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
@@ -14,11 +14,14 @@ info:
     2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in crvs registry it sends event details on notify end point
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
 
-    Gitbook reference link :
-    - [Scoial Registry - V1.0 ](https://standards.spdci.org/standards/v/social-v1.0-1/social/1.-social)
+    Gitbook reference link[WIP]:
+    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.io)
 
-    Code directory links :
-    - [Identifiers](https://standards.spdci.org/standards/v/social-v1.0-1/social/social-registry-with-sp-mis-standards/data/code-directory)
+    Code directory links:
+    - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
+    - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
+    - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
+    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
 
     Each request is build up of three parts
     - signature 
@@ -30,7 +33,7 @@ info:
     email: info@spdci.org
   license:
     name: DCI Social Protection License
-    url: 'https://github.com/spdci/standards/blob/draft/LICENSE.md'
+    url: 'https://api.spdci.org/LICENSE.md'
 servers:
   - url: 'https://sandbox.spdci.org/namespace/v1.0.0'
     description: Sandbox Server
@@ -55,6 +58,22 @@ tags:
     x-displayName: SearchStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
+  - name: SubscribeRequest
+    x-displayName: SubscribeRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
+  - name: SubscribeResponse
+    x-displayName: SubscribeResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
+  - name: SubscribeStatusReasonCode
+    x-displayName: SubscribeStatusReasonCode
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
+  - name: NotifyEventRequest
+    x-displayName: NotifyEventRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
   - name: UnSubscribeRequest
     x-displayName: UnSubscribeRequest
     description: |
@@ -67,14 +86,6 @@ tags:
     x-displayName: UnSubscribeStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
-  - name: ReceiptRequest
-    x-displayName: ReceiptRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
-  - name: ReceiptResponse
-    x-displayName: ReceiptResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -83,6 +94,14 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
+  - name: ReceiptRequest
+    x-displayName: ReceiptRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
+  - name: ReceiptResponse
+    x-displayName: ReceiptResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
@@ -96,10 +115,15 @@ x-tagGroups:
     tags:
       - SearchRequest
       - SearchResponse
+      - SubscribeRequest
+      - SubscribeResponse
       - ReceiptRequest
       - ReceiptResponse
       - TxnStatusRequest
       - TxnStatusResponse
+      - NotifyEventRequest
+      - UnSubscribeRequest
+      - UnSubscribeResponse
       - EncryptedMessage
   - name: Status Codes
     tags:
@@ -417,6 +441,57 @@ paths:
           $ref: '#/components/responses/HttpErrorResponse'
         default:
           $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
+  /registry/notify:
+    post:
+      summary: /registry/notify
+      description: Registry to notify a life event to subscrbiers
+      operationId: post_reg_notify
+      tags:
+        - Async
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - notify
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/HttpErrorResponse'
       security:
         - Authorization: []
       deprecated: false
@@ -1137,6 +1212,9 @@ components:
                   reg_records:
                     description: |
                       The "Person" object contains fields expected in response of search
+                      @context: "https://spdci.github.io/schemas/extensions/ibr/v1/Person.jsonld" <br>
+                      @type: "Person" <br>
+                      @container: "@set" <br>
                     type: array
                     items:
                       allOf:

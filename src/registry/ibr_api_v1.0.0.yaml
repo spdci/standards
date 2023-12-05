@@ -15,11 +15,14 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
     
     Gitbook reference link[WIP]:
-    - [Integrated Beneficiary Registry - V1.0 ](https://digital-convergence-initiative-d.gitbook.io)
+    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.io)
 
-    Code directory links[WIP]:
-    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/)
-    
+    Code directory links:
+    - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
+    - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
+    - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
+    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+
     Each request is build up of three parts
     - signature 
     - header 
@@ -30,7 +33,7 @@ info:
     email: info@spdci.org
   license:
    name: DCI Social Protection License
-   url: https://github.com/spdci/standards/blob/draft/LICENSE.md
+   url: https://api.spdci.org/LICENSE.md
  
 servers:
   - url: "https://sandbox.spdci.org/namespace/v1.0.0"
@@ -56,6 +59,22 @@ tags:
     x-displayName: SearchStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
+  - name: SubscribeRequest
+    x-displayName: SubscribeRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
+  - name: SubscribeResponse
+    x-displayName: SubscribeResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
+  - name: SubscribeStatusReasonCode
+    x-displayName: SubscribeStatusReasonCode
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
+  - name: NotifyEventRequest
+    x-displayName: NotifyEventRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
   - name: UnSubscribeRequest
     x-displayName: UnSubscribeRequest
     description: |
@@ -68,15 +87,6 @@ tags:
     x-displayName: UnSubscribeStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
-  - name: ReceiptRequest
-    x-displayName: ReceiptRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
-  - name: ReceiptResponse
-    x-displayName: ReceiptResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
-
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -85,10 +95,19 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
+  - name: ReceiptRequest
+    x-displayName: ReceiptRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
+  - name: ReceiptResponse
+    x-displayName: ReceiptResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/EncryptedMessage" />    
+
 x-tagGroups:
   - name: API Definitions
     tags:
@@ -97,11 +116,16 @@ x-tagGroups:
   - name: Schema Objects
     tags:
       - SearchRequest
-      - SearchResponse 
+      - SearchResponse
+      - SubscribeRequest 
+      - SubscribeResponse
       - ReceiptRequest
       - ReceiptResponse
       - TxnStatusRequest
       - TxnStatusResponse
+      - NotifyEventRequest
+      - UnSubscribeRequest
+      - UnSubscribeResponse 
       - EncryptedMessage
   - name: Status Codes
     tags: 
@@ -424,7 +448,57 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
-
+ /registry/notify:
+  post: 
+    summary: "/registry/notify"
+    description: Registry to notify a life event to subscrbiers
+    operationId: post_reg_notify
+    tags: 
+      -  Async
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
  /registry/on-notify:
   post: 
     summary: "/registry/on-notify"
