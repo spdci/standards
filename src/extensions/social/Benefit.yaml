@@ -1,0 +1,11 @@
+type: object
+description: | 
+  The Benefit object provide information about benefits
+properties:
+  benefit_type:
+    $ref: BenefitType.yaml
+  benefit_date:
+    $ref: ../../common/schema/DateTime.yaml
+  benefit_value: 
+    type: string
+    description: This can be any value like monetery value like currency value or any objects received

@@ -1,0 +1,44 @@
+type: object
+description: | 
+  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+  3. Allowes Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+properties:
+  identifier:
+    $ref: IdentifierTypeValue.yaml
+    description: "Information of identifier of the person"
+  name: 
+    $ref: ../dci/Name.yaml
+  sex:
+    $ref: ../dci/Sex.yaml
+  birthdate:
+    description: Represents Date and time of the applicant's birth as in [ISO 8601](https://www.iso.org/standard/40874.html) 
+    type: string
+  address:
+    $ref: ../openid/Address.yaml
+  marital_status:
+    $ref: ../dci/MaritalStatus.yaml
+  poverty_score:
+    type: string
+    description: details of poverty score
+  disabled:
+    type: boolean
+    description: True is disabled, false if no disability
+  household_identifier:
+    type: string
+    description: Value of the household identifier
+  programms:
+    type: array
+    description: "Details of the programmes the person is enrolled in"
+    items:
+      $ref: Programme.yaml
+  benefits:
+    type: array
+    description: "Benefits received by the person"
+    items:
+      $ref: Benefit.yaml
+  payments:
+    type: array
+    description: "Payment information"
+    items:
+      $ref: DisburshmentInfo.yaml
+    
