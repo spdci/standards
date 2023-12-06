@@ -33,13 +33,10 @@ properties:
             reg_records:
               description: |
                 The "Person" object contains fields expected in response of search
-                @context: "https://spdci.github.io/schemas/extensions/social/v1/Person.jsonld" <br>
+                @context: https://spdci.github.io/schemas/extensions/social/v1/Person.jsonld <br>
                 @type: "Person" <br>
                 @container: "@set" <br>
               type: array
-              items:
-                allOf:
-                  - $ref: ../../extensions/social/Person.yaml
           required: 
             - reg_records
         pagination: 

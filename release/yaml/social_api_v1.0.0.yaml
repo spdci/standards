@@ -928,7 +928,27 @@ components:
                         type: string
                         description: Value of the identifier
                   name:
-                    $ref: '#/paths/~1registry~1on-search/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/search_response/items/properties/data/properties/reg_records/items/allOf/0/properties/name'
+                    type: object
+                    description: |
+                      The name data object represents a person's name with various components. <br>
+                      Reference: [FHIR XPN - extended person name](https://v2plus.hl7.org/2021Jan/data-type/XPN.html#XPN-1) <br>
+                      Note: Note: In some cultures, people can have multiple Surname(s), Given name(s), Second name(s), Suffix(s), or Prefix(s) to their name; all can be present in the respective attributes, being separated by separator character like space or /.
+                    properties:
+                      sur_name:
+                        type: string
+                        description: Surname(s) or last name(s) of the applicant
+                      given_name:
+                        type: string
+                        description: Given name(s) or first name(s) of the applicant
+                      second_name:
+                        type: string
+                        description: Second name(s) or middle name(s) of the applicant
+                      suffix:
+                        type: string
+                        description: Suffix part of the applicant's name
+                      prefix:
+                        type: string
+                        description: Prefix part of the applicant's name
                   sex:
                     type: string
                     description: |
@@ -1453,50 +1473,6 @@ components:
                       @type: "Person" <br>
                       @container: "@set" <br>
                     type: array
-                    items:
-                      allOf:
-                        - type: object
-                          description: |
-                            1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                            3. Allowes Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-                          properties:
-                            identifier:
-                              description: Information of identifier of the person
-                              type: object
-                              properties:
-                                identifier_type:
-                                  type: string
-                                  description: |
-                                    An identifier type includes unique numbers legally assigned to individuals. <br>
-                                    Reference: [Types of ID](https://id4d.worldbank.org/guide/types-id-systems)
-                                    UIN : Unique Identification Number <br>
-                                  enum:
-                                    - UIN
-                                identifier_value:
-                                  type: string
-                                  description: Value of the identifier
-                            name:
-                              type: object
-                              description: |
-                                The name data object represents a person's name with various components. <br>
-                                Reference: [FHIR XPN - extended person name](https://v2plus.hl7.org/2021Jan/data-type/XPN.html#XPN-1) <br>
-                                Note: Note: In some cultures, people can have multiple Surname(s), Given name(s), Second name(s), Suffix(s), or Prefix(s) to their name; all can be present in the respective attributes, being separated by separator character like space or /.
-                              properties:
-                                sur_name:
-                                  type: string
-                                  description: Surname(s) or last name(s) of the applicant
-                                given_name:
-                                  type: string
-                                  description: Given name(s) or first name(s) of the applicant
-                                second_name:
-                                  type: string
-                                  description: Second name(s) or middle name(s) of the applicant
-                                suffix:
-                                  type: string
-                                  description: Suffix part of the applicant's name
-                                prefix:
-                                  type: string
-                                  description: Prefix part of the applicant's name
                 required:
                   - reg_records
               pagination:

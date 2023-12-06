@@ -6,9 +6,9 @@ properties:
   identifier:
     $ref: IdentifierTypeValue.yaml
     description: The person identification number
-  name: 
-    $ref: ../dci/Name.yaml
-    description: Full name in a displayable form, possibly including titles and suffixes, in the order of the applicant's locale norms and/or preferences.    
+#  name: 
+#    $ref: ../dci/Name.yaml
+#    description: Full name in a displayable form, possibly including titles and suffixes, in the order of the applicant's locale norms and/or preferences.    
 #  parent1_identifier:
 #    $ref: IdentifierTypeValue.yaml
 #    description: "Identifier for one parent of the applicant. Must be a unique identifier similar to the applicant's identifier."
