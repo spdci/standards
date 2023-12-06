@@ -928,27 +928,7 @@ components:
                         type: string
                         description: Value of the identifier
                   name:
-                    type: object
-                    description: |
-                      The name data object represents a person's name with various components. <br>
-                      Reference: [FHIR XPN - extended person name](https://v2plus.hl7.org/2021Jan/data-type/XPN.html#XPN-1) <br>
-                      Note: Note: In some cultures, people can have multiple Surname(s), Given name(s), Second name(s), Suffix(s), or Prefix(s) to their name; all can be present in the respective attributes, being separated by separator character like space or /.
-                    properties:
-                      sur_name:
-                        type: string
-                        description: Surname(s) or last name(s) of the applicant
-                      given_name:
-                        type: string
-                        description: Given name(s) or first name(s) of the applicant
-                      second_name:
-                        type: string
-                        description: Second name(s) or middle name(s) of the applicant
-                      suffix:
-                        type: string
-                        description: Suffix part of the applicant's name
-                      prefix:
-                        type: string
-                        description: Prefix part of the applicant's name
+                    $ref: '#/paths/~1registry~1on-search/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/search_response/items/properties/data/properties/reg_records/items/allOf/0/properties/name'
                   sex:
                     type: string
                     description: |
@@ -1477,11 +1457,11 @@ components:
                       allOf:
                         - type: object
                           description: |
-                            This data object contains the information on people and households held in the social registry.  In case of a household the information for the head of household is provided.
-                            The data object may include information received from other registries, including CRVS and disability registries.  It may be queried by SP-MIS to determine an applicant's eligibility.
+                            1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                            3. Allowes Country/Registry specific implementation extensions using Attribute Name/Value pairs.
                           properties:
                             identifier:
-                              description: The person identification number
+                              description: Information of identifier of the person
                               type: object
                               properties:
                                 identifier_type:
@@ -1495,71 +1475,28 @@ components:
                                 identifier_value:
                                   type: string
                                   description: Value of the identifier
-                            birth_date:
-                              description: 'Represents Date and time of the applicant''s birth as in [ISO 8601](https://www.iso.org/standard/40874.html)'
-                              type: string
-                            phone_number:
-                              description: 'Applicant preferred phone number as in [E.164](https://www.itu.int/rec/T-REC-E.164-201011-I/en)'
-                              type: string
-                            phone_number_verified:
-                              description: True if the End-User's phone number has been verified; otherwise false.
-                              type: string
-                            household_identifier:
-                              type: string
-                              description: Value of the household identifier
-                            is_head:
-                              type: boolean
-                              description: Defines if the person is the head of the household or not
-                            is_disabled:
-                              type: boolean
-                              description: 'Specifies if the applicant is disabled, not disabled or not known'
-                            registration_date:
-                              description: The date on which the person was first registered in the social registry
-                              $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                            death_date:
-                              description: 'The date of death of the applicant, if applicable. Formatted according to schema:DateTime.'
-                              $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                            email:
-                              type: string
-                              description: 'Applicant preferred e-mail address as in [RFC 5322](https://datatracker.ietf.org/doc/html/rfc5322) [addr-spec](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1) [specification](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)'
-                            email_verified:
-                              type: boolean
-                              description: 'Email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating.'
-                            nationality:
-                              type: string
-                              description: The nationality of the person registered
-                            poverty_score:
-                              type: string
-                              description: The poverty score assigned to the household as a result of a proxy means test or other poverty ranking approach
-                            employment_status:
-                              type: string
-                              description: Binary representation of if the beneficiary is formally employed or not
-                            disability_information:
+                            name:
                               type: object
                               description: |
-                                Disability information of person
+                                The name data object represents a person's name with various components. <br>
+                                Reference: [FHIR XPN - extended person name](https://v2plus.hl7.org/2021Jan/data-type/XPN.html#XPN-1) <br>
+                                Note: Note: In some cultures, people can have multiple Surname(s), Given name(s), Second name(s), Suffix(s), or Prefix(s) to their name; all can be present in the respective attributes, being separated by separator character like space or /.
                               properties:
-                                disability_identifier:
+                                sur_name:
                                   type: string
-                                  description: Value of the identifier
-                                disability_type:
+                                  description: Surname(s) or last name(s) of the applicant
+                                given_name:
                                   type: string
-                                  description: Type of disability
-                                functional_limitation_type:
+                                  description: Given name(s) or first name(s) of the applicant
+                                second_name:
                                   type: string
-                                  description: Type of functional limitation
-                                functional_severity:
-                                  description: Functional severity of the disability
+                                  description: Second name(s) or middle name(s) of the applicant
+                                suffix:
                                   type: string
-                            is_deceased:
-                              type: boolean
-                              description: 'True is disabled, false if no disability'
-                            ethnicity:
-                              type: string
-                              description: Ethnicity of the applicant
-                            last_updated:
-                              type: string
-                              description: Date on which applicant data was last updated
+                                  description: Suffix part of the applicant's name
+                                prefix:
+                                  type: string
+                                  description: Prefix part of the applicant's name
                 required:
                   - reg_records
               pagination:
