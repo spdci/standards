@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Interoperability APIs - Integrated Beneficiary Registry
   x-logo:
-    url: 'https://standards.spdci.org/api-documentation/draft/dci-logo.png'
+    url: ./dci-logo.png
     backgroundColor: '#FFFFFF'
     altText: Digital Convergence Initiative
   description: |-
@@ -903,7 +903,13 @@ components:
             beneficiaries:
               type: array
               items:
-                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items/allOf/0'
+                type: object
+                description: |
+                  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                  3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                  @context: "https://schema.spdci.org/extensions/ibr/v1/Person.jsonld" <br>
+                  @type: "@context" <br>
       required:
         - transaction_id
         - receipt_information
@@ -1212,266 +1218,9 @@ components:
                   reg_records:
                     description: |
                       The "Person" object contains fields expected in response of search
-                      @context: "https://spdci.github.io/schemas/extensions/ibr/v1/Person.jsonld" <br>
+                      @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
                       @type: "Person" <br>
                       @container: "@set" <br>
-                    type: array
-                    items:
-                      allOf:
-                        - type: object
-                          description: |
-                            1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                            3. Allowes Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-                          properties:
-                            identifier:
-                              description: Information of identifier of the person
-                              type: object
-                              properties:
-                                identifier_type:
-                                  type: string
-                                  description: |
-                                    An identifier type includes unique numbers legally assigned to individuals. <br>
-                                    Reference: [Types of ID](https://id4d.worldbank.org/guide/types-id-systems)
-                                    UIN : Unique Identification Number <br>
-                                  enum:
-                                    - UIN
-                                identifier_value:
-                                  type: string
-                                  description: Value of the identifier
-                            name:
-                              type: object
-                              description: |
-                                The name data object represents a person's name with various components. <br>
-                                Reference: [FHIR XPN - extended person name](https://v2plus.hl7.org/2021Jan/data-type/XPN.html#XPN-1) <br>
-                                Note: Note: In some cultures, people can have multiple Surname(s), Given name(s), Second name(s), Suffix(s), or Prefix(s) to their name; all can be present in the respective attributes, being separated by separator character like space or /.
-                              properties:
-                                sur_name:
-                                  type: string
-                                  description: Surname(s) or last name(s) of the applicant
-                                given_name:
-                                  type: string
-                                  description: Given name(s) or first name(s) of the applicant
-                                second_name:
-                                  type: string
-                                  description: Second name(s) or middle name(s) of the applicant
-                                suffix:
-                                  type: string
-                                  description: Suffix part of the applicant's name
-                                prefix:
-                                  type: string
-                                  description: Prefix part of the applicant's name
-                            sex:
-                              type: string
-                              description: |
-                                Standardized codes/values representing diverse Sex categories.
-                                Reference: [FHIR Administrative Gender](https://build.fhir.org/valueset-administrative-gender.html)
-                                1 : Male
-                                2 : Female
-                                3 : Others
-                                4 : Unknown
-                              enum:
-                                - male
-                                - female
-                                - other
-                                - unknown
-                            birthdate:
-                              description: 'Represents Date and time of the applicant''s birth as in [ISO 8601](https://www.iso.org/standard/40874.html)'
-                              type: string
-                            address:
-                              title: Address
-                              type: object
-                              description: 'Address info as per OpenID <a href="https://openid.net/specs/openid-connect-core-1_0.html#AddressClaim">specs</a>'
-                              properties:
-                                address_line1:
-                                  description: 'Full mailing address, formatted for display or use on a mailing label. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair ("\r\n") or as a single line feed character ("\n").'
-                                  type: string
-                                  example: ''
-                                address_line_2:
-                                  description: 'Full street address component, which MAY include house number, street name, Post Office Box, and multi-line extended street address information. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair ("\r\n") or as a single line feed character ("\n").'
-                                  type: string
-                                  example: ''
-                                locality:
-                                  description: City or locality component.
-                                  type: string
-                                  example: ''
-                                sub_region_code:
-                                  description: District or sub-regional code
-                                  type: string
-                                region_code:
-                                  description: 'State, province, prefecture, or region component.'
-                                  type: string
-                                  example: ''
-                                postal_code:
-                                  description: Zip code or postal code component.
-                                  type: string
-                                  example: ''
-                                country_code:
-                                  description: 'Country part of an address represented using an ISO 3-letter code [ISO3166-3], e.g., "USA" or "JPN". 2-letter ISO codes [ISO3166-1] e.g. ,e.g. US, JP'
-                                  type: string
-                                  example: ''
-                                geo_location:
-                                  description: |
-                                    Refer [Plus Codes](https://github.com/google/open-location-code/wiki/Plus-codes-API) for more details
-                                  oneOf:
-                                    - type: object
-                                      properties:
-                                        latitude:
-                                          type: string
-                                          example: 11°24'12.2"N
-                                        longitude:
-                                          type: string
-                                          example: 88°50'26.5"E
-                                    - type: object
-                                      description: 'Refer [Plus Codes](https://github.com/google/open-location-code/wiki/Plus-codes-API) for more details'
-                                      properties:
-                                        global_code:
-                                          type: string
-                                          example: ''
-                                        geometry:
-                                          type: object
-                                          properties:
-                                            bounds:
-                                              type: object
-                                              properties:
-                                                northeast:
-                                                  $ref: '#/paths/~1registry~1receipts/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/receipt_information/properties/beneficiaries/items/properties/address/properties/geo_location/oneOf/0'
-                                                southwest:
-                                                  $ref: '#/paths/~1registry~1receipts/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/receipt_information/properties/beneficiaries/items/properties/address/properties/geo_location/oneOf/0'
-                                            location:
-                                              $ref: '#/paths/~1registry~1receipts/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/receipt_information/properties/beneficiaries/items/properties/address/properties/geo_location/oneOf/0'
-                            marital_status:
-                              type: string
-                              description: |
-                                Marital status reference database: Standardized codes/values representing different marital status categories <br>
-                                Reference: [FHIR Marital Status](https://hl7.org/fhir/DSTU2/valueset-marital-status.html)<br>
-
-                                Code : Values - Description <br>
-                                S : Never Married - No marriage contract has ever been entered <br>
-                                M : Married - A current marriage contract is active <br>
-                                W : Widow - The spouse has died <br>
-                                A : Annulled - Marriage contract has been declared null and to not have existed <br>
-                                D : Divorced - Marriage contract has been declared dissolved and inactive <br>
-                                L : Legally Separated - Legally Separated <br>
-                                U : Unmarried - The person is not presently married. The marital history is not known or stated. <br>
-                              enum:
-                                - S
-                                - M
-                                - W
-                                - A
-                                - D
-                                - L
-                                - U
-                            poverty_score:
-                              type: string
-                              description: details of poverty score
-                            disabled:
-                              type: boolean
-                              description: 'True is disabled, false if no disability'
-                            household_identifier:
-                              type: string
-                              description: Value of the household identifier
-                            programms:
-                              type: array
-                              description: Details of the programmes the person is enrolled in
-                              items:
-                                type: object
-                                description: |
-                                  1. 
-                                  2. 
-                                properties:
-                                  programme_name:
-                                    type: string
-                                    description: The programme name sent by sp system
-                                  programme_identifier:
-                                    type: string
-                                    description: Programme identifier
-                                  registration_date:
-                                    description: The date when the beneficiary was registered into the programme
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  enrolment_date:
-                                    description: The date when the beneficiary was enrolled into the programme
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  suspension_date:
-                                    description: The date when the beneficiary was suspended from the programme
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  graduation_date:
-                                    description: The date when the beneficiary graduated
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  status:
-                                    type: string
-                                    description: |
-                                      The beneficiaries status with a specific program
-
-                                      1 : Active <br>
-                                      2 : Deceased <br>
-                                      3 : Graduated <br>
-                                      4 : Suspended <br> 
-                                    enum:
-                                      - '1'
-                                      - '2'
-                                      - '3'
-                                      - '4'
-                            benefits:
-                              type: array
-                              description: Benefits received by the person
-                              items:
-                                type: object
-                                description: |
-                                  The Benefit object provide information about benefits
-                                properties:
-                                  benefit_type:
-                                    type: string
-                                    description: |
-                                      The type of benefit provided by a program
-                                      1 : Cash <br>
-                                      2 : Voucher <br>
-                                      3 : In-kind <br>
-                                      4 : Training <br>
-                                      5 : Work opportunity <br>
-                                      6 : Insurance
-                                    enum:
-                                      - '1'
-                                      - '2'
-                                      - '3'
-                                      - '4'
-                                      - '5'
-                                      - '6'
-                                  benefit_date:
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  benefit_value:
-                                    type: string
-                                    description: This can be any value like monetery value like currency value or any objects received
-                            payments:
-                              type: array
-                              description: Payment information
-                              items:
-                                type: object
-                                description: |
-                                  The payment information contains details about payment related fields
-                                properties:
-                                  payroll_date:
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  payroll_amount:
-                                    type: string
-                                    description: Value of the identifier
-                                  payment_credit_date:
-                                    $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                                  payment_credit_amount:
-                                    description: null
-                                    type: string
-                                  payment_charges:
-                                    type: string
-                                    description: null
-                                  payment_status:
-                                    type: string
-                                    description: |
-                                      The status of a payment made to a beneficiary
-
-                                      1 : Succesful <br>
-                                      2 : Not succesful <br>
-                                    enum:
-                                      - '1'
-                                      - '2'
                 required:
                   - reg_records
               pagination:
@@ -1844,7 +1593,7 @@ components:
                   reg_type:
                     type: string
                     description: |
-                      @context: "https://schema.spdci.org/common/v1/RegistryType.jsonld" <br>
+                      @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
                       @type: "RegistryType" <br>
 
                       **Notes:**

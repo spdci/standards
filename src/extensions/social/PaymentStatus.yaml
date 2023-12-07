@@ -1,9 +1,0 @@
-type: string
-description: |
-  The status of a payment made to a beneficiary
-
-  1 : Succesful <br>
-  2 : Not succesful <br>
-enum:
-  - "1"
-  - "2" 
