@@ -2,76 +2,8 @@ type: object
 description: | 
   This data object contains the information on people and households held in the social registry.  In case of a household the information for the head of household is provided.
   The data object may include information received from other registries, including CRVS and disability registries.  It may be queried by SP-MIS to determine an applicant's eligibility.
-properties:
-  identifier:
-    $ref: IdentifierTypeValue.yaml
-    description: The person identification number
-#  name: 
-#    $ref: ../dci/Name.yaml
-#    description: Full name in a displayable form, possibly including titles and suffixes, in the order of the applicant's locale norms and/or preferences.    
-#  parent1_identifier:
-#    $ref: IdentifierTypeValue.yaml
-#    description: "Identifier for one parent of the applicant. Must be a unique identifier similar to the applicant's identifier."
-#  parent2_identifier:
-#    $ref: IdentifierTypeValue.yaml
-#    description: "Identifier for one parent of the applicant. Must be a unique identifier similar to the applicant's identifier."
-  birth_date:
-    description: Represents Date and time of the applicant's birth as in [ISO 8601](https://www.iso.org/standard/40874.html) 
-    type: string
-#  sex:
-#    $ref: ../dci/Sex.yaml
-  phone_number:
-    description: Applicant preferred phone number as in [E.164](https://www.itu.int/rec/T-REC-E.164-201011-I/en)
-    type: string
-  phone_number_verified:
-    description: True if the End-User's phone number has been verified; otherwise false. 
-    type: string
-#  marital_status:
-#    $ref: ../dci/MaritalStatus.yaml
-  household_identifier:
-    type: string
-    description: Value of the household identifier
-  is_head:
-    type: boolean
-    description: Defines if the person is the head of the household or not
-  is_disabled:
-    type: boolean
-    description: Specifies if the applicant is disabled, not disabled or not known
-  registration_date: 
-    description: The date on which the person was first registered in the social registry
-    $ref: ../../common/schema/DateTime.yaml   
-#  address:
-#    description: Current residential address of the applicant, represented as an address object.
-#    $ref: ../openid/Address.yaml
-  death_date:
-    description: The date of death of the applicant, if applicable. Formatted according to schema:DateTime.
-    $ref: ../../common/schema/DateTime.yaml
-#  deathplace:
-#    $ref: ../openid/Address.yaml
-  email:
-    type: string
-    description: Applicant preferred e-mail address as in [RFC 5322](https://datatracker.ietf.org/doc/html/rfc5322) [addr-spec](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1) [specification](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)
-  email_verified: 
-    type: boolean
-    description: Email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating.
-  nationality:
-    type: string
-    description: The nationality of the person registered
-  poverty_score:
-    type: string
-    description: The poverty score assigned to the household as a result of a proxy means test or other poverty ranking approach
-  employment_status:
-    type: string
-    description: Binary representation of if the beneficiary is formally employed or not
-  disability_information:
-    $ref: DisabilityInfo.yaml
-  is_deceased:
-    type: boolean
-    description: True is disabled, false if no disability
-  ethnicity:
-    type: string  
-    description: Ethnicity of the applicant
-  last_updated:
-    type: string  
-    description: Date on which applicant data was last updated
-#
+
+  @context: "https://schema.spdci.org/extensions/social/v1/Person.jsonld" <br>
+  @type: "@context" <br>
+  
+ 
