@@ -13,6 +13,9 @@ redocly build-docs ./release/yaml/registry_core_api_v1.0.0.yaml  -o ./release/ht
 swagger-cli -f 2 -t yaml bundle ./src/registry/ibr_api_v1.0.0.yaml -o ./release/yaml/ibr_api_v1.0.0.yaml
 redocly build-docs ./release/yaml/ibr_api_v1.0.0.yaml  -o ./release/html/ibr_api_v1.0.0.html
 
+swagger-cli -f 2 -t yaml bundle ./src/registry/social_api_v1.0.0.yaml -o ./release/yaml/social_api_v1.0.0.yaml
+redocly build-docs ./release/yaml/social_api_v1.0.0.yaml  -o ./release/html/social_api_v1.0.0.html
+
 
 # build locations APIs
 swagger-cli -f 2 -t yaml bundle ./src/locations/locations_core_api_v1.0.0.yaml -o ./release/yaml/locations_core_api_v1.0.0.yaml
