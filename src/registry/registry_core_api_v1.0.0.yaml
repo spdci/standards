@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Interoperability APIs - Foundational/Functional registries
   x-logo:
-    url: 'https://standards.spdci.org/api-documentation/draft/dci-logo.png'
+    url: './dci-logo.png'
     backgroundColor: '#FFFFFF'
     altText: 'Digital Convergence Initiative'  
   description: |-

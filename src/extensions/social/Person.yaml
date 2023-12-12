@@ -1,9 +1,7 @@
 type: object
 description: | 
-  This data object contains the information on people and households held in the social registry.  In case of a household the information for the head of household is provided.
-  The data object may include information received from other registries, including CRVS and disability registries.  It may be queried by SP-MIS to determine an applicant's eligibility.
+  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+  3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
 
-  @context: "https://schema.spdci.org/extensions/social/v1/Person.jsonld" <br>
+  @context: https://schema.spdci.org/extensions/social/v1/Person.jsonld <br>
   @type: "@context" <br>
-  
- 

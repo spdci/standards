@@ -1,0 +1,19 @@
+type: object
+description: Identifier type and value object
+properties:
+  type:
+    type: string
+    description: |
+      @context: "https://schema.spdci.org/common/v1/identifier_type.jsonld" <br>
+      @type: "IdType" <br>
+      
+      **Notes:**
+        1. Identifier type values defined as per implementation context.
+        2. Usually a list of **enum** values of all possible queryable identifiers.
+        3. e.g: UIN, MOBILE, BRN, MRN, DRN, etc., 
+    example: "UIN"
+  value:
+    allOf:
+      - description: Identifier Value of the subject.
+      - $ref: AttributeValue.yaml
+    example: "12314567890"
