@@ -5,7 +5,6 @@ description: |
   1 : Household <br>
   2 : Family <br>
   3 : Group <br>  
-enum:
-  - "1"
-  - "2"
-  - "3"
+
+  @context: "https://schema.spdci.org/extensions/ibr/v1/GroupTypeEnum.jsonld" <br>
+  @type: "@context" <br>

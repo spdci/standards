@@ -34,7 +34,7 @@ properties:
               description: |
                 The "Person" object contains fields expected in response of search
                 @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
-                @type: "Person" <br>
+                @type: "@context" <br>
                 @container: "@set" <br>
           required: 
             - reg_records

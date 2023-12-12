@@ -1,7 +1,7 @@
 type: object
 description: | 
   Receipt information contains receipt type and list of beneficiaries
-  1) Register - It indi
+  1) Register - It indicates that beneficiary have registered into system.
   2) Deregister - If receipt is for a programme exit then programm information with suspended date to be recorded
 properties:
   receipt_type:

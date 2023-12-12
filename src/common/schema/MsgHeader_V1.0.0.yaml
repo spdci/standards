@@ -15,24 +15,24 @@ properties:
   message_ts:
     $ref: DateTime.yaml
   action:
-    description: G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps identity payload type in message property.
+    description: G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.
     type: string
   sender_id:
     description: | 
       1. sender_id registered with the receiving system or gateway. 
-      2. Used for authorization, encryption, digital sign verfication, etc., 
+      2. Used for authorization, encryption, digital sign verification, etc.,
     type: string
     example: 'spp.example.org'
   sender_uri:
     description: |
       1. sender url to accept callbacks. Applicable only for async communications and if response ack_status is ACK.
-      2. Default uri is assumed to be configred on the gateway as part of sender/receiver onboarding. 
+      2. Default uri is assumed to be configured on the gateway as part of sender/receiver onboarding. 
       3. For SFTP based communications, this shall be set to server/folder details.
     type: string
     format: uri
     example: "https://spp.example.org/{namespace}/callback/on-search"
   receiver_id:
-    description: receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.
+    description: receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.
     type: string
     example: 'pymts.example.org'
   total_count:

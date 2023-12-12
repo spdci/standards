@@ -22,7 +22,7 @@ properties:
   status_reason_code:
     $ref: "./MsgHeaderStatusReasonCode.yaml"
   status_reason_message:
-    description: "Status reascon code message, if any, Helps actionanble messaging for system/end users"
+    description: "Status reascon code message, if any, Helps actionable messaging for system/end users"
     type: string
     maxLength: 999
   total_count:
