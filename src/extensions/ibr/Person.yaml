@@ -5,3 +5,54 @@ description: |
 
   @context: "https://schema.spdci.org/extensions/ibr/v1/Person.jsonld" <br>
   @type: "@context" <br>
+example:
+  {
+  "@context": {
+    "@vocab": "https://schema.spdci.org/extensions/ibr/v1",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#"
+  },
+  "@id": "Person",
+  "@type": "Person",
+  "identifier": {
+    "@id": "Identifier",
+    "@type": "Identifier",
+    "identifier_type": "UIN",
+    "identifier_value": "847951632"
+  },
+  "name": {
+    "@type": "Name",
+    "surname": "Phumchai",
+    "given_name": "Sudarat",
+    "second_name": "",
+    "prefix": "Dr.",
+    "suffix": "PhD"
+  },
+  "household_status": "",
+  "benefiting_entity": "Person",
+  "sex": "female",
+  "birth_date": "1995-09-21T11:20:00",
+  "sub_region_code": "",
+  "marital_status": "M",
+  "poverty_score": "",
+  "is_disabled": 2,
+  "household_identifier": "",
+  "programme_name": "",
+  "programme_identifier": "",
+  "registration_date": "2022-09-21T11:20:00",
+  "enrolment_date": "2022-10-21T11:20:00",
+  "suspension_date": "2023-09-21T11:20:00",
+  "graduation_date": "2022-09-21T11:20:00",
+  "enrolment_status": "3",
+  "benefit_type": "2",
+  "benefit_date": "",
+  "benefit_value": "",
+  "payroll_date": "",
+  "payroll_amount": "",
+  "payment_credit_date": "",
+  "payment_credit_amount": "",
+  "payment_charges": "",
+  "payment_status": "1"
+}

@@ -37,6 +37,9 @@ properties:
                 @type: "Person" <br>
                 @container: "@set" <br>
               type: array
+              items:
+                $ref: "../../extensions/social/Person.yaml"                
+
           required: 
             - reg_records
         pagination: 

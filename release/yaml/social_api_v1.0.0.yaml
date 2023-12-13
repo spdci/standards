@@ -132,7 +132,13 @@ paths:
   /registry/search:
     post:
       summary: /registry/search
-      description: Search person(s) in registry using identifier or custome attributes
+      description: |-
+        The async search api will accept request and will send response to on-search endpoint. The registry system will implement /registry/search endpoint and the SP system shall implement /registry/on-search to receive data from registry system.
+        The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The registry system will validate the request and will send response to on-search endpoint. 
+        Information for each field is given below.
+          - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+          - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+          - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
       operationId: post_reg_search
       tags:
         - Async
@@ -185,7 +191,7 @@ paths:
   /registry/on-search:
     post:
       summary: /registry/on-search
-      description: Search results through callback
+      description: The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. Refer example json at gitbook.
       operationId: post_reg_on-search
       tags:
         - Async
@@ -652,7 +658,13 @@ paths:
   /registry/sync/search:
     post:
       summary: /registry/sync/search
-      description: Search person(s) in registry using identifier or custome attributes
+      description: |-
+        The sync search api will accept request and will send response immediately
+        The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The registry system will validate the request and will send response to on-search endpoint. 
+        Information for each field is given below.
+          - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+          - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+          - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
       operationId: post_reg_sync_search
       tags:
         - Sync
@@ -914,6 +926,52 @@ components:
 
                   @context: "https://schema.spdci.org/extensions/ibr/v1/Person.jsonld" <br>
                   @type: "@context" <br>
+                example:
+                  '@context':
+                    '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
+                    xsd: 'http://www.w3.org/2001/XMLSchema#'
+                    schema: 'http://schema.org/'
+                    rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                    owl: 'http://www.w3.org/2002/07/owl#'
+                  '@id': Person
+                  '@type': Person
+                  identifier:
+                    '@id': Identifier
+                    '@type': Identifier
+                    identifier_type: UIN
+                    identifier_value: '847951632'
+                  name:
+                    '@type': Name
+                    surname: Phumchai
+                    given_name: Sudarat
+                    second_name: ''
+                    prefix: Dr.
+                    suffix: PhD
+                  household_status: ''
+                  benefiting_entity: Person
+                  sex: female
+                  birth_date: '1995-09-21T11:20:00'
+                  sub_region_code: ''
+                  marital_status: M
+                  poverty_score: ''
+                  is_disabled: 2
+                  household_identifier: ''
+                  programme_name: ''
+                  programme_identifier: ''
+                  registration_date: '2022-09-21T11:20:00'
+                  enrolment_date: '2022-10-21T11:20:00'
+                  suspension_date: '2023-09-21T11:20:00'
+                  graduation_date: '2022-09-21T11:20:00'
+                  enrolment_status: '3'
+                  benefit_type: '2'
+                  benefit_date: ''
+                  benefit_value: ''
+                  payroll_date: ''
+                  payroll_amount: ''
+                  payment_credit_date: ''
+                  payment_credit_amount: ''
+                  payment_charges: ''
+                  payment_status: '1'
       required:
         - transaction_id
         - receipt_information
@@ -1226,6 +1284,105 @@ components:
                       @type: "Person" <br>
                       @container: "@set" <br>
                     type: array
+                    items:
+                      type: object
+                      description: |
+                        1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                        3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                        @context: https://schema.spdci.org/extensions/social/v1/Person.jsonld <br>
+                        @type: "@context" <br>
+                      example:
+                        '@context':
+                          '@vocab': 'https://schema.spdci.org/extensions/social/v1'
+                          xsd: 'http://www.w3.org/2001/XMLSchema#'
+                          schema: 'http://schema.org/'
+                          rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                          owl: 'http://www.w3.org/2002/07/owl#'
+                        '@id': Person
+                        '@type': Person
+                        identifier:
+                          '@id': Identifier
+                          '@type': Identifier
+                          identifier_type: UIN
+                          identifier_value: '847951632'
+                        name:
+                          '@type': Name
+                          surname: Phumchai
+                          given_name: Sudarat
+                          second_name: ''
+                          prefix: Dr.
+                          suffix: PhD
+                        birth_date: '1995-09-21T11:20:00'
+                        sex: female
+                        marital_status: M
+                        is_disabled: 2
+                        disability_identifier:
+                          '@id': Identifier
+                          '@type': Identifier
+                          identifier_type: UIN
+                          identifier_value: '753869421'
+                        disability_type: ''
+                        functional_limitation_type: d132
+                        functional_severity: '0'
+                        nationality: 'ISO 3166-2:DZ'
+                        employment_status: '1'
+                        is_deceased: '2'
+                        death_date: ''
+                        ethnicity: ''
+                        address:
+                          '@id': Address_1
+                          '@type': Address
+                          address_line1: Bophut Koh Samui
+                          address_line2: 'Surat, Near Big Buddha Beach'
+                          locality: Thani
+                          sub_region_code: SH
+                          region_code: A205
+                          postal_code: '84320'
+                          country_code: TH
+                          geo_location:
+                            '@id': GeoLocation_1
+                            '@type': GeoLocation
+                            plus_code:
+                              global_code: 8FW4V900+
+                              geometry:
+                                '@id': geometry
+                                '@type': GeoLocation
+                                bounds:
+                                  '@id': bounds
+                                  '@type': geometry
+                                  northeast:
+                                    '@id': northeast
+                                    '@type': GeoCoordinates
+                                    latitude: 48.900000000000006
+                                    longitude: 2.4000000000000057
+                                  southwest:
+                                    '@id': southwest
+                                    '@type': GeoCoordinates
+                                    latitude: 48.849999999999994
+                                    longitude: 2.3499999999999943
+                                location:
+                                  '@id': location
+                                  '@type': GeoCoordinates
+                                  latitude: 48.875
+                                  longitude: 2.375
+                        phone_number: '+66891234567'
+                        email: sudarat.phumchai@example.com
+                        household_identifier: ''
+                        household_status: '1'
+                        poverty_score: '2.5'
+                        parent1_identifier:
+                          '@id': Identifier
+                          '@type': Identifier
+                          identifier_type: UIN
+                          identifier_value: '753869421'
+                        parent2_identifier:
+                          '@id': Identifier
+                          '@type': Identifier
+                          identifier_type: UIN
+                          identifier_value: '852963741'
+                        registration_date: '2022-09-21T11:20:00'
+                        last_updated: '2022-09-21T11:20:00'
                 required:
                   - reg_records
               pagination:
@@ -1292,9 +1449,18 @@ components:
                     type: string
                     default: 1.0.0
                   reg_type:
-                    $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_type'
+                    type: string
+                    description: |
+                      @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
+                      @type: "RegistryType" <br>
+
+                      **Notes:**
+                        1. Registry type values defined as per implementation context.
+                        2. Usually a list of **enum** values of all possible queryable functional registries 
+                        3. example: "ns:org:RegistryType:IBR"
+                    example: 'ns:org:RegistryType:IBR'
                   reg_event_type:
-                    $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_event_type'
+                    $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/reg_event_type'
                   frequency:
                     type: object
                     description: |
@@ -1320,7 +1486,17 @@ components:
                   filter:
                     $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query'
                   notify_record_type:
-                    $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_record_type'
+                    type: string
+                    description: |
+                      @context: "https://schema.spdci.org/extensions/social/v1/Person.jsonld" <br>
+                      @type: "RegistryRecordType" <br>
+
+                      **Notes:**
+                        1. Registry record type values defined as per implementation context.
+                        2. Usually a list of **enum** values of all possible queryable result sets 
+                        3. Referenced in search_request and notify events
+                        4. example: "Person" 
+                    example: Person
                   authorize:
                     $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/authorize'
                 required:
@@ -1536,6 +1712,9 @@ components:
                             @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
                             @type: "Person" <br>
                             @container: "@set" <br>
+                          type: array
+                          items:
+                            $ref: '#/paths/~1registry~1receipts/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/receipt_information/properties/beneficiaries/items'
                       required:
                         - reg_records
                     pagination:

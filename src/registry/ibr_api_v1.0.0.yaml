@@ -23,10 +23,32 @@ info:
     - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
     - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
 
-    Each request is build up of three parts
+    Data Objects:
+    - Person (WIP)
+    - HouseHold (WIP)
+
+
+    Each request is build up of three parts 
     - signature 
     - header 
     - message
+
+    Information about each part is given below
+
+    **Signature:**
+    - The signature is used to verify the integrity of the message.
+    - The signature is a hash of the message and is encrypted using the private key of the sender.
+    - The receiver can verify the signature using the public key of the sender.
+
+    **Header:**
+    - The header contains information about various message header, refer to the header schema for more details.
+
+    **Message:**
+
+    - The message contains the actual payload of the message.
+    - Refere example section to get sample data and also read Gitbook for details data objects
+    - The receiver can decrypt the message using the private key of the "err.receiver_id.invalid"
+
   version: 1.0.0
   contact:
     name: DCI Social Protection
@@ -134,7 +156,14 @@ paths:
  /registry/search:
   post: 
     summary: "/registry/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: |-
+      The async search api will accept request and will send response to on-search endpoint. The registry system will implement /registry/search endpoint and the SP system shall implement /registry/on-search to receive data from registry system.
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The registry system will validate the request and will send response to on-search endpoint. 
+      Information for each field is given below.
+        - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+        - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+        - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+
     operationId: post_reg_search
     tags: 
       -  Async
@@ -187,7 +216,8 @@ paths:
  /registry/on-search:
   post: 
     summary: "/registry/on-search"
-    description: Search results through callback
+    description: |-
+      The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in ibr/v1/Person.jsonld. Refer example json at
     operationId: post_reg_on-search
     tags: 
       -  Async
@@ -658,7 +688,14 @@ paths:
  /registry/sync/search:
   post: 
     summary: "/registry/sync/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: |- 
+      The sync search api will accept request and will send response immediately
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The registry system will validate the request and will send response to on-search endpoint. 
+      Information for each field is given below.
+        - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+        - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+        - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+
     operationId: post_reg_sync_search
     tags: 
       -  Sync
@@ -903,9 +940,9 @@ components:
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
     SubscribeRequest: 
-      $ref: schema/SubscribeRequest.yaml
+      $ref: ibr/SubscribeRequest.yaml
     SubscribeResponse: 
-      $ref: schema/SubscribeResponse.yaml
+      $ref: ibr/SubscribeResponse.yaml
     SubscribeStatusReasonCode: 
       $ref: schema/SubscribeStatusReasonCode.yaml
     TxnStatusRequest: 

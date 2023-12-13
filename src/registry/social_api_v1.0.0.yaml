@@ -134,7 +134,14 @@ paths:
  /registry/search:
   post: 
     summary: "/registry/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: |-
+      The async search api will accept request and will send response to on-search endpoint. The registry system will implement /registry/search endpoint and the SP system shall implement /registry/on-search to receive data from registry system.
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The registry system will validate the request and will send response to on-search endpoint. 
+      Information for each field is given below.
+        - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+        - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+        - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+
     operationId: post_reg_search
     tags: 
       -  Async
@@ -187,7 +194,8 @@ paths:
  /registry/on-search:
   post: 
     summary: "/registry/on-search"
-    description: Search results through callback
+    description: |-
+      The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. Refer example json at gitbook.
     operationId: post_reg_on-search
     tags: 
       -  Async
@@ -658,7 +666,15 @@ paths:
  /registry/sync/search:
   post: 
     summary: "/registry/sync/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: |-
+      The sync search api will accept request and will send response immediately
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The registry system will validate the request and will send response to on-search endpoint. 
+      Information for each field is given below.
+        - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+        - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+        - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+
+
     operationId: post_reg_sync_search
     tags: 
       -  Sync
@@ -903,9 +919,9 @@ components:
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
     SubscribeRequest: 
-      $ref: schema/SubscribeRequest.yaml
+      $ref: social/SubscribeRequest.yaml
     SubscribeResponse: 
-      $ref: schema/SubscribeResponse.yaml
+      $ref: social/SubscribeResponse.yaml
     SubscribeStatusReasonCode: 
       $ref: schema/SubscribeStatusReasonCode.yaml
     TxnStatusRequest: 
