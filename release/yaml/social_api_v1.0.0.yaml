@@ -22,12 +22,30 @@ info:
     - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
     - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
     - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+    Data Objects:
+    - Person (WIP)
+    - HouseHold (WIP)
 
-    Each request is build up of three parts
+    Each request is build up of three parts 
     - signature 
     - header 
     - message
-  version: 1.0.0
+
+    Information about each part is given below
+
+    **Signature:**
+    - The signature is used to verify the integrity of the message.
+    - The signature is a hash of the message and is encrypted using the private key of the sender.
+    - The receiver can verify the signature using the public key of the sender.
+
+    **Header:**
+    - The header contains information about various message header, refer to the header schema for more details.
+
+    **Message:**
+
+    - The message contains the actual payload of the message.
+    - Refere example section to get sample data and also read Gitbook for details data objects
+    - The receiver can decrypt the message using the private key of the "err.receiver_id.invalid"  version: 1.0.0
   contact:
     name: DCI Social Protection
     email: info@spdci.org
@@ -191,7 +209,10 @@ paths:
   /registry/on-search:
     post:
       summary: /registry/on-search
-      description: The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. Refer example json at gitbook.
+      description: |-
+        The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. 
+        The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. 
+        Refer example json at gitbook [link](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/1.-crvs/data/data-objects/person#example).
       operationId: post_reg_on-search
       tags:
         - Async
@@ -242,7 +263,9 @@ paths:
   /registry/subscribe:
     post:
       summary: /registry/subscribe
-      description: Subscribe to a life event with registry
+      description: |-
+        The /registry/subscribe end point tobe implemented by registry system to receive subscription request from SP system.
+        The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
       operationId: post_reg_subscribe
       tags:
         - Async
@@ -295,7 +318,9 @@ paths:
   /registry/on-subscribe:
     post:
       summary: /registry/on-subscribe
-      description: Subscribe results through callback
+      description: |-
+        The /registry/on-subscribe request tobe implemented by SP system to receive subscription response from registry system. 
+        The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
       operationId: post_reg_on-subscribe
       tags:
         - Async
@@ -348,7 +373,7 @@ paths:
   /registry/unsubscribe:
     post:
       summary: /registry/unsubscribe
-      description: Unsubscribe existing subscription(s) by subscription_code
+      description: 'The /registry/unsubscribe endpoint will be implemented by registry system, SP system can send request to unsubscribe existing subscription(s) by subscription_code(s).'
       operationId: post_reg_unsubscribe
       tags:
         - Async
@@ -401,7 +426,7 @@ paths:
   /registry/on-unsubscribe:
     post:
       summary: /registry/on-unsubscribe
-      description: Unsubscribe response as a callback
+      description: The /registry/on-unsubscribe will be implemented by SP system to receive unsubscribe response from registry system. It will contain status information of unsubscribe request.
       operationId: post_reg_on-unsubscribe
       tags:
         - Async
@@ -453,7 +478,9 @@ paths:
   /registry/notify:
     post:
       summary: /registry/notify
-      description: Registry to notify a life event to subscrbiers
+      description: |-
+        The /registry/sync/notify end point will be implemented by SP system to receive notification for subscribed event.
+        The notification will be sent based on subscription criteria.
       operationId: post_reg_notify
       tags:
         - Async
@@ -504,7 +531,7 @@ paths:
   /registry/on-notify:
     post:
       summary: /registry/on-notify
-      description: Registry to notify a life event to subscrbiers
+      description: The /registry/on-notify will be implemented by registry system to receive notification response from SP system.
       operationId: post_reg_on_notify
       tags:
         - Async
@@ -555,7 +582,7 @@ paths:
   /registry/txn/status:
     post:
       summary: /registry/txn/status
-      description: Perform async status check of previous civil registry transanctions using transaction_id and/or reference_id(s)
+      description: The /registry/txn/status will be implemented by registry system. This will check status of reach request using transaction_id and/or reference_id(s).
       operationId: post_reg_txnstatus
       tags:
         - Async
@@ -607,7 +634,7 @@ paths:
   /registry/txn/on-status:
     post:
       summary: /registry/txn/on-status
-      description: Response to async status check of previous civil registrt transanctions using callback
+      description: The /registry/txn/on-status will be implemented by SP system. The response with information about request and in some case it may contain data as well.
       operationId: post_reg_on-txnstatus
       tags:
         - Async
@@ -727,61 +754,12 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/receipts:
-    post:
-      summary: /registry/receipts
-      description: Registry receive receipts from SP system
-      operationId: post_reg_receipts
-      tags:
-        - Sync
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/ReceiptRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - notify
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
   /registry/sync/notify:
     post:
       summary: /registry/sync/notify
-      description: Registry to notify a life event to subscrbiers
+      description: |-
+        The /registry/sync/notify end point will be implemented by SP system to receive notification for subscribed event.
+        The notification will be sent based on subscription criteria.
       operationId: post_reg_sync_notify
       tags:
         - Sync
@@ -832,7 +810,7 @@ paths:
   /registry/sync/txn/status:
     post:
       summary: /registry/sync/txn/status
-      description: Sync status check of registry Async APIs
+      description: The /registry/sync/txn/status will be implemented by registry system. This will check status of reach request using transaction_id and/or reference_id(s).
       operationId: post_reg_sync_txnstatus
       tags:
         - Sync
@@ -906,7 +884,7 @@ components:
           type: object
           description: |
             Receipt information contains receipt type and list of beneficiaries
-            1) Register - It indi
+            1) Register - It indicates that beneficiary have registered into system.
             2) Deregister - If receipt is for a programme exit then programm information with suspended date to be recorded
           properties:
             receipt_type:
@@ -996,7 +974,7 @@ components:
         transaction_id:
           description: |
             1. transaction_id set by txn initiating system (i.e sender) to co-relate all related requests in the context of a business transaction.
-            2. transaction_id should be samme across processing systems/service end points.
+            2. transaction_id should be same across processing systems/service end points.
             2. transaction_id uniqueness is ensured by txn initiating system (i.e sender)
           type: string
           maxLength: 99
@@ -1055,7 +1033,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://schema.spdci.org/common/v1/QueryType.jsonld" <br>
+                              @context: "https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld" <br>
                               @type: "Queryype" <br>
 
                               **Notes:**
@@ -1079,7 +1057,7 @@ components:
                           type:
                             type: string
                             description: |
-                              @context: "https://schema.spdci.org/common/v1/identifier_type.jsonld" <br>
+                              @context: "https://schema.spdci.org/common/v1/IdentifierTypeEnum.jsonld" <br>
                               @type: "IdType" <br>
 
                               **Notes:**
@@ -1710,11 +1688,11 @@ components:
                           description: |
                             The "Person" object contains fields expected in response of search
                             @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
-                            @type: "Person" <br>
+                            @type: "@context" <br>
                             @container: "@set" <br>
                           type: array
                           items:
-                            $ref: '#/paths/~1registry~1receipts/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/receipt_information/properties/beneficiaries/items'
+                            $ref: '#/components/schemas/ReceiptRequest/properties/receipt_information/properties/beneficiaries/items'
                       required:
                         - reg_records
                     pagination:
@@ -1838,7 +1816,7 @@ components:
                     type: string
                     description: |
                       @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
-                      @type: "RegistryType" <br>
+                      @type: "@context" <br>
 
                       **Notes:**
                         1. Registry type values defined as per implementation context.
@@ -1848,7 +1826,7 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      @context: "https://schema.spdci.org/common/v1/RegistryEventType" <br>
+                      @context: "https://schema.spdci.org/common/v1/RegistryEventTypeEnum.jsonld" <br>
                       @type: "VitalEvent" <br>
 
                       **Notes:**
@@ -1859,7 +1837,7 @@ components:
                   reg_record_type:
                     type: string
                     description: |
-                      @context: "https://schema.spdci.org/extensions/dci/v1/" <br>
+                      @context: "https://schema.spdci.org/extensions/" <br>
                       @type: "RegistryRecordType" <br>
 
                       **Notes:**
@@ -1872,7 +1850,7 @@ components:
                     type: object
                     description: |
                       The "Person" object contains fields expected in response of search
-                      @context: "https://schema.spdci.org/extensions/dci/v1/Person" <br>
+                      @context: "https://schema.spdci.org/extensions/dci/v1/Person.jsonld" <br>
                       @type: "Person" <br>
                       @container: "@set" <br> 
                     example:
@@ -2072,7 +2050,7 @@ components:
         status_reason_code:
           $ref: '#/components/schemas/MsgHeaderStatusReasonCode'
         status_reason_message:
-          description: 'Status reascon code message, if any, Helps actionanble messaging for system/end users'
+          description: 'Status reascon code message, if any, Helps actionable messaging for system/end users'
           type: string
           maxLength: 999
         total_count:
@@ -2126,24 +2104,24 @@ components:
           format: date-time
           example: ''
         action:
-          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps identity payload type in message property.'
+          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
           type: string
         sender_id:
           description: |
             1. sender_id registered with the receiving system or gateway. 
-            2. Used for authorization, encryption, digital sign verfication, etc., 
+            2. Used for authorization, encryption, digital sign verification, etc.,
           type: string
           example: spp.example.org
         sender_uri:
           description: |
             1. sender url to accept callbacks. Applicable only for async communications and if response ack_status is ACK.
-            2. Default uri is assumed to be configred on the gateway as part of sender/receiver onboarding. 
+            2. Default uri is assumed to be configured on the gateway as part of sender/receiver onboarding. 
             3. For SFTP based communications, this shall be set to server/folder details.
           type: string
           format: uri
           example: 'https://spp.example.org/{namespace}/callback/on-search'
         receiver_id:
-          description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
+          description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
           example: pymts.example.org
         total_count:
@@ -2157,7 +2135,7 @@ components:
         meta:
           type: object
           description: |
-            @context: "https://schema.spdci.org/common/v1/Meta" <br>
+            @context: "https://schema.spdci.org/common/v1/Meta.jsonld" <br>
             @type: "@context" <br>
               
             **Notes:**

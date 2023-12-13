@@ -22,12 +22,30 @@ info:
     - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
     - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
     - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+    Data Objects:
+    - Person (WIP)
+    - HouseHold (WIP)
 
-    Each request is build up of three parts
+    Each request is build up of three parts 
     - signature 
     - header 
     - message
-  version: 1.0.0
+
+    Information about each part is given below
+
+    **Signature:**
+    - The signature is used to verify the integrity of the message.
+    - The signature is a hash of the message and is encrypted using the private key of the sender.
+    - The receiver can verify the signature using the public key of the sender.
+
+    **Header:**
+    - The header contains information about various message header, refer to the header schema for more details.
+
+    **Message:**
+
+    - The message contains the actual payload of the message.
+    - Refere example section to get sample data and also read Gitbook for details data objects
+    - The receiver can decrypt the message using the private key of the "err.receiver_id.invalid"  version: 1.0.0
   contact:
     name: DCI Social Protection
     email: info@spdci.org
@@ -195,7 +213,9 @@ paths:
   post: 
     summary: "/registry/on-search"
     description: |-
-      The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. Refer example json at gitbook.
+      The /registry/on-search end point tobe implemented by SP system to receive search results from registry system. 
+      The registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. 
+      Refer example json at gitbook [link](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/1.-crvs/data/data-objects/person#example).
     operationId: post_reg_on-search
     tags: 
       -  Async
@@ -247,7 +267,9 @@ paths:
  /registry/subscribe:
   post: 
     summary: "/registry/subscribe"
-    description: Subscribe to a life event with registry
+    description: |-
+      The /registry/subscribe end point tobe implemented by registry system to receive subscription request from SP system.
+      The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
     operationId: post_reg_subscribe
     tags: 
       -  Async
@@ -300,7 +322,10 @@ paths:
  /registry/on-subscribe:
   post: 
     summary: "/registry/on-subscribe"
-    description: Subscribe results through callback
+    description: |-
+      The /registry/on-subscribe request tobe implemented by SP system to receive subscription response from registry system. 
+      The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
+
     operationId: post_reg_on-subscribe
     tags: 
       -  Async
@@ -354,7 +379,9 @@ paths:
  /registry/unsubscribe:
   post: 
     summary: "/registry/unsubscribe"
-    description: Unsubscribe existing subscription(s) by subscription_code
+    description: |-
+      The /registry/unsubscribe endpoint will be implemented by registry system, SP system can send request to unsubscribe existing subscription(s) by subscription_code(s).
+
     operationId: post_reg_unsubscribe
     tags: 
       -  Async
@@ -407,7 +434,8 @@ paths:
  /registry/on-unsubscribe:
   post: 
     summary: "/registry/on-unsubscribe"
-    description: Unsubscribe response as a callback
+    description: |-
+      The /registry/on-unsubscribe will be implemented by SP system to receive unsubscribe response from registry system. It will contain status information of unsubscribe request.
     operationId: post_reg_on-unsubscribe
     tags: 
       -  Async
@@ -459,7 +487,10 @@ paths:
  /registry/notify:
   post: 
     summary: "/registry/notify"
-    description: Registry to notify a life event to subscrbiers
+    description: |-
+      The /registry/sync/notify end point will be implemented by SP system to receive notification for subscribed event.
+      The notification will be sent based on subscription criteria.
+
     operationId: post_reg_notify
     tags: 
       -  Async
@@ -510,7 +541,9 @@ paths:
  /registry/on-notify:
   post: 
     summary: "/registry/on-notify"
-    description: Registry to notify a life event to subscrbiers
+    description: |-
+      The /registry/on-notify will be implemented by registry system to receive notification response from SP system.
+
     operationId: post_reg_on_notify
     tags: 
       -  Async
@@ -562,7 +595,8 @@ paths:
  /registry/txn/status:
   post: 
     summary: "/registry/txn/status"
-    description: Perform async status check of previous civil registry transanctions using transaction_id and/or reference_id(s)
+    description: |-
+      The /registry/txn/status will be implemented by registry system. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_txnstatus
     tags: 
       -  Async
@@ -614,7 +648,8 @@ paths:
  /registry/txn/on-status:
   post: 
     summary: "/registry/txn/on-status"
-    description: Response to async status check of previous civil registrt transanctions using callback
+    description: |-
+      The /registry/txn/on-status will be implemented by SP system. The response with information about request and in some case it may contain data as well.
     operationId: post_reg_on-txnstatus
     tags: 
       -  Async
@@ -737,62 +772,12 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/receipts:
-  post: 
-    summary: "/registry/receipts"
-    description: Registry receive receipts from SP system
-    operationId: post_reg_receipts
-    tags: 
-      -  Sync
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/ReceiptRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- 
  /registry/sync/notify:
   post: 
     summary: "/registry/sync/notify"
-    description: Registry to notify a life event to subscrbiers
+    description: |-
+      The /registry/sync/notify end point will be implemented by SP system to receive notification for subscribed event.
+      The notification will be sent based on subscription criteria.
     operationId: post_reg_sync_notify
     tags: 
       -  Sync
@@ -843,7 +828,8 @@ paths:
  /registry/sync/txn/status:
   post: 
     summary: "/registry/sync/txn/status"
-    description: Sync status check of registry Async APIs
+    description: |-
+      The /registry/sync/txn/status will be implemented by registry system. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_sync_txnstatus
     tags: 
       -  Sync
