@@ -153,8 +153,8 @@ paths:
   post: 
     summary: "/registry/search"
     description: |-
-      The async search api will accept request and will send response to on-search endpoint. The Social Registry system will implement /registry/search endpoint and the SPMIS shall implement /registry/on-search to receive data from Social Registry system.
-      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The Social Registry system will validate the request and will send response to on-search endpoint. 
+      The async search api will accept request and will send response to on-search endpoint. The SR will implement /registry/search endpoint and the SPMIS shall implement /registry/on-search to receive data from SR.
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The SR will validate the request and will send response to on-search endpoint. 
       Information for each field is given below.
         - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
         - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
@@ -213,8 +213,8 @@ paths:
   post: 
     summary: "/registry/on-search"
     description: |-
-      The /registry/on-search end point tobe implemented by SPMIS to receive search results from Social Registry system. 
-      The Social Registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. 
+      The /registry/on-search end point tobe implemented by SPMIS to receive search results from SR. 
+      The SR will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in social/v1/Person.jsonld. 
       Refer example json at gitbook [link](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/1.-crvs/data/data-objects/person#example).
     operationId: post_reg_on-search
     tags: 
@@ -268,7 +268,7 @@ paths:
   post: 
     summary: "/registry/subscribe"
     description: |-
-      The /registry/subscribe end point tobe implemented by Social Registry system to receive subscription request from SPMIS.
+      The /registry/subscribe end point tobe implemented by SR to receive subscription request from SPMIS.
       The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
     operationId: post_reg_subscribe
     tags: 
@@ -323,7 +323,7 @@ paths:
   post: 
     summary: "/registry/on-subscribe"
     description: |-
-      The /registry/on-subscribe request tobe implemented by SPMIS to receive subscription response from Social Registry system. 
+      The /registry/on-subscribe request tobe implemented by SPMIS to receive subscription response from SR. 
       The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
 
     operationId: post_reg_on-subscribe
@@ -380,7 +380,7 @@ paths:
   post: 
     summary: "/registry/unsubscribe"
     description: |-
-      The /registry/unsubscribe endpoint will be implemented by Social Registry system, SPMIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
+      The /registry/unsubscribe endpoint will be implemented by SR, SPMIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
 
     operationId: post_reg_unsubscribe
     tags: 
@@ -435,7 +435,7 @@ paths:
   post: 
     summary: "/registry/on-unsubscribe"
     description: |-
-      The /registry/on-unsubscribe will be implemented by SPMIS to receive unsubscribe response from Social Registry system. It will contain status information of unsubscribe request.
+      The /registry/on-unsubscribe will be implemented by SPMIS to receive unsubscribe response from SR. It will contain status information of unsubscribe request.
     operationId: post_reg_on-unsubscribe
     tags: 
       -  Async
@@ -542,7 +542,7 @@ paths:
   post: 
     summary: "/registry/on-notify"
     description: |-
-      The /registry/on-notify will be implemented by Social Registry system to receive notification response from SPMIS.
+      The /registry/on-notify will be implemented by SR to receive notification response from SPMIS.
 
     operationId: post_reg_on_notify
     tags: 
@@ -596,7 +596,7 @@ paths:
   post: 
     summary: "/registry/txn/status"
     description: |-
-      The /registry/txn/status will be implemented by Social Registry system. This will check status of reach request using transaction_id and/or reference_id(s).
+      The /registry/txn/status will be implemented by SR. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_txnstatus
     tags: 
       -  Async
@@ -703,7 +703,7 @@ paths:
     summary: "/registry/sync/search"
     description: |-
       The sync search api will accept request and will send response immediately
-      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The Social Registry system will validate the request and will send response to on-search endpoint. 
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The SR will validate the request and will send response to on-search endpoint. 
       Information for each field is given below.
         - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
         - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
@@ -829,7 +829,7 @@ paths:
   post: 
     summary: "/registry/sync/txn/status"
     description: |-
-      The /registry/sync/txn/status will be implemented by Social Registry system. This will check status of reach request using transaction_id and/or reference_id(s).
+      The /registry/sync/txn/status will be implemented by SR. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_sync_txnstatus
     tags: 
       -  Sync

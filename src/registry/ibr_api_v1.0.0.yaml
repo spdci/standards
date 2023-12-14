@@ -6,7 +6,7 @@ info:
     backgroundColor: '#FFFFFF'
     altText: 'Digital Convergence Initiative'  
   description: |-
-    The IBR(Integrated Beneficiary Registry) interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between IBR registry and SPMIS.
+    The IBR(Integrated Beneficiary Registry) interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between IBR registry and SP-MIS.
     You can now help us improve the API whether it's by making changes to the definition itself or to the code.
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
@@ -157,8 +157,8 @@ paths:
   post: 
     summary: "/registry/search"
     description: |-
-      The async search api will accept request and will send response to on-search endpoint. The Integrated Beneficiary Registry system will implement /registry/search endpoint and the SPMIS shall implement /registry/on-search to receive data from Integrated Beneficiary Registry system.
-      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The Integrated Beneficiary Registry system will validate the request and will send response to on-search endpoint. 
+      The async search api will accept request and will send response to on-search endpoint. The IBR will implement /registry/search endpoint and the SP-MIS shall implement /registry/on-search to receive data from IBR.
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
       Information for each field is given below.
         - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
         - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
@@ -217,8 +217,8 @@ paths:
   post: 
     summary: "/registry/on-search"
     description: |-
-      The /registry/on-search end point tobe implemented by SPMIS to receive search results from Integrated Beneficiary Registry system. 
-      The Integrated Beneficiary Registry system will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in ibr/v1/Person.jsonld. 
+      The /registry/on-search end point tobe implemented by SP-MIS to receive search results from IBR. 
+      The IBR will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in ibr/v1/Person.jsonld. 
       Refer example json at github [link](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/1.-crvs/data/data-objects/person#example)
     operationId: post_reg_on-search
     tags: 
@@ -272,7 +272,7 @@ paths:
   post: 
     summary: "/registry/subscribe"
     description: |-
-      The /registry/subscribe end point tobe implemented by Integrated Beneficiary Registry system to receive subscription request from SPMIS.
+      The /registry/subscribe end point tobe implemented by IBR to receive subscription request from SP-MIS.
       The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
     operationId: post_reg_subscribe
     tags: 
@@ -327,7 +327,7 @@ paths:
   post: 
     summary: "/registry/on-subscribe"
     description: |-
-      The /registry/on-subscribe request tobe implemented by SPMIS to receive subscription response from Integrated Beneficiary Registry system. 
+      The /registry/on-subscribe request tobe implemented by SP-MIS to receive subscription response from IBR. 
       The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
     operationId: post_reg_on-subscribe
     tags: 
@@ -383,7 +383,7 @@ paths:
   post: 
     summary: "/registry/unsubscribe"
     description: |-
-      The /registry/unsubscribe endpoint will be implemented by Integrated Beneficiary Registry system, SPMIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
+      The /registry/unsubscribe endpoint will be implemented by IBR, SP-MIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
     operationId: post_reg_unsubscribe
     tags: 
       -  Async
@@ -437,7 +437,7 @@ paths:
   post: 
     summary: "/registry/on-unsubscribe"
     description: |-
-      The /registry/on-unsubscribe will be implemented by SPMIS to receive unsubscribe response from Integrated Beneficiary Registry system. It will contain status information of unsubscribe request.
+      The /registry/on-unsubscribe will be implemented by SP-MIS to receive unsubscribe response from IBR. It will contain status information of unsubscribe request.
     operationId: post_reg_on-unsubscribe
     tags: 
       -  Async
@@ -490,7 +490,7 @@ paths:
   post: 
     summary: "/registry/notify"
     description: |-
-      The /registry/notify end point will be implemented by SPMIS to receive notification for subscribed event.
+      The /registry/notify end point will be implemented by SP-MIS to receive notification for subscribed event.
       The notification will be sent based on subscription criteria.
     operationId: post_reg_notify
     tags: 
@@ -543,7 +543,7 @@ paths:
   post: 
     summary: "/registry/on-notify"
     description: |-
-      The /registry/on-notify will be implemented by Integrated Beneficiary Registry system to receive notification response from SPMIS.
+      The /registry/on-notify will be implemented by IBR to receive notification response from SP-MIS.
     operationId: post_reg_on_notify
     tags: 
       -  Async
@@ -596,7 +596,7 @@ paths:
   post: 
     summary: "/registry/txn/status"
     description: |-
-      The /registry/txn/status will be implemented by Integrated Beneficiary Registry system. This will check status of reach request using transaction_id and/or reference_id(s).
+      The /registry/txn/status will be implemented by IBR. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_txnstatus
     tags: 
       -  Async
@@ -649,7 +649,7 @@ paths:
   post: 
     summary: "/registry/txn/on-status"
     description: |-
-      The /registry/txn/on-status will be implemented by SPMIS. The response with information about request and in some case it may contain data as well.
+      The /registry/txn/on-status will be implemented by SP-MIS. The response with information about request and in some case it may contain data as well.
     operationId: post_reg_on-txnstatus
     tags: 
       -  Async
@@ -703,7 +703,7 @@ paths:
     summary: "/registry/sync/search"
     description: |- 
       The sync search api will accept request and will send response immediately
-      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The Integrated Beneficiary Registry system will validate the request and will send response to on-search endpoint. 
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
       Information for each field is given below.
         - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
         - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
@@ -775,7 +775,7 @@ paths:
   post: 
     summary: "/registry/receipts"
     description: |-
-      The /registry/receipts endpoint will be implemented by Integrated Beneficiary Registry system to receive receipt request from SPMIS system.
+      The /registry/receipts endpoint will be implemented by IBR to receive receipt request from SP-MIS system.
       The receipt_type and beneficiaries will be requied to make request. 
       Three receipt types are supported as of now, they are 
         1) Register 
@@ -834,7 +834,7 @@ paths:
   post: 
     summary: "/registry/sync/notify"
     description: |-
-      The /registry/sync/notify end point will be implemented by SPMIS to receive notification for subscribed event.
+      The /registry/sync/notify end point will be implemented by SP-MIS to receive notification for subscribed event.
       The notification will be sent based on subscription criteria.
     operationId: post_reg_sync_notify
     tags: 
@@ -887,7 +887,7 @@ paths:
   post: 
     summary: "/registry/sync/txn/status"
     description: |-
-      The /registry/sync/txn/status will be implemented by Integrated Beneficiary Registry system. This will check status of reach request using transaction_id and/or reference_id(s).
+      The /registry/sync/txn/status will be implemented by IBR. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_sync_txnstatus
     tags: 
       -  Sync
