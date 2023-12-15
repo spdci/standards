@@ -739,7 +739,7 @@ components:
     dci_Person:
       type: object
       description: |
-        @context: "https://schema.spdci.org/CRVSPerson" <br>
+        @context: https://schema.spdci.org/CRVSPerson" <br>
         @type: "Consent"
       example:
         '@context': 'https://standards.spdci.org/schemas/extensions/dci/v1/Person'
@@ -1591,7 +1591,7 @@ components:
     RegistryEventType:
       type: string
       description: |
-        @context: "https://schema.spdci.org/common/v1/RegistryEventTypeEnum.jsonld" <br>
+        @context: https://schema.spdci.org/common/v1/RegistryEventTypeEnum.jsonld <br>
         @type: "VitalEvent" <br>
 
         **Notes:**
@@ -1603,7 +1603,7 @@ components:
       type: object
       description: |
         The "Person" object contains fields expected in response of search
-        @context: "https://schema.spdci.org/extensions/dci/v1/Person.jsonld" <br>
+        @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
         @type: "Person" <br>
         @container: "@set" <br> 
       example:
@@ -1611,7 +1611,7 @@ components:
     RegistryRecordType:
       type: string
       description: |
-        @context: "https://schema.spdci.org/extensions/" <br>
+        @context: https://schema.spdci.org/extensions/" <br>
         @type: "RegistryRecordType" <br>
 
         **Notes:**
@@ -2061,7 +2061,7 @@ components:
         name:
           type: string
           description: |
-            @context: "https://schema.spdci.org/common/v1/attribute.jsonld" <br>
+            @context: https://schema.spdci.org/common/v1/attribute.jsonld <br>
             @type: "Attribute" <br>
 
             **Notes:**
@@ -2090,10 +2090,10 @@ components:
     Authorize:
       type: object
       description: |
-        @context: "https://schema.spdci.org/Authorize" <br>
+        @context: https://schema.spdci.org/Authorize <br>
         @type: "Authorize"
       example:
-        '@context': 'https://standards.spdci.org/schemas//Authorize'
+        '@context': 'https://standards.spdci.org/schemas/Authorize'
         '@type': Authorize
         ts:
           $ref: '#/components/schemas/DateTime'
@@ -2110,7 +2110,7 @@ components:
     Consent:
       type: object
       description: |
-        @context: "https://schema.spdci.org/Consent" <br>
+        @context: https://schema.spdci.org/Consent" <br>
         @type: "Consent"
       example:
         '@context': 'https://standards.spdci.org/schemas//Consent'
@@ -2247,7 +2247,7 @@ components:
         attribute_name:
           type: string
           description: |
-            @context: "https://schema.spdci.org/QueryAttributes" <br>
+            @context: https://schema.spdci.org/QueryAttributes" <br>
             @type: "QueryAttributes" <br>
 
             **Notes:**
@@ -2294,7 +2294,7 @@ components:
         type:
           type: string
           description: |
-            @context: "https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld" <br>
+            @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
             @type: "Queryype" <br>
 
             **Notes:**
@@ -2304,7 +2304,7 @@ components:
         value:
           type: object
           description: |
-            @context: "https://schema.spdci.org/common/v1/QueryExpression.jsonld" <br>
+            @context: https://schema.spdci.org/common/v1/QueryExpression.jsonld <br>
             @type: "QueryExpression" <br>
 
             **Notes:**
@@ -2334,7 +2334,7 @@ components:
     IdentifierType:
       type: string
       description: |
-        @context: "https://schema.spdci.org/IdType" <br>
+        @context: https://schema.spdci.org/IdType" <br>
         @type: "IdType" <br>
 
         **Notes:**
@@ -2349,7 +2349,7 @@ components:
         type:
           type: string
           description: |
-            @context: "https://schema.spdci.org/common/v1/IdentifierTypeEnum.jsonld" <br>
+            @context: https://schema.spdci.org/common/v1/IdentifierTypeEnum.jsonld <br>
             @type: "IdType" <br>
 
             **Notes:**
@@ -2379,7 +2379,7 @@ components:
     Meta:
       type: object
       description: |
-        @context: "https://schema.spdci.org/common/v1/Meta.jsonld" <br>
+        @context: https://schema.spdci.org/common/v1/Meta.jsonld <br>
         @type: "@context" <br>
           
         **Notes:**
@@ -2581,7 +2581,7 @@ components:
         attribute_name:
           type: string
           description: |
-            @context: "https://schema.spdci.org/common/v1/Attribute.jsonld" <br>
+            @context: https://schema.spdci.org/common/v1/Attribute.jsonld <br>
             @type: "Attribute" <br>
 
             **Notes:**

@@ -4,7 +4,7 @@ properties:
   name:
     type: string
     description: |
-      @context: "https://schema.spdci.org/common/v1/attribute.jsonld" <br>
+      @context: https://schema.spdci.org/common/v1/attribute.jsonld <br>
       @type: "Attribute" <br>
       
       **Notes:**

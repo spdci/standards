@@ -2,5 +2,5 @@ type: object
 description: | 
   The payment information contains details about payment related fields
 
-  @context: "https://schema.spdci.org/extensions/ibr/v1/DisbursementInfo.jsonld" <br>
+  @context: https://schema.spdci.org/extensions/ibr/v1/DisbursementInfo.jsonld <br>
   @type: "@context" <br>
