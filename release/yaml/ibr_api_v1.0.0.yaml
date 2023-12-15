@@ -1734,7 +1734,7 @@ components:
                   reg_record_type:
                     type: string
                     description: |
-                      @context: https://schema.spdci.org/extensions/" <br>
+                      @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
                       @type: "RegistryRecordType" <br>
 
                       **Notes:**
