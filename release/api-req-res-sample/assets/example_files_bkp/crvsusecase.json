@@ -1,0 +1,38 @@
+[
+    {
+        "processflow_id" : "processflow1",        
+        "processflow_name": "Process Flow 1 : Enrollment in Old Age Pension Scheme"
+    },
+    {
+        "processflow_id" : "processflow2",        
+        "processflow_name": "Process Flow 2 : Ceasing Payments upon Death Notification"
+    },
+    {
+        "processflow_id" : "processflow3",        
+        "processflow_name": "Process Flow 3 : Enrollment in Widow Allowance Scheme - Retrieve Id Details"
+    },
+    {
+        "processflow_id" : "processflow3a",
+        "processflow_name": "Process Flow 3 : Enrollment in Widow Allowance Scheme - Retrieve Marital Status"
+    },
+    {
+        "processflow_id" : "processflow3b",
+        "processflow_name": "Process Flow 3 : Enrollment in Widow Allowance Scheme - Retrieve Marriage Details"
+    },
+    {
+        "processflow_id" : "processflow3c",
+        "processflow_name": "Process Flow 3 : Enrollment in Widow Allowance Scheme - Retrieve Divorce Details"
+    },
+    {
+        "processflow_id" : "processflow3d",
+        "processflow_name": "Process Flow 3 : Enrollment in Widow Allowance Scheme - Retrieve Deceased Details"
+    },
+    {
+        "processflow_id" : "processflow4",
+        "processflow_name": "Process Flow 4 : Enrollment in Child Allowance Scheme"
+    },
+    {
+        "processflow_id" : "processflow5",
+        "processflow_name": "Process Flow 5 : Proactive Enrollment in Child Allowance Scheme"
+    }
+] 

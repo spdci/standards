@@ -1,0 +1,100 @@
+{
+  "signature": "Signature:  namespace=\"dci\", kidId=\"{sender_id}|{unique_key_id}|{algorithm}\", algorithm=\"ed25519\", created=\"1606970629\", expires=\"1607030629\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)",
+  "headers": {
+    "version": "1.0.0",
+    "message_id": "123456789020211216223812",
+    "message_ts": "2022-12-04T18:01:07+00:00",
+    "sender_id": "10089",
+    "receiver_id": "crvs",
+    "action": "search",
+    "total_count": 10,
+    "is_encrypted": true,
+    "encryption_algorithm": "DH-2048",
+    "async": true,
+    "callbackendpoint": "https://{server_url}/on-search"
+  },
+  "message": {
+    "transaction_id": "",
+    "search_request": [
+      {
+        "reference_id": "",
+        "query": "",
+        "timestamp": "2022-12-04T17:20:07-04:00",
+        "persons": [
+          {
+            "identifier": [
+              {
+                "identifier_type": "uin",
+                "identifier_value": "345678916"
+              }
+            ],
+            "name": {
+              "family_name": "Doe",
+              "given_name": "John",
+              "middle_name": "Jackson",
+              "suffix": "Jr",
+              "prefix": "Mr."
+            },
+            "related_persons": [
+              {
+                  "relation_code": "father",
+                  "identifier": [
+                    {
+                      "identifier_type": "uin",
+                      "identifier_value": "345678912"
+                    }
+                  ],
+                  "person_info": {
+                    "family_name": "Doe",
+                    "given_name": "John",
+                    "middle_name": "Jackson",
+                    "suffix": "Sr",
+                    "prefix": "Mr."
+                }
+              },
+              {
+                "relation_code": "mother",
+                "identifier": [
+                  {
+                    "identifier_type": "uin",
+                    "identifier_value": "345678913"
+                  }
+                ],
+                "person_info": {
+                  "family_name": "Doe",
+                  "given_name": "Jessica",
+                  "middle_name": "John", 
+                  "prefix": "Mrs."
+              }
+            }
+            ],
+            "date_of_birth":"1958-01-01T14:30:00Z",
+            "date_of_death":"2022-12-12T21:30:00Z",
+            "sex": {
+              "code": "M",
+              "display_text": "Male"
+            },
+            "address":{ 
+              "address_line1": "Dragon's Lair",
+              "street_address": "Firebreath Lane",
+              "locality": "Mystic Meadows",
+              "region": "Enchanted Forest",
+              "postal_code": "12345",
+              "country": "Eldoria",
+              "country_code": "ELD"
+            }
+          }
+        ],
+        "pagination": {
+          "page_size": 10,
+          "page_number": 1,
+          "total_records": 20
+        },
+        "locale": {
+          "code": "",
+          "language": ""
+        }
+      }
+    ]
+  }
+}
