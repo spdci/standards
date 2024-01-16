@@ -17,7 +17,7 @@ var download_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="
     '</svg>'
 $(function () {
 
-    $.getJSON('./assets/example_files/'+getFolder+'/crvsusecase.json', function (data) {
+    $.getJSON('./assets/example_files/'+getFolder+'/usecaselist.json', function (data) {
 
         console.log("Data",data);
         
