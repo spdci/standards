@@ -1,5 +1,46 @@
 {
-  "signature": "",
-  "headers": "",
-  "message": ""
+  "signature": "Signature:  namespace=\"dci\", kidId=\"{sender_id}|{unique_key_id}|{algorithm}\", algorithm=\"ed25519\", created=\"1606970629\", expires=\"1607030629\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)",
+  "headers": {
+    "version": "1.0.0",
+    "message_id": "0c96614c-7255-4774-b109-cd53ee851769",
+    "message_ts": "2023-07-19T12:15:04.555Z",
+    "action": "search",
+    "sender_id": "sp-system",
+    "sender_uri": "",
+    "receiver_id": "crvs",
+    "total_count": "1",
+    "is_msg_encrypted": false,
+    "meta": ""
+  },
+  "message": {
+    "transaction_id": "",
+    "search_request": [
+      {
+        "reference_id": "",
+        "timestamp": "2022-12-04T17:20:07-04:00",
+        "search_criteria": {
+          "version": "1.0.0",
+          "reg_event_type": "REGISTER",
+          "query_type": "idtype-value",
+          "query": {
+            "type": "UIN",
+            "value": "847951632"
+          },
+          "sort": [
+            {
+              "attribute_name": "UIN",
+              "sort_order": "asc"
+            }
+          ],
+          "pagination": {
+            "page_size": 10,
+            "page_number": 1
+          },
+          "consent": "",
+          "authorize": ""
+        },
+        "locale": ""
+      }
+    ]
+  }
 }

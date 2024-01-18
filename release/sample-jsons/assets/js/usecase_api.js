@@ -69,7 +69,7 @@ function renderJson(divid, jsoninput) {
 }
 function download_file(usecaseid, reqres) {
     $.ajax({
-        url: './assets/example_files/' + usecaseid + reqres + ".json",
+        url: './assets/example_files/'+ getFolder+ "/" + usecaseid + reqres + ".json",
         dataType: 'json',
         success: function (data) {
             // Convert JSON object to a string
