@@ -10,10 +10,10 @@ properties:
   payment_credit_date: 
     $ref: ../../common/schema/DateTime.yaml
   payment_credit_amount:
-    description: ""
+    description: 
     type: string
   payment_charges:
     type: string
-    description: ""
+    description: 
   payment_status:
     $ref: PaymentStatus.yaml

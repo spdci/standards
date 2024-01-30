@@ -33,13 +33,8 @@ paths:
           $ref: "#/components/responses/HttpErrorResponse"
         "500":
           $ref: "#/components/responses/HttpErrorResponse"
-      security:
-       - Authorization: [ ]
       deprecated: false
 components:
   responses:
     HttpErrorResponse:
       $ref: "../common/response/HttpErrorResponse.yaml"
-  securitySchemes:
-    Authorization:
-      $ref: ../common/security/Authorization.yaml

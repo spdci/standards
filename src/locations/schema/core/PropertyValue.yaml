@@ -3,7 +3,7 @@ type: object
 properties:
   "@type":
     type: string
-    #const: "PropertyValue"
+    const: "PropertyValue"
   name:
     type: string
     description: The identifier name
