@@ -2,20 +2,6 @@ type: object
 description: | 
   1. 
   2. 
-properties:
-  programme_name:
-    type: string
-    description: The programme name sent by sp system
-  programme_identifier:
-    type: string
-    description: Programme identifier
-  registration_date: 
-    $ref: ../../common/schema/DateTime.yaml
-  enrolment_date: 
-    $ref: ../../common/schema/DateTime.yaml    
-  suspension_date: 
-    $ref: ../../common/schema/DateTime.yaml    
-  graduation_date: 
-    $ref: ../../common/schema/DateTime.yaml    
-  status: 
-    $ref: EnrollmentStatus.yaml        
+
+  @context: https://schema.spdci.org/extensions/ibr/v1/Programme.jsonld <br>
+  @type: "@context" <br>

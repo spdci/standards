@@ -1,0 +1,18 @@
+[
+    {
+        "processflow_id" : "processflow1",        
+        "processflow_name": "Process Flow 1 : Enrolment in Cash Transfer Scheme For Persons with Severe Disability"
+    },
+    {
+        "processflow_id" : "processflow2",        
+        "processflow_name": "Process Flow 2 : Providing and Publishing Beneficiaries who Received Benefits"
+    },
+    {
+        "processflow_id" : "processflow3a",        
+        "processflow_name": "Process Flow 3 : Providing and Publishing Beneficiaries who Exited the Program"
+    },
+    {
+        "processflow_id" : "processflow4",
+        "processflow_name": "Process Flow 4 : Batch Eligibility and Enrolment in Proactive Cash Transfer Scheme for Education"
+    }
+] 

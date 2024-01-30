@@ -1,0 +1,26 @@
+[
+    {
+        "processflow_id" : "processflow1",        
+        "processflow_name": "Process Flow 1 : Generic process workflow between SP-MIS and CRVS"
+    },
+    {
+        "processflow_id" : "processflow2",        
+        "processflow_name": "Process Flow 2 : Enrollment in the old age allowance scheme"
+    },
+    {
+        "processflow_id" : "processflow3",        
+        "processflow_name": "Process Flow 3 : Ceasing allowance upon death notification"
+    },
+    {
+        "processflow_id" : "processflow4",
+        "processflow_name": "Process Flow 4 : Enrollment in widow allowance scheme"
+    },
+    {
+        "processflow_id" : "processflow5",
+        "processflow_name": "Process Flow 5 : Enrollment in child allowance scheme"
+    },
+    {
+        "processflow_id" : "processflow6",
+        "processflow_name": "Process Flow 6 : Proactive enrollment in child allowance scheme"
+    }
+] 

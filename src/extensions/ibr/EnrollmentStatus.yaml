@@ -6,8 +6,6 @@ description: |
   2 : Deceased <br>
   3 : Graduated <br>
   4 : Suspended <br> 
-enum:
-  - "1"
-  - "2" 
-  - "3" 
-  - "4"  
+
+  @context: https://schema.spdci.org/extensions/ibr/v1/EnrollmentStatusEnum.jsonld <br>
+  @type: "@context" <br>

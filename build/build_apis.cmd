@@ -6,9 +6,16 @@
 swagger-cli -f 2 -t yaml bundle ./src/authz/authz_core_api_v1.0.0.yaml -o ./release/yaml/authz_core_api_v1.0.0.yaml
 redocly build-docs ./release/yaml/authz_core_api_v1.0.0.yaml  -o ./release/html/authz_core_api_v1.0.0.html
 
-# build registry core APIs
+# build APIs
 swagger-cli -f 2 -t yaml bundle ./src/registry/registry_core_api_v1.0.0.yaml -o ./release/yaml/registry_core_api_v1.0.0.yaml
 redocly build-docs ./release/yaml/registry_core_api_v1.0.0.yaml  -o ./release/html/registry_core_api_v1.0.0.html
+
+swagger-cli -f 2 -t yaml bundle ./src/registry/ibr_api_v1.0.0.yaml -o ./release/yaml/ibr_api_v1.0.0.yaml
+redocly build-docs ./release/yaml/ibr_api_v1.0.0.yaml  -o ./release/html/ibr_api_v1.0.0.html
+
+swagger-cli -f 2 -t yaml bundle ./src/registry/social_api_v1.0.0.yaml -o ./release/yaml/social_api_v1.0.0.yaml
+redocly build-docs ./release/yaml/social_api_v1.0.0.yaml  -o ./release/html/social_api_v1.0.0.html
+
 
 # build locations APIs
 swagger-cli -f 2 -t yaml bundle ./src/locations/locations_core_api_v1.0.0.yaml -o ./release/yaml/locations_core_api_v1.0.0.yaml
@@ -18,9 +25,6 @@ redocly build-docs ./release/yaml/locations_core_api_v1.0.0.yaml -o ./release/ht
 swagger-cli -f 2 -t yaml bundle ./src/jwks/jwks_core_api_v1.0.0.yaml -o ./release/yaml/jwks_core_api_v1.0.0.yaml
 redocly build-docs ./release/yaml/jwks_core_api_v1.0.0.yaml  -o ./release/html/jwks_core_api_v1.0.0.html
 
-# IBR registry build steps
-swagger-cli -f 2 -t yaml bundle ./src/registry/ibr_api_v1.0.0.yaml -o ./release/yaml/ibr_api_v1.0.0.yaml
-redocly build-docs ./release/yaml/ibr_api_v1.0.0.yaml  -o ./release/html/ibr_api_v1.0.0.html
 
 # swagger-cli -f 2 -t yaml bundle ./src/mapper/mapper_core_api_v1.0.0.yaml -o ./release/yaml/mapper_core_api_v1.0.0.yaml
 # swagger-cli -f 2 -t yaml bundle ./src/disburse/disburse_core_api_v1.0.0.yaml -o ./release/yaml/disburse_core_api_v1.0.0.yaml

@@ -4,6 +4,6 @@ description: |
 
   1 : Succesful <br>
   2 : Not succesful <br>
-enum:
-  - "1"
-  - "2" 
+
+  @context: https://schema.spdci.org/extensions/ibr/v1/PaymentStatusEnum.jsonld <br>
+  @type: "@context" <br>

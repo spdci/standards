@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Interoperability APIs - Foundational/Functional registries
   x-logo:
-    url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
+    url: ./dci-logo.png
     backgroundColor: '#FFFFFF'
     altText: Digital Convergence Initiative
   description: |-
@@ -15,13 +15,13 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
 
     Gitbook reference link:
-    - [CRVS - V1.0 ](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs)
+    - [CRVS - V1.0 ](https://standards.spdci.org/standards/v/crvs-v1.0-1/)
 
     Code directory links:
-    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.01-identifier_type)
-    - [Marital Status](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.02-marital_status)
-    - [Sex](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.03-sex)
-    - [Vital event types](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs/6.5-data-standards/6.5.2-code-directory#cd.04-vital_events)   
+    - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
+    - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
+    - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
+    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
 
     Each request is build up of three parts
     - signature 
@@ -33,7 +33,7 @@ info:
     email: info@spdci.org
   license:
     name: DCI Social Protection License
-    url: 'https://github.com/spdci/standards/blob/draft/LICENSE.md'
+    url: 'https://api.spdci.org/LICENSE.md'
 servers:
   - url: 'https://sandbox.spdci.org/namespace/v1.0.0'
     description: Sandbox Server
@@ -736,20 +736,20 @@ components:
         Note: id provider should be made configurable and solutions should adapt to the local jurisdiction and policies.
       format: '^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$'
       example: 'vid:54321@nid'
-    dci_CRVSPerson:
+    dci_Person:
       type: object
       description: |
-        @context: "https://example.org/schema/CRVSPerson" <br>
+        @context: https://schema.spdci.org/CRVSPerson" <br>
         @type: "Consent"
       example:
-        '@context': 'https://example.org/schema/CRVSPerson'
+        '@context': 'https://standards.spdci.org/schemas/extensions/dci/v1/Person'
         '@type': CRVSPerson
         '@vocab': 'https://spdci.org/'
         schema: 'http://schema.org/'
         rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
         xsd: 'http://www.w3.org/2001/XMLSchema#'
         CRVSPerson:
-          '@id': 'https://spdci.org/CRVSPerson'
+          '@id': 'https://spdci.org/schemas/extensions/dci/v1/Person'
           '@type': 'rdfs:Class'
           '@context':
             name:
@@ -1033,14 +1033,14 @@ components:
       type: object
       description: 'MOSIP Verifiable Credential for a [person](https://github.com/opencrvs/mosip-mediator/blob/master/samples/decrypted-sample-received-credentials.json)'
       properties:
-        issuedTo:
+        issued_to:
           description: ''
           type: string
-        protectedAttributes:
+        protected_attributes:
           type: array
           items:
             type: string
-        credentialSubject:
+        credential_subject:
           description: MOSIP Verifiable Credential for Proof of identity
           type: object
           properties:
@@ -1048,13 +1048,13 @@ components:
               $ref: '#/components/schemas/mosip_LanguageValueList'
             city:
               $ref: '#/components/schemas/mosip_LanguageValueList'
-            postalCode:
+            postal_code:
               type: string
               example: '14022'
-            fullName:
+            full_name:
               type: string
               example: Thirteen Mosip
-            dateOfBirth:
+            birthdate:
               type: string
               example: '2022'
             province:
@@ -1062,14 +1062,14 @@ components:
             phone:
               type: string
               example: '9898989898'
-            addressLine1:
+            addressline1:
               $ref: '#/components/schemas/mosip_LanguageValueList'
-            addressLine2:
+            addressline2:
               $ref: '#/components/schemas/mosip_LanguageValueList'
             id:
               type: string
               example: '2835824850916304'
-            UIN:
+            uin:
               type: string
               example: '7346597054'
             region:
@@ -1101,11 +1101,11 @@ components:
       type: object
       description: 'Birth Registration record to sync with MOSIP. [Reference](https://github.com/mosip/mosip-opencrvs/blob/develop/mediator/src/main/java/io/mosip/opencrvs/dto/SyncDto.java)'
       properties:
-        registrationId:
+        registration_id:
           type: string
         packetId:
           type: string
-        additionalInfoReqId:
+        additional_info_reqId:
           type: string
         name:
           type: string
@@ -1113,31 +1113,31 @@ components:
           type: string
         phone:
           type: string
-        registrationType:
+        registration_type:
           type: string
-        packetHashValue:
+        packet_hash_value:
           type: string
-        packetSize:
+        packet_size:
           type: integer
-        supervisorStatus:
+        supervisor_status:
           type: string
-        supervisorComment:
+        supervisor_comment:
           type: string
-        opentionalValues:
+        opentional_values:
           type: array
           items:
             type: string
-        langCode:
+        lang_code:
           type: string
-        createDateTime:
+        create_date_time:
           $ref: '#/components/schemas/DateTime'
-        updateDateTime:
+        update_date_time:
           $ref: '#/components/schemas/DateTime'
-        deletedDateTime:
+        deleted_date_time:
           $ref: '#/components/schemas/DateTime'
-        isActive:
+        is_active:
           type: boolean
-        isDeleted:
+        is_deleted:
           type: boolean
     nid_DeceasedRecord:
       type: object
@@ -1218,13 +1218,13 @@ components:
         vtc:
           description: Village Town City Code
           type: string
-        vtc-name:
+        vtc_name:
           description: Village/Town/City Name
           type: string
-        sub-district-name:
+        sub_district_name:
           description: Sub District Name
           type: string
-        district-name:
+        district_name:
           description: District Name
           type: string
         state:
@@ -1237,40 +1237,40 @@ components:
       type: object
       description: Resident Local Address
       properties:
-        local-careof:
+        local_careof:
           description: Care of information in local language
           type: string
-        local-building:
+        local_building:
           description: Building information in local language
           type: string
-        local-street:
-          description: Street information in local language
+        local_street:
+          description: Street information in local languages
           type: string
-        local-landmark:
+        local_landmark:
           description: Landmark information in local language
           type: string
-        local-locality:
+        local_locality:
           description: locality information in local language
           type: string
         pincode:
           description: pincode
           type: string
-        po-name-local:
+        po_name_local:
           description: Post office name in local
           type: string
-        local-vtc:
+        local_vtc:
           description: vtc information in local language
           type: string
-        local-subdistrict:
+        local_subdistrict:
           description: Sub district information in local language
           type: string
-        local-district:
+        local_district:
           description: district information in local language
           type: string
-        local-state:
+        local_state:
           description: State information in local language
           type: string
-        local-country:
+        local_country:
           description: Country information in local language
           type: string
     nid_ResidentLocalName:
@@ -1591,43 +1591,40 @@ components:
     RegistryEventType:
       type: string
       description: |
-        @context: "https://example.org/schema/RegistryEventType" <br>
+        @context: https://schema.spdci.org/common/v1/RegistryEventTypeEnum.jsonld <br>
         @type: "VitalEvent" <br>
 
         **Notes:**
           1. Registry event type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. example: "ns:org:RegistryEventType:LiveBirth"
-      example: 'ns:org:RegistryEventType:LiveBirth'
+          3. example: "spdci-common:RegistryEventType:LiveBirth"
+      example: 'spdci-common:RegistryEventType:LiveBirth'
     RegistryRecord:
       type: object
       description: |
-        @context: "https://example.org/schema/RecordType" <br>
-        @type: "CRVSPerson" <br>
-        @container: "@set" <br>
-
-        **Notes:**
-          1. Record type values defined as per implementation context.
-          2. Usually a list of **enum** values of all possible queryable identifiers.
+        The "Person" object contains fields expected in response of search
+        @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
+        @type: "Person" <br>
+        @container: "@set" <br> 
       example:
-        $ref: '#/components/schemas/dci_CRVSPerson'
+        $ref: '#/components/schemas/dci_Person'
     RegistryRecordType:
       type: string
       description: |
-        @context: "https://example.org/schema/RegistryRecordType" <br>
+        @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
         @type: "RegistryRecordType" <br>
 
         **Notes:**
           1. Registry record type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable result sets 
           3. Referenced in search_request and notify events
-          4. example: "ns:dci:RegistryRecordType:CRVSPerson" 
-      example: 'ns:dci:RegistryRecordType:CRVSPerson'
+          4. example: "spdci-extensions-dci:Person" 
+      example: 'spdci-extensions-dci:Person'
     RegistryType:
       type: string
       description: |
-        @context: "https://example.org/schema/RegistryType" <br>
-        @type: "RegistryType" <br>
+        @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
+        @type: "@context" <br>
 
         **Notes:**
           1. Registry type values defined as per implementation context.
@@ -2064,7 +2061,7 @@ components:
         name:
           type: string
           description: |
-            @context: "https://example.org/schema/Attribute" <br>
+            @context: https://schema.spdci.org/common/v1/attribute.jsonld <br>
             @type: "Attribute" <br>
 
             **Notes:**
@@ -2093,10 +2090,10 @@ components:
     Authorize:
       type: object
       description: |
-        @context: "https://example.org/schema/Authorize" <br>
+        @context: https://schema.spdci.org/Authorize <br>
         @type: "Authorize"
       example:
-        '@context': 'https://example.org/schema/Authorize'
+        '@context': 'https://standards.spdci.org/schemas/Authorize'
         '@type': Authorize
         ts:
           $ref: '#/components/schemas/DateTime'
@@ -2106,17 +2103,17 @@ components:
           code:
             type: string
             description: 'From a fixed set, documented at refUri'
-          refUri:
+          ref_uri:
             type: string
             format: uri
             description: Uri to provide more info on authorize codes
     Consent:
       type: object
       description: |
-        @context: "https://example.org/schema/Consent" <br>
+        @context: https://schema.spdci.org/Consent" <br>
         @type: "Consent"
       example:
-        '@context': 'https://example.org/schema/Consent'
+        '@context': 'https://standards.spdci.org/schemas//Consent'
         '@type': Consent
         ts:
           $ref: '#/components/schemas/DateTime'
@@ -2126,7 +2123,7 @@ components:
           code:
             type: string
             description: 'From a fixed set, documented at refUri'
-          refUri:
+          ref_uri:
             type: string
             format: uri
             description: Uri to provide more info on consent codes
@@ -2250,7 +2247,7 @@ components:
         attribute_name:
           type: string
           description: |
-            @context: "https://example.org/schema/QueryAttributes" <br>
+            @context: https://schema.spdci.org/QueryAttributes" <br>
             @type: "QueryAttributes" <br>
 
             **Notes:**
@@ -2297,7 +2294,7 @@ components:
         type:
           type: string
           description: |
-            @context: "https://example.org/schema/QueryType" <br>
+            @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
             @type: "Queryype" <br>
 
             **Notes:**
@@ -2307,7 +2304,7 @@ components:
         value:
           type: object
           description: |
-            @context: "https://example.org/schema/QueryExpression" <br>
+            @context: https://schema.spdci.org/common/v1/QueryExpression.jsonld <br>
             @type: "QueryExpression" <br>
 
             **Notes:**
@@ -2337,7 +2334,7 @@ components:
     IdentifierType:
       type: string
       description: |
-        @context: "https://example.org/schema/IdType" <br>
+        @context: https://schema.spdci.org/IdType" <br>
         @type: "IdType" <br>
 
         **Notes:**
@@ -2352,7 +2349,7 @@ components:
         type:
           type: string
           description: |
-            @context: "https://example.org/schema/IdType" <br>
+            @context: https://schema.spdci.org/common/v1/IdentifierTypeEnum.jsonld <br>
             @type: "IdType" <br>
 
             **Notes:**
@@ -2382,7 +2379,7 @@ components:
     Meta:
       type: object
       description: |
-        @context: "https://example.org/schema/Meta" <br>
+        @context: https://schema.spdci.org/common/v1/Meta.jsonld <br>
         @type: "@context" <br>
           
         **Notes:**
@@ -2414,7 +2411,7 @@ components:
         status_reason_code:
           $ref: '#/components/schemas/MsgHeaderStatusReasonCode'
         status_reason_message:
-          description: 'Status reascon code message, if any, Helps actionanble messaging for system/end users'
+          description: 'Status reascon code message, if any, Helps actionable messaging for system/end users'
           type: string
           maxLength: 999
         total_count:
@@ -2464,24 +2461,24 @@ components:
         message_ts:
           $ref: '#/components/schemas/DateTime'
         action:
-          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps identity payload type in message property.'
+          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
           type: string
         sender_id:
           description: |
             1. sender_id registered with the receiving system or gateway. 
-            2. Used for authorization, encryption, digital sign verfication, etc., 
+            2. Used for authorization, encryption, digital sign verification, etc.,
           type: string
           example: spp.example.org
         sender_uri:
           description: |
             1. sender url to accept callbacks. Applicable only for async communications and if response ack_status is ACK.
-            2. Default uri is assumed to be configred on the gateway as part of sender/receiver onboarding. 
+            2. Default uri is assumed to be configured on the gateway as part of sender/receiver onboarding. 
             3. For SFTP based communications, this shall be set to server/folder details.
           type: string
           format: uri
           example: 'https://spp.example.org/{namespace}/callback/on-search'
         receiver_id:
-          description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
+          description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
           example: pymts.example.org
         total_count:
@@ -2584,7 +2581,7 @@ components:
         attribute_name:
           type: string
           description: |
-            @context: "https://example.org/schema/Attribute" <br>
+            @context: https://schema.spdci.org/common/v1/Attribute.jsonld <br>
             @type: "Attribute" <br>
 
             **Notes:**
@@ -2604,7 +2601,7 @@ components:
     TransactionId:
       description: |
         1. transaction_id set by txn initiating system (i.e sender) to co-relate all related requests in the context of a business transaction.
-        2. transaction_id should be samme across processing systems/service end points.
+        2. transaction_id should be same across processing systems/service end points.
         2. transaction_id uniqueness is ensured by txn initiating system (i.e sender)
       type: string
       maxLength: 99

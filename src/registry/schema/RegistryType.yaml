@@ -1,7 +1,7 @@
 type: string
 description: |
-  @context: "https://example.org/schema/RegistryType" <br>
-  @type: "RegistryType" <br>
+  @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
+  @type: "@context" <br>
   
   **Notes:**
     1. Registry type values defined as per implementation context.

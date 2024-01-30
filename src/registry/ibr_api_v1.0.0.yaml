@@ -2,11 +2,11 @@ openapi: 3.0.3
 info:
   title: Interoperability APIs - Integrated Beneficiary Registry
   x-logo:
-    url: 'https://spdci.github.io/api-documentation/draft/dci-logo.png'
+    url: './dci-logo.png'
     backgroundColor: '#FFFFFF'
     altText: 'Digital Convergence Initiative'  
   description: |-
-    The IBR(Integrated Beneficiary Registry) interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between IBR registry and SP system.
+    The IBR(Integrated Beneficiary Registry) interoperability APIs describes different APIs some of them are usecase specific and other are generalized APIs to perform interoperable operations between IBR registry and SP-MIS.
     You can now help us improve the API whether it's by making changes to the definition itself or to the code.
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
@@ -15,22 +15,47 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
     
     Gitbook reference link[WIP]:
-    - [Integrated Beneficiary Registry - V1.0 ](https://digital-convergence-initiative-d.gitbook.io)
+    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.io)
 
-    Code directory links[WIP]:
-    - [Identifiers](https://digital-convergence-initiative-d.gitbook.io/)
-    
-    Each request is build up of three parts
+    Code directory links:
+    - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
+    - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
+    - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
+    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+
+    Data Objects:
+    - Person (WIP)
+    - HouseHold (WIP)
+
+
+    Each request is build up of three parts 
     - signature 
     - header 
     - message
+
+    Information about each part is given below
+
+    **Signature:**
+    - The signature is used to verify the integrity of the message.
+    - The signature is a hash of the message and is encrypted using the private key of the sender.
+    - The receiver can verify the signature using the public key of the sender.
+
+    **Header:**
+    - The header contains information about various message header, refer to the header schema for more details.
+
+    **Message:**
+
+    - The message contains the actual payload of the message.
+    - Refere example section to get sample data and also read Gitbook for details data objects
+    - The receiver can decrypt the message using the private key of the "err.receiver_id.invalid"
+
   version: 1.0.0
   contact:
     name: DCI Social Protection
     email: info@spdci.org
   license:
    name: DCI Social Protection License
-   url: https://github.com/spdci/standards/blob/draft/LICENSE.md
+   url: https://api.spdci.org/LICENSE.md
  
 servers:
   - url: "https://sandbox.spdci.org/namespace/v1.0.0"
@@ -92,10 +117,19 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
+  - name: ReceiptRequest
+    x-displayName: ReceiptRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
+  - name: ReceiptResponse
+    x-displayName: ReceiptResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/EncryptedMessage" />    
+
 x-tagGroups:
   - name: API Definitions
     tags:
@@ -104,25 +138,32 @@ x-tagGroups:
   - name: Schema Objects
     tags:
       - SearchRequest
-      - SearchResponse 
-      - SubscribeRequest
+      - SearchResponse
+      - SubscribeRequest 
       - SubscribeResponse
+      - ReceiptRequest
+      - ReceiptResponse
+      - TxnStatusRequest
+      - TxnStatusResponse
       - NotifyEventRequest
       - UnSubscribeRequest
       - UnSubscribeResponse 
-      - TxnStatusRequest
-      - TxnStatusResponse
       - EncryptedMessage
   - name: Status Codes
     tags: 
       - SearchStatusReasonCode
-      - SubscribeStatusReasonCode
-      - UnSubscribeStatusReasonCode
 paths:
  /registry/search:
   post: 
     summary: "/registry/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: |-
+      The async search api will accept request and will send response to on-search endpoint. The IBR will implement /registry/search endpoint and the SP-MIS shall implement /registry/on-search to receive data from IBR.
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
+      Information for each field is given below.
+        - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+        - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+        - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+
     operationId: post_reg_search
     tags: 
       -  Async
@@ -175,7 +216,10 @@ paths:
  /registry/on-search:
   post: 
     summary: "/registry/on-search"
-    description: Search results through callback
+    description: |-
+      The /registry/on-search end point tobe implemented by SP-MIS to receive search results from IBR. 
+      The IBR will send data in format explained in SearchResponse.yaml. The reg_records will containe data that in explained in ibr/v1/Person.jsonld. 
+      Refer example json at github [link](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/1.-crvs/data/data-objects/person#example)
     operationId: post_reg_on-search
     tags: 
       -  Async
@@ -227,7 +271,9 @@ paths:
  /registry/subscribe:
   post: 
     summary: "/registry/subscribe"
-    description: Subscribe to a life event with registry
+    description: |-
+      The /registry/subscribe end point tobe implemented by IBR to receive subscription request from SP-MIS.
+      The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
     operationId: post_reg_subscribe
     tags: 
       -  Async
@@ -250,7 +296,7 @@ paths:
                             - subscribe
                 message:
                   type: object
-                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber
+                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber, The IBR supports benefit_disbusrement,programme_exited events as of now
                   oneOf:
                     - $ref: "#/components/schemas/SubscribeRequest"
                     - $ref: "#/components/schemas/EncryptedMessage"
@@ -280,7 +326,9 @@ paths:
  /registry/on-subscribe:
   post: 
     summary: "/registry/on-subscribe"
-    description: Subscribe results through callback
+    description: |-
+      The /registry/on-subscribe request tobe implemented by SP-MIS to receive subscription response from IBR. 
+      The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
     operationId: post_reg_on-subscribe
     tags: 
       -  Async
@@ -330,61 +378,12 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/notify:
-  post: 
-    summary: "/registry/notify"
-    description: Registry to notify a life event to subscrbiers
-    operationId: post_reg_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
+
  /registry/unsubscribe:
   post: 
     summary: "/registry/unsubscribe"
-    description: Unsubscribe existing subscription(s) by subscription_code
+    description: |-
+      The /registry/unsubscribe endpoint will be implemented by IBR, SP-MIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
     operationId: post_reg_unsubscribe
     tags: 
       -  Async
@@ -437,7 +436,8 @@ paths:
  /registry/on-unsubscribe:
   post: 
     summary: "/registry/on-unsubscribe"
-    description: Unsubscribe response as a callback
+    description: |-
+      The /registry/on-unsubscribe will be implemented by SP-MIS to receive unsubscribe response from IBR. It will contain status information of unsubscribe request.
     operationId: post_reg_on-unsubscribe
     tags: 
       -  Async
@@ -486,11 +486,117 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
+ /registry/notify:
+  post: 
+    summary: "/registry/notify"
+    description: |-
+      The /registry/notify end point will be implemented by SP-MIS to receive notification for subscribed event.
+      The notification will be sent based on subscription criteria.
+    operationId: post_reg_notify
+    tags: 
+      -  Async
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
+ /registry/on-notify:
+  post: 
+    summary: "/registry/on-notify"
+    description: |-
+      The /registry/on-notify will be implemented by IBR to receive notification response from SP-MIS.
+    operationId: post_reg_on_notify
+    tags: 
+      -  Async
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/ReceiptResponse'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/Response"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
 
  /registry/txn/status:
   post: 
     summary: "/registry/txn/status"
-    description: Perform async status check of previous civil registry transanctions using transaction_id and/or reference_id(s)
+    description: |-
+      The /registry/txn/status will be implemented by IBR. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_txnstatus
     tags: 
       -  Async
@@ -542,7 +648,8 @@ paths:
  /registry/txn/on-status:
   post: 
     summary: "/registry/txn/on-status"
-    description: Response to async status check of previous civil registrt transanctions using callback
+    description: |-
+      The /registry/txn/on-status will be implemented by SP-MIS. The response with information about request and in some case it may contain data as well.
     operationId: post_reg_on-txnstatus
     tags: 
       -  Async
@@ -590,10 +697,18 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
+
  /registry/sync/search:
   post: 
     summary: "/registry/sync/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: |- 
+      The sync search api will accept request and will send response immediately
+      The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
+      Information for each field is given below.
+        - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
+        - query_type: The query type on which registry to determene type of search process, this can be any of query type explained in QueryType.yaml
+        - query: The query will indicate payload of data which to be seached in registry, this can be any of explained in RegistryQueries.yaml
+
     operationId: post_reg_sync_search
     tags: 
       -  Sync
@@ -656,10 +771,123 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
+ /registry/receipts:
+  post: 
+    summary: "/registry/receipts"
+    description: |-
+      The /registry/receipts endpoint will be implemented by IBR to receive receipt request from SP-MIS system.
+      The receipt_type and beneficiaries will be requied to make request. 
+      Three receipt types are supported as of now, they are 
+        1) Register 
+        2) Payment 
+        3) Deregister
+      The beneficiaries will contain list of person information for which receipt to be generated.
+    operationId: post_reg_receipts
+    tags: 
+      -  Sync
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/ReceiptRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/Response"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
+ 
+ /registry/sync/notify:
+  post: 
+    summary: "/registry/sync/notify"
+    description: |-
+      The /registry/sync/notify end point will be implemented by SP-MIS to receive notification for subscribed event.
+      The notification will be sent based on subscription criteria.
+    operationId: post_reg_sync_notify
+    tags: 
+      -  Sync
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - notify
+                message:
+                  type: object
+                  oneOf:
+                    - $ref: '#/components/schemas/NotifyEventRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - notify
+    responses:
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
  /registry/sync/txn/status:
   post: 
     summary: "/registry/sync/txn/status"
-    description: Sync status check of registry Async APIs
+    description: |-
+      The /registry/sync/txn/status will be implemented by IBR. This will check status of reach request using transaction_id and/or reference_id(s).
     operationId: post_reg_sync_txnstatus
     tags: 
       -  Sync
@@ -721,99 +949,13 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
+
 components:
-  schemas:
-    ###### src/extensions/cdpi schema objects
-    cdpi_PersonId: 
-      $ref: ../extensions/cdpi/PersonId.yaml
-
-    ###### src/extensions/dci schema objects
-    dci_CRVSPerson: 
-      $ref: ../extensions/dci/CRVSPerson.yaml
-    dci_IdentifierType: 
-      $ref: ../extensions/dci/IdentifierType.yaml
-    dci_IdentifierTypeValue: 
-      $ref: ../extensions/dci/IdentifierTypeValue.yaml
-    dci_MaritalStatus: 
-      $ref: ../extensions/dci/MaritalStatus.yaml
-    dci_Name: 
-      $ref: ../extensions/dci/Name.yaml
-    dci_PersonRecord: 
-      $ref: ../extensions/dci/PersonRecord.yaml
-    dci_RecordType: 
-      $ref: ../extensions/dci/RecordType.yaml
-    dci_Sex: 
-      $ref: ../extensions/dci/Sex.yaml
-    dci_VitalEvents: 
-      $ref: ../extensions/dci/VitalEvents.yaml
-
-    ###### src/extensions/fhir schema objects
-    
-    ###### src/extensions/google schema objects
-    GooglePlusCode: 
-      $ref: ../extensions/google/GooglePlusCode.yaml
-
-    ###### src/extensions/mosip schema objects
-    mosip_EventType: 
-      $ref: ../extensions/mosip/EventType.yaml
-    mosip_LangaugeValue: 
-      $ref: ../extensions/mosip/LangaugeValue.yaml
-    mosip_LanguageValueList: 
-      $ref: ../extensions/mosip/LanguageValueList.yaml
-    mosip_MOSIPVerifiableCredential: 
-      $ref: ../extensions/mosip/MOSIPVerifiableCredential.yaml
-    mosip_RecordType: 
-      $ref: ../extensions/mosip/RecordType.yaml
-    mosip_RegistrationRecord: 
-      $ref: ../extensions/mosip/RegistrationRecord.yaml  
-        
-    ###### src/extensions/nid schema objects
-    nid_DeceasedRecord: 
-      $ref: ../extensions/nid/DeceasedRecord.yaml
-    nid_Document: 
-      $ref: ../extensions/nid/Document.yaml
-    nid_EKycDetails: 
-      $ref: ../extensions/nid/EKycDetails.yaml
-    nid_RecordType: 
-      $ref: ../extensions/nid/RecordType.yaml
-    nid_ResidentAddress:
-      $ref: ../extensions/nid/ResidentAddress.yaml
-    nid_ResidentLocalAddress:
-      $ref: ../extensions/nid/ResidentLocalAddress.yaml
-    nid_ResidentLocalName:
-      $ref: ../extensions/nid/ResidentLocalName.yaml
-    nid_ResidentNationality:
-      $ref: ../extensions/nid/ResidentNationality.yaml
-    nid_ResidentPhoto:
-      $ref: ../extensions/nid/ResidentPhoto.yaml
-    nid_ResidentRecord:
-      $ref: ../extensions/nid/ResidentRecord.yaml
-    
-    ###### src/extensions/openid schema objects
-    openid_Address: 
-      $ref: ../extensions/openid/Address.yaml
-    openid_PersonRecord:
-      $ref: ../extensions/openid/PersonRecord.yaml
-    openid_PersonDocDetails: 
-      $ref: ../extensions/openid/PersonDocDetails.yaml
-
-    ###### src/registry/schema objects
-    RegistryQueries: 
-      $ref: schema/RegistryQueries.yaml
-    # FetchSubscriptionsRequest: 
-    #   $ref: schema/FetchSubscriptionsRequest.yaml
-    # FetchSubscriptionsResponse:
-    #   $ref: schema/FetchSubscriptionsResponse.yaml
-    NotifyEventRequest: 
-      $ref: schema/NotifyEventRequest.yaml
-    RegistryEventType:
-      $ref: schema/RegistryEventType.yaml
-    RegistryRecord:
-      $ref: schema/RegistryRecord.yaml
-    RegistryRecordType: 
-      $ref: schema/RegistryRecordType.yaml
-    RegistryType: 
-      $ref: schema/RegistryType.yaml
+  schemas: 
+    ReceiptRequest: 
+      $ref: ibr/ReceiptRequest.yaml
+    ReceiptResponse: 
+      $ref: ibr/ReceiptResponse.yaml
     SearchRequest: 
       $ref: ibr/SearchRequest.yaml
     SearchResponse: 
@@ -821,79 +963,29 @@ components:
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
     SubscribeRequest: 
-      $ref: schema/SubscribeRequest.yaml
+      $ref: ibr/SubscribeRequest.yaml
     SubscribeResponse: 
-      $ref: schema/SubscribeResponse.yaml
+      $ref: ibr/SubscribeResponse.yaml
     SubscribeStatusReasonCode: 
       $ref: schema/SubscribeStatusReasonCode.yaml
-    SubscriptionCode: 
-      $ref: schema/SubscriptionCode.yaml
-    SubscriptionCodeList: 
-      $ref: schema/SubscriptionCodeList.yaml
-    SubscriptionInfo:
-      $ref: schema/SubscriptionInfo.yaml
-    SubscriptionStatus:
-        $ref: schema/SubscriptionStatus.yaml
     TxnStatusRequest: 
-      $ref: schema/TxnStatusRequest.yaml            
+      $ref: ibr/TxnStatusRequest.yaml            
     TxnStatusResponse: 
-      $ref: schema/TxnStatusResponse.yaml  
+      $ref: ibr/TxnStatusResponse.yaml  
     UnSubscribeRequest: 
       $ref: schema/UnSubscribeRequest.yaml
     UnSubscribeResponse: 
       $ref: schema/UnSubscribeResponse.yaml
     UnSubscribeStatusReasonCode: 
       $ref: schema/UnSubscribeStatusReasonCode.yaml           
-  
-    ###### Common schema objects
-    Ack: 
-      $ref: ../common/schema/Ack.yaml
-    AdditionalInfo:
-      $ref: ../common/schema/AdditionalInfo.yaml
-    AttributeNameValue: 
-      $ref: ../common/schema/AttributeNameValue.yaml
-    AttributeNameValueList: 
-      $ref: ../common/schema/AttributeNameValueList.yaml
-    AttributeValue: 
-      $ref: ../common/schema/AttributeValue.yaml
-    Authorize: 
-      $ref: ../common/schema/Authorize.yaml      
-    Consent: 
-      $ref: ../common/schema/Consent.yaml
-    DateTime: 
-      $ref: ../common/schema/DateTime.yaml
+    NotifyEventRequest: 
+      $ref: schema/NotifyEventRequest.yaml    
     EncryptedMessage: 
       $ref: ../common/schema/EncryptedMessage.yaml
     Error: 
       $ref: ../common/schema/Error.yaml
-    EventFrequency:
-      $ref: ../common/schema/EventFrequency.yaml
-    ExpCondition: 
-      $ref: ../common/schema/ExpCondition.yaml
-    ExpOperator: 
-      $ref: ../common/schema/ExpOperator.yaml
-    ExpPredicate: 
-      $ref: ../common/schema/ExpPredicate.yaml
-    ExpPredicateList: 
-      $ref: ../common/schema/ExpPredicateList.yaml
-    ExpPredicateWithCondition: 
-      $ref: ../common/schema/ExpPredicateWithCondition.yaml
-    ExpPredicateWithConditionList: 
-      $ref: ../common/schema/ExpPredicateWithConditionList.yaml
-    ExpTemplate:
-      $ref: ../common/schema/ExpTemplate.yaml
     FileInfo: 
       $ref: ../common/schema/FileInfo.yaml
-    IdentifierType: 
-      $ref: ../common/schema/IdentifierType.yaml
-    IdentifierTypeValue: 
-      $ref: ../common/schema/IdentifierTypeValue.yaml
-    LanguageCode: 
-      $ref: ../common/schema/LanguageCode.yaml
-    LatLong: 
-      $ref: ../common/schema/LatLong.yaml
-    Meta:
-      $ref: ../common/schema/Meta.yaml
     MsgCallbackHeader_V1.0.0: 
       $ref: ../common/schema/MsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
@@ -902,24 +994,6 @@ components:
       $ref: ../common/schema/MsgHeaderStatusReasonCode.yaml
     MsgSignature: 
       $ref:  ../common/schema/MsgSignature.yaml
-    Pagination: 
-      $ref: ../common/schema/Pagination.yaml
-    PaginationRequest: 
-      $ref: ../common/schema/PaginationRequest.yaml
-    QueryType:
-      $ref: ../common/schema/QueryType.yaml
-    ReferenceId: 
-      $ref: ../common/schema/ReferenceId.yaml
-    ReferenceIdList: 
-      $ref: ../common/schema/ReferenceIdList.yaml
-    RequestStatus: 
-      $ref: ../common/schema/RequestStatus.yaml
-    SearchSort: 
-      $ref: ../common/schema/SearchSort.yaml
-    SearchSortList: 
-      $ref: ../common/schema/SearchSortList.yaml
-    TransactionId:  
-      $ref: ../common/schema/TransactionId.yaml
 
   responses: 
     HttpErrorResponse:

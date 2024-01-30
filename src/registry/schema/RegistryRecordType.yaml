@@ -1,11 +1,11 @@
 type: string
 description: |
-  @context: "https://example.org/schema/RegistryRecordType" <br>
+  @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
   @type: "RegistryRecordType" <br>
   
   **Notes:**
     1. Registry record type values defined as per implementation context.
     2. Usually a list of **enum** values of all possible queryable result sets 
     3. Referenced in search_request and notify events
-    4. example: "ns:dci:RegistryRecordType:CRVSPerson" 
-example: "ns:dci:RegistryRecordType:CRVSPerson"
+    4. example: "spdci-extensions-dci:Person" 
+example: "spdci-extensions-dci:Person"

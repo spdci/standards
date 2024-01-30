@@ -4,7 +4,7 @@ properties:
   type:
     type: string
     description: |
-      @context: "https://example.org/schema/IdType" <br>
+      @context: https://schema.spdci.org/common/v1/IdentifierTypeEnum.jsonld <br>
       @type: "IdType" <br>
       
       **Notes:**

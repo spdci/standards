@@ -1,9 +1,9 @@
 type: object
 description: |
-  @context: "https://example.org/schema/Authorize" <br>
+  @context: https://schema.spdci.org/Authorize <br>
   @type: "Authorize"
 example:
-  "@context": "https://example.org/schema/Authorize"
+  "@context": "https://standards.spdci.org/schemas/Authorize"
   "@type": "Authorize"
   ts:
     $ref: ./DateTime.yaml
@@ -13,7 +13,7 @@ example:
     code: 
       type: string
       description: From a fixed set, documented at refUri
-    refUri:
+    ref_uri:
         type: string
         format: uri
         description: Uri to provide more info on authorize codes
