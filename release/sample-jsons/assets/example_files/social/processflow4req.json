@@ -7,7 +7,7 @@
     "action": "search",
     "sender_id": "sp-system",
     "sender_uri": "",
-    "receiver_id": "crvs",
+    "receiver_id": "social",
     "total_count": "1",
     "is_msg_encrypted": false,
     "meta": ""
