@@ -143,8 +143,7 @@
               "email": [
                 "PhumchaiS@isp.com"
               ],
-              "household_identifier": "",
-              "household_status": "1",
+              "household_info": [],
               "poverty_score": "",
               "parent1_identifier": {
                 "@id": "Identifier",
