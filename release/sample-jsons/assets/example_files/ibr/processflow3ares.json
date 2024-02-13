@@ -62,6 +62,7 @@
                 "prefix": "Dr.",
                 "suffix": "PhD"
               },
+              "household_status": "",
               "benefiting_entity": "1",
               "sex": "female",
               "birth_date": "1995-09-21T11:20:00",
@@ -69,7 +70,7 @@
               "marital_status": "M",
               "poverty_score": "",
               "is_disabled": "2",
-              "household_info": [],
+              "household_identifier": "",
               "programme": [
                 {
                   "@id": "Programme",

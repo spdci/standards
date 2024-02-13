@@ -111,7 +111,9 @@
                                     }
                                 }
                             ],
-                            "household_info": [],
+                            "spdci:household_identifier": "Household1",
+                            "spdci:household_status": "Head",
+                            "spdci:household_size": 5,
                             "spdci:poverty_score": 2,
                             "spdci:parent1_identifier": {
                                 "@id": "Identifier",
