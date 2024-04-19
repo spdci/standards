@@ -66,3 +66,11 @@ bundled successfully in: ./release/html/registry_core_api_v1.0.0.html
 ```
 
 6. Commit the changes and push the updated code to git repo. Create pull requests for teams to collaborate and merge to main branch!
+
+## How this published on website 
+
+The github actions used to publish this as website, you can map branch / folder which to be published as webpages root path.
+
+Below link will help to understand how it works
+
+https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
