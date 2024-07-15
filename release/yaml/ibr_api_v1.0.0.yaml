@@ -815,6 +815,59 @@ paths:
       security:
         - Authorization: []
       deprecated: false
+  /registry/enrolled:
+    post:
+      summary: /registry/enrolled
+      description: search programmes person is enrolled in
+      operationId: post_reg_enrolled
+      tags:
+        - Sync
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signature:
+                  $ref: '#/components/schemas/MsgSignature'
+                header:
+                  allOf:
+                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
+                    - properties:
+                        action:
+                          enum:
+                            - search
+                message:
+                  type: object
+                  description: The search data using which registry search to be performed
+                  oneOf:
+                    - $ref: '#/components/schemas/EnrolledRequest'
+                    - $ref: '#/components/schemas/EncryptedMessage'
+              required:
+                - header
+                - message
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/FileInfo'
+                - properties:
+                    action:
+                      enum:
+                        - search
+      responses:
+        '401':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '403':
+          $ref: '#/components/responses/HttpErrorResponse'
+        '500':
+          $ref: '#/components/responses/HttpErrorResponse'
+        default:
+          $ref: '#/components/responses/Response'
+      security:
+        - Authorization: []
+      deprecated: false
   /registry/sync/notify:
     post:
       summary: /registry/sync/notify
@@ -956,10 +1009,67 @@ components:
               description: |
                 1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
                 2. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-                @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
+                @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
                 @type: "@context" <br>   
               items:
-                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
+                type: object
+                description: |
+                  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                  3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                  @context: https://schema.spdci.org/extensions/ibr/v1/Beneficairy.jsonld <br>
+                  @type: "@context" <br>
+                example:
+                  '@context':
+                    '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
+                    xsd: 'http://www.w3.org/2001/XMLSchema#'
+                    schema: 'http://schema.org/'
+                    rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                    owl: 'http://www.w3.org/2002/07/owl#'
+                  '@id': Beneficiary
+                  '@type': Beneficiary
+                  assistance_unit: '1'
+                  member:
+                    member_identifier: HS0205202401
+                    demographic_info:
+                      person:
+                        identifier_type: NID
+                        identifier_value: '0205202401'
+                        name:
+                          first_name: Test
+                          second_name: Test2
+                          surname: Test3
+                        sex: F
+                        birth_date: 02.05.2004
+                        death_date: ''
+                        address: ''
+                        phone_number: ''
+                        email: ''
+                    relationship_head: ''
+                    related_person: ''
+                    is_disabled: '0'
+                    disability_info: ''
+                    marital_status: Single
+                    employment_status: employed
+                    occupation: Caregiver
+                    income_level: ''
+                    language_code: Eng
+                    education_level: Highschool
+                    additional_attributes: ''
+                    registration_date: 02.05.2024
+                    last_update: ''
+                    programme_identifier:
+                      programme:
+                        programme_identifier: DCI001
+                        programme_name: Test Programme
+                      enrolment_date: 02.02.2024
+                      enrolment_status: Active
+                      status_change_date: ''
+                      benefits:
+                        benefit_type: Cash
+                        benefit_date: 02.05.2024
+                        benefit_value: USD 50
+                        benefit_frequency: Monthly
       required:
         - transaction_id
         - receipt_information
@@ -1027,7 +1137,7 @@ components:
                       - idtype-value
                       - expression
                       - predicate
-                    example: idtype-value
+                    example: expression
                   query:
                     description: |
                       1. Implementing systems can define schemas.
@@ -1044,12 +1154,12 @@ components:
                             type: string
                             description: |
                               @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
-                              @type: "Queryype" <br>
+                              @type: "QueryType" <br>
 
                               **Notes:**
                                 1. Query types that helps decode query expressions
                                 2. Sample query type enums: "GraphQl", "Sql", "NoSql"
-                            example: 'ns:org:QueryType:GraphQl'
+                            example: 'ns:org:QueryType:NoSql'
                           value:
                             type: object
                             description: |
@@ -1060,7 +1170,16 @@ components:
                                 1. Query expression's syntax / format is determined based on query-type.
                                 2. Query expression as a template with placeholder to pass conditional search parameters
                             example:
-                              expression: ' query GeBirthRecordById: { person: (UIN: "1") { BRN, name, gender, birthDate, birthPlace, parents } }'
+                              expression:
+                                collection: HouseHold
+                                query:
+                                  $and:
+                                    - poverty_score:
+                                        $lt: 5
+                                    - location:
+                                        $eq: central_region
+                                    - household_size:
+                                        $lt: 5
                       - type: object
                         description: Identifier type and value object
                         properties:
@@ -1153,8 +1272,8 @@ components:
                             **Notes:**
                               1. Attribute names defined as per implementation context.
                               2. Usually a list of **enum** values of all possible attribute names.
-                              3. e.g: UIN, YOB, DOB, age, mobile, area-code, pin-code, etc.,
-                          example: YOB
+                              3. e.g: UIN, poverty_score, etc.,
+                          example: poverty_score
                         sort_order:
                           type: string
                           enum:
@@ -1505,11 +1624,21 @@ components:
                     filter:
                       $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query'
                     notify_record_type:
-                      $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_record_type'
                       required:
                         - reg_event_type
                         - filter
                         - notify_record_type
+                      type: string
+                      description: |
+                        @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
+                        @type: "RegistryRecordType" <br>
+
+                        **Notes:**
+                          1. Registry record type values defined as per implementation context.
+                          2. Usually a list of **enum** values of all possible queryable result sets 
+                          3. Referenced in search_request and notify events
+                          4. example: "spdci-extensions-dci:Person" 
+                      example: 'spdci-extensions-dci:Person'
                     locale:
                       $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
                   required:
@@ -1616,6 +1745,37 @@ components:
         - transaction_id
         - correlation_id
         - txnstatus_response
+    EnrolledRequest:
+      type: object
+      description: Registry to notify a event to subscrbiers
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        enrolled_criteria:
+          type: object
+          description: |
+            Enrolled query
+          properties:
+            query_type:
+              $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query_type'
+              description: ''
+            response_entity:
+              $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/response_entity'
+              example: Beneficiary
+            query:
+              type: object
+              description: Query expression for the enrolled query
+              example: |
+                {
+                  "$and": [
+                    {
+                      "person_identifier": { "eq": "ABC451123" }
+                    }
+                  ]
+                }
+      required:
+        - transaction_id
+        - enrolled_criteria
     UnSubscribeRequest:
       type: object
       description: Un-Subscribe to registred subscriptions
@@ -1723,8 +1883,8 @@ components:
                       **Notes:**
                         1. Registry type values defined as per implementation context.
                         2. Usually a list of **enum** values of all possible queryable functional registries 
-                        3. example: "ns:org:RegistryType:Civil"
-                    example: 'ns:org:RegistryType:Civil'
+                        3. example: "ns:org:RegistryType:Social"
+                    example: 'ns:org:RegistryType:Social'
                   reg_event_type:
                     type: string
                     description: |
@@ -1734,102 +1894,93 @@ components:
                       **Notes:**
                         1. Registry event type values defined as per implementation context.
                         2. Usually a list of **enum** values of all possible queryable identifiers.
-                        3. example: "spdci-common:RegistryEventType:LiveBirth"
-                    example: 'spdci-common:RegistryEventType:LiveBirth'
-                  reg_record_type:
-                    type: string
+                        3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
+                    example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
+                  response_entity:
+                    type: enum
                     description: |
-                      @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
-                      @type: "RegistryRecordType" <br>
-
-                      **Notes:**
-                        1. Registry record type values defined as per implementation context.
-                        2. Usually a list of **enum** values of all possible queryable result sets 
-                        3. Referenced in search_request and notify events
-                        4. example: "spdci-extensions-dci:Person" 
-                    example: 'spdci-extensions-dci:Person'
+                      Define the type of response to have when executing the search
+                    enum:
+                      - Household
+                      - Family
+                      - Member
                   reg_records:
                     type: object
                     description: |
-                      The "Person" object contains fields expected in response of search
+                      The "Household" object contains fields expected in response of search
                       @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
-                      @type: "Person" <br>
+                      @type: "Household" <br>
                       @container: "@set" <br> 
                     example:
                       type: object
                       description: |
-                        @context: https://schema.spdci.org/CRVSPerson" <br>
-                        @type: "Consent"
+                        1. Attributes of a household to create fetch records, create verifiable credentials or use in search criteria.
+                        3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                        @context: https://schema.spdci.org/extensions/social/v1/Household.jsonld <br>
+                        @type: "@context" <br>
                       example:
-                        '@context': 'https://standards.spdci.org/schemas/extensions/dci/v1/Person'
-                        '@type': CRVSPerson
-                        '@vocab': 'https://spdci.org/'
-                        schema: 'http://schema.org/'
-                        rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-                        xsd: 'http://www.w3.org/2001/XMLSchema#'
-                        CRVSPerson:
-                          '@id': 'https://spdci.org/schemas/extensions/dci/v1/Person'
-                          '@type': 'rdfs:Class'
-                          '@context':
+                        '@context':
+                          '@vocab': 'https://schema.spdci.org/extensions/social/v1'
+                          xsd: 'http://www.w3.org/2001/XMLSchema#'
+                          schema: 'http://schema.org/'
+                          rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                          owl: 'http://www.w3.org/2002/07/owl#'
+                        '@id': Household
+                        '@type': Household
+                        household_identifier: HS02052024
+                        address:
+                          geo_location: ''
+                        poverty_score: '4.0'
+                        poverty_score_type: ''
+                        household_size: '1'
+                        household_head_info:
+                          person:
+                            identifier_type: NID
+                            identifier_value: '0205202401'
                             name:
-                              '@id': 'schema:name'
-                              '@type': 'xsd:string'
-                            givenName:
-                              '@id': 'schema:givenName'
-                              '@type': 'xsd:string'
-                            familyName:
-                              '@id': 'schema:familyName'
-                              '@type': 'xsd:string'
-                            additionalName:
-                              '@id': 'schema:additionalName'
-                              '@type': 'xsd:string'
-                            gender:
-                              '@id': 'schema:gender'
-                              '@type': 'xsd:string'
-                            birthDate:
-                              '@id': 'schema:birthDate'
-                              '@type': 'xsd:date'
-                            birthPlace:
-                              '@id': 'schema:birthPlace'
-                              '@type': 'schema:GeoCoordinates'
-                            deathDate:
-                              '@id': 'schema:deathDate'
-                              '@type': 'xsd:date'
-                            deathPlace:
-                              '@id': 'schema:deathPlace'
-                              '@type': 'schema:GeoCoordinates'
-                            maritalStatus:
-                              '@id': 'schema:maritalStatus'
-                              '@type': 'xsd:string'
-                            honorificPrefix:
-                              '@id': 'schema:honorificPrefix'
-                              '@type': 'xsd:string'
-                            honorificSuffix:
-                              '@id': 'schema:honorificSuffix'
-                              '@type': 'xsd:string'
-                            emails:
-                              '@container': '@set'
-                              '@id': 'schema:email'
-                              '@type': 'xsd:string'
-                            telephones:
-                              '@container': '@set'
-                              '@id': 'schema:telephone'
-                              '@type': 'xsd:string'
-                            address:
-                              '@id': 'schema:address'
-                              '@type': 'schema:GeoCoordinates'
-                            marriageDate:
-                              '@id': 'https://spdci.org/marriageDate'
-                              '@type': 'xsd:date'
-                            divorceDate:
-                              '@id': 'https://spdci.org/divorceDate'
-                              '@type': 'xsd:date'
-                            parents:
-                              '@id': 'schema:parents'
-                              '@type': 'https://spdci.org/CRVSPerson'
-                        '@id': 'https://spdci.org/CRVSPerson'
+                              first_name: Test
+                              second_name: Test2
+                              surname: Test3
+                            sex: F
+                            birth_date: 02.05.2004
+                            death_date: ' '
+                            address: ' '
+                            phone_number: ''
+                            email: ' '
+                        member_list:
+                          - household_member:
+                              member_identifier: HS0205202401
+                              demographic_info:
+                                person:
+                                  identifier_type: NID
+                                  identifier_value: '0205202401'
+                                  name:
+                                    first_name: Test
+                                    second_name: Test2
+                                    surname: Test3
+                                  sex: F
+                                  birth_date: 02.05.2004
+                                  death_date: ' '
+                                  address: {}
+                                  phone_number: ''
+                                  email: ' '
+                              relationship_head: self
+                              related_person: {}
+                              is_disabled: '0'
+                              disability_info: ' '
+                              marital_status: Single
+                              employment_status: employed
+                              occupation: Caregiver
+                              income_level: ' '
+                              language_code: Eng
+                              education_level: Highschool
+                              registration_date: 02.05.2024
+                        additional_attributes: []
+                        registration_date: 02.05.2024
+                        last_update: ' '
                 required:
-                  - reg_record_type
+                  - response_entity
                   - reg_records
               locale:
                 $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
@@ -2006,7 +2157,7 @@ components:
           format: date-time
           example: ''
         action:
-          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
+          description: 'spdci Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
           type: string
         sender_id:
           description: |
@@ -2065,7 +2216,7 @@ components:
     MsgSignature:
       type: string
       description: 'Signature of {header}+{message} body verified using sender''s signing public key'
-      example: 'Signature:  namespace="g2p", kidId="{sender_id}|{unique_key_id}|{algorithm}", algorithm="ed25519", created="1606970629", expires="1607030629", headers="(created) (expires) digest", signature="Base64(signing content)'
+      example: 'Signature:  namespace="spdci", kidId="{sender_id}|{unique_key_id}|{algorithm}", algorithm="ed25519", created="1606970629", expires="1607030629", headers="(created) (expires) digest", signature="Base64(signing content)'
   responses:
     HttpErrorResponse:
       description: HTTP layer error details

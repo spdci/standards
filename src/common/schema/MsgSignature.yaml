@@ -1,7 +1,7 @@
 type: string
 description: Signature of {header}+{message} body verified using sender's signing public key
 example: "Signature: 
-    namespace=\"g2p\",
+    namespace=\"spdci\",
     kidId=\"{sender_id}|{unique_key_id}|{algorithm}\",
     algorithm=\"ed25519\",
     created=\"1606970629\",

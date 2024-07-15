@@ -15,7 +15,7 @@ properties:
   message_ts:
     $ref: DateTime.yaml
   action:
-    description: G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.
+    description: spdci Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.
     type: string
   sender_id:
     description: | 

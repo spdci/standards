@@ -4,8 +4,10 @@ description: |
 
   1 : Register <br>
   2 : Payment <br>
-  3 : Deregister <br>  
+  3 : Deregister <br> 
+  4 : spdci:common:RegistryEventType:NewHouseHoldMember
 enum:
   - "REGISTER"
   - "PAYMENT"
   - "DEREGISTER"
+  - "NewHouseHoldMember"

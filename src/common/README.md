@@ -1,1 +1,1 @@
-This folder holds all G2P Connect common components used across vairous functional interfaces
+This folder holds all G2P Connect common components used across various functional interfaces

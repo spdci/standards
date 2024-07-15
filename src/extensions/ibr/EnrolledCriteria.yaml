@@ -1,0 +1,21 @@
+type: object
+description: | 
+  Enrolled query
+properties:
+  query_type:
+    $ref: ../../common/schema/QueryType.yaml
+    description: ""
+  response_entity:
+    $ref: ../../common/schema/ResponseEntity.yaml
+    example: "Beneficiary"
+  query:
+    type: object
+    description: "Query expression for the enrolled query"
+    example: |
+      {
+        "$and": [
+          {
+            "person_identifier": { "eq": "ABC451123" }
+          }
+        ]
+      }

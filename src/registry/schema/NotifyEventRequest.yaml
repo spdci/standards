@@ -23,13 +23,13 @@ properties:
             reg_type:
               $ref: RegistryType.yaml
             reg_event_type:
-              $ref: RegistryEventType.yaml
-            reg_record_type:
-              $ref: RegistryRecordType.yaml    
+              $ref: RegistryEventType.yaml    
+            response_entity:
+              $ref: ../../common/schema/ResponseEntity.yaml  
             reg_records:
               $ref: RegistryRecord.yaml
           required: 
-            - reg_record_type
+            - response_entity
             - reg_records
         locale:
           $ref: "../../common/schema/LanguageCode.yaml"

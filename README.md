@@ -2,7 +2,6 @@
 
 The APIs are accessible through
     1. DCI:  [standards](https://standards.spdci.org/standards/release/index.html)
-    2. G2P Community: [specifications](https://g2p-connect.github.io/specs/release/index.html)
 
 ## Discussion forum 
 
@@ -10,9 +9,9 @@ To initiate any discussion please visit [discussion page](https://github.com/org
 
 **IMPORTANT NOTES:**
 1. Final release for consuming these APIs (yaml, html) are available in specs/release folder.
-2. Contribute to G2P Connect specification or DCI standards APIs through pull requests in  respective specs/src folder.
+2. Contribute to  DCI standards APIs through pull requests in  respective specs/src folder.
 3. specs/release folder files are auto generated and it's NOT recommended to edit these directly. 
-4. specs/release filder API files are for final consumption by solution providers to make their services compatible with G2P Connect / DCI standards.
+4. specs/release filder API files are for final consumption by solution providers to make their services compatible with  DCI standards.
 
 ### Reference Links
 1. Build [Instructions](./build/build_instructions.md)

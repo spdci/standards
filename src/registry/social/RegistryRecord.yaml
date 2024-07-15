@@ -1,8 +1,8 @@
 type: object
 description: |
-  The "Person" object contains fields expected in response of search
-  @context: https://schema.spdci.org/extensions/social/v1/Person.jsonld <br>
-  @type: "Person" <br>
+  The "Household" object contains fields expected in response of search
+  @context: https://schema.spdci.org/extensions/social/v1/Household.jsonld <br>
+  @type: "Household" <br>
   @container: "@set" <br> 
 example: 
-  $ref: "../../extensions/social/Person.yaml"
+  $ref: "../../extensions/social/Household.yaml"

@@ -267,7 +267,7 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
-   
+
  /registry/subscribe:
   post: 
     summary: "/registry/subscribe"
@@ -829,7 +829,60 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- 
+ /registry/enrolled:
+  post: 
+    summary: "/registry/enrolled"
+    description: |- 
+      search programmes person is enrolled in
+    operationId: post_reg_enrolled
+    tags: 
+      -  Sync
+    requestBody:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                signature:  
+                  $ref: "#/components/schemas/MsgSignature"
+                header:
+                  allOf:
+                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
+                    - properties:
+                        action:
+                          enum:
+                            - search
+                message:
+                  type: object
+                  description: The search data using which registry search to be performed
+                  oneOf:
+                    - $ref: '#/components/schemas/EnrolledRequest'
+                    - $ref: "#/components/schemas/EncryptedMessage"
+              required:
+                - header
+                - message
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/FileInfo"
+              - properties:
+                  action:
+                    enum:
+                      - search
+    responses:
+        default:
+          $ref: "#/components/responses/Response"
+        '401':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '403':
+          $ref: "#/components/responses/HttpErrorResponse"
+        '500':
+          $ref: "#/components/responses/HttpErrorResponse"
+    security:
+      - Authorization: [ ]
+    deprecated: false
  /registry/sync/notify:
   post: 
     summary: "/registry/sync/notify"
@@ -950,6 +1003,7 @@ paths:
       - Authorization: [ ]
     deprecated: false
 
+ 
 components:
   schemas: 
     ReceiptRequest: 
@@ -972,6 +1026,8 @@ components:
       $ref: ibr/TxnStatusRequest.yaml            
     TxnStatusResponse: 
       $ref: ibr/TxnStatusResponse.yaml  
+    EnrolledRequest:
+      $ref: ibr/EnrolledRequest.yaml
     UnSubscribeRequest: 
       $ref: schema/UnSubscribeRequest.yaml
     UnSubscribeResponse: 
