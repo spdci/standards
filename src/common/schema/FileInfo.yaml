@@ -2,7 +2,7 @@ type: object
 description: 'File info. Used in file upload feature using HTTPS'
 properties:
   action:
-    description: G2P Connect specific actions. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
+    description: SPDCI Connect specific actions. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
     type: string
   fileName:
     description: "Disbursement instruction file representing Disburse or OnDisburse end point elements i.e signature/header/message entities as a file record"

@@ -21,10 +21,23 @@ info:
     - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
     - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
     - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
-    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+    - [Relation Ship Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.07-relationship_type)   
+    - [Ethnicity](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.08-ethnicity)
+    - [Nationality](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.09-nationality)
+    - [Disability Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.10-disability_type)
+    - [Functional Limitation Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.11-functional_limitation_type)
+    - [Functional Severity](https://app.gitbook.com/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.12-functional_severity)
+    - [Education Level](https://app.gitbook.com/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.17-education_level)
+    - [Employment Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.02-employment_status)
+    - [Income Level](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.03-income_level)
+    - [Occupation](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.04-occupation)
     Data Objects:
-    - Person (WIP)
-    - HouseHold (WIP)
+    - Person 
+    - HouseHold 
+    - Family
+    - Member
+    - RelatedPerson
+    - DisabilityInfo
 
     Each request is build up of three parts 
     - signature 
@@ -76,35 +89,7 @@ tags:
   - name: SearchStatusReasonCode
     x-displayName: SearchStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
-  - name: SubscribeRequest
-    x-displayName: SubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
-  - name: SubscribeResponse
-    x-displayName: SubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
-  - name: SubscribeStatusReasonCode
-    x-displayName: SubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
-  - name: NotifyEventRequest
-    x-displayName: NotifyEventRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
-  - name: UnSubscribeRequest
-    x-displayName: UnSubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeRequest" />    
-  - name: UnSubscribeResponse
-    x-displayName: UnSubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeResponse" />  
-  - name: UnSubscribeStatusReasonCode
-    x-displayName: UnSubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />               
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -113,14 +98,6 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
-  - name: ReceiptRequest
-    x-displayName: ReceiptRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
-  - name: ReceiptResponse
-    x-displayName: ReceiptResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
@@ -135,15 +112,8 @@ x-tagGroups:
     tags:
       - SearchRequest
       - SearchResponse
-      - SubscribeRequest 
-      - SubscribeResponse
-      - ReceiptRequest
-      - ReceiptResponse
       - TxnStatusRequest
       - TxnStatusResponse
-      - NotifyEventRequest
-      - UnSubscribeRequest
-      - UnSubscribeResponse 
       - EncryptedMessage
   - name: Status Codes
     tags: 
@@ -264,333 +234,6 @@ paths:
       - Authorization: [ ]
     deprecated: false
    
- /registry/subscribe:
-  post: 
-    summary: "/registry/subscribe"
-    description: |-
-      The /registry/subscribe end point tobe implemented by SR to receive subscription request from SPMIS.
-      The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
-    operationId: post_reg_subscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - subscribe
-                message:
-                  type: object
-                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber, The IBR supports benefit_disbusrement,programme_exited events as of now
-                  oneOf:
-                    - $ref: "#/components/schemas/SubscribeRequest"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - subscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/on-subscribe:
-  post: 
-    summary: "/registry/on-subscribe"
-    description: |-
-      The /registry/on-subscribe request tobe implemented by SPMIS to receive subscription response from SR. 
-      The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
-
-    operationId: post_reg_on-subscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - on-subscribe
-                message:
-                  type: object
-                  description: Subscription information 
-                  oneOf:
-                    - $ref: "#/components/schemas/SubscribeResponse"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - on-subscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
-
- /registry/unsubscribe:
-  post: 
-    summary: "/registry/unsubscribe"
-    description: |-
-      The /registry/unsubscribe endpoint will be implemented by SR, SPMIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
-
-    operationId: post_reg_unsubscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - unsubscribe
-                message:
-                  type: object
-                  description: The unsubscribe request that contain subscription ids which to be removed from subscription list 
-                  oneOf:
-                    - $ref: "#/components/schemas/UnSubscribeRequest"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - unsubscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/on-unsubscribe:
-  post: 
-    summary: "/registry/on-unsubscribe"
-    description: |-
-      The /registry/on-unsubscribe will be implemented by SPMIS to receive unsubscribe response from SR. It will contain status information of unsubscribe request.
-    operationId: post_reg_on-unsubscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - on-unsubscribe
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: "#/components/schemas/UnSubscribeResponse"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - on-unsubscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/notify:
-  post: 
-    summary: "/registry/notify"
-    description: |-
-      The /registry/sync/notify end point will be implemented by SPMIS to receive notification for subscribed event.
-      The notification will be sent based on subscription criteria.
-
-    operationId: post_reg_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/on-notify:
-  post: 
-    summary: "/registry/on-notify"
-    description: |-
-      The /registry/on-notify will be implemented by SR to receive notification response from SPMIS.
-
-    operationId: post_reg_on_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/ReceiptResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
 
  /registry/txn/status:
   post: 
@@ -772,59 +415,6 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/sync/notify:
-  post: 
-    summary: "/registry/sync/notify"
-    description: |-
-      The /registry/sync/notify end point will be implemented by SPMIS to receive notification for subscribed event.
-      The notification will be sent based on subscription criteria.
-    operationId: post_reg_sync_notify
-    tags: 
-      -  Sync
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
  /registry/sync/txn/status:
   post: 
     summary: "/registry/sync/txn/status"
@@ -894,34 +484,16 @@ paths:
 
 components:
   schemas: 
-    ReceiptRequest: 
-      $ref: social/ReceiptRequest.yaml
-    ReceiptResponse: 
-      $ref: social/ReceiptResponse.yaml
     SearchRequest: 
       $ref: social/SearchRequest.yaml
     SearchResponse: 
       $ref: social/SearchResponse.yaml
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
-    SubscribeRequest: 
-      $ref: social/SubscribeRequest.yaml
-    SubscribeResponse: 
-      $ref: social/SubscribeResponse.yaml
-    SubscribeStatusReasonCode: 
-      $ref: schema/SubscribeStatusReasonCode.yaml
     TxnStatusRequest: 
       $ref: ibr/TxnStatusRequest.yaml            
     TxnStatusResponse: 
       $ref: ibr/TxnStatusResponse.yaml  
-    UnSubscribeRequest: 
-      $ref: schema/UnSubscribeRequest.yaml
-    UnSubscribeResponse: 
-      $ref: schema/UnSubscribeResponse.yaml
-    UnSubscribeStatusReasonCode: 
-      $ref: schema/UnSubscribeStatusReasonCode.yaml           
-    NotifyEventRequest: 
-      $ref: schema/NotifyEventRequest.yaml    
     EncryptedMessage: 
       $ref: ../common/schema/EncryptedMessage.yaml
     Error: 

@@ -1,13 +1,9 @@
 type: string
 description: |
-  The IBR receive data from SP system , it has to differenciate of details based on event type, Usually SP system sends Registration , payment and deregister events to IBR
+  The SR receive data from SP system , it has to differenciate of details based on event type, Usually SP system sends Registration , payment and deregister events to IBR
 
   1 : Register <br>
-  2 : Payment <br>
-  3 : Deregister <br> 
   4 : spdci:common:RegistryEventType:NewHouseHoldMember
 enum:
   - "REGISTER"
-  - "PAYMENT"
-  - "DEREGISTER"
   - "NewHouseHoldMember"

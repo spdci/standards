@@ -19,7 +19,7 @@ properties:
         status_reason_code:
           $ref: "../schema/SearchStatusReasonCode.yaml" 
         status_reason_message:
-          description: "Status reason code message. Helps actionanble messaging for systems/end users"
+          description: "Status reason code message. Helps actionable messaging for systems/end users"
           type: string
           maxLength: 999
         data:
@@ -32,13 +32,13 @@ properties:
               default: 1.0.0
             reg_records:
               description: |
-                The "Person" object contains fields expected in response of search
-                @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
+                The "Beneficiary" object contains fields expected in response of search
+                @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
                 @type: "@context" <br>
                 @container: "@set" <br>
               type: array
               items:
-                $ref: "../../extensions/ibr/Person.yaml"                
+                $ref: "../../extensions/ibr/Beneficiary.yaml"                
           required: 
             - reg_records
         pagination: 

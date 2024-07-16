@@ -21,10 +21,23 @@ info:
     - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
     - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
     - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
-    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+    - [Relation Ship Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.07-relationship_type)   
+    - [Ethnicity](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.08-ethnicity)
+    - [Nationality](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.09-nationality)
+    - [Disability Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.10-disability_type)
+    - [Functional Limitation Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.11-functional_limitation_type)
+    - [Functional Severity](https://app.gitbook.com/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.12-functional_severity)
+    - [Education Level](https://app.gitbook.com/s/F9fu0tIY1rJUsF03WdAv/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.17-education_level)
+    - [Employment Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.02-employment_status)
+    - [Income Level](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.03-income_level)
+    - [Occupation](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.04-occupation)
     Data Objects:
-    - Person (WIP)
-    - HouseHold (WIP)
+    - Person 
+    - HouseHold 
+    - Family
+    - Member
+    - RelatedPerson
+    - DisabilityInfo
 
     Each request is build up of three parts 
     - signature 
@@ -76,34 +89,6 @@ tags:
     x-displayName: SearchStatusReasonCode
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
-  - name: SubscribeRequest
-    x-displayName: SubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
-  - name: SubscribeResponse
-    x-displayName: SubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
-  - name: SubscribeStatusReasonCode
-    x-displayName: SubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
-  - name: NotifyEventRequest
-    x-displayName: NotifyEventRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
-  - name: UnSubscribeRequest
-    x-displayName: UnSubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeRequest" />    
-  - name: UnSubscribeResponse
-    x-displayName: UnSubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeResponse" />  
-  - name: UnSubscribeStatusReasonCode
-    x-displayName: UnSubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -112,14 +97,6 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
-  - name: ReceiptRequest
-    x-displayName: ReceiptRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
-  - name: ReceiptResponse
-    x-displayName: ReceiptResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
@@ -133,15 +110,8 @@ x-tagGroups:
     tags:
       - SearchRequest
       - SearchResponse
-      - SubscribeRequest
-      - SubscribeResponse
-      - ReceiptRequest
-      - ReceiptResponse
       - TxnStatusRequest
       - TxnStatusResponse
-      - NotifyEventRequest
-      - UnSubscribeRequest
-      - UnSubscribeResponse
       - EncryptedMessage
   - name: Status Codes
     tags:
@@ -248,325 +218,6 @@ paths:
                     action:
                       enum:
                         - on-search
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/subscribe:
-    post:
-      summary: /registry/subscribe
-      description: |-
-        The /registry/subscribe end point tobe implemented by SR to receive subscription request from SPMIS.
-        The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
-      operationId: post_reg_subscribe
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - subscribe
-                message:
-                  type: object
-                  description: 'Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber, The IBR supports benefit_disbusrement,programme_exited events as of now'
-                  oneOf:
-                    - $ref: '#/components/schemas/SubscribeRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - subscribe
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/on-subscribe:
-    post:
-      summary: /registry/on-subscribe
-      description: |-
-        The /registry/on-subscribe request tobe implemented by SPMIS to receive subscription response from SR. 
-        The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
-      operationId: post_reg_on-subscribe
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - on-subscribe
-                message:
-                  type: object
-                  description: Subscription information
-                  oneOf:
-                    - $ref: '#/components/schemas/SubscribeResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - on-subscribe
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/unsubscribe:
-    post:
-      summary: /registry/unsubscribe
-      description: 'The /registry/unsubscribe endpoint will be implemented by SR, SPMIS can send request to unsubscribe existing subscription(s) by subscription_code(s).'
-      operationId: post_reg_unsubscribe
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - unsubscribe
-                message:
-                  type: object
-                  description: The unsubscribe request that contain subscription ids which to be removed from subscription list
-                  oneOf:
-                    - $ref: '#/components/schemas/UnSubscribeRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - unsubscribe
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/on-unsubscribe:
-    post:
-      summary: /registry/on-unsubscribe
-      description: The /registry/on-unsubscribe will be implemented by SPMIS to receive unsubscribe response from SR. It will contain status information of unsubscribe request.
-      operationId: post_reg_on-unsubscribe
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - on-unsubscribe
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/UnSubscribeResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - on-unsubscribe
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/Response'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/notify:
-    post:
-      summary: /registry/notify
-      description: |-
-        The /registry/sync/notify end point will be implemented by SPMIS to receive notification for subscribed event.
-        The notification will be sent based on subscription criteria.
-      operationId: post_reg_notify
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - notify
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/HttpErrorResponse'
-      security:
-        - Authorization: []
-      deprecated: false
-  /registry/on-notify:
-    post:
-      summary: /registry/on-notify
-      description: The /registry/on-notify will be implemented by SR to receive notification response from SPMIS.
-      operationId: post_reg_on_notify
-      tags:
-        - Async
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/ReceiptResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - notify
       responses:
         '401':
           $ref: '#/components/responses/HttpErrorResponse'
@@ -754,59 +405,6 @@ paths:
       security:
         - Authorization: []
       deprecated: false
-  /registry/sync/notify:
-    post:
-      summary: /registry/sync/notify
-      description: |-
-        The /registry/sync/notify end point will be implemented by SPMIS to receive notification for subscribed event.
-        The notification will be sent based on subscription criteria.
-      operationId: post_reg_sync_notify
-      tags:
-        - Sync
-      requestBody:
-        description: ''
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                signature:
-                  $ref: '#/components/schemas/MsgSignature'
-                header:
-                  allOf:
-                    - $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0'
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-          multipart/form-data:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/FileInfo'
-                - properties:
-                    action:
-                      enum:
-                        - notify
-      responses:
-        '401':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '403':
-          $ref: '#/components/responses/HttpErrorResponse'
-        '500':
-          $ref: '#/components/responses/HttpErrorResponse'
-        default:
-          $ref: '#/components/responses/HttpErrorResponse'
-      security:
-        - Authorization: []
-      deprecated: false
   /registry/sync/txn/status:
     post:
       summary: /registry/sync/txn/status
@@ -884,16 +482,100 @@ components:
           type: object
           description: |
             Receipt information contains receipt type and list of beneficiaries
+            1) Enrolled beneficiaries - It return the beneficiaries enrolled  into system.
+            2) Updated beneficiaries - If return updated status
+          properties:
+            receipt_type:
+              description: Receipt type 1) Enrollments  2) Updates
+              type: string
+              enum:
+                - enrollement
+                - enrollement_status_change
+            beneficiaries:
+              type: array
+              description: |
+                1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                2. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+                @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
+                @type: "@context" <br>   
+              items:
+                type: object
+                description: |
+                  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                  3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                  @context: https://schema.spdci.org/extensions/ibr/v1/Beneficairy.jsonld <br>
+                  @type: "@context" <br>
+                example:
+                  '@context':
+                    '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
+                    xsd: 'http://www.w3.org/2001/XMLSchema#'
+                    schema: 'http://schema.org/'
+                    rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                    owl: 'http://www.w3.org/2002/07/owl#'
+                  '@id': Beneficiary
+                  '@type': Beneficiary
+                  assistance_unit: '1'
+                  member:
+                    member_identifier: HS0205202401
+                    demographic_info:
+                      person:
+                        identifier_type: NID
+                        identifier_value: '0205202401'
+                        name:
+                          first_name: Test
+                          second_name: Test2
+                          surname: Test3
+                        sex: F
+                        birth_date: 02.05.2004
+                        death_date: ''
+                        address: ''
+                        phone_number: ''
+                        email: ''
+                    relationship_head: ''
+                    related_person: ''
+                    is_disabled: '0'
+                    disability_info: ''
+                    marital_status: Single
+                    employment_status: employed
+                    occupation: Caregiver
+                    income_level: ''
+                    language_code: Eng
+                    education_level: Highschool
+                    additional_attributes: ''
+                    registration_date: 02.05.2024
+                    last_update: ''
+                    programme_identifier:
+                      programme:
+                        programme_identifier: DCI001
+                        programme_name: Test Programme
+                      enrolment_date: 02.02.2024
+                      enrolment_status: Active
+                      status_change_date: ''
+                      benefits:
+                        benefit_type: Cash
+                        benefit_date: 02.05.2024
+                        benefit_value: USD 50
+                        benefit_frequency: Monthly
+      required:
+        - transaction_id
+        - receipt_information
+    ReceiptResponse:
+      type: object
+      description: Event notification information
+      properties:
+        transaction_id:
+          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
+        receipt_information:
+          type: object
+          description: |
+            Receipt information contains receipt type and list of beneficiaries
             1) Register - It indicates that beneficiary have registered into system.
             2) Deregister - If receipt is for a programme exit then programm information with suspended date to be recorded
           properties:
             receipt_type:
+              $ref: '#/components/schemas/ReceiptRequest/properties/receipt_information/properties/receipt_type'
               description: Receipt type 1) Register 2) Payment 3) Deregister
-              type: string
-              enum:
-                - REGISTER
-                - PAYMENT
-                - DEREGISTER
             beneficiaries:
               type: array
               description: |
@@ -907,11 +589,11 @@ components:
                   1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
                   3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
 
-                  @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
+                  @context: https://schema.spdci.org/extensions/social/v1/Person.jsonld <br>
                   @type: "@context" <br>
                 example:
                   '@context':
-                    '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
+                    '@vocab': 'https://schema.spdci.org/extensions/social/v1'
                     xsd: 'http://www.w3.org/2001/XMLSchema#'
                     schema: 'http://schema.org/'
                     rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
@@ -930,42 +612,76 @@ components:
                     second_name: ''
                     prefix: Dr.
                     suffix: PhD
-                  household_status: ''
-                  benefiting_entity: Person
-                  sex: female
                   birth_date: '1995-09-21T11:20:00'
-                  sub_region_code: ''
+                  sex: female
                   marital_status: M
-                  poverty_score: ''
                   is_disabled: 2
+                  disability_identifier:
+                    '@id': Identifier
+                    '@type': Identifier
+                    identifier_type: UIN
+                    identifier_value: '753869421'
+                  disability_type: ''
+                  functional_limitation_type: d132
+                  functional_severity: '0'
+                  nationality: 'ISO 3166-2:DZ'
+                  employment_status: '1'
+                  is_deceased: '2'
+                  death_date: ''
+                  ethnicity: ''
+                  address:
+                    '@id': Address_1
+                    '@type': Address
+                    address_line1: Bophut Koh Samui
+                    address_line2: 'Surat, Near Big Buddha Beach'
+                    locality: Thani
+                    sub_region_code: SH
+                    region_code: A205
+                    postal_code: '84320'
+                    country_code: TH
+                    geo_location:
+                      '@id': GeoLocation_1
+                      '@type': GeoLocation
+                      plus_code:
+                        global_code: 8FW4V900+
+                        geometry:
+                          '@id': geometry
+                          '@type': GeoLocation
+                          bounds:
+                            '@id': bounds
+                            '@type': geometry
+                            northeast:
+                              '@id': northeast
+                              '@type': GeoCoordinates
+                              latitude: 48.900000000000006
+                              longitude: 2.4000000000000057
+                            southwest:
+                              '@id': southwest
+                              '@type': GeoCoordinates
+                              latitude: 48.849999999999994
+                              longitude: 2.3499999999999943
+                          location:
+                            '@id': location
+                            '@type': GeoCoordinates
+                            latitude: 48.875
+                            longitude: 2.375
+                  phone_number: '+66891234567'
+                  email: sudarat.phumchai@example.com
                   household_identifier: ''
-                  programme_name: ''
-                  programme_identifier: ''
+                  household_status: '1'
+                  poverty_score: '2.5'
+                  parent1_identifier:
+                    '@id': Identifier
+                    '@type': Identifier
+                    identifier_type: UIN
+                    identifier_value: '753869421'
+                  parent2_identifier:
+                    '@id': Identifier
+                    '@type': Identifier
+                    identifier_type: UIN
+                    identifier_value: '852963741'
                   registration_date: '2022-09-21T11:20:00'
-                  enrolment_date: '2022-10-21T11:20:00'
-                  suspension_date: '2023-09-21T11:20:00'
-                  graduation_date: '2022-09-21T11:20:00'
-                  enrolment_status: '3'
-                  benefit_type: '2'
-                  benefit_date: ''
-                  benefit_value: ''
-                  payroll_date: ''
-                  payroll_amount: ''
-                  payment_credit_date: ''
-                  payment_credit_amount: ''
-                  payment_charges: ''
-                  payment_status: '1'
-      required:
-        - transaction_id
-        - receipt_information
-    ReceiptResponse:
-      type: object
-      description: Event notification information
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        receipt_information:
-          $ref: '#/components/schemas/ReceiptRequest/properties/receipt_information'
+                  last_updated: '2022-09-21T11:20:00'
       required:
         - transaction_id
         - receipt_information
@@ -1004,16 +720,12 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      The IBR receive data from SP system , it has to differenciate of details based on event type, Usually SP system sends Registration , payment and deregister events to IBR
+                      The SR receive data from SP system , it has to differenciate of details based on event type, Usually SP system sends Registration , payment and deregister events to IBR
 
                       1 : Register <br>
-                      2 : Payment <br>
-                      3 : Deregister <br> 
                       4 : spdci:common:RegistryEventType:NewHouseHoldMember
                     enum:
                       - REGISTER
-                      - PAYMENT
-                      - DEREGISTER
                       - NewHouseHoldMember
                   query_type:
                     type: string
@@ -1161,8 +873,8 @@ components:
                             **Notes:**
                               1. Attribute names defined as per implementation context.
                               2. Usually a list of **enum** values of all possible attribute names.
-                              3. e.g: UIN, YOB, DOB, age, mobile, area-code, pin-code, etc.,
-                          example: YOB
+                              3. e.g: UIN, poverty_score, etc.,
+                          example: poverty_score
                         sort_order:
                           type: string
                           enum:
@@ -1605,7 +1317,7 @@ components:
                 - $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
             locale:
               type: string
-              description: indicates language code. G2P Connect supports country codes as per ISO 639.3 standard
+              description: indicates language code. SPDCI Connect supports country codes as per ISO 639.3 standard
               pattern: '^[a-z]{3,3}$'
               example: en
           required:
@@ -1669,7 +1381,7 @@ components:
                     status_reason_code:
                       $ref: '#/components/schemas/SearchStatusReasonCode'
                     status_reason_message:
-                      description: Status reason code message. Helps actionanble messaging for systems/end users
+                      description: Status reason code message. Helps actionable messaging for systems/end users
                       type: string
                       maxLength: 999
                     data:
@@ -1682,8 +1394,8 @@ components:
                           default: 1.0.0
                         reg_records:
                           description: |
-                            The "Person" object contains fields expected in response of search
-                            @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
+                            The "Beneficiary" object contains fields expected in response of search
+                            @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
                             @type: "@context" <br>
                             @container: "@set" <br>
                           type: array
@@ -1932,7 +1644,7 @@ components:
       description: File info. Used in file upload feature using HTTPS
       properties:
         action:
-          description: G2P Connect specific actions. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
+          description: SPDCI Connect specific actions. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
           type: string
         fileName:
           description: Disbursement instruction file representing Disburse or OnDisburse end point elements i.e signature/header/message entities as a file record
@@ -1964,7 +1676,7 @@ components:
         message_ts:
           $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
         action:
-          description: G2P Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
+          description: SPDCI Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
           type: string
         status:
           $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
@@ -2025,7 +1737,7 @@ components:
           format: date-time
           example: ''
         action:
-          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
+          description: 'spdci Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
           type: string
         sender_id:
           description: |
@@ -2084,7 +1796,7 @@ components:
     MsgSignature:
       type: string
       description: 'Signature of {header}+{message} body verified using sender''s signing public key'
-      example: 'Signature:  namespace="g2p", kidId="{sender_id}|{unique_key_id}|{algorithm}", algorithm="ed25519", created="1606970629", expires="1607030629", headers="(created) (expires) digest", signature="Base64(signing content)'
+      example: 'Signature:  namespace="spdci", kidId="{sender_id}|{unique_key_id}|{algorithm}", algorithm="ed25519", created="1606970629", expires="1607030629", headers="(created) (expires) digest", signature="Base64(signing content)'
   responses:
     HttpErrorResponse:
       description: HTTP layer error details

@@ -15,17 +15,26 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
     
     Gitbook reference link[WIP]:
-    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.io)
+    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0)
 
     Code directory links:
-    - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
-    - [Marital Status](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.02-marital_status)
-    - [Sex](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.03-sex)
-    - [Vital event types](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.04-vital_event)   
+    - [Assistance Unit]()
+    - [Enrollement Status]()
+    - [Benefit Type]()
+    - [Institution Type]()   
+    - [Legal Status]()
+    - [Social Protection Functions]()
+    - [Contribution Type]()
+    - [Programme Type]()
 
     Data Objects:
-    - Person (WIP)
-    - HouseHold (WIP)
+    - Beneficiary
+    - Programme
+    - Benefit
+    - Benefit Frequency 
+    - HouseHold
+    - Family
+    - Member
 
 
     Each request is build up of three parts 
@@ -139,15 +148,10 @@ x-tagGroups:
     tags:
       - SearchRequest
       - SearchResponse
-      - SubscribeRequest 
-      - SubscribeResponse
       - ReceiptRequest
       - ReceiptResponse
       - TxnStatusRequest
       - TxnStatusResponse
-      - NotifyEventRequest
-      - UnSubscribeRequest
-      - UnSubscribeResponse 
       - EncryptedMessage
   - name: Status Codes
     tags: 
@@ -255,330 +259,6 @@ paths:
                   action:
                     enum:
                       - on-search
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
-
- /registry/subscribe:
-  post: 
-    summary: "/registry/subscribe"
-    description: |-
-      The /registry/subscribe end point tobe implemented by IBR to receive subscription request from SP-MIS.
-      The subscription request contain event type, frequency and query information, based on that resistry will send notification to subscriber.
-    operationId: post_reg_subscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - subscribe
-                message:
-                  type: object
-                  description: Subscription request which contaion query with frequency and other info on which notification to be sent by registry to subscriber, The IBR supports benefit_disbusrement,programme_exited events as of now
-                  oneOf:
-                    - $ref: "#/components/schemas/SubscribeRequest"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - subscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/on-subscribe:
-  post: 
-    summary: "/registry/on-subscribe"
-    description: |-
-      The /registry/on-subscribe request tobe implemented by SP-MIS to receive subscription response from IBR. 
-      The response with contain subscription code which to be used to unsubscribe the subscription or to track subscription details.
-    operationId: post_reg_on-subscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - on-subscribe
-                message:
-                  type: object
-                  description: Subscription information 
-                  oneOf:
-                    - $ref: "#/components/schemas/SubscribeResponse"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - on-subscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
-
- /registry/unsubscribe:
-  post: 
-    summary: "/registry/unsubscribe"
-    description: |-
-      The /registry/unsubscribe endpoint will be implemented by IBR, SP-MIS can send request to unsubscribe existing subscription(s) by subscription_code(s).
-    operationId: post_reg_unsubscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - unsubscribe
-                message:
-                  type: object
-                  description: The unsubscribe request that contain subscription ids which to be removed from subscription list 
-                  oneOf:
-                    - $ref: "#/components/schemas/UnSubscribeRequest"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - unsubscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/on-unsubscribe:
-  post: 
-    summary: "/registry/on-unsubscribe"
-    description: |-
-      The /registry/on-unsubscribe will be implemented by SP-MIS to receive unsubscribe response from IBR. It will contain status information of unsubscribe request.
-    operationId: post_reg_on-unsubscribe
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - on-unsubscribe
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: "#/components/schemas/UnSubscribeResponse"
-                    - $ref: "#/components/schemas/EncryptedMessage"
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - on-unsubscribe
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/notify:
-  post: 
-    summary: "/registry/notify"
-    description: |-
-      The /registry/notify end point will be implemented by SP-MIS to receive notification for subscribed event.
-      The notification will be sent based on subscription criteria.
-    operationId: post_reg_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/on-notify:
-  post: 
-    summary: "/registry/on-notify"
-    description: |-
-      The /registry/on-notify will be implemented by IBR to receive notification response from SP-MIS.
-    operationId: post_reg_on_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/ReceiptResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
     responses:
         default:
           $ref: "#/components/responses/Response"
@@ -771,17 +451,16 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/receipts:
+ /registry/receipt:
   post: 
-    summary: "/registry/receipts"
+    summary: "/registry/receipt"
     description: |-
-      The /registry/receipts endpoint will be implemented by IBR to receive receipt request from SP-MIS system.
-      The receipt_type and beneficiaries will be requied to make request. 
+      The /registry/enrollments/updates endpoint will be implemented by IBR to receive details of beneficiaries enrolled in programs  from SP-MIS system.
+      The receipt_type and beneficiaries will be required to make request. 
       Three receipt types are supported as of now, they are 
-        1) Register 
-        2) Payment 
-        3) Deregister
-      The beneficiaries will contain list of person information for which receipt to be generated.
+        1) Enrolled beneficiaries 
+        2) Updated beneficiaries details
+      The beneficiaries will contain list of beneficiaries information for which enrollments updated to be generated.
     operationId: post_reg_receipts
     tags: 
       -  Sync
@@ -883,59 +562,6 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/sync/notify:
-  post: 
-    summary: "/registry/sync/notify"
-    description: |-
-      The /registry/sync/notify end point will be implemented by SP-MIS to receive notification for subscribed event.
-      The notification will be sent based on subscription criteria.
-    operationId: post_reg_sync_notify
-    tags: 
-      -  Sync
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
  /registry/sync/txn/status:
   post: 
     summary: "/registry/sync/txn/status"
@@ -1016,26 +642,12 @@ components:
       $ref: ibr/SearchResponse.yaml
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
-    SubscribeRequest: 
-      $ref: ibr/SubscribeRequest.yaml
-    SubscribeResponse: 
-      $ref: ibr/SubscribeResponse.yaml
-    SubscribeStatusReasonCode: 
-      $ref: schema/SubscribeStatusReasonCode.yaml
     TxnStatusRequest: 
       $ref: ibr/TxnStatusRequest.yaml            
     TxnStatusResponse: 
       $ref: ibr/TxnStatusResponse.yaml  
     EnrolledRequest:
       $ref: ibr/EnrolledRequest.yaml
-    UnSubscribeRequest: 
-      $ref: schema/UnSubscribeRequest.yaml
-    UnSubscribeResponse: 
-      $ref: schema/UnSubscribeResponse.yaml
-    UnSubscribeStatusReasonCode: 
-      $ref: schema/UnSubscribeStatusReasonCode.yaml           
-    NotifyEventRequest: 
-      $ref: schema/NotifyEventRequest.yaml    
     EncryptedMessage: 
       $ref: ../common/schema/EncryptedMessage.yaml
     Error: 

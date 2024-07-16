@@ -1572,12 +1572,18 @@ components:
                     $ref: '#/components/schemas/RegistryType'
                   reg_event_type:
                     $ref: '#/components/schemas/RegistryEventType'
-                  reg_record_type:
-                    $ref: '#/components/schemas/RegistryRecordType'
+                  response_entity:
+                    type: enum
+                    description: |
+                      Define the type of response to have when executing the search
+                    enum:
+                      - Household
+                      - Family
+                      - Member
                   reg_records:
                     $ref: '#/components/schemas/RegistryRecord'
                 required:
-                  - reg_record_type
+                  - response_entity
                   - reg_records
               locale:
                 $ref: '#/components/schemas/LanguageCode'
@@ -1597,17 +1603,83 @@ components:
         **Notes:**
           1. Registry event type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. example: "spdci-common:RegistryEventType:LiveBirth"
-      example: 'spdci-common:RegistryEventType:LiveBirth'
+          3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
+      example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
     RegistryRecord:
       type: object
       description: |
-        The "Person" object contains fields expected in response of search
+        The "Household" object contains fields expected in response of search
         @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
-        @type: "Person" <br>
+        @type: "Household" <br>
         @container: "@set" <br> 
       example:
-        $ref: '#/components/schemas/dci_Person'
+        type: object
+        description: |
+          1. Attributes of a household to create fetch records, create verifiable credentials or use in search criteria.
+          3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+          @context: https://schema.spdci.org/extensions/social/v1/Household.jsonld <br>
+          @type: "@context" <br>
+        example:
+          '@context':
+            '@vocab': 'https://schema.spdci.org/extensions/social/v1'
+            xsd: 'http://www.w3.org/2001/XMLSchema#'
+            schema: 'http://schema.org/'
+            rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+            owl: 'http://www.w3.org/2002/07/owl#'
+          '@id': Household
+          '@type': Household
+          household_identifier: HS02052024
+          address:
+            geo_location: ''
+          poverty_score: '4.0'
+          poverty_score_type: ''
+          household_size: '1'
+          household_head_info:
+            person:
+              identifier_type: NID
+              identifier_value: '0205202401'
+              name:
+                first_name: Test
+                second_name: Test2
+                surname: Test3
+              sex: F
+              birth_date: 02.05.2004
+              death_date: ' '
+              address: ' '
+              phone_number: ''
+              email: ' '
+          member_list:
+            - household_member:
+                member_identifier: HS0205202401
+                demographic_info:
+                  person:
+                    identifier_type: NID
+                    identifier_value: '0205202401'
+                    name:
+                      first_name: Test
+                      second_name: Test2
+                      surname: Test3
+                    sex: F
+                    birth_date: 02.05.2004
+                    death_date: ' '
+                    address: {}
+                    phone_number: ''
+                    email: ' '
+                relationship_head: self
+                related_person: {}
+                is_disabled: '0'
+                disability_info: ' '
+                marital_status: Single
+                employment_status: employed
+                occupation: Caregiver
+                income_level: ' '
+                language_code: Eng
+                education_level: Highschool
+                registration_date: 02.05.2024
+          additional_attributes: []
+          registration_date: 02.05.2024
+          last_update: ' '
     RegistryRecordType:
       type: string
       description: |
@@ -1629,8 +1701,8 @@ components:
         **Notes:**
           1. Registry type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable functional registries 
-          3. example: "ns:org:RegistryType:Civil"
-      example: 'ns:org:RegistryType:Civil'
+          3. example: "ns:org:RegistryType:Social"
+      example: 'ns:org:RegistryType:Social'
     SearchRequest:
       type: object
       description: |
@@ -2295,12 +2367,12 @@ components:
           type: string
           description: |
             @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
-            @type: "Queryype" <br>
+            @type: "QueryType" <br>
 
             **Notes:**
               1. Query types that helps decode query expressions
               2. Sample query type enums: "GraphQl", "Sql", "NoSql"
-          example: 'ns:org:QueryType:GraphQl'
+          example: 'ns:org:QueryType:NoSql'
         value:
           type: object
           description: |
@@ -2311,7 +2383,16 @@ components:
               1. Query expression's syntax / format is determined based on query-type.
               2. Query expression as a template with placeholder to pass conditional search parameters
           example:
-            expression: ' query GeBirthRecordById: { person: (UIN: "1") { BRN, name, gender, birthDate, birthPlace, parents } }'
+            expression:
+              collection: HouseHold
+              query:
+                $and:
+                  - poverty_score:
+                      $lt: 5
+                  - location:
+                      $eq: central_region
+                  - household_size:
+                      $lt: 5
     FileInfo:
       type: object
       description: File info. Used in file upload feature using HTTPS
@@ -2461,7 +2542,7 @@ components:
         message_ts:
           $ref: '#/components/schemas/DateTime'
         action:
-          description: 'G2P Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
+          description: 'spdci Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.'
           type: string
         sender_id:
           description: |
@@ -2512,7 +2593,7 @@ components:
     MsgSignature:
       type: string
       description: 'Signature of {header}+{message} body verified using sender''s signing public key'
-      example: 'Signature:  namespace="g2p", kidId="{sender_id}|{unique_key_id}|{algorithm}", algorithm="ed25519", created="1606970629", expires="1607030629", headers="(created) (expires) digest", signature="Base64(signing content)'
+      example: 'Signature:  namespace="spdci", kidId="{sender_id}|{unique_key_id}|{algorithm}", algorithm="ed25519", created="1606970629", expires="1607030629", headers="(created) (expires) digest", signature="Base64(signing content)'
     Pagination:
       description: 'Pagination definition, count starts with 1'
       type: object
@@ -2557,7 +2638,7 @@ components:
         - idtype-value
         - expression
         - predicate
-      example: idtype-value
+      example: expression
     ReferenceId:
       type: string
       description: Unique reference_id set by txn initiating system for each request in a batch
@@ -2587,8 +2668,8 @@ components:
             **Notes:**
               1. Attribute names defined as per implementation context.
               2. Usually a list of **enum** values of all possible attribute names.
-              3. e.g: UIN, YOB, DOB, age, mobile, area-code, pin-code, etc.,
-          example: YOB
+              3. e.g: UIN, poverty_score, etc.,
+          example: poverty_score
         sort_order:
           type: string
           enum:
