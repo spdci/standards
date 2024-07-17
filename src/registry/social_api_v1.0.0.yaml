@@ -15,7 +15,7 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
 
     Gitbook reference link :
-    - [Scoial Registry - V1.0 ](https://standards.spdci.org/standards/v/social-v1.0-1/social/1.-social)
+    - [Social Registry - V1.0 ](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/introduction)
 
     Code directory links:
     - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
@@ -31,13 +31,14 @@ info:
     - [Employment Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.02-employment_status)
     - [Income Level](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.03-income_level)
     - [Occupation](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.04-occupation)
+    
     Data Objects:
-    - Person 
-    - HouseHold 
-    - Family
-    - Member
-    - RelatedPerson
-    - DisabilityInfo
+    - [Person](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.01-person)
+    - [HouseHold](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household) 
+    - [Family](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.03-family)
+    - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
+    - [RelatedPerson](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.05-relatedperson)
+    - [DisabilityInfo](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.06-disabilityinfo)
 
     Each request is build up of three parts 
     - signature 

@@ -11,30 +11,30 @@ info:
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
     1. Search: The Search API provides functionality to search based on demographic, identifiers and custom query
-    2. Event subscription: The Event subscription APIs describe APIs useful to subscribe / unsubscribe events. When any event happens in crvs registry it sends event details on notify end point
-    3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
-    
+    2. Enrollment updates: The enrollment updates API send  details of beneficiaries enrolled in programs  from SP-MIS system
+    3. Enrolled : the enrolled API is a special type of search to return the programs a beneficiary is enrolled in
+   
     Gitbook reference link[WIP]:
-    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0)
+    - [Integrated Beneficiary Registry - V1.0 ](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/introduction)
 
     Code directory links:
-    - [Assistance Unit]()
-    - [Enrollement Status]()
-    - [Benefit Type]()
-    - [Institution Type]()   
-    - [Legal Status]()
-    - [Social Protection Functions]()
-    - [Contribution Type]()
-    - [Programme Type]()
+    - [Assistance Unit](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.01-assistance_unit)
+    - [Enrollment Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.02-enrolment_status)
+    - [Benefit Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.03-benefit_type)
+    - [Institution Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.04-institution_type)   
+    - [Legal Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.05-legal_status)
+    - [Social Protection Functions](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.06-social_protection_functions)
+    - [Contribution Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.07-contribution_type)
+    - [Programme Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.08-programme_type)
 
     Data Objects:
-    - Beneficiary
-    - Programme
-    - Benefit
-    - Benefit Frequency 
-    - HouseHold
-    - Family
-    - Member
+    - [Beneficiary](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.01-beneficiary)
+    - [Programme](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.02-programme)
+    - [Benefit](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.03-benefit)
+    - [Benefit Frequency](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.o4-benefit-frequency) 
+    - [HouseHold](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household)
+    - [Family](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.03-family)
+    - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
 
 
     Each request is build up of three parts 
@@ -55,7 +55,7 @@ info:
     **Message:**
 
     - The message contains the actual payload of the message.
-    - Refere example section to get sample data and also read Gitbook for details data objects
+    - Refer example section to get sample data and also read Gitbook for details data objects
     - The receiver can decrypt the message using the private key of the "err.receiver_id.invalid"
 
   version: 1.0.0
@@ -89,35 +89,7 @@ tags:
   - name: SearchStatusReasonCode
     x-displayName: SearchStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
-  - name: SubscribeRequest
-    x-displayName: SubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeRequest" />    
-  - name: SubscribeResponse
-    x-displayName: SubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeResponse" />    
-  - name: SubscribeStatusReasonCode
-    x-displayName: SubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SubscribeStatusReasonCode" />        
-  - name: NotifyEventRequest
-    x-displayName: NotifyEventRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/NotifyEventRequest" />    
-  - name: UnSubscribeRequest
-    x-displayName: UnSubscribeRequest
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeRequest" />    
-  - name: UnSubscribeResponse
-    x-displayName: UnSubscribeResponse
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeResponse" />  
-  - name: UnSubscribeStatusReasonCode
-    x-displayName: UnSubscribeStatusReasonCode
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/UnSubscribeStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />          
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -126,14 +98,22 @@ tags:
     x-displayName: TxnStatusResponse
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/TxnStatusResponse" />    
-  - name: ReceiptRequest
-    x-displayName: ReceiptRequest
+  - name: EnrollmentUpdatesRequest
+    x-displayName: EnrollmentUpdatesRequest
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptRequest" />    
-  - name: ReceiptResponse
-    x-displayName: ReceiptResponse
+      <SchemaDefinition schemaRef="#/components/schemas/EnrollmentUpdatesRequest" />    
+  - name: EnrollmentUpdatesResponse
+    x-displayName: EnrollmentUpdatesResponse
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ReceiptResponse" />    
+      <SchemaDefinition schemaRef="#/components/schemas/EnrollmentUpdatesResponse" />    
+  - name: EnrolledRequest
+    x-displayName: EnrolledRequest
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/EnrolledRequest" />    
+  - name: EnrolledResponse
+    x-displayName: EnrolledResponse
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/EnrolledResponse" />    
   - name: EncryptedMessage
     x-displayName: EncryptedMessage
     description: |
@@ -148,8 +128,10 @@ x-tagGroups:
     tags:
       - SearchRequest
       - SearchResponse
-      - ReceiptRequest
-      - ReceiptResponse
+      - EnrollmentUpdatesRequest
+      - EnrollmentUpdatesResponse
+      - EnrolledRequest
+      - EnrolledResponse
       - TxnStatusRequest
       - TxnStatusResponse
       - EncryptedMessage
@@ -449,11 +431,11 @@ paths:
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
     security:
-      - Authorization: [ ]
+      - Authorization: [ ]    
     deprecated: false
- /registry/receipt:
+ /registry/sync/enrollment/updates:
   post: 
-    summary: "/registry/receipt"
+    summary: "/registry/sync/enrollment/updates"
     description: |-
       The /registry/enrollments/updates endpoint will be implemented by IBR to receive details of beneficiaries enrolled in programs  from SP-MIS system.
       The receipt_type and beneficiaries will be required to make request. 
@@ -461,7 +443,7 @@ paths:
         1) Enrolled beneficiaries 
         2) Updated beneficiaries details
       The beneficiaries will contain list of beneficiaries information for which enrollments updated to be generated.
-    operationId: post_reg_receipts
+    operationId: post_reg_enrollments_updates
     tags: 
       -  Sync
     requestBody:
@@ -484,7 +466,7 @@ paths:
                 message:
                   type: object
                   oneOf:
-                    - $ref: '#/components/schemas/ReceiptRequest'
+                    - $ref: '#/components/schemas/EnrollmentUpdatesRequest'
                     - $ref: '#/components/schemas/EncryptedMessage'
               required:
                 - header
@@ -498,7 +480,7 @@ paths:
                       - notify
     responses:
         default:
-          $ref: "#/components/responses/Response"
+          $ref: "#/components/schemas/EnrollmentUpdatesResponse"
         '401':
           $ref: "#/components/responses/HttpErrorResponse"
         '403':
@@ -508,9 +490,9 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/enrolled:
+ /registry/sync/enrolled:
   post: 
-    summary: "/registry/enrolled"
+    summary: "/registry/sync/enrolled"
     description: |- 
       search programmes person is enrolled in
     operationId: post_reg_enrolled
@@ -552,15 +534,13 @@ paths:
                       - search
     responses:
         default:
-          $ref: "#/components/responses/Response"
+          $ref: "#/components/schemas/EnrolledResponse"
         '401':
           $ref: "#/components/responses/HttpErrorResponse"
         '403':
           $ref: "#/components/responses/HttpErrorResponse"
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
     deprecated: false
  /registry/sync/txn/status:
   post: 
@@ -625,17 +605,15 @@ paths:
           $ref: "#/components/responses/HttpErrorResponse"
         '500':
           $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
     deprecated: false
 
  
 components:
   schemas: 
-    ReceiptRequest: 
-      $ref: ibr/ReceiptRequest.yaml
-    ReceiptResponse: 
-      $ref: ibr/ReceiptResponse.yaml
+    EnrollmentUpdatesRequest: 
+      $ref: ibr/EnrollmentUpdatesRequest.yaml
+    EnrollmentUpdatesResponse: 
+      $ref: ibr/EnrollmentUpdatesResponse.yaml
     SearchRequest: 
       $ref: ibr/SearchRequest.yaml
     SearchResponse: 
@@ -648,6 +626,8 @@ components:
       $ref: ibr/TxnStatusResponse.yaml  
     EnrolledRequest:
       $ref: ibr/EnrolledRequest.yaml
+    EnrolledResponse:
+      $ref: ibr/EnrolledResponse.yaml
     EncryptedMessage: 
       $ref: ../common/schema/EncryptedMessage.yaml
     Error: 
@@ -668,6 +648,6 @@ components:
       $ref: ../common/response/HttpErrorResponse.yaml       
     Response:
       $ref: ../common/response/Response.yaml    
-  securitySchemes:
+  securitySchemas:
     Authorization:
       $ref: ../common/security/Authorization.yaml

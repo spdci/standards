@@ -1,4 +1,4 @@
-type: enum
+type: string
 description: |
   Define the type of response to have when executing the search
 enum:

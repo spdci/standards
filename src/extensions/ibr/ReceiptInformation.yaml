@@ -4,9 +4,6 @@ description: |
   1) Enrolled beneficiaries - It return the beneficiaries enrolled  into system.
   2) Updated beneficiaries - If return updated status
 properties:
-  receipt_type:
-    $ref: ../../registry/ibr/RegistryEventType.yaml
-    description: "Receipt type 1) Enrollments  2) Updates"
   beneficiaries: 
     type: array
     description: | 
