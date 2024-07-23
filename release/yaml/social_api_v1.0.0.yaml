@@ -15,7 +15,7 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
 
     Gitbook reference link :
-    - [Scoial Registry - V1.0 ](https://standards.spdci.org/standards/v/social-v1.0-1/social/1.-social)
+    - [Social Registry - V1.0 ](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/introduction)
 
     Code directory links:
     - [Identifiers](https://standards.spdci.org/standards/standards-for-interoperability-interfaces/common-standards-for-interoperability-interfaces/data/code-directory/cd.com.01-identifier_type)
@@ -31,13 +31,14 @@ info:
     - [Employment Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.02-employment_status)
     - [Income Level](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.03-income_level)
     - [Occupation](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/code-directory/cd.sr.04-occupation)
+
     Data Objects:
-    - Person 
-    - HouseHold 
-    - Family
-    - Member
-    - RelatedPerson
-    - DisabilityInfo
+    - [Person](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.01-person)
+    - [HouseHold](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household) 
+    - [Family](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.03-family)
+    - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
+    - [RelatedPerson](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.05-relatedperson)
+    - [DisabilityInfo](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.06-disabilityinfo)
 
     Each request is build up of three parts 
     - signature 
@@ -88,7 +89,7 @@ tags:
   - name: SearchStatusReasonCode
     x-displayName: SearchStatusReasonCode
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />        
+      <SchemaDefinition schemaRef="#/components/schemas/SearchStatusReasonCode" />               
   - name: TxnStatusRequest
     x-displayName: TxnStatusRequest
     description: |
@@ -472,219 +473,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    ReceiptRequest:
-      type: object
-      description: Registry to notify a event to subscrbiers
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        receipt_information:
-          type: object
-          description: |
-            Receipt information contains receipt type and list of beneficiaries
-            1) Enrolled beneficiaries - It return the beneficiaries enrolled  into system.
-            2) Updated beneficiaries - If return updated status
-          properties:
-            receipt_type:
-              description: Receipt type 1) Enrollments  2) Updates
-              type: string
-              enum:
-                - enrollement
-                - enrollement_status_change
-            beneficiaries:
-              type: array
-              description: |
-                1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                2. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-                @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
-                @type: "@context" <br>   
-              items:
-                type: object
-                description: |
-                  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                  3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-
-                  @context: https://schema.spdci.org/extensions/ibr/v1/Beneficairy.jsonld <br>
-                  @type: "@context" <br>
-                example:
-                  '@context':
-                    '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
-                    xsd: 'http://www.w3.org/2001/XMLSchema#'
-                    schema: 'http://schema.org/'
-                    rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-                    owl: 'http://www.w3.org/2002/07/owl#'
-                  '@id': Beneficiary
-                  '@type': Beneficiary
-                  assistance_unit: '1'
-                  member:
-                    member_identifier: HS0205202401
-                    demographic_info:
-                      person:
-                        identifier_type: NID
-                        identifier_value: '0205202401'
-                        name:
-                          first_name: Test
-                          second_name: Test2
-                          surname: Test3
-                        sex: F
-                        birth_date: 02.05.2004
-                        death_date: ''
-                        address: ''
-                        phone_number: ''
-                        email: ''
-                    relationship_head: ''
-                    related_person: ''
-                    is_disabled: '0'
-                    disability_info: ''
-                    marital_status: Single
-                    employment_status: employed
-                    occupation: Caregiver
-                    income_level: ''
-                    language_code: Eng
-                    education_level: Highschool
-                    additional_attributes: ''
-                    registration_date: 02.05.2024
-                    last_update: ''
-                    programme_identifier:
-                      programme:
-                        programme_identifier: DCI001
-                        programme_name: Test Programme
-                      enrolment_date: 02.02.2024
-                      enrolment_status: Active
-                      status_change_date: ''
-                      benefits:
-                        benefit_type: Cash
-                        benefit_date: 02.05.2024
-                        benefit_value: USD 50
-                        benefit_frequency: Monthly
-      required:
-        - transaction_id
-        - receipt_information
-    ReceiptResponse:
-      type: object
-      description: Event notification information
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        receipt_information:
-          type: object
-          description: |
-            Receipt information contains receipt type and list of beneficiaries
-            1) Register - It indicates that beneficiary have registered into system.
-            2) Deregister - If receipt is for a programme exit then programm information with suspended date to be recorded
-          properties:
-            receipt_type:
-              $ref: '#/components/schemas/ReceiptRequest/properties/receipt_information/properties/receipt_type'
-              description: Receipt type 1) Register 2) Payment 3) Deregister
-            beneficiaries:
-              type: array
-              description: |
-                1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                2. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-                @context: https://schema.spdci.org/extensions/ibr/v1/Person.jsonld <br>
-                @type: "@context" <br>   
-              items:
-                type: object
-                description: |
-                  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
-                  3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-
-                  @context: https://schema.spdci.org/extensions/social/v1/Person.jsonld <br>
-                  @type: "@context" <br>
-                example:
-                  '@context':
-                    '@vocab': 'https://schema.spdci.org/extensions/social/v1'
-                    xsd: 'http://www.w3.org/2001/XMLSchema#'
-                    schema: 'http://schema.org/'
-                    rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-                    owl: 'http://www.w3.org/2002/07/owl#'
-                  '@id': Person
-                  '@type': Person
-                  identifier:
-                    '@id': Identifier
-                    '@type': Identifier
-                    identifier_type: UIN
-                    identifier_value: '847951632'
-                  name:
-                    '@type': Name
-                    surname: Phumchai
-                    given_name: Sudarat
-                    second_name: ''
-                    prefix: Dr.
-                    suffix: PhD
-                  birth_date: '1995-09-21T11:20:00'
-                  sex: female
-                  marital_status: M
-                  is_disabled: 2
-                  disability_identifier:
-                    '@id': Identifier
-                    '@type': Identifier
-                    identifier_type: UIN
-                    identifier_value: '753869421'
-                  disability_type: ''
-                  functional_limitation_type: d132
-                  functional_severity: '0'
-                  nationality: 'ISO 3166-2:DZ'
-                  employment_status: '1'
-                  is_deceased: '2'
-                  death_date: ''
-                  ethnicity: ''
-                  address:
-                    '@id': Address_1
-                    '@type': Address
-                    address_line1: Bophut Koh Samui
-                    address_line2: 'Surat, Near Big Buddha Beach'
-                    locality: Thani
-                    sub_region_code: SH
-                    region_code: A205
-                    postal_code: '84320'
-                    country_code: TH
-                    geo_location:
-                      '@id': GeoLocation_1
-                      '@type': GeoLocation
-                      plus_code:
-                        global_code: 8FW4V900+
-                        geometry:
-                          '@id': geometry
-                          '@type': GeoLocation
-                          bounds:
-                            '@id': bounds
-                            '@type': geometry
-                            northeast:
-                              '@id': northeast
-                              '@type': GeoCoordinates
-                              latitude: 48.900000000000006
-                              longitude: 2.4000000000000057
-                            southwest:
-                              '@id': southwest
-                              '@type': GeoCoordinates
-                              latitude: 48.849999999999994
-                              longitude: 2.3499999999999943
-                          location:
-                            '@id': location
-                            '@type': GeoCoordinates
-                            latitude: 48.875
-                            longitude: 2.375
-                  phone_number: '+66891234567'
-                  email: sudarat.phumchai@example.com
-                  household_identifier: ''
-                  household_status: '1'
-                  poverty_score: '2.5'
-                  parent1_identifier:
-                    '@id': Identifier
-                    '@type': Identifier
-                    identifier_type: UIN
-                    identifier_value: '753869421'
-                  parent2_identifier:
-                    '@id': Identifier
-                    '@type': Identifier
-                    identifier_type: UIN
-                    identifier_value: '852963741'
-                  registration_date: '2022-09-21T11:20:00'
-                  last_updated: '2022-09-21T11:20:00'
-      required:
-        - transaction_id
-        - receipt_information
     SearchRequest:
       type: object
       description: |
@@ -738,7 +526,13 @@ components:
                       - predicate
                     example: expression
                   response_entity:
-                    $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/response_entity'
+                    type: string
+                    description: |
+                      Define the type of response to have when executing the search
+                    enum:
+                      - Household
+                      - Family
+                      - Member
                   query:
                     description: |
                       1. Implementing systems can define schemas.
@@ -970,7 +764,7 @@ components:
               timestamp:
                 $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
               status:
-                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+                $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0/properties/status'
               status_reason_code:
                 $ref: '#/components/schemas/SearchStatusReasonCode'
               status_reason_message:
@@ -1104,184 +898,6 @@ components:
         - rjct.sort.invalid
         - rjct.pagination.invalid
         - rjct.search.too_many_records_found
-    SubscribeRequest:
-      type: object
-      description: Subscribe to a life event with crvs
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        subscribe_request:
-          type: array
-          items:
-            type: object
-            properties:
-              reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
-              timestamp:
-                $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-              subscribe_criteria:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_type:
-                    type: string
-                    description: |
-                      @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
-                      @type: "RegistryType" <br>
-
-                      **Notes:**
-                        1. Registry type values defined as per implementation context.
-                        2. Usually a list of **enum** values of all possible queryable functional registries 
-                        3. example: "ns:org:RegistryType:Social"
-                    example: 'ns:org:RegistryType:Social'
-                  reg_event_type:
-                    $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/reg_event_type'
-                  frequency:
-                    type: object
-                    description: |
-                      1. Frequency at which subscribed services should be notified. 
-                      2. start_time, end_time represent data range where the notification frequency is applicable 
-                    properties:
-                      start_time:
-                        $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                      end_time:
-                        $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                      frequency:
-                        type: string
-                        description: |
-                          Frequency at which notification is required. This will be in the form of cron expression. 
-                          Example - "0 0 0 5,15 * ? *" 
-                          which says At 00:00:00am, on the 5th and 15th day, every month
-                    required:
-                      - start_time
-                      - end_time
-                      - frequency
-                  filter_type:
-                    $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query_type'
-                  filter:
-                    $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query'
-                  response_entity:
-                    $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/response_entity'
-                  response_fields:
-                    type: array
-                    items:
-                      type: string
-                      description: Field from the response entity
-                    examples:
-                      - Household.household_size
-                      - Household.member_list
-                    description: Array of fields from the response entity
-                  authorize:
-                    $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/authorize'
-                required:
-                  - reg_event_type
-                  - filter
-                  - notify_record_type
-              locale:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
-            required:
-              - reference_id
-              - timestamp
-              - subscribe_criteria
-      required:
-        - transaction_id
-        - subscribe_request
-    SubscribeResponse:
-      type: object
-      description: Response to subscribe request.
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        correlation_id:
-          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-        subscribe_response:
-          type: array
-          items:
-            type: object
-            properties:
-              reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
-              timestamp:
-                $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-              status:
-                $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
-              status_reason_code:
-                $ref: '#/components/schemas/SubscribeStatusReasonCode'
-              status_reason_message:
-                description: Status reason code message. Helps actionanble messaging for systems/end users
-                type: string
-                maxLength: 999
-              subscriptions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    version:
-                      type: string
-                      default: 1.0.0
-                    code:
-                      $ref: '#/components/schemas/UnSubscribeRequest/properties/subscription_codes/items'
-                    status:
-                      $ref: '#/components/schemas/UnSubscribeResponse/properties/subscription_status/items/properties/status'
-                    timestamp:
-                      $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-                    reg_type:
-                      $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_type'
-                    reg_event_type:
-                      $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/reg_event_type'
-                    frequency:
-                      $ref: '#/components/schemas/SubscribeRequest/properties/subscribe_request/items/properties/subscribe_criteria/properties/frequency'
-                    filter_type:
-                      $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query_type'
-                    filter:
-                      $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query'
-                    notify_record_type:
-                      required:
-                        - reg_event_type
-                        - filter
-                        - notify_record_type
-                      type: string
-                      description: |
-                        @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
-                        @type: "RegistryRecordType" <br>
-
-                        **Notes:**
-                          1. Registry record type values defined as per implementation context.
-                          2. Usually a list of **enum** values of all possible queryable result sets 
-                          3. Referenced in search_request and notify events
-                          4. example: "spdci-extensions-dci:Person" 
-                      example: 'spdci-extensions-dci:Person'
-                    locale:
-                      $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
-                  required:
-                    - subscription_code
-                    - timestamp
-                    - subscribe_criteria
-              pagination:
-                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
-              locale:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
-            required:
-              - reference_id
-              - timestamp
-              - status
-      required:
-        - transaction_id
-        - correlation_id
-        - subscribe_response
-    SubscribeStatusReasonCode:
-      type: string
-      description: Identity verification request status reason codes
-      enum:
-        - rjct.reference_id.invalid
-        - rjct.reference_id.duplicate
-        - rjct.timestamp.invalid
-        - rjct.notify_types.invalid
-        - rjct.notify_details.invalid
-        - rjct.person_id.invalid
-        - rjct.event.already_subscribed
     TxnStatusRequest:
       type: object
       description: Request to fetch txn status on various service requests
@@ -1355,7 +971,21 @@ components:
                     transaction_id:
                       $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
                     receipt_information:
-                      $ref: '#/components/schemas/ReceiptRequest/properties/receipt_information'
+                      type: object
+                      description: |
+                        Receipt information contains receipt type and list of beneficiaries
+                        1) Enrolled beneficiaries - It return the beneficiaries enrolled  into system.
+                        2) Updated beneficiaries - If return updated status
+                      properties:
+                        beneficiaries:
+                          type: array
+                          description: |
+                            1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                            2. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+                            @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
+                            @type: "@context" <br>   
+                          items:
+                            $ref: '#/paths/~1registry~1txn~1on-status/post/requestBody/content/application~1json/schema/properties/message/oneOf/0/properties/txnstatus_response/example/properties/search_response/items/properties/data/properties/reg_records/items'
                   required:
                     - transaction_id
                     - receipt_information
@@ -1377,7 +1007,7 @@ components:
                     timestamp:
                       $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
                     status:
-                      $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+                      $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0/properties/status'
                     status_reason_code:
                       $ref: '#/components/schemas/SearchStatusReasonCode'
                     status_reason_message:
@@ -1400,7 +1030,64 @@ components:
                             @container: "@set" <br>
                           type: array
                           items:
-                            $ref: '#/components/schemas/ReceiptRequest/properties/receipt_information/properties/beneficiaries/items'
+                            type: object
+                            description: |
+                              1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+                              3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
+
+                              @context: https://schema.spdci.org/extensions/ibr/v1/Beneficairy.jsonld <br>
+                              @type: "@context" <br>
+                            example:
+                              '@context':
+                                '@vocab': 'https://schema.spdci.org/extensions/ibr/v1'
+                                xsd: 'http://www.w3.org/2001/XMLSchema#'
+                                schema: 'http://schema.org/'
+                                rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                                owl: 'http://www.w3.org/2002/07/owl#'
+                              '@id': Beneficiary
+                              '@type': Beneficiary
+                              assistance_unit: '1'
+                              member:
+                                member_identifier: HS0205202401
+                                demographic_info:
+                                  person:
+                                    identifier_type: NID
+                                    identifier_value: '0205202401'
+                                    name:
+                                      first_name: Test
+                                      second_name: Test2
+                                      surname: Test3
+                                    sex: F
+                                    birth_date: 02.05.2004
+                                    death_date: ''
+                                    address: ''
+                                    phone_number: ''
+                                    email: ''
+                                relationship_head: ''
+                                related_person: ''
+                                is_disabled: '0'
+                                disability_info: ''
+                                marital_status: Single
+                                employment_status: employed
+                                occupation: Caregiver
+                                income_level: ''
+                                language_code: Eng
+                                education_level: Highschool
+                                additional_attributes: ''
+                                registration_date: 02.05.2024
+                                last_update: ''
+                                programme_identifier:
+                                  programme:
+                                    programme_identifier: DCI001
+                                    programme_name: Test Programme
+                                  enrolment_date: 02.02.2024
+                                  enrolment_status: Active
+                                  status_change_date: ''
+                                  benefits:
+                                    benefit_type: Cash
+                                    benefit_date: 02.05.2024
+                                    benefit_value: USD 50
+                                    benefit_frequency: Monthly
                       required:
                         - reg_records
                     pagination:
@@ -1422,155 +1109,6 @@ components:
         - transaction_id
         - correlation_id
         - txnstatus_response
-    UnSubscribeRequest:
-      type: object
-      description: Un-Subscribe to registred subscriptions
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        timesstamp:
-          $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-        subscription_codes:
-          type: array
-          items:
-            type: string
-            description: |
-              Unique code to identify the subscription request by the entity providing subscription service.
-              Helps to check status, unsubscribe etc.,
-            maxLength: 99
-      required:
-        - transaction_id
-        - timestamp
-        - sunscription_codes
-    UnSubscribeResponse:
-      type: object
-      description: Un-Subscribe to a life event with crvs
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        correlation_id:
-          $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-        timesatmp:
-          $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-        status:
-          type: string
-          description: 'Request (e.g disburse, link, unlink, resolve, issue, search, verify, etc.,) status: <br> 1. rcvd: Received; Request received <br> 2. pdng: Pending; Request initiated <br> 3. succ: Success; Request successful <br> 4. rjct: Rejected; Request rejected'
-          enum:
-            - rcvd
-            - pdng
-            - succ
-            - rjct
-        status_reason_code:
-          $ref: '#/components/schemas/UnSubscribeStatusReasonCode'
-        status_reason_message:
-          description: Status reason code message. Helps actionanble messaging for systems/end users
-          type: string
-          maxLength: 999
-        subscription_status:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                $ref: '#/components/schemas/UnSubscribeRequest/properties/subscription_codes/items'
-              status:
-                type: string
-                description: subscription status
-                enum:
-                  - subscribe
-                  - unsubscribe
-            required:
-              - code
-              - status
-      required:
-        - transaction_id
-        - correlation_id
-        - timestamp
-        - status
-    UnSubscribeStatusReasonCode:
-      type: string
-      description: Identity verification request status reason codes
-      enum:
-        - rjct.reference_id.invalid
-        - rjct.reference_id.duplicate
-        - rjct.timestamp.invalid
-        - rjct.subscription_code.invalid
-        - rjct.requester.invalid
-        - rjct.event.already_unsubscribed
-    NotifyEventRequest:
-      type: object
-      description: Registry to notify a event to subscrbiers
-      properties:
-        transaction_id:
-          $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        notify_event:
-          type: array
-          items:
-            type: object
-            properties:
-              reference_id:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/reference_id'
-              timestamp:
-                $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
-              data:
-                type: object
-                description: |
-                  Registry data being notified as an outcome of event subscription with registry
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_type:
-                    type: string
-                    description: |
-                      @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
-                      @type: "@context" <br>
-
-                      **Notes:**
-                        1. Registry type values defined as per implementation context.
-                        2. Usually a list of **enum** values of all possible queryable functional registries 
-                        3. example: "ns:org:RegistryType:Social"
-                    example: 'ns:org:RegistryType:Social'
-                  reg_event_type:
-                    type: string
-                    description: |
-                      @context: https://schema.spdci.org/common/v1/RegistryEventTypeEnum.jsonld <br>
-                      @type: "VitalEvent" <br>
-
-                      **Notes:**
-                        1. Registry event type values defined as per implementation context.
-                        2. Usually a list of **enum** values of all possible queryable identifiers.
-                        3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
-                    example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
-                  response_entity:
-                    type: enum
-                    description: |
-                      Define the type of response to have when executing the search
-                    enum:
-                      - Household
-                      - Family
-                      - Member
-                  reg_records:
-                    type: object
-                    description: |
-                      The "Household" object contains fields expected in response of search
-                      @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
-                      @type: "Household" <br>
-                      @container: "@set" <br> 
-                    example:
-                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
-                required:
-                  - response_entity
-                  - reg_records
-              locale:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
-            required:
-              - reference_id
-              - timestamp
-              - data
-      required:
-        - transaction_id
-        - notify_event
     EncryptedMessage:
       description: Encrypted payload
       type: object
@@ -1679,7 +1217,13 @@ components:
           description: SPDCI Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
           type: string
         status:
-          $ref: '#/components/schemas/UnSubscribeResponse/properties/status'
+          type: string
+          description: 'Request (e.g disburse, link, unlink, resolve, issue, search, verify, etc.,) status: <br> 1. rcvd: Received; Request received <br> 2. pdng: Pending; Request initiated <br> 3. succ: Success; Request successful <br> 4. rjct: Rejected; Request rejected'
+          enum:
+            - rcvd
+            - pdng
+            - succ
+            - rjct
         status_reason_code:
           $ref: '#/components/schemas/MsgHeaderStatusReasonCode'
         status_reason_message:

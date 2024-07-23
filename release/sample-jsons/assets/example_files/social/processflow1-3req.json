@@ -26,13 +26,18 @@
                   "type": "ns:org:QueryType:NoSql",
                   "value": {
                   "expression": {
-                      "collection": "HouseHold",
+                      "collection": "member",
                       "query": {
                       "$and": [
                           {
-                          "household_size": {
-                              "$lt": 5
+                          "marital_status": {
+                              "$eq": "W"
                            }
+                          },
+                          {
+                            "sex":{
+                                "$eq":"female"
+                            }
                           }
                       ]
                       } 
@@ -40,7 +45,7 @@
                   }
                   },
               "sort": [{
-                  "attribute_name": "household_size",
+                  "attribute_name": "poverty_score",
                   "sort_order": "asc"
               }],
               "pagination": {
