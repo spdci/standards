@@ -26,17 +26,17 @@
                   "type": "ns:org:QueryType:NoSql",
                   "value": {
                   "expression": {
-                      "collection": "member",
+                      "collection": "Household",
                       "query": {
                       "$and": [
                           {
-                          "marital_status": {
-                              "$eq": "W"
+                          "household.household_head_info.person.sex": {
+                              "$eq": "female"
                            }
                           },
                           {
-                            "sex":{
-                                "$eq":"female"
+                            "household.household_head_info.marital_status":{
+                                "$eq":"W"
                             }
                           }
                       ]
