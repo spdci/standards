@@ -15,7 +15,7 @@ properties:
   message_ts:
     $ref: DateTime.yaml
   action:
-    description: G2P Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
+    description: SPDCI Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
     type: string
   status:
     $ref: "./RequestStatus.yaml"

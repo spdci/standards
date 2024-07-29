@@ -1,4 +1,4 @@
-## G2P Connect JSON Web Token Set Specs
+## SPDCI Connect JSON Web Token Set Specs
 
 ### Wiki Pages
 1. [Specifications](https://digital-convergence-initiative-d.gitbook.io/dci-standards-1/standards/1.-crvs)

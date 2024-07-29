@@ -1,0 +1,8 @@
+type: array
+items:
+  type: string
+  description: Field from the response entity
+examples:
+  - "Household.household_size"
+  - "Household.member_list" 
+description: Array of fields from the response entity

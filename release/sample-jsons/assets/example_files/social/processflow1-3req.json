@@ -21,18 +21,23 @@
               "version": "1.0.0",
               "reg_event_type": "SEARCH",
               "query_type": "expression",
-              "response_entity": "Household",
+              "response_entity": "member",
               "query": {
                   "type": "ns:org:QueryType:NoSql",
                   "value": {
                   "expression": {
-                      "collection": "HouseHold",
+                      "collection": "Group",
                       "query": {
                       "$and": [
                           {
-                          "household_size": {
-                              "$lt": 5
+                          "demographic_info.person.sex": {
+                              "$eq": "female"
                            }
+                          },
+                          {
+                            "marital_status":{
+                                "$eq":"W"
+                            }
                           }
                       ]
                       } 
@@ -40,7 +45,7 @@
                   }
                   },
               "sort": [{
-                  "attribute_name": "household_size",
+                  "attribute_name": "poverty_score",
                   "sort_order": "asc"
               }],
               "pagination": {

@@ -1,0 +1,10 @@
+type: object
+description: Registry to notify a event to subscrbiers
+properties:
+  transaction_id: 
+    $ref: ../../common/schema/TransactionId.yaml
+  enrolled_updates:
+    $ref: ../../extensions/ibr/ReceiptInformation.yaml 
+required: 
+  - transaction_id
+  - enrolled_updates

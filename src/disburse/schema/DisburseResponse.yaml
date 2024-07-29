@@ -8,7 +8,7 @@ properties:
     items:
       type: object
       description: |
-        1. G2P Disbursement response i.e status of each disburemsent request for reconciliation by sender system
+        1. SPDCI Disbursement response i.e status of each disburemsent request for reconciliation by sender system
       properties:
         reference_id:
           $ref: "../../common/schema/ReferenceId.yaml"

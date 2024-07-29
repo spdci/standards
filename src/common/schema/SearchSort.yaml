@@ -10,8 +10,8 @@ properties:
       **Notes:**
         1. Attribute names defined as per implementation context.
         2. Usually a list of **enum** values of all possible attribute names.
-        3. e.g: UIN, YOB, DOB, age, mobile, area-code, pin-code, etc.,
-    example: "YOB"
+        3. e.g: UIN, poverty_score, etc.,
+    example: "poverty_score"
   sort_order:
     type: string
     enum:

@@ -53,4 +53,3 @@ required:
   - transaction_id
   - correlation_id
   - search_response
- 
