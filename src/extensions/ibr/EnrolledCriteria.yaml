@@ -11,11 +11,8 @@ properties:
   query:
     type: object
     description: "Query expression for the enrolled query"
-    example: |
+    example: 
       {
-        "$and": [
-          {
-            "person_identifier": { "eq": "ABC451123" }
-          }
-        ]
+         "person_identifier": { "eq": "ABC451123" }
+          
       }

@@ -603,7 +603,7 @@ components:
       properties:
         transaction_id:
           $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
-        receipt_information:
+        enrolled_updates:
           type: object
           description: |
             Receipt information contains receipt type and list of beneficiaries
@@ -621,7 +621,7 @@ components:
                 $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
       required:
         - transaction_id
-        - receipt_information
+        - enrolled_updates
     EnrollmentUpdatesResponse:
       type: object
       description: Response to subscribe request.
@@ -1135,7 +1135,7 @@ components:
                     transaction_id:
                       $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
                     receipt_information:
-                      $ref: '#/components/schemas/EnrollmentUpdatesRequest/properties/receipt_information'
+                      $ref: '#/components/schemas/EnrollmentUpdatesRequest/properties/enrolled_updates'
                   required:
                     - transaction_id
                     - receipt_information
@@ -1174,14 +1174,9 @@ components:
             query:
               type: object
               description: Query expression for the enrolled query
-              example: |
-                {
-                  "$and": [
-                    {
-                      "person_identifier": { "eq": "ABC451123" }
-                    }
-                  ]
-                }
+              example:
+                person_identifier:
+                  eq: ABC451123
       required:
         - transaction_id
         - enrolled_criteria

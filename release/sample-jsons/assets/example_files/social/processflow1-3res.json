@@ -10,8 +10,8 @@
         "status_reason_message": "",
         "total_count": "1",
         "completed_count": "",
-        "sender_id": "sp-system",
-        "receiver_id": "social",
+        "sender_id": "SR",
+        "receiver_id": "SP-MIS",
         "is_msg_encrypted": false,
         "meta": ""
     },
@@ -24,42 +24,6 @@
                     "version": "1.0.0",
                     "reg_records": [
                         {
-                            "@context": {
-                            "@vocab": "https://schema.spdci.org/extensions/social/v1",
-                            "xsd": "http://www.w3.org/2001/XMLSchema#",
-                            "schema": "http://schema.org/",
-                            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-                            "owl": "http://www.w3.org/2002/07/owl#"
-                            },
-                            "@id": "Household",
-                            "@type": "Household",
-                            "household_identifier": "HS02052024",
-                            "address": {
-                            "geo_location": ""
-                            },
-                            "poverty_score": "4.0",
-                            "poverty_score_type": "",
-                            "household_size": "1",
-                            "household_head_info": {
-                            "person": {
-                            "identifier_type": "NID",
-                            "identifier_value": "0205202401",
-                            "name": {
-                            "first_name": "Test",
-                            "second_name": "Test2",
-                            "surname": "Test3"
-                            },
-                            "sex": "F",
-                            "birth_date": "02.05.2004",
-                            "death_date": " ",
-                            "address": " ",
-                            "phone_number": "",
-                            "email": " "
-                            }
-                            },
-                            "member_list": [
-                            {
-                            "household_member": {
                             "member_identifier": "HS0205202401",
                             "demographic_info": {
                             "person": {
@@ -89,14 +53,9 @@
                             "language_code": "Eng",
                             "education_level": "Highschool",
                             "registration_date": "02.05.2024"
-                            }
-                            }
-                            ],
-                            "additional_attributes": [ ],
-                            "registration_date": "02.05.2024",
-                            "last_update": " "
-                            }
-                    ]
+                        }
+                        
+                    ]  
                 },
                 "pagination": null,
                 "locale": null,

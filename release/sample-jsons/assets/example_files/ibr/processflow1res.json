@@ -10,8 +10,8 @@
     "status_reason_message": "",
     "total_count": "1",
     "completed_count": "",
-    "sender_id": "civilregistry.example.org",
-    "receiver_id": "registry.example.org",
+    "sender_id": "IBR",
+    "receiver_id": "SP-MIS",
     "is_msg_encrypted": false,
     "meta": ""
   },

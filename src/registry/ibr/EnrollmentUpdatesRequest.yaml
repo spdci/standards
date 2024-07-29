@@ -3,8 +3,8 @@ description: Registry to notify a event to subscrbiers
 properties:
   transaction_id: 
     $ref: ../../common/schema/TransactionId.yaml
-  receipt_information:
+  enrolled_updates:
     $ref: ../../extensions/ibr/ReceiptInformation.yaml 
 required: 
   - transaction_id
-  - receipt_information
+  - enrolled_updates
