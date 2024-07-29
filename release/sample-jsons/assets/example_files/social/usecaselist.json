@@ -5,7 +5,7 @@
     },
     {
         "processflow_id" : "processflow1-2",        
-        "processflow_name": "Process Flow 2 : Search by Household Size"
+        "processflow_name": "Process Flow 2 : Search by group Size"
     },
     {
         "processflow_id" : "processflow1-3",        

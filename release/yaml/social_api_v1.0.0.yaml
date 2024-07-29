@@ -34,8 +34,7 @@ info:
 
     Data Objects:
     - [Person](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.01-person)
-    - [HouseHold](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household) 
-    - [Family](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.03-family)
+    - [Group](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household) 
     - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
     - [RelatedPerson](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.05-relatedperson)
     - [DisabilityInfo](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.06-disabilityinfo)
@@ -530,8 +529,7 @@ components:
                     description: |
                       Define the type of response to have when executing the search
                     enum:
-                      - Household
-                      - Family
+                      - Group
                       - Member
                   query:
                     description: |
@@ -566,14 +564,14 @@ components:
                                 2. Query expression as a template with placeholder to pass conditional search parameters
                             example:
                               expression:
-                                collection: HouseHold
+                                collection: Group
                                 query:
                                   $and:
                                     - poverty_score:
                                         $lt: 5
                                     - location:
                                         $eq: central_region
-                                    - household_size:
+                                    - group_size:
                                         $lt: 5
                       - type: object
                         description: Identifier type and value object
@@ -782,17 +780,17 @@ components:
                   reg_records:
                     description: |
                       The "Entity" object contains fields expected in response of search
-                      @context: https://spdci.github.io/schemas/extensions/social/v1/Household.jsonld <br>
-                      @type: "Household" <br>
+                      @context: https://spdci.github.io/schemas/extensions/social/v1/Group.jsonld <br>
+                      @type: "Group" <br>
                       @container: "@set" <br>
                     type: array
                     items:
                       type: object
                       description: |
-                        1. Attributes of a household to create fetch records, create verifiable credentials or use in search criteria.
+                        1. Attributes of a group to create fetch records, create verifiable credentials or use in search criteria.
                         3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
 
-                        @context: https://schema.spdci.org/extensions/social/v1/Household.jsonld <br>
+                        @context: https://schema.spdci.org/extensions/social/v1/Group.jsonld <br>
                         @type: "@context" <br>
                       example:
                         '@context':
@@ -801,15 +799,16 @@ components:
                           schema: 'http://schema.org/'
                           rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
                           owl: 'http://www.w3.org/2002/07/owl#'
-                        '@id': Household
-                        '@type': Household
-                        household_identifier: HS02052024
+                        '@id': Group
+                        '@type': Group
+                        group_identifier: HS02052024
+                        group_type: household
                         address:
                           geo_location: ''
                         poverty_score: '4.0'
                         poverty_score_type: ''
-                        household_size: '1'
-                        household_head_info:
+                        group_size: '1'
+                        group_head_info:
                           person:
                             identifier_type: NID
                             identifier_value: '0205202401'

@@ -32,8 +32,7 @@ info:
     - [Programme](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.02-programme)
     - [Benefit](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.03-benefit)
     - [Benefit Frequency](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.o4-benefit-frequency) 
-    - [HouseHold](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household)
-    - [Family](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.03-family)
+    - [Group](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household)
     - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
 
 
@@ -739,14 +738,14 @@ components:
                                 2. Query expression as a template with placeholder to pass conditional search parameters
                             example:
                               expression:
-                                collection: HouseHold
+                                collection: Group
                                 query:
                                   $and:
                                     - poverty_score:
                                         $lt: 5
                                     - location:
                                         $eq: central_region
-                                    - household_size:
+                                    - group_size:
                                         $lt: 5
                       - type: object
                         description: Identifier type and value object
@@ -1168,8 +1167,7 @@ components:
               description: |
                 Define the type of response to have when executing the search
               enum:
-                - Household
-                - Family
+                - Group
                 - Member
             query:
               type: object

@@ -2,6 +2,5 @@ type: string
 description: |
   Define the type of response to have when executing the search
 enum:
-- "Household"
-- "Family"
+- "Group"
 - "Member"

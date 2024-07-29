@@ -22,7 +22,7 @@ properties:
         2. Query expression as a template with placeholder to pass conditional search parameters
     example:
       expression: 
-        collection: "HouseHold"
+        collection: "Group"
         query: 
           $and: [
             {
@@ -32,7 +32,7 @@ properties:
               location: { $eq: "central_region" }
             },
             {
-              household_size: { $lt: 5 }
+              group_size: { $lt: 5 }
             }
           ]
     

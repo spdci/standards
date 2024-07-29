@@ -34,8 +34,7 @@ info:
     
     Data Objects:
     - [Person](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.01-person)
-    - [HouseHold](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household) 
-    - [Family](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.03-family)
+    - [Group](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household) 
     - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
     - [RelatedPerson](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.05-relatedperson)
     - [DisabilityInfo](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.06-disabilityinfo)

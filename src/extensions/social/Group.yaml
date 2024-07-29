@@ -1,9 +1,9 @@
 type: object
 description: | 
-  1. Attributes of a household to create fetch records, create verifiable credentials or use in search criteria.
+  1. Attributes of a group to create fetch records, create verifiable credentials or use in search criteria.
   3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
 
-  @context: https://schema.spdci.org/extensions/social/v1/Household.jsonld <br>
+  @context: https://schema.spdci.org/extensions/social/v1/Group.jsonld <br>
   @type: "@context" <br>
 example:
   {
@@ -14,16 +14,17 @@ example:
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "owl": "http://www.w3.org/2002/07/owl#"
   },
-  "@id": "Household",
-  "@type": "Household",
-  "household_identifier": "HS02052024",
+  "@id": "Group",
+  "@type": "Group",
+  "group_identifier": "HS02052024",
+  "group_type":"household",
   "address": {
     "geo_location": ""
   },
   "poverty_score": "4.0",
   "poverty_score_type": "",
-  "household_size": "1",
-  "household_head_info": {
+  "group_size": "1",
+  "group_head_info": {
     "person": {
       "identifier_type": "NID",
       "identifier_value": "0205202401",

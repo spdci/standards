@@ -21,12 +21,12 @@
             "version": "1.0.0",
             "reg_event_type": "SEARCH",
             "query_type": "expression",
-            "response_entity": "Household",
+            "response_entity": "Group",
             "query": {
                 "type": "ns:org:QueryType:NoSql",
                 "value": {
                 "expression": {
-                    "collection": "HouseHold",
+                    "collection": "Group",
                     "query": {
                     "$and": [
                         {
