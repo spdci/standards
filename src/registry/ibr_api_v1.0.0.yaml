@@ -15,25 +15,25 @@ info:
     3. Enrolled : the enrolled API is a special type of search to return the programs a beneficiary is enrolled in
    
     Gitbook reference link[WIP]:
-    - [Integrated Beneficiary Registry - V1.0 ](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/introduction)
+    - [Integrated Beneficiary Registry - V1.0 ](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0)
 
     Code directory links:
-    - [Assistance Unit](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.01-assistance_unit)
-    - [Enrollment Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.02-enrolment_status)
-    - [Benefit Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.03-benefit_type)
-    - [Institution Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.04-institution_type)   
-    - [Legal Status](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.05-legal_status)
-    - [Social Protection Functions](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.06-social_protection_functions)
-    - [Contribution Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.07-contribution_type)
-    - [Programme Type](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/code-directory/cd.ibr.08-programme_type)
+    - [Assistance Unit](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.01-assistance_unit)
+    - [Enrollment Status](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.02-enrolment_status)
+    - [Benefit Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.03-benefit_type)
+    - [Institution Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.04-institution_type)   
+    - [Legal Status](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.05-legal_status)
+    - [Social Protection Functions](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.06-social_protection_functions)
+    - [Contribution Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.07-contribution_type)
+    - [Programme Type](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/code-directory/cd.ibr.08-programme_type)
 
     Data Objects:
-    - [Beneficiary](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.01-beneficiary)
-    - [Programme](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.02-programme)
-    - [Benefit](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.03-benefit)
-    - [Benefit Frequency](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/iRXYPSOF88AbSukDLMoT/ibr/1.-crvs/data/data-objects/do.ibr.o4-benefit-frequency) 
-    - [Group](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.02-household)
-    - [Member](https://app.gitbook.com/o/0iSqNDBWH70sLmGExne0/s/bUVnrLEoih8bOGfpNjnB/social-registry/1.-crvs/data/data-objects/do.sr.04-member)
+    - [Beneficiary](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.01-beneficiary)
+    - [Programme](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.02-programme)
+    - [Benefit](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.03-benefit)
+    - [Benefit Frequency](https://standards.spdci.org/standards/v/wip-integrated-beneficiary-registry-v1.0.0/ibr/1.-crvs/data/data-objects/do.ibr.o4-benefit-frequency) 
+    - [Group](https://standards.spdci.org/standards/v/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.02-group)
+    - [Member](https://standards.spdci.org/standards/v/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.03-member)
 
 
     Each request is build up of three parts 

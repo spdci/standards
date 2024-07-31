@@ -1,7 +1,7 @@
 # API documentation
 
 The APIs are accessible through
-    1. DCI:  [standards](https://standards.spdci.org/standards/release/index.html)
+    1. DCI:  [standards](https://standards.spdci.org/standards)
 
 ## Discussion forum 
 
