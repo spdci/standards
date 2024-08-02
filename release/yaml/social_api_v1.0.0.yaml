@@ -505,10 +505,10 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      The SR receive data from SP system , it has to differenciate of details based on event type, Usually SP system sends Registration , payment and deregister events to IBR
+                      The SP-MIS receives data from SR, usually the SR sends registration and updates events to SP-MIS
 
-                      1 : Register <br>
-                      4 : spdci:common:RegistryEventType:NewHouseHoldMember
+                      1 : Register 
+                      2 : spdci:common:RegistryEventType:NewHouseHoldMember
                     enum:
                       - REGISTER
                       - NewHouseHoldMember
