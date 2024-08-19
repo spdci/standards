@@ -1,0 +1,18 @@
+[
+    {
+        "processflow_id" : "processflow1",        
+        "processflow_name": "Process Flow 1 : Check if person is registered as disabled"
+    },
+    {
+        "processflow_id" : "processflow2",        
+        "processflow_name": "Process Flow 2 : Get person disability info"
+    },
+    {
+        "processflow_id" : "processflow3",        
+        "processflow_name": "Process Flow 3 : Get disabled minor"
+    },
+    {
+        "processflow_id" : "processflow4",        
+        "processflow_name": "Process Flow 4 : Register for new born disabled notifications"
+    }
+] 

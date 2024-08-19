@@ -1,0 +1,15 @@
+type: object
+description: | 
+  Disabled query
+properties:
+  query_type:
+    $ref: ../../common/schema/QueryType.yaml
+    description: ""
+  query:
+    type: object
+    description: "Query expression for the disabled query"
+    example: 
+      {
+         "member.member_identifier": { "eq": "ABC451123" }
+          
+      }

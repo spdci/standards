@@ -1,0 +1,53 @@
+{
+    "signature": "Signature: namespace=\"dci\", kidId=\"DR|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691746600\", expires=\"1691833000\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
+    "header": {
+      "version": "1.0.0",
+      "message_id": "a1b2c3d4-5678-90ef-gh12-34567890ijkl",
+      "message_ts": "2024-08-11T11:30:00.000Z",
+      "action": "get_disability_info",
+      "status": "success",
+      "status_reason_code": "200",
+      "status_reason_message": "Disability information retrieved successfully",
+      "total_count": "1",
+      "completed_count": "1",
+      "sender_id": "DR",
+      "receiver_id": "SP-MIS",
+      "is_msg_encrypted": false,
+      "meta": ""
+    },
+    "message": {
+      "transaction_id": "txn-abcdef1234",
+      "disability_info": [
+        {
+          "identifier": "HS0205202401",
+          "disability_type": "Visual Impairment",
+          "disability_by_birth": true,
+          "disabled_since": "2010-05-01",
+          "disability_area": "Sight",
+          "treating_hospital":[ {
+            "hospital": "Central Eye Hospital",
+            "address": {
+              "street_address": "123 Vision St.",
+              "locality": "Manhattan",
+              "region": "New York",
+              "postal_code": "10001",
+              "country": "USA"
+            },
+            "treating_doctor": {
+              "given_name": "Dr. John",
+              "family_name": "Doe",
+              "identifier": "DOC12345"
+            },
+            "treatment_type": "Optometry",
+            "treatment_status": "Ongoing",
+            "treatment_start_date": "2022-01-10T00:00:00Z",
+            "treatment_end_date": null
+          }],
+          "disability_due_to": "Congenital condition",
+          "disability_limitation_type": "Severe",
+          "functional_severity": "High"
+        }
+      ]
+    }
+  }
+  

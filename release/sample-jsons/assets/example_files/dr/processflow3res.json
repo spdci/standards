@@ -1,0 +1,178 @@
+{
+    "signature": "Signature: namespace=\"spdci\", kidId=\"DR|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691833700\", expires=\"1691920100\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
+    "header": {
+      "version": "1.0.0",
+      "message_id": "1234567890",
+      "message_ts": "2024-08-11T13:15:00.000Z",
+      "action": "search",
+      "status": "success",
+      "status_reason_code": "200",
+      "status_reason_message": "Search request processed successfully",
+      "total_count": "3",
+      "sender_id": "DR",
+      "receiver_id": "SP-MIS",
+      "is_msg_encrypted": false,
+      "meta": {}
+    },
+    "message": {
+      "results": [
+        {
+          "identifier": "ID001",
+          "name": {
+            "first_name": "John",
+            "second_name": "Doe",
+            "surname": "Doe"
+          },
+          "birth_date": "2012-05-15",
+          "sex": "M",
+          "address": {
+            "street_address": "123 Elm Street",
+            "city": "Springfield",
+            "state": "IL",
+            "postal_code": "62704",
+            "country": "USA"
+          },
+          "phone_number": "+1234567890",
+          "email": "john.doe@example.com",
+          "disability_info": [
+            {
+              "disability_type": "Physical",
+              "disability_by_birth": true,
+              "disabled_since": "2012-05-15",
+              "disability_area": "Mobility",
+              "disability_due_to": "Congenital",
+              "disability_limitation_type": "Severe",
+              "functional_severity": "High",
+              "treating_hospital": [
+                {
+                  "hospital": "Springfield General",
+                  "address": {
+                    "street_address": "789 Health Street",
+                    "city": "Springfield",
+                    "state": "IL",
+                    "postal_code": "62704",
+                    "country": "USA"
+                  },
+                  "treating_doctor": "Dr. Smith",
+                  "treatment_type": "Orthopedic Surgery",
+                  "treatment_status": "Ongoing",
+                  "treatment_start_date": "2024-01-15",
+                  "treatment_end_date": null
+                }
+              ]
+            }
+          ],
+          "is_disabled": true,
+          "marital_status": "Single",
+          "employment_status": "Not Employed",
+          "occupation": "Student",
+          "income_level": "Low"
+        },
+        {
+          "identifier": "ID002",
+          "name": {
+            "first_name": "Jane",
+            "second_name": "Smith",
+            "surname": "Smith"
+          },
+          "birth_date": "2015-11-20",
+          "sex": "F",
+          "address": {
+            "street_address": "456 Oak Avenue",
+            "city": "Springfield",
+            "state": "IL",
+            "postal_code": "62705",
+            "country": "USA"
+          },
+          "phone_number": "+0987654321",
+          "email": "jane.smith@example.com",
+          "disability_info": [
+            {
+              "disability_type": "Visual",
+              "disability_by_birth": false,
+              "disabled_since": "2021-03-12",
+              "disability_area": "Vision",
+              "disability_due_to": "Accident",
+              "disability_limitation_type": "Moderate",
+              "functional_severity": "Medium",
+              "treating_hospital": [
+                {
+                  "hospital": "Springfield Eye Clinic",
+                  "address": {
+                    "street_address": "321 Vision Blvd",
+                    "city": "Springfield",
+                    "state": "IL",
+                    "postal_code": "62706",
+                    "country": "USA"
+                  },
+                  "treating_doctor": "Dr. Johnson",
+                  "treatment_type": "Ophthalmology",
+                  "treatment_status": "Ongoing",
+                  "treatment_start_date": "2022-01-10",
+                  "treatment_end_date": null
+                }
+              ]
+            }
+          ],
+          "is_disabled": true,
+          "marital_status": "Single",
+          "employment_status": "Not Employed",
+          "occupation": "Student",
+          "income_level": "Low"
+        },
+        {
+          "identifier": "ID003",
+          "name": {
+            "first_name": "Emily",
+            "second_name": "Johnson",
+            "surname": "Johnson"
+          },
+          "birth_date": "2014-01-30",
+          "sex": "F",
+          "address": {
+            "street_address": "789 Pine Road",
+            "city": "Springfield",
+            "state": "IL",
+            "postal_code": "62707",
+            "country": "USA"
+          },
+          "phone_number": "+1122334455",
+          "email": "emily.johnson@example.com",
+          "disability_info": [
+            {
+              "disability_type": "Hearing",
+              "disability_by_birth": true,
+              "disabled_since": "2014-01-30",
+              "disability_area": "Hearing",
+              "disability_due_to": "Genetic",
+              "disability_limitation_type": "Severe",
+              "functional_severity": "High",
+              "treating_hospital": [
+                {
+                  "hospital": "Springfield Hearing Center",
+                  "address": {
+                    "street_address": "654 Sound Avenue",
+                    "city": "Springfield",
+                    "state": "IL",
+                    "postal_code": "62708",
+                    "country": "USA"
+                  },
+                  "treating_doctor": "Dr. Williams",
+                  "treatment_type": "Audiology",
+                  "treatment_status": "Ongoing",
+                  "treatment_start_date": "2014-02-01",
+                  "treatment_end_date": null
+                }
+              ]
+            }
+          ],
+          "is_disabled": true,
+          "marital_status": "Single",
+          "employment_status": "Not Employed",
+          "occupation": "Student",
+          "income_level": "Low"
+        }
+      ]
+    }
+  }
+  
