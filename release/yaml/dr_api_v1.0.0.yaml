@@ -913,10 +913,6 @@ components:
       description: |
         1. Implementing systems can define schemas.
         2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
-        3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
-          - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
-          - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
-          - search all farmers with land area less than 2 acers in district code 504
       oneOf:
         - $ref: '#/components/schemas/ExpTemplate'
         - $ref: '#/components/schemas/IdentifierTypeValue'
@@ -945,9 +941,9 @@ components:
                     type: string
                     default: 1.0.0
                   reg_type:
-                    $ref: '#/components/schemas/RegistryType'
+                    $ref: '#/components/schemas/SubscriptionInfo/properties/reg_type'
                   reg_event_type:
-                    $ref: '#/components/schemas/RegistryEventType'
+                    $ref: '#/components/schemas/SubscriptionInfo/properties/reg_event_type'
                   response_entity:
                     type: string
                     description: |
@@ -978,8 +974,8 @@ components:
         **Notes:**
           1. Registry event type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
-      example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
+          3. example: "spdci-common:RegistryEventType:DisabledPerson"
+      example: 'spdci-common:RegistryEventType:DisabledPerson'
     RegistryRecord:
       type: object
       description: |
@@ -1077,8 +1073,8 @@ components:
         **Notes:**
           1. Registry type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable functional registries 
-          3. example: "ns:org:RegistryType:Social"
-      example: 'ns:org:RegistryType:Social'
+          3. example: "ns:org:RegistryType:DR"
+      example: 'ns:org:RegistryType:DR'
     SearchRequest:
       type: object
       description: |
@@ -1160,7 +1156,7 @@ components:
               status_reason_code:
                 $ref: '#/components/schemas/SearchStatusReasonCode'
               status_reason_message:
-                description: Status reason code message. Helps actionanble messaging for systems/end users
+                description: Status reason code message. Helps actionable messaging for systems/end users
                 type: string
                 maxLength: 999
               data:
@@ -1176,9 +1172,79 @@ components:
                   reg_event_type:
                     $ref: '#/components/schemas/RegistryEventType'
                   reg_record_type:
-                    $ref: '#/components/schemas/RegistryRecordType'
+                    type: string
+                    description: |
+                      @context: https://schema.spdci.org/common/v1/RegistryRecordType.jsonld <br>
+                      @type: "RegistryRecordType" <br>
+
+                      **Notes:**
+                        1. Registry record type values defined as per implementation context.
+                        2. Usually a list of **enum** values of all possible queryable result sets 
+                        3. Referenced in search_request and notify events
+                        4. example: "spdci-extensions-dci:DisabledPerson" 
+                    example: 'spdci-extensions-dci:DisabledPerson'
                   reg_records:
-                    $ref: '#/components/schemas/RegistryRecord'
+                    type: object
+                    description: |
+                      The "group" object contains fields expected in response of search
+                      @context: https://schema.spdci.org/extensions/dr/v1/DisabledPerson.jsonld <br>
+                      @type: "DisabledPerson" <br>
+                      @container: "@set" <br> 
+                    example:
+                      type: object
+                      description: |
+                        1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+
+
+                        @context: https://schema.spdci.org/extensions/dr/v1/DisabledPerson.jsonld <br>
+                        @type: "@context" <br>
+                      example:
+                        '@context':
+                          spdci: 'https://schema.spdci.org/extensions/dr/v1/'
+                          social: 'https://schema.spdci.org/extensions/social/v1/'
+                          rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                          xsd: 'http://www.w3.org/2001/XMLSchema#'
+                          owl: 'http://www.w3.org/2002/07/owl#'
+                          common: 'https://schema.spdci.org/common/v1/'
+                        '@id': 'https://example.org/disabled/123456789'
+                        '@type': 'spdci:disabled'
+                        'spdci:member':
+                          '@type': 'social:Member'
+                          'spdci:member_identifier': M123456789
+                          'spdci:name':
+                            - '@type': 'common:Name'
+                              surname: Doe
+                              given_name: John
+                              prefix: Mr.
+                          'spdci:sex': male
+                          'spdci:birth_date': '1990-04-12'
+                          'spdci:is_disabled': true
+                          'spdci:disability_info':
+                            - disability_type: Visual
+                              disability_by_birth: false
+                              disabled_since: '2010-05-12'
+                              disability_area: Vision
+                              hospital:
+                                name: Central Eye Hospital
+                                state: Illinois
+                                district: Sangamon
+                                department: Ophthalmology
+                              treating_hospital_in_other_state: false
+                              disability_due_to: Accident
+                              disability_limitation_type: Partial
+                              functional_severity: Moderate
+                        'spdci:care_giver':
+                          '@type': 'social:Person'
+                          'spdci:identifier':
+                            - '@type': 'common:Identifier'
+                              identifier_type: NationalID
+                              identifier_value: '987654321'
+                          'spdci:name':
+                            - '@type': 'common:Name'
+                              surname: Smith
+                              given_name: Alice
+                              prefix: Ms.
+                        'spdci:relationship_type': parent
                 required:
                   - reg_record_type
                   - reg_records
@@ -1238,7 +1304,7 @@ components:
                   filter:
                     $ref: '#/components/schemas/RegistryQueries'
                   notify_record_type:
-                    $ref: '#/components/schemas/RegistryRecordType'
+                    $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
                   authorize:
                     $ref: '#/components/schemas/Authorize'
                 required:
@@ -1276,13 +1342,45 @@ components:
               status_reason_code:
                 $ref: '#/components/schemas/SubscribeStatusReasonCode'
               status_reason_message:
-                description: Status reason code message. Helps actionanble messaging for systems/end users
+                description: Status reason code message. Helps actionable messaging for systems/end users
                 type: string
                 maxLength: 999
               subscriptions:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SubscriptionInfo'
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      default: 1.0.0
+                    code:
+                      $ref: '#/components/schemas/SubscriptionCode'
+                    status:
+                      $ref: '#/components/schemas/SubscriptionStatus'
+                    timestamp:
+                      $ref: '#/components/schemas/DateTime'
+                    reg_type:
+                      $ref: '#/components/schemas/RegistryType'
+                    reg_event_type:
+                      $ref: '#/components/schemas/RegistryEventType'
+                    frequency:
+                      $ref: '#/components/schemas/EventFrequency'
+                    filter_type:
+                      $ref: '#/components/schemas/QueryType'
+                    filter:
+                      $ref: '#/components/schemas/RegistryQueries'
+                    notify_record_type:
+                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_record_type'
+                      required:
+                        - reg_event_type
+                        - filter
+                        - notify_record_type
+                    locale:
+                      $ref: '#/components/schemas/LanguageCode'
+                  required:
+                    - subscription_code
+                    - timestamp
+                    - subscribe_criteria
               pagination:
                 $ref: '#/components/schemas/Pagination'
               locale:
@@ -1328,15 +1426,75 @@ components:
         timestamp:
           $ref: '#/components/schemas/DateTime'
         reg_type:
-          $ref: '#/components/schemas/RegistryType'
+          type: string
+          description: |
+            @context: https://schema.spdci.org/common/v1/RegistryType.jsonld <br>
+            @type: "@context" <br>
+
+            **Notes:**
+              1. Registry type values defined as per implementation context.
+              2. Usually a list of **enum** values of all possible queryable functional registries 
+              3. example: "ns:org:RegistryType:Social"
+          example: 'ns:org:RegistryType:Social'
         reg_event_type:
-          $ref: '#/components/schemas/RegistryEventType'
+          type: string
+          description: |
+            @context: https://schema.spdci.org/common/v1/RegistryEventTypeEnum.jsonld <br>
+            @type: "VitalEvent" <br>
+
+            **Notes:**
+              1. Registry event type values defined as per implementation context.
+              2. Usually a list of **enum** values of all possible queryable identifiers.
+              3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
+          example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
         frequency:
           $ref: '#/components/schemas/EventFrequency'
         filter_type:
           $ref: '#/components/schemas/QueryType'
         filter:
-          $ref: '#/components/schemas/RegistryQueries'
+          description: |
+            1. Implementing systems can define schemas.
+            2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
+            3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
+              - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
+              - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
+              - search all farmers with land area less than 2 acers in district code 504
+          oneOf:
+            - type: object
+              description: Identifier type and value object
+              properties:
+                type:
+                  type: string
+                  description: |
+                    @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
+                    @type: "QueryType" <br>
+
+                    **Notes:**
+                      1. Query types that helps decode query expressions
+                      2. Sample query type enums: "GraphQl", "Sql", "NoSql"
+                  example: 'ns:org:QueryType:NoSql'
+                value:
+                  type: object
+                  description: |
+                    @context: https://schema.spdci.org/common/v1/QueryExpression.jsonld <br>
+                    @type: "QueryExpression" <br>
+
+                    **Notes:**
+                      1. Query expression's syntax / format is determined based on query-type.
+                      2. Query expression as a template with placeholder to pass conditional search parameters
+                  example:
+                    expression:
+                      collection: Group
+                      query:
+                        $and:
+                          - poverty_score:
+                              $lt: 5
+                          - location:
+                              $eq: central_region
+                          - group_size:
+                              $lt: 5
+            - $ref: '#/components/schemas/IdentifierTypeValue'
+            - $ref: '#/components/schemas/ExpPredicateWithConditionList'
         notify_record_type:
           $ref: '#/components/schemas/RegistryRecordType'
           required:
@@ -1833,15 +1991,12 @@ components:
               2. Query expression as a template with placeholder to pass conditional search parameters
           example:
             expression:
-              collection: Group
               query:
                 $and:
-                  - poverty_score:
-                      $lt: 5
+                  - member.disabled:
+                      $eq: true
                   - location:
                       $eq: central_region
-                  - group_size:
-                      $lt: 5
     FileInfo:
       type: object
       description: File info. Used in file upload feature using HTTPS
@@ -1957,11 +2112,11 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verfication, etc., 
           type: string
-          example: civilregistry.example.org
+          example: dr.example.org
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
           type: string
-          example: registry.example.org
+          example: spmis.example.org
         is_msg_encrypted:
           description: Is message encrypted?
           type: boolean
@@ -1978,7 +2133,7 @@ components:
       description: Message header
       properties:
         version:
-          description: Messaing protocol specification version being used
+          description: Messaging protocol specification version being used
           type: string
           default: 1.0.0
         message_id:
@@ -1998,7 +2153,7 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verification, etc.,
           type: string
-          example: spp.example.org
+          example: spmis.example.org
         sender_uri:
           description: |
             1. sender url to accept callbacks. Applicable only for async communications and if response ack_status is ACK.
@@ -2006,11 +2161,11 @@ components:
             3. For SFTP based communications, this shall be set to server/folder details.
           type: string
           format: uri
-          example: 'https://spp.example.org/{namespace}/callback/on-search'
+          example: 'https://spmis.example.org/{namespace}/callback/on-search'
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
-          example: pymts.example.org
+          example: dr.example.org
         total_count:
           description: Total no of requests present in the message request
           type: integer

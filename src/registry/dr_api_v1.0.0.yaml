@@ -646,27 +646,27 @@ components:
 
     ###### src/registry/schema objects
     RegistryQueries: 
-      $ref: schema/RegistryQueries.yaml
+      $ref: dr/RegistryQueries.yaml
     NotifyEventRequest: 
       $ref: schema/NotifyEventRequest.yaml
     RegistryEventType:
-      $ref: schema/RegistryEventType.yaml
+      $ref: dr/RegistryEventType.yaml
     RegistryRecord:
       $ref: schema/RegistryRecord.yaml
     RegistryRecordType: 
       $ref: schema/RegistryRecordType.yaml
     RegistryType: 
-      $ref: schema/RegistryType.yaml
+      $ref: dr/RegistryType.yaml
     SearchRequest: 
-      $ref: schema/SearchRequest.yaml
+      $ref: dr/SearchRequest.yaml
     SearchResponse: 
-      $ref: schema/SearchResponse.yaml
+      $ref: dr/SearchResponse.yaml
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
     SubscribeRequest: 
-      $ref: schema/SubscribeRequest.yaml
+      $ref: dr/SubscribeRequest.yaml
     SubscribeResponse: 
-      $ref: schema/SubscribeResponse.yaml
+      $ref: dr/SubscribeResponse.yaml
     SubscribeStatusReasonCode: 
       $ref: schema/SubscribeStatusReasonCode.yaml
     SubscriptionCode: 
@@ -729,7 +729,7 @@ components:
     ExpPredicateWithConditionList: 
       $ref: ../common/schema/ExpPredicateWithConditionList.yaml
     ExpTemplate:
-      $ref: ../common/schema/ExpTemplate.yaml
+      $ref: ../common/schema/DisabledExpTemplate.yaml
     FileInfo: 
       $ref: ../common/schema/FileInfo.yaml
     IdentifierType: 
@@ -743,9 +743,9 @@ components:
     Meta:
       $ref: ../common/schema/Meta.yaml
     MsgCallbackHeader_V1.0.0: 
-      $ref: ../common/schema/MsgCallbackHeader_V1.0.0.yaml
+      $ref: ../common/schema/DRMsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
-      $ref: ../common/schema/MsgHeader_V1.0.0.yaml
+      $ref: ../common/schema/DRMsgHeader_V1.0.0.yaml
     MsgHeaderStatusReasonCode: 
       $ref: ../common/schema/MsgHeaderStatusReasonCode.yaml
     MsgSignature: 
