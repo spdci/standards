@@ -36,30 +36,34 @@
           "email": "john.doe@example.com",
           "disability_info": [
             {
-              "disability_type": "Physical",
-              "disability_by_birth": true,
-              "disabled_since": "2012-05-15",
-              "disability_area": "Mobility",
-              "disability_due_to": "Congenital",
-              "disability_limitation_type": "Severe",
-              "functional_severity": "High",
-              "treating_hospital": [
-                {
-                  "hospital": "Springfield General",
-                  "address": {
-                    "street_address": "789 Health Street",
-                    "city": "Springfield",
-                    "state": "IL",
-                    "postal_code": "62704",
-                    "country": "USA"
-                  },
-                  "treating_doctor": "Dr. Smith",
-                  "treatment_type": "Orthopedic Surgery",
-                  "treatment_status": "Ongoing",
-                  "treatment_start_date": "2024-01-15",
-                  "treatment_end_date": null
-                }
-              ]
+              "disability_classification": "D",
+              "disability_by_birth": false,
+              "disabled_since": "2010-05-12",
+              "disability_area": "D4",
+              "treatment": {
+                "treating_doctor": {
+                                "identifier_type": "NID",
+                                "identifier_value": "0205202401",
+                                "name": {
+                                "first_name": "Jhon",
+                                "second_name": "",
+                                "surname": "Doe"
+                                },
+                                "sex": "M",
+                                "birth_date": "1980-04-12T00:00",
+                                "death_date": " ",
+                                "address": { },
+                                "phone_number": "",
+                                "email": " "
+                                
+                },
+                "treatment_status": "ongoing",
+                "treatment_start_date": "Sangamon"
+              },
+              "treating_hospital_in_other_state": false,
+              "disability_due_to": "Accident",
+              "disability_limitation_type":"d450",
+              "functional_severity": "Moderate"
             }
           ],
           "is_disabled": true,

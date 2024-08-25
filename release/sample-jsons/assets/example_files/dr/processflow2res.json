@@ -19,33 +19,34 @@
       "transaction_id": "txn-abcdef1234",
       "disability_info": [
         {
-          "identifier": "HS0205202401",
-          "disability_type": "Visual Impairment",
-          "disability_by_birth": true,
-          "disabled_since": "2010-05-01",
-          "disability_area": "Sight",
-          "treating_hospital":[ {
-            "hospital": "Central Eye Hospital",
-            "address": {
-              "street_address": "123 Vision St.",
-              "locality": "Manhattan",
-              "region": "New York",
-              "postal_code": "10001",
-              "country": "USA"
-            },
+          "disability_classification": "D",
+          "disability_by_birth": false,
+          "disabled_since": "2010-05-12",
+          "disability_area": "D4",
+          "treatment": {
             "treating_doctor": {
-              "given_name": "Dr. John",
-              "family_name": "Doe",
-              "identifier": "DOC12345"
+                            "identifier_type": "NID",
+                            "identifier_value": "0205202401",
+                            "name": {
+                            "first_name": "Jhon",
+                            "second_name": "",
+                            "surname": "Doe"
+                            },
+                            "sex": "M",
+                            "birth_date": "1980-04-12T00:00",
+                            "death_date": " ",
+                            "address": { },
+                            "phone_number": "",
+                            "email": " "
+                            
             },
-            "treatment_type": "Optometry",
-            "treatment_status": "Ongoing",
-            "treatment_start_date": "2022-01-10T00:00:00Z",
-            "treatment_end_date": null
-          }],
-          "disability_due_to": "Congenital condition",
-          "disability_limitation_type": "Severe",
-          "functional_severity": "High"
+            "treatment_status": "ongoing",
+            "treatment_start_date": "Sangamon"
+          },
+          "treating_hospital_in_other_state": false,
+          "disability_due_to": "Accident",
+          "disability_limitation_type":"d450",
+          "functional_severity": "Moderate"
         }
       ]
     }

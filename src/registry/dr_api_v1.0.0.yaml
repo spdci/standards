@@ -565,7 +565,7 @@ paths:
 
  /registry/sync/disabled:
   post: 
-    summary: "/registry/sync/disabled"
+    summary: "/registry/sync/get-disability-status"
     description: |- 
       check if member is registered as disabled
     operationId: post_reg_disabled
