@@ -35,12 +35,12 @@
                   "programme_identifier": "DCI001",
                   "programme_name": "Test Programme"
                 },
-              "enrolment_date": "02.02.2024",
+              "enrolment_date": "2024-04-12T00:00",
               "enrolment_status": "Active",
               "status_change_date": "",
               "benefits": {
                 "benefit_type": "Cash",
-                "benefit_date": "02.05.2024",
+                "benefit_date": "2024-04-12T00:00",
                 "benefit_value": "USD 50",
                 "benefit_frequency": "Monthly"
               }
