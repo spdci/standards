@@ -729,7 +729,7 @@ components:
     ExpPredicateWithConditionList: 
       $ref: ../common/schema/ExpPredicateWithConditionList.yaml
     ExpTemplate:
-      $ref: ../common/schema/DisabledExpTemplate.yaml
+      $ref: dr/ExpTemplate.yaml
     FileInfo: 
       $ref: ../common/schema/FileInfo.yaml
     IdentifierType: 
@@ -743,9 +743,9 @@ components:
     Meta:
       $ref: ../common/schema/Meta.yaml
     MsgCallbackHeader_V1.0.0: 
-      $ref: ../common/schema/DRMsgCallbackHeader_V1.0.0.yaml
+      $ref: dr/MsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
-      $ref: ../common/schema/DRMsgHeader_V1.0.0.yaml
+      $ref: dr/MsgHeader_V1.0.0.yaml
     MsgHeaderStatusReasonCode: 
       $ref: ../common/schema/MsgHeaderStatusReasonCode.yaml
     MsgSignature: 

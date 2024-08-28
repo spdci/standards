@@ -554,7 +554,7 @@ paths:
       deprecated: false
   /registry/sync/disabled:
     post:
-      summary: /registry/sync/disabled
+      summary: /registry/sync/get-disability-status
       description: check if member is registered as disabled
       operationId: post_reg_disabled
       tags:
@@ -914,7 +914,36 @@ components:
         1. Implementing systems can define schemas.
         2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
       oneOf:
-        - $ref: '#/components/schemas/ExpTemplate'
+        - type: object
+          description: Identifier type and value object
+          properties:
+            type:
+              type: string
+              description: |
+                @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
+                @type: "QueryType" <br>
+
+                **Notes:**
+                  1. Query types that helps decode query expressions
+                  2. Sample query type enums: "GraphQl", "Sql", "NoSql"
+              example: 'ns:org:QueryType:NoSql'
+            value:
+              type: object
+              description: |
+                @context: https://schema.spdci.org/common/v1/QueryExpression.jsonld <br>
+                @type: "QueryExpression" <br>
+
+                **Notes:**
+                  1. Query expression's syntax / format is determined based on query-type.
+                  2. Query expression as a template with placeholder to pass conditional search parameters
+              example:
+                expression:
+                  query:
+                    $and:
+                      - member.disabled:
+                          $eq: true
+                      - location:
+                          $eq: central_region
         - $ref: '#/components/schemas/IdentifierTypeValue'
         - $ref: '#/components/schemas/ExpPredicateWithConditionList'
     NotifyEventRequest:
@@ -993,65 +1022,182 @@ components:
           @type: "@context" <br>
         example:
           '@context':
-            '@vocab': 'https://schema.spdci.org/extensions/social/v1'
-            xsd: 'http://www.w3.org/2001/XMLSchema#'
-            schema: 'http://schema.org/'
+            spdci: 'https://schema.spdci.org/extensions/social/v1/'
             rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+            xsd: 'http://www.w3.org/2001/XMLSchema#'
             owl: 'http://www.w3.org/2002/07/owl#'
-          '@id': Group
-          '@type': Group
-          group_identifier: HS02052024
-          group_type: household
-          address:
-            geo_location: ''
-          poverty_score: '4.0'
-          poverty_score_type: ''
-          group_size: '1'
+            common: 'https://schema.spdci.org/common/v1/'
+          '@id': 'https://example.org/group/001'
+          '@type': 'spdci:Group'
+          group_identifier:
+            - '@type': Identifier
+              identifier_type: NationalID
+              identifier_value: G9876543210
+          group_type: family
+          place:
+            '@type': Place
+            geo:
+              '@type': GeoCoordinates
+              latitude: '40.712776'
+              longitude: '-74.005974'
+            address: '123 Main St, Anytown, CountryName'
+          place_address: 1
+          poverty_score: 45.2
+          poverty_score_type: income-based
           group_head_info:
-            person:
-              identifier_type: NID
-              identifier_value: '0205202401'
+            '@type': 'spdci:Member'
+            '@id': 'https://example.org/member/987654321'
+            member_identifier:
+              - '@type': Identifier
+                identifier_type: NationalID
+                identifier_value: M9876543210
+            demographic_info:
+              '@type': SRPerson
+              identifier:
+                - '@type': Identifier
+                  identifier_type: NationalID
+                  identifier_value: '9876543210'
               name:
-                first_name: Test
-                second_name: Test2
-                surname: Test3
-              sex: F
-              birth_date: 02.05.2004
-              death_date: ' '
-              address: ' '
-              phone_number: ''
-              email: ' '
+                '@type': Name
+                surname: Smith
+                given_name: Alice
+                prefix: Ms.
+                suffix: ''
+              sex: female
+              address:
+                '@type': Address
+                street_address: 123 Main St
+                city: Anytown
+                postal_code: '12345'
+                country: CountryName
+              birth_date: '1985-05-20T00:00:00Z'
+              registration_date: '2022-01-10T08:00:00Z'
+            is_disabled: false
+            marital_status: married
+            registration_date: '2022-01-10T08:00:00Z'
+          group_size: 4
           member_list:
-            - household_member:
-                member_identifier: HS0205202401
-                demographic_info:
-                  person:
-                    identifier_type: NID
-                    identifier_value: '0205202401'
-                    name:
-                      first_name: Test
-                      second_name: Test2
-                      surname: Test3
-                    sex: F
-                    birth_date: 02.05.2004
-                    death_date: ' '
-                    address: {}
-                    phone_number: ''
-                    email: ' '
-                relationship_head: self
-                related_person: {}
-                is_disabled: '0'
-                disability_info: ' '
-                marital_status: Single
-                employment_status: employed
-                occupation: Caregiver
-                income_level: ' '
-                language_code: Eng
-                education_level: Highschool
-                registration_date: 02.05.2024
-          additional_attributes: []
-          registration_date: 02.05.2024
-          last_update: ' '
+            - '@type': Member
+              '@id': 'https://example.org/member/987654321'
+              member_identifier:
+                - '@type': Identifier
+                  identifier_type: NationalID
+                  identifier_value: M9876543210
+              demographic_info:
+                '@type': SRPerson
+                identifier:
+                  - '@type': Identifier
+                    identifier_type: NationalID
+                    identifier_value: '9876543210'
+                name:
+                  '@type': Name
+                  surname: Smith
+                  given_name: Alice
+                  prefix: Ms.
+                  suffix: ''
+                sex: female
+                address:
+                  '@type': Address
+                  street_address: 123 Main St
+                  city: Anytown
+                  postal_code: '12345'
+                  country: CountryName
+                birth_date: '1985-05-20T00:00:00Z'
+                registration_date: '2022-01-10T08:00:00Z'
+              is_disabled: false
+              marital_status: married
+              registration_date: '2022-01-10T08:00:00Z'
+            - '@type': Member
+              '@id': 'https://example.org/member/123456789'
+              member_identifier:
+                - '@type': Identifier
+                  identifier_type: NationalID
+                  identifier_value: M9876543210
+              demographic_info:
+                '@type': SRPerson
+                'spdci:identifier':
+                  - '@type': Identifier
+                    identifier_type: NationalID
+                    identifier_value: '1234567890'
+                name:
+                  '@type': Name
+                  surname: Smith
+                  given_name: Bob
+                  prefix: Mr.
+                  suffix: ''
+                sex: male
+                address:
+                  '@type': Address
+                  street_address: 123 Main St
+                  city: Anytown
+                  postal_code: '12345'
+                  country: CountryName
+                birth_date: '1982-03-15T00:00:00Z'
+                registration_date: '2022-01-10T08:00:00Z'
+              is_disabled: false
+              marital_status: married
+              registration_date: '2022-01-10T08:00:00Z'
+            - '@type': Member
+              '@id': 'https://example.org/member/987654322'
+              member_identifier:
+                - '@type': Identifier
+                  identifier_type: NationalID
+                  identifier_value: '9876543210'
+              demographic_info:
+                '@type': SRPerson
+                ':identifier':
+                  - '@type': Identifier
+                    identifier_type: NationalID
+                    identifier_value: '9876543221'
+                name:
+                  '@type': cName
+                  surname: Smith
+                  given_name: Charlie
+                  prefix: ''
+                  suffix: ''
+                sex: male
+                address:
+                  '@type': Address
+                  street_address: 123 Main St
+                  city: Anytown
+                  postal_code: '12345'
+                  country: CountryName
+                birth_date: '2010-07-05T00:00:00Z'
+                registration_date: '2022-01-10T08:00:00Z'
+              is_disabled: false
+              marital_status: single
+              registration_date: '2022-01-10T08:00:00Z'
+            - '@type': Member
+              '@id': 'https://example.org/member/987654323'
+              member_identifier: M987654323
+              demographic_info:
+                '@type': SRPerson
+                identifier:
+                  - '@type': Identifier
+                    identifier_type: NationalID
+                    identifier_value: '9876543232'
+                name:
+                  '@type': Name
+                  surname: Smith
+                  given_name: Daisy
+                  prefix: ''
+                  suffix: ''
+                sex: female
+                address:
+                  '@type': Address
+                  street_address: 123 Main St
+                  city: Anytown
+                  postal_code: '12345'
+                  country: CountryName
+                birth_date: '2012-09-22T00:00:00Z'
+                sregistration_date: '2022-01-10T08:00:00Z'
+              is_disabled: false
+              marital_status: single
+              'spdci:registration_date': '2022-01-10T08:00:00Z'
+          registration_date: '2022-01-10T08:00:00Z'
+          last_updated: '2023-06-15T10:00:00Z'
+          additional_attributes:
+            - services: receives_subsidy
     RegistryRecordType:
       type: string
       description: |
@@ -1217,21 +1363,32 @@ components:
                               given_name: John
                               prefix: Mr.
                           'spdci:sex': male
-                          'spdci:birth_date': '1990-04-12'
+                          'spdci:birth_date': '1990-04-12T00:00'
                           'spdci:is_disabled': true
                           'spdci:disability_info':
-                            - disability_type: Visual
+                            - disability_classification: D
                               disability_by_birth: false
                               disabled_since: '2010-05-12'
-                              disability_area: Vision
-                              hospital:
-                                name: Central Eye Hospital
-                                state: Illinois
-                                district: Sangamon
-                                department: Ophthalmology
+                              disability_area: D4
+                              treatment:
+                                treating_doctor:
+                                  identifier_type: NID
+                                  identifier_value: '0205202401'
+                                  name:
+                                    first_name: Jhon
+                                    second_name: ''
+                                    surname: Doe
+                                  sex: M
+                                  birth_date: '1980-04-12T00:00'
+                                  death_date: ' '
+                                  address: {}
+                                  phone_number: ''
+                                  email: ' '
+                                treatment_status: ongoing
+                                treatment_start_date: Sangamon
                               treating_hospital_in_other_state: false
                               disability_due_to: Accident
-                              disability_limitation_type: Partial
+                              disability_limitation_type: d450
                               functional_severity: Moderate
                         'spdci:care_giver':
                           '@type': 'social:Person'
@@ -2076,7 +2233,7 @@ components:
       description: Message header
       properties:
         version:
-          description: Messaing protocol specification version being used
+          description: Messaging protocol specification version being used
           type: string
           default: 1.0.0
         message_id:
