@@ -1,0 +1,10 @@
+type: object
+description: Verifies is registered member is disabled
+properties:
+  transaction_id: 
+    $ref: ../../common/schema/TransactionId.yaml
+  disabled_criteria:
+    $ref: ../../extensions/dr/DisabledCriteria.yaml 
+required: 
+  - transaction_id
+  - disabled_criteria

@@ -792,65 +792,182 @@ components:
                         @type: "@context" <br>
                       example:
                         '@context':
-                          '@vocab': 'https://schema.spdci.org/extensions/social/v1'
-                          xsd: 'http://www.w3.org/2001/XMLSchema#'
-                          schema: 'http://schema.org/'
+                          spdci: 'https://schema.spdci.org/extensions/social/v1/'
                           rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+                          xsd: 'http://www.w3.org/2001/XMLSchema#'
                           owl: 'http://www.w3.org/2002/07/owl#'
-                        '@id': Group
-                        '@type': Group
-                        group_identifier: HS02052024
-                        group_type: household
-                        address:
-                          geo_location: ''
-                        poverty_score: '4.0'
-                        poverty_score_type: ''
-                        group_size: '1'
+                          common: 'https://schema.spdci.org/common/v1/'
+                        '@id': 'https://example.org/group/001'
+                        '@type': 'spdci:Group'
+                        group_identifier:
+                          - '@type': Identifier
+                            identifier_type: NationalID
+                            identifier_value: G9876543210
+                        group_type: family
+                        place:
+                          '@type': Place
+                          geo:
+                            '@type': GeoCoordinates
+                            latitude: '40.712776'
+                            longitude: '-74.005974'
+                          address: '123 Main St, Anytown, CountryName'
+                        place_address: 1
+                        poverty_score: 45.2
+                        poverty_score_type: income-based
                         group_head_info:
-                          person:
-                            identifier_type: NID
-                            identifier_value: '0205202401'
+                          '@type': 'spdci:Member'
+                          '@id': 'https://example.org/member/987654321'
+                          member_identifier:
+                            - '@type': Identifier
+                              identifier_type: NationalID
+                              identifier_value: M9876543210
+                          demographic_info:
+                            '@type': SRPerson
+                            identifier:
+                              - '@type': Identifier
+                                identifier_type: NationalID
+                                identifier_value: '9876543210'
                             name:
-                              first_name: Test
-                              second_name: Test2
-                              surname: Test3
-                            sex: F
-                            birth_date: 02.05.2004
-                            death_date: ' '
-                            address: ' '
-                            phone_number: ''
-                            email: ' '
+                              '@type': Name
+                              surname: Smith
+                              given_name: Alice
+                              prefix: Ms.
+                              suffix: ''
+                            sex: female
+                            address:
+                              '@type': Address
+                              street_address: 123 Main St
+                              city: Anytown
+                              postal_code: '12345'
+                              country: CountryName
+                            birth_date: '1985-05-20T00:00:00Z'
+                            registration_date: '2022-01-10T08:00:00Z'
+                          is_disabled: false
+                          marital_status: married
+                          registration_date: '2022-01-10T08:00:00Z'
+                        group_size: 4
                         member_list:
-                          - household_member:
-                              member_identifier: HS0205202401
-                              demographic_info:
-                                person:
-                                  identifier_type: NID
-                                  identifier_value: '0205202401'
-                                  name:
-                                    first_name: Test
-                                    second_name: Test2
-                                    surname: Test3
-                                  sex: F
-                                  birth_date: 02.05.2004
-                                  death_date: ' '
-                                  address: {}
-                                  phone_number: ''
-                                  email: ' '
-                              relationship_head: self
-                              related_person: {}
-                              is_disabled: '0'
-                              disability_info: ' '
-                              marital_status: Single
-                              employment_status: employed
-                              occupation: Caregiver
-                              income_level: ' '
-                              language_code: Eng
-                              education_level: Highschool
-                              registration_date: 02.05.2024
-                        additional_attributes: []
-                        registration_date: 02.05.2024
-                        last_update: ' '
+                          - '@type': Member
+                            '@id': 'https://example.org/member/987654321'
+                            member_identifier:
+                              - '@type': Identifier
+                                identifier_type: NationalID
+                                identifier_value: M9876543210
+                            demographic_info:
+                              '@type': SRPerson
+                              identifier:
+                                - '@type': Identifier
+                                  identifier_type: NationalID
+                                  identifier_value: '9876543210'
+                              name:
+                                '@type': Name
+                                surname: Smith
+                                given_name: Alice
+                                prefix: Ms.
+                                suffix: ''
+                              sex: female
+                              address:
+                                '@type': Address
+                                street_address: 123 Main St
+                                city: Anytown
+                                postal_code: '12345'
+                                country: CountryName
+                              birth_date: '1985-05-20T00:00:00Z'
+                              registration_date: '2022-01-10T08:00:00Z'
+                            is_disabled: false
+                            marital_status: married
+                            registration_date: '2022-01-10T08:00:00Z'
+                          - '@type': Member
+                            '@id': 'https://example.org/member/123456789'
+                            member_identifier:
+                              - '@type': Identifier
+                                identifier_type: NationalID
+                                identifier_value: M9876543210
+                            demographic_info:
+                              '@type': SRPerson
+                              'spdci:identifier':
+                                - '@type': Identifier
+                                  identifier_type: NationalID
+                                  identifier_value: '1234567890'
+                              name:
+                                '@type': Name
+                                surname: Smith
+                                given_name: Bob
+                                prefix: Mr.
+                                suffix: ''
+                              sex: male
+                              address:
+                                '@type': Address
+                                street_address: 123 Main St
+                                city: Anytown
+                                postal_code: '12345'
+                                country: CountryName
+                              birth_date: '1982-03-15T00:00:00Z'
+                              registration_date: '2022-01-10T08:00:00Z'
+                            is_disabled: false
+                            marital_status: married
+                            registration_date: '2022-01-10T08:00:00Z'
+                          - '@type': Member
+                            '@id': 'https://example.org/member/987654322'
+                            member_identifier:
+                              - '@type': Identifier
+                                identifier_type: NationalID
+                                identifier_value: '9876543210'
+                            demographic_info:
+                              '@type': SRPerson
+                              ':identifier':
+                                - '@type': Identifier
+                                  identifier_type: NationalID
+                                  identifier_value: '9876543221'
+                              name:
+                                '@type': cName
+                                surname: Smith
+                                given_name: Charlie
+                                prefix: ''
+                                suffix: ''
+                              sex: male
+                              address:
+                                '@type': Address
+                                street_address: 123 Main St
+                                city: Anytown
+                                postal_code: '12345'
+                                country: CountryName
+                              birth_date: '2010-07-05T00:00:00Z'
+                              registration_date: '2022-01-10T08:00:00Z'
+                            is_disabled: false
+                            marital_status: single
+                            registration_date: '2022-01-10T08:00:00Z'
+                          - '@type': Member
+                            '@id': 'https://example.org/member/987654323'
+                            member_identifier: M987654323
+                            demographic_info:
+                              '@type': SRPerson
+                              identifier:
+                                - '@type': Identifier
+                                  identifier_type: NationalID
+                                  identifier_value: '9876543232'
+                              name:
+                                '@type': Name
+                                surname: Smith
+                                given_name: Daisy
+                                prefix: ''
+                                suffix: ''
+                              sex: female
+                              address:
+                                '@type': Address
+                                street_address: 123 Main St
+                                city: Anytown
+                                postal_code: '12345'
+                                country: CountryName
+                              birth_date: '2012-09-22T00:00:00Z'
+                              sregistration_date: '2022-01-10T08:00:00Z'
+                            is_disabled: false
+                            marital_status: single
+                            'spdci:registration_date': '2022-01-10T08:00:00Z'
+                        registration_date: '2022-01-10T08:00:00Z'
+                        last_updated: '2023-06-15T10:00:00Z'
+                        additional_attributes:
+                          - services: receives_subsidy
                 required:
                   - reg_records
               pagination:
@@ -1198,7 +1315,7 @@ components:
       description: Message header
       properties:
         version:
-          description: Messaing protocol specification version being used
+          description: Messaging protocol specification version being used
           type: string
           default: 1.0.0
         message_id:
@@ -1240,11 +1357,11 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verfication, etc., 
           type: string
-          example: civilregistry.example.org
+          example: social.example.org
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
           type: string
-          example: registry.example.org
+          example: spmis.example.org
         is_msg_encrypted:
           description: Is message encrypted?
           type: boolean
@@ -1261,7 +1378,7 @@ components:
       description: Message header
       properties:
         version:
-          description: Messaing protocol specification version being used
+          description: Messaging protocol specification version being used
           type: string
           default: 1.0.0
         message_id:
@@ -1285,7 +1402,7 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verification, etc.,
           type: string
-          example: spp.example.org
+          example: spmis.example.org
         sender_uri:
           description: |
             1. sender url to accept callbacks. Applicable only for async communications and if response ack_status is ACK.
@@ -1293,11 +1410,11 @@ components:
             3. For SFTP based communications, this shall be set to server/folder details.
           type: string
           format: uri
-          example: 'https://spp.example.org/{namespace}/callback/on-search'
+          example: 'https://spmis.example.org/{namespace}/callback/on-search'
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
-          example: pymts.example.org
+          example: social.example.org
         total_count:
           description: Total no of requests present in the message request
           type: integer

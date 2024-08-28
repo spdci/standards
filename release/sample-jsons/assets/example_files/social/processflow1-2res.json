@@ -33,68 +33,73 @@
                             },
                             "@id": "Group",
                             "@type": "Group",
-                            "group_identifier": "HS02052024",
-                            "group_type":"houselhold",
-                            "address": {
-                            "geo_location": ""
+                            "group_identifier":[ {
+                                "identifier_type": "NID",
+                                "identifier_value": "0205202401"
+                            }],
+                            "place": {
+                                "geo": {
+                                    "latitude": "40.712776",
+                                    "longitude": "-74.005974"
+                                  },
+                                  "address": "123 Main St, Anytown, CountryName"
                             },
+                            "place_address":1,
                             "poverty_score": "4.0",
                             "poverty_score_type": "",
                             "group_size": "1",
                             "group_head_info": {
                             "person": {
-                            "identifier_type": "NID",
-                            "identifier_value": "0205202401",
-                            "name": {
-                            "first_name": "Test",
-                            "second_name": "Test2",
-                            "surname": "Test3"
-                            },
+                                "identifier":[{
+                                    "identifier_type": "NID",
+                                    "identifier_value": "0205202401"
+                                }],
+                                "name": {
+                                "first_name": "Test",
+                                "second_name": "Test2",
+                                "surname": "Test3"
+                                },
                             "sex": "F",
-                            "birth_date": "02.05.2004",
-                            "death_date": " ",
-                            "address": " ",
-                            "phone_number": "",
-                            "email": " "
+                            "birth_date": "1985-05-20T00:00:00Z"   
                             }
                             },
                             "member_list": [
                             {
                             "household_member": {
-                            "member_identifier": "HS0205202401",
+                            "member_identifier": [{
+                                "identifier_type": "NID",
+                                "identifier_value": "HS0205202401"
+                            }],
                             "demographic_info": {
                             "person": {
-                            "identifier_type": "NID",
-                            "identifier_value": "0205202401",
+                            "identifier":[{
+                                "identifier_type": "NID",
+                                "identifier_value": "0205202401"
+                                }],
                             "name": {
                             "first_name": "Test",
                             "second_name": "Test2",
                             "surname": "Test3"
                             },
                             "sex": "F",
-                            "birth_date": "02.05.2004",
-                            "death_date": " ",
-                            "address": { },
-                            "phone_number": "",
-                            "email": " "
+                            "birth_date": "1985-05-20T00:00:00Z"
                             }
                             },
                             "relationship_head": "self",
                             "related_person": { },
                             "is_disabled": "0",
-                            "disability_info": " ",
                             "marital_status": "Single",
                             "employment_status": "employed",
                             "occupation": "Caregiver",
                             "income_level": " ",
                             "language_code": "Eng",
                             "education_level": "Highschool",
-                            "registration_date": "02.05.2024"
+                            "registration_date": "1985-05-20T00:00:00Z"
                             }
                             }
                             ],
                             "additional_attributes": [ ],
-                            "registration_date": "02.05.2024",
+                            "registration_date": "1985-05-20T00:00:00Z",
                             "last_update": " "
                             }
                     ]

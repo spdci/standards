@@ -634,9 +634,9 @@ components:
     FileInfo: 
       $ref: ../common/schema/FileInfo.yaml
     MsgCallbackHeader_V1.0.0: 
-      $ref: ../common/schema/MsgCallbackHeader_V1.0.0.yaml
+      $ref: ibr/MsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
-      $ref: ../common/schema/MsgHeader_V1.0.0.yaml
+      $ref: ibr/MsgHeader_V1.0.0.yaml
     MsgHeaderStatusReasonCode: 
       $ref: ../common/schema/MsgHeaderStatusReasonCode.yaml
     MsgSignature: 

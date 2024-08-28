@@ -40,8 +40,6 @@
               "@type": "Person",
               "identifier": [
                 {
-                  "@id": "Identifier",
-                  "@type": "Identifier",
                   "identifier_type": "UIN",
                   "identifier_value": "847951632"
                 },

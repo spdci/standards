@@ -29,18 +29,23 @@
           "@type": "Beneficiary",
           "assistance_unit": "1",
           "member": {
-            "member_identifier": "HS0205202401",
-            "demographic_info": {
-            "person": {
+            "member_identifier": [ {
               "identifier_type": "NID",
-              "identifier_value": "0205202401",
-              "name": {
-              "first_name": "Test",
-              "second_name": "Test2",
-              "surname": "Test3"
-            },
+              "identifier_value": "0205202401"
+          }],
+            "demographic_info": {
+              "person": {
+                "identifier":[ {
+                  "identifier_type": "NID",
+                  "identifier_value": "0205202401"
+                }],
+                "name": {
+                "first_name": "Test",
+                "second_name": "Test2",
+                "surname": "Test3"
+              },
             "sex": "F",
-            "birth_date": "02.05.2004",
+            "birth_date": "1980-04-12T00:00",
             "death_date": "",
             "address": "",
             "phone_number": "",
@@ -58,14 +63,14 @@
           "language_code": "Eng",
           "education_level": "Highschool",
           "additional_attributes": "",
-          "registration_date": "02.05.2024",
+          "registration_date": "2024-04-12T00:00",
           "last_update": "",
           "programme_identifier": {
           "programme": {
             "programme_identifier": "DCI001",
             "programme_name": "Test Programme"
           },
-          "enrolment_date": "02.02.2024",
+          "enrolment_date": "2024-04-12T00:00",
           "enrolment_status": "Active",
           "status_change_date": "",
           "benefits": {

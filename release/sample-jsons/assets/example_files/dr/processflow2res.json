@@ -1,0 +1,54 @@
+{
+    "signature": "Signature: namespace=\"dci\", kidId=\"DR|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691746600\", expires=\"1691833000\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
+    "header": {
+      "version": "1.0.0",
+      "message_id": "a1b2c3d4-5678-90ef-gh12-34567890ijkl",
+      "message_ts": "2024-08-11T11:30:00.000Z",
+      "action": "get_disability_info",
+      "status": "success",
+      "status_reason_code": "200",
+      "status_reason_message": "Disability information retrieved successfully",
+      "total_count": "1",
+      "completed_count": "1",
+      "sender_id": "DR",
+      "receiver_id": "SP-MIS",
+      "is_msg_encrypted": false,
+      "meta": ""
+    },
+    "message": {
+      "transaction_id": "txn-abcdef1234",
+      "disability_info": [
+        {
+          "disability_classification": "D",
+          "disability_by_birth": false,
+          "disabled_since": "2010-05-12",
+          "disability_area": "D4",
+          "treatment": {
+            "treating_doctor": {
+                            "identifier_type": "NID",
+                            "identifier_value": "0205202401",
+                            "name": {
+                            "first_name": "Jhon",
+                            "second_name": "",
+                            "surname": "Doe"
+                            },
+                            "sex": "M",
+                            "birth_date": "1980-04-12T00:00",
+                            "death_date": " ",
+                            "address": { },
+                            "phone_number": "",
+                            "email": " "
+                            
+            },
+            "treatment_status": "ongoing",
+            "treatment_start_date": "Sangamon"
+          },
+          "treating_hospital_in_other_state": false,
+          "disability_due_to": "Accident",
+          "disability_limitation_type":"d450",
+          "functional_severity": "Moderate"
+        }
+      ]
+    }
+  }
+  

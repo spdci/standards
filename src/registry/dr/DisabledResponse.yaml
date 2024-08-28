@@ -1,0 +1,36 @@
+type: object
+
+description: Response to verify disability status request.
+properties:
+  transaction_id: 
+    $ref: ../../common/schema/TransactionId.yaml
+  correlation_id:
+    $ref: ../../common/schema/CorrelationId.yaml
+  disabled_response:
+    type: array
+    items:
+      type: object
+      properties: 
+        reference_id:
+          $ref: "../../common/schema/ReferenceId.yaml"
+        timestamp: 
+          $ref: ../../common/schema/DateTime.yaml
+        status:
+          $ref: "../../common/schema/RequestStatus.yaml" 
+        status_reason_message:
+          description: "Status reason code message. Helps actionable messaging for systems/end users"
+          type: string
+          maxLength: 999
+        disabled_status:
+          description: "Indicates whether the individual is disabled ('yes') or not ('no')."
+          type: string
+          enum: ["yes", "no"]
+      required:
+        - reference_id
+        - timestamp
+        - status
+        - disabled_status
+required:
+  - transaction_id
+  - correlation_id
+  - disabled_response
