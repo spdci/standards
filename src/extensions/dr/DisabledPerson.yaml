@@ -33,10 +33,8 @@ example:
       "spdci:is_disabled": true,
       "spdci:disability_info": [
         {
-          "disability_classification": "D",
           "disability_by_birth": false,
           "disabled_since": "2010-05-12",
-          "disability_area": "D4",
           "treatment": {
             "treating_doctor": {
                             "identifier_type": "NID",
@@ -59,7 +57,7 @@ example:
           },
           "treating_hospital_in_other_state": false,
           "disability_due_to": "Accident",
-          "disability_limitation_type":"d450",
+          "disability_limitation_type":"b21009",
           "functional_severity": "Moderate"
         }
       ]
