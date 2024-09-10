@@ -35,27 +35,6 @@ example:
         {
           "disability_by_birth": false,
           "disabled_since": "2010-05-12",
-          "treatment": {
-            "treating_doctor": {
-                            "identifier_type": "NID",
-                            "identifier_value": "0205202401",
-                            "name": {
-                            "first_name": "Jhon",
-                            "second_name": "",
-                            "surname": "Doe"
-                            },
-                            "sex": "M",
-                            "birth_date": "1980-04-12T00:00",
-                            "death_date": " ",
-                            "address": { },
-                            "phone_number": "",
-                            "email": " "
-                            
-            },
-            "treatment_status": "ongoing",
-            "treatment_start_date": "Sangamon"
-          },
-          "treating_hospital_in_other_state": false,
           "disability_due_to": "Accident",
           "disability_limitation_type":"b21009",
           "functional_severity": "Moderate"

@@ -9,13 +9,6 @@ example:
         
         "disability_by_birth": false,
         "disabled_since": "2010-05-12",
-        "hospital": {
-          "name": "Central Eye Hospital",
-          "state": "Illinois",
-          "district": "Sangamon",
-          "department": "Ophthalmology"
-        },
-        "treating_hospital_in_other_state": false,
         "disability_due_to": "Accident",
         "disability_limitation_type": "b21009",
         "functional_severity": "Moderate"
