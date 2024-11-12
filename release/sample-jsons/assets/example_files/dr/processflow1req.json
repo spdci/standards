@@ -14,14 +14,37 @@
     },
     "message": {
             "transaction_id": "txn-1234567890",
-            "check_disability_info": {
-              "identifier": "HS0205202401",
-              "demographic_info": {
-                "person": {
-                  "identifier_type": "NID",
-                  "identifier_value": "0205202401"
+            "search_request": {
+              "reference_id": "12345678901234567890",
+              "timestamp": "",
+              "search_criteria": {
+              "version": "1.0.0",
+              "reg_type": "ns:org:RegistryType:DR",
+              "reg_event_type": "spdci-common:RegistryEventType:DisabledPerson",
+              "query_type": "expression",
+              "query": {
+                "type": "ns:org:QueryType:NoSql",
+                "value": {
+                "expression": {
+                  "query": {
+                    "$and": [
+                        {
+                        "disability_status": {"$eq": "Approved"}
+                        },
+                        {
+                          "disability_details.impairment_type" : {"$eq":"Mobility"}
+                        }
+                      ]
+                    }
+                  }
                 }
-              }
+              },
+              "sort": [],
+              "pagination": {},
+              "consent": {},
+              "authorize": {}
+              },
+              "locale": "en"
             }
         
         }

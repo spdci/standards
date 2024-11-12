@@ -1,18 +1,18 @@
 [
     {
         "processflow_id" : "processflow1",        
-        "processflow_name": "Process Flow 1 : Check if person is registered as disabled"
+        "processflow_name": "Process Flow 1 : Searching disabled person with disability status approved and impairment type mobility"
     },
     {
         "processflow_id" : "processflow2",        
-        "processflow_name": "Process Flow 2 : Get person disability info"
+        "processflow_name": "Process Flow 2 : Get person disability status"
     },
     {
         "processflow_id" : "processflow3",        
-        "processflow_name": "Process Flow 3 : Get disabled minor"
+        "processflow_name": "Process Flow 3 : Get disabled elderly"
     },
     {
         "processflow_id" : "processflow4",        
-        "processflow_name": "Process Flow 4 : Register for new born disabled notifications"
+        "processflow_name": "Process Flow 4 : Register for disabled notifications with status approved"
     }
 ] 

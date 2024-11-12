@@ -31,18 +31,12 @@
             "type": "ns:org:QueryType:NoSql",
             "value": {
               "expression": {
-                "collection": "Member",
+                "collection": "DRPerson",
                 "query": {
                   "$and": [
                     {
-                      "demographic_info.birth_date": {
-                        "$gte": "2024-08-18T00:00:00.000Z",
-                        "$lt": "2024-08-19T00:00:00.000Z"
-                      }
-                    },
-                    {
-                      "is_disabled": {
-                        "$eq": true
+                      "disability_status": {
+                        "$eq": "Approved"
                       }
                     }
                   ]

@@ -17,36 +17,13 @@
     },
     "message": {
       "transaction_id": "txn-abcdef1234",
-      "disability_info": [
+      "disabled_response": [
         {
-          "disability_classification": "D",
-          "disability_by_birth": false,
-          "disabled_since": "2010-05-12",
-          "disability_area": "D4",
-          "treatment": {
-            "treating_doctor": {
-                            "identifier_type": "NID",
-                            "identifier_value": "0205202401",
-                            "name": {
-                            "first_name": "Jhon",
-                            "second_name": "",
-                            "surname": "Doe"
-                            },
-                            "sex": "M",
-                            "birth_date": "1980-04-12T00:00",
-                            "death_date": " ",
-                            "address": { },
-                            "phone_number": "",
-                            "email": " "
-                            
-            },
-            "treatment_status": "ongoing",
-            "treatment_start_date": "Sangamon"
-          },
-          "treating_hospital_in_other_state": false,
-          "disability_due_to": "Accident",
-          "disability_limitation_type":"d450",
-          "functional_severity": "Moderate"
+          "reference_id": "12345678901234567890",
+          "timestamp": "",
+          "status": "rcvd",
+          "status_reason_message": "string",
+          "disabled_status": "yes"
         }
       ]
     }
