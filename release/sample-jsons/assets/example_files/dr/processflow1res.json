@@ -20,7 +20,57 @@
       "message": {
         "timestamp": "2024-08-11T10:00:00.000Z",
         "correlation_id": "1234567890",
-        "disability_status": "Yes"
+        "search_response": [
+          {
+            "reference_id": "12345678901234567890",
+            "timestamp": "",
+            "status": "rcvd",
+            "status_reason_code": "rjct.reference_id.invalid",
+            "status_reason_message": "string",
+            "data": {
+            "version": "1.0.0",
+            "reg_type": "ns:org:RegistryType:DR",
+            "reg_event_type": "spdci-common:RegistryEventType:DisabledPerson",
+            "reg_record_type": "spdci-extensions-dci:DisabledPerson",
+            "reg_records": {
+            "type": "object",
+             "example": {
+              "personal_details": {
+                "identifier": "123456",
+                "name": {
+                  "first_name": "John",
+                  "last_name": "Doe"
+                },
+                "date_of_birth": "1990-05-15",
+                "gender": "Male"
+              },
+              "disability_status": "Approved",
+              "disability_details": [
+                {
+                  "impairment_type": "Mobility",
+                  "impairment_level": "Severe",
+                  "impairment_cause": "Accident",
+                  "age_on_set": "Working age"
+                }
+              ],
+              "disability_support": [
+                {
+                  "support_needed": "Needed",
+                  "support_type": "Personal Assistant",
+                  "support_intensity": "High"
+                }
+              ],
+              "transport_requirement": "Adaptable vehical",
+              "housing_type": "Social housing",
+              "registration_date": "2023-01-10T00:00:00Z",
+              "last_updated": "2023-09-20T00:00:00Z"
+              }
+          }
+        },
+        "pagination": {},
+        "locale": "en"
+        }
+        ]
       }
     }
   }

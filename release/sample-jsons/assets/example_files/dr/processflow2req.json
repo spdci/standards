@@ -17,15 +17,14 @@
     },
     "message": {
       "transaction_id": "txn-abcdef1234",
-      "request_info": {
-        "identifier": "HS0205202401",
-        "demographic_info": {
-          "person": {
-            "identifier_type": "NID",
-            "identifier_value": "0205202401"
-          }
+      "disabled_criteria": {
+        "query_type": "expression",
+        "query": {
+          "personal_details.member_identifier": {
+          "eq": "ABC451123"
         }
       }
+}
     }
   }
   

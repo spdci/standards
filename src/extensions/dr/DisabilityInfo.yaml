@@ -1,0 +1,20 @@
+type: object
+description: | 
+  1. Attributes of a person to create fetch records, create verifiable credentials or use in search criteria.
+
+
+  @context: https://schema.spdci.org/extensions/dr/v1/DisabledPerson.jsonld <br>
+  @type: "@context" <br>
+example:
+  {
+    
+    "disability_details": [
+      {
+        "impairment_type": "Physical",
+        "impairment_level": "Severe",
+        "impairment_cause": "Accident",
+        "age_on_set": "Working age"
+      }
+    ]
+   
+  }
