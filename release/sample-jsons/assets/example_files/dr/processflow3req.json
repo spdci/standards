@@ -30,12 +30,12 @@
                       "query": {
                         "$and": [
                             {
-                              "demographic_info.birth_date": {
+                              "member.demographic_info.birth_date": {
                                 "$gt": "1950-08-18T00:00:00Z"
                               }
                             },
                             {
-                              "is_disabled": true
+                              "disability_status": {"$eq": "Approved"}
                             }
                           ]
                 
