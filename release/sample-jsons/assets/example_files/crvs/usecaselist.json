@@ -1,7 +1,7 @@
 [
     {
         "processflow_id" : "processflow1",        
-        "processflow_name": "Process Flow 1 : Generic process workflow between SP-MIS and CRVS"
+        "processflow_name": "Process Flow 1 : Generic process workflow between SP-System and CRVS"
     },
     {
         "processflow_id" : "processflow2",        

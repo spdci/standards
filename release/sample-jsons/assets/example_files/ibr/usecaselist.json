@@ -1,7 +1,7 @@
 [
     {
         "processflow_id" : "processflow1",        
-        "processflow_name": "Process Flow 1 : Enrollment of beneficiaries  in programs for SP-MIS system"
+        "processflow_name": "Process Flow 1 : Enrollment of beneficiaries  in programs for SP-System system"
     },
     {
         "processflow_id" : "processflow2",        

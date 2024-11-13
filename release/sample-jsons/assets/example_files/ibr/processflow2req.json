@@ -5,7 +5,7 @@
     "message_id": "0c96614c-7255-4774-b109-cd53ee851769",
     "message_ts": "2023-07-19T12:15:04.555Z",
     "action": "search",
-    "sender_id": "SP-MIS",
+    "sender_id": "SP-System",
     "sender_uri": "",
     "receiver_id": "IBR",
     "total_count": "1",

@@ -505,7 +505,7 @@ components:
                   reg_event_type:
                     type: string
                     description: |
-                      The SP-MIS receives data from SR, usually the SR sends registration and updates events to SP-MIS
+                      The SP-System receives data from SR, usually the SR sends registration and updates events to SP-System
 
                       1 : Register 
                       2 : spdci:common:RegistryEventType:NewHouseHoldMember
