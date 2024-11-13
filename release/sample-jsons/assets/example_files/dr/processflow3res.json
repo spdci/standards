@@ -10,7 +10,7 @@
       "status_reason_message": "Search request processed successfully",
       "total_count": "3",
       "sender_id": "DR",
-      "receiver_id": "SP-MIS",
+      "receiver_id": "SP-System",
       "is_msg_encrypted": false,
       "meta": {}
     },

@@ -1,11 +1,11 @@
 {
-  "signature": "Signature: namespace=\"spdci\", kidId=\"SP-MIS|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691746200\", expires=\"1691832600\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
+  "signature": "Signature: namespace=\"spdci\", kidId=\"SP-System|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691746200\", expires=\"1691832600\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
   "header": {
     "version": "1.0.0",
     "message_id": "4567890123",
     "message_ts": "2024-08-11T12:00:00.000Z",
     "action": "subscribe",
-    "sender_id": "SP-MIS",
+    "sender_id": "SP-System",
     "sender_uri": "https://spmis.example.org/{namespace}/callback/on-new-disabled-newborn",
     "receiver_id": "DR",
     "total_count": 1,

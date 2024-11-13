@@ -1,5 +1,5 @@
 {
-    "signature": "Signature: namespace=\"dci\", kidId=\"SP-MIS|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691746200\", expires=\"1691832600\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
+    "signature": "Signature: namespace=\"dci\", kidId=\"SP-System|unique_key_id|ed25519\", algorithm=\"ed25519\", created=\"1691746200\", expires=\"1691832600\", headers=\"(created) (expires) digest\", signature=\"Base64(signing content)\"",
     "header": {
       "version": "1.0.0",
       "message_id": "b2a5c6d7-8e9f-4a1b-9d2c-34567890abcd",
@@ -10,7 +10,7 @@
       "status_reason_message": "",
       "total_count": "1",
       "completed_count": "",
-      "sender_id": "SP-MIS",
+      "sender_id": "SP-System",
       "receiver_id": "DR",
       "is_msg_encrypted": false,
       "meta": ""
