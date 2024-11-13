@@ -1,15 +1,15 @@
 [
     {
         "processflow_id" : "processflow1",        
-        "processflow_name": "Process Flow 1 : Searching disabled person with disability status approved and impairment type mobility"
+        "processflow_name": "Process Flow 1 :  SP-MIS queries the DR to request individuals with a specific disability criteria"
     },
     {
         "processflow_id" : "processflow2",        
-        "processflow_name": "Process Flow 2 : Get person disability status"
+        "processflow_name": "Process Flow 2 : SP-MIS queries the DR to confirm disability status "
     },
     {
         "processflow_id" : "processflow3",        
-        "processflow_name": "Process Flow 3 : Get disabled elderly"
+        "processflow_name": "Process Flow 3 : Eligibility check in a Grants for Old Age Scheme enrollment"
     },
     {
         "processflow_id" : "processflow4",        
