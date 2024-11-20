@@ -10,9 +10,9 @@ example:
     
     "disability_details": [
       {
-        "impairment_type": "Physical",
-        "impairment_level": "Severe",
-        "impairment_cause": "Accident",
+        "impairment_type": "Physical and movement related functions",
+        "impairment_level": "Severe impairment or difficulty",
+        "impairment_cause": "Work Accident",
         "age_on_set": "Working age"
       }
     ]

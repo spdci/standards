@@ -6,15 +6,10 @@ description: |
 example:
    [
       {
-        "id": "DisabilitySupport_001",
-        "type": "DisabilitySupport",
-        "label": "DR_Person",
-        "human_assistance": [
+        "human_assistance": 
           {
-            "id": "HumanAssistance_001",
-            "type": "HumanAssistance",
-            "assistance_type": "Basic Activity",
-            "intensity": "Daily",
+            "type": "mobility",
+            "frequency": "Daily",
             "support_status": "Needed",
             "caregiver": {
               "id": "Person_001",
@@ -25,7 +20,7 @@ example:
             "registration_date": "2024-01-15T10:00:00Z",
             "last_updated": "2024-09-20T12:30:00Z"
           }
-        ],
+        ,
         "assistive_technology": [],
         "housing_support": [],
         "medical_care": [],

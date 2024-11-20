@@ -35,35 +35,44 @@
             "reg_records": {
             "type": "object",
              "example": {
-              "personal_details": {
-                "identifier": "123456",
-                "name": {
-                  "first_name": "John",
-                  "last_name": "Doe"
+                "personal_details": {
+                  "identifier": "123456",
+                  "name": {
+                    "first_name": "John",
+                    "last_name": "Doe"
+                  },
+                  "date_of_birth": "1990-05-15",
+                  "gender": "Male"
                 },
-                "date_of_birth": "1990-05-15",
-                "gender": "Male"
-              },
-              "disability_status": "Approved",
-              "disability_details": [
-                {
-                  "impairment_type": "Mobility",
-                  "impairment_level": "Severe",
-                  "impairment_cause": "Accident",
-                  "age_on_set": "Working age"
-                }
-              ],
-              "disability_support": [
-                {
-                  "support_needed": "Needed",
-                  "support_type": "Personal Assistant",
-                  "support_intensity": "High"
-                }
-              ],
-              "transport_requirement": "Adaptable vehical",
-              "housing_type": "Social housing",
-              "registration_date": "2023-01-10T00:00:00Z",
-              "last_updated": "2023-09-20T00:00:00Z"
+                "disability_status": "Approved",
+                "disability_level": "Severe",
+                "disability_details": [
+                  {
+                    "impairment_type": "Physical and movement related functions",
+                    "impairment_level": "Severe impairment or difficulty",
+                    "impairment_cause": "Work Accident",
+                    "age_on_set": "Working age"
+                  }
+                ],
+                "disability_support": [
+                  {
+                    "human_assistance":{
+                        "frequency": "Permanent",
+                        "type": "mobility",
+                        "support_status": "Required"
+                      }  
+                  }
+                ],
+                "transport_requirement": "Adaptable vehical",
+                "housing_type": "Social housing",
+                "programs_enrollments":[
+                    {
+                      "programme_name" : "financial_assistance",
+                      "programme_identifier": "AD234"
+                    }
+                ],
+                "registration_date": "2023-01-10T00:00:00Z",
+                "last_updated": "2023-09-20T00:00:00Z"
               }
           }
         },
