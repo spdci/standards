@@ -15,10 +15,37 @@ info:
     3. Request status check: The request status checking APIs implement to check status of request sent in any above APIs
     
     Gitbook reference link:
-    - [DR - V1.0 ]()
+    - [DR - V1.0 ](https://standards.spdci.org/standards/wip-disability-registry)
 
     Code directory links:
-    - 
+    - [Impairment Type](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.01-impairmenttype-functional-limitationtype)
+    - [Impairment Level](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.02-impairmentlevel-functional-limitationslevel)
+    - [Human Assistance Type](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.03-humanassistancetype)
+    - [Support Frequency](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.04-supportfrequency)   
+    - [Support Status](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.05-supportstatusenum)
+    - [Assistive Technology](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.06-assistivetechnologyenum)
+    - [Disability Status](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.07-disabilityonset)
+    - [Impairment Cause](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.08-impairmentcause)
+    - [Transport Requirement](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.9-transportrequirement)
+    - [Housing Type](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.10-housingtype)
+    - [Medical Care](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.11-medicalcareenum)
+    - [Housing Support](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.12-housingsupportenum)
+    - [Animal Assistance](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.13-animalassitanceenum)
+    - [Disability Status](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.14-disabilitystatus)
+    - [Disability Status Level](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/code-directory/cd.dr.15-disabilitystatuslevel)
+
+    Data Objects:
+    - [PWDPerspn](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.01-pwdperson)
+    - [Disability Details](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.02-disabilitydetails)
+    - [Disability Support](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.03-disabilitysupport)
+    - [Human Assistance](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.04-humanassistance) 
+    - [Assistive Technology](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.05-assistivetechnology)
+    - [Medical Care](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.06-medicalcare)
+    - [Housing Support](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.07-housingsupport)
+    - [Animal Assistance](https://standards.spdci.org/standards/wip-disability-registry/disability-registry-and-sp-systems-interface/1.-crvs/data/data-objects/do.dr.08-animalassistance)
+    - [Member](https://standards.spdci.org/standards/v/wip-social-registry-v1.0.0/social-registry/1.-crvs/data/data-objects/do.sr.03-member)
+
+
 
     Each request is build up of three parts
     - signature 

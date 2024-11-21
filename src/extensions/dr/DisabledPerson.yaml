@@ -42,7 +42,7 @@ example:
           "programme_name" : "financial_assistance",
           "programme_identifier": "AD234"
         }
-    ]
+    ],
     "registration_date": "2023-01-10T00:00:00Z",
     "last_updated": "2023-09-20T00:00:00Z"
 
