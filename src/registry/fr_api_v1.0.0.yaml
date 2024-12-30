@@ -106,11 +106,8 @@ x-tagGroups:
       - SearchResponse 
       - SubscribeRequest
       - SubscribeResponse
-      - NotifyEventRequest
       - UnSubscribeRequest
       - UnSubscribeResponse 
-      - TxnStatusRequest
-      - TxnStatusResponse
       - EncryptedMessage
   - name: Status Codes
     tags: 
@@ -121,7 +118,7 @@ paths:
  /registry/search:
   post: 
     summary: "/registry/search"
-    description: Search person(s) in registry using identifier or custome attributes
+    description: Search person(s) in registry using identifier or custom attributes
     operationId: post_reg_search
     tags: 
       -  Async
@@ -329,57 +326,6 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/notify:
-  post: 
-    summary: "/registry/notify"
-    description: Registry to notify a life event to subscrbiers
-    operationId: post_reg_notify
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - notify
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/NotifyEventRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - notify
-    responses:
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
  /registry/unsubscribe:
   post: 
     summary: "/registry/unsubscribe"
@@ -485,109 +431,6 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/txn/status:
-  post: 
-    summary: "/registry/txn/status"
-    description: Perform async status check of previous civil registry transanctions using transaction_id and/or reference_id(s)
-    operationId: post_reg_txnstatus
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - txn-status
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/TxnStatusRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - txn-status
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
- /registry/txn/on-status:
-  post: 
-    summary: "/registry/txn/on-status"
-    description: Response to async status check of previous civil registrt transanctions using callback
-    operationId: post_reg_on-txnstatus
-    tags: 
-      -  Async
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - txn-on-status
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/TxnStatusResponse'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-        multipart/form-data:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/FileInfo"
-              - properties:
-                  action:
-                    enum:
-                      - txn-on-status
-    responses:
-        default:
-          $ref: "#/components/responses/Response"
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
  /registry/sync/search:
   post: 
     summary: "/registry/sync/search"
@@ -654,71 +497,6 @@ paths:
     security:
       - Authorization: [ ]
     deprecated: false
- /registry/sync/txn/status:
-  post: 
-    summary: "/registry/sync/txn/status"
-    description: Sync status check of registry Async APIs
-    operationId: post_reg_sync_txnstatus
-    tags: 
-      -  Sync
-    requestBody:
-      description: ""
-      required: true
-      content:
-        application/json:
-          schema:
-              type: object
-              properties:
-                signature:  
-                  $ref: "#/components/schemas/MsgSignature"
-                header:
-                  allOf:
-                    - $ref: "#/components/schemas/MsgHeader_V1.0.0"
-                    - properties:
-                        action:
-                          enum:
-                            - txn-status
-                message:
-                  type: object
-                  oneOf:
-                    - $ref: '#/components/schemas/TxnStatusRequest'
-                    - $ref: '#/components/schemas/EncryptedMessage'
-              required:
-                - header
-                - message
-    responses:
-        default:
-          description: "Transaction status check response"
-          content:
-            application/json:
-              schema:
-                  type: object
-                  properties:
-                    signature:  
-                      $ref: "#/components/schemas/MsgSignature"
-                    header:
-                      allOf:
-                        - $ref: "#/components/schemas/MsgCallbackHeader_V1.0.0"
-                        - properties:
-                            action:
-                              enum:
-                                - txn-on-status
-                    message:
-                      type: object
-                      oneOf:
-                        - $ref: '#/components/schemas/TxnStatusResponse'
-                        - $ref: '#/components/schemas/EncryptedMessage'
-                  required:
-                    - header
-        '401':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '403':
-          $ref: "#/components/responses/HttpErrorResponse"
-        '500':
-          $ref: "#/components/responses/HttpErrorResponse"
-    security:
-      - Authorization: [ ]
-    deprecated: false
 components:
   schemas:
     ###### src/extensions/cdpi schema objects
@@ -745,63 +523,9 @@ components:
     dci_VitalEvents: 
       $ref: ../extensions/dci/VitalEvents.yaml
 
-    ###### src/extensions/fhir schema objects
-    
-    ###### src/extensions/google schema objects
-    GooglePlusCode: 
-      $ref: ../extensions/google/GooglePlusCode.yaml
-
-    ###### src/extensions/mosip schema objects
-    mosip_EventType: 
-      $ref: ../extensions/mosip/EventType.yaml
-    mosip_LangaugeValue: 
-      $ref: ../extensions/mosip/LangaugeValue.yaml
-    mosip_LanguageValueList: 
-      $ref: ../extensions/mosip/LanguageValueList.yaml
-    mosip_MOSIPVerifiableCredential: 
-      $ref: ../extensions/mosip/MOSIPVerifiableCredential.yaml
-    mosip_RecordType: 
-      $ref: ../extensions/mosip/RecordType.yaml
-    mosip_RegistrationRecord: 
-      $ref: ../extensions/mosip/RegistrationRecord.yaml  
-        
-    ###### src/extensions/nid schema objects
-    nid_DeceasedRecord: 
-      $ref: ../extensions/nid/DeceasedRecord.yaml
-    nid_Document: 
-      $ref: ../extensions/nid/Document.yaml
-    nid_EKycDetails: 
-      $ref: ../extensions/nid/EKycDetails.yaml
-    nid_RecordType: 
-      $ref: ../extensions/nid/RecordType.yaml
-    nid_ResidentAddress:
-      $ref: ../extensions/nid/ResidentAddress.yaml
-    nid_ResidentLocalAddress:
-      $ref: ../extensions/nid/ResidentLocalAddress.yaml
-    nid_ResidentLocalName:
-      $ref: ../extensions/nid/ResidentLocalName.yaml
-    nid_ResidentNationality:
-      $ref: ../extensions/nid/ResidentNationality.yaml
-    nid_ResidentPhoto:
-      $ref: ../extensions/nid/ResidentPhoto.yaml
-    nid_ResidentRecord:
-      $ref: ../extensions/nid/ResidentRecord.yaml
-    
-    ###### src/extensions/openid schema objects
-    openid_Address: 
-      $ref: ../extensions/openid/Address.yaml
-    openid_PersonRecord:
-      $ref: ../extensions/openid/PersonRecord.yaml
-    openid_PersonDocDetails: 
-      $ref: ../extensions/openid/PersonDocDetails.yaml
-
     ###### src/registry/schema objects
     RegistryQueries: 
       $ref: schema/RegistryQueries.yaml
-    # FetchSubscriptionsRequest: 
-    #   $ref: schema/FetchSubscriptionsRequest.yaml
-    # FetchSubscriptionsResponse:
-    #   $ref: schema/FetchSubscriptionsResponse.yaml
     NotifyEventRequest: 
       $ref: schema/NotifyEventRequest.yaml
     RegistryEventType:
@@ -813,9 +537,9 @@ components:
     RegistryType: 
       $ref: schema/RegistryType.yaml
     SearchRequest: 
-      $ref: schema/SearchRequest.yaml
+      $ref: fr/SearchRequest.yaml
     SearchResponse: 
-      $ref: schema/SearchResponse.yaml
+      $ref: fr/SearchResponse.yaml
     SearchStatusReasonCode: 
       $ref: schema/SearchStatusReasonCode.yaml
     SubscribeRequest: 
@@ -832,10 +556,6 @@ components:
       $ref: schema/SubscriptionInfo.yaml
     SubscriptionStatus:
         $ref: schema/SubscriptionStatus.yaml
-    TxnStatusRequest: 
-      $ref: schema/TxnStatusRequest.yaml            
-    TxnStatusResponse: 
-      $ref: schema/TxnStatusResponse.yaml  
     UnSubscribeRequest: 
       $ref: schema/UnSubscribeRequest.yaml
     UnSubscribeResponse: 
@@ -893,9 +613,9 @@ components:
     Meta:
       $ref: ../common/schema/Meta.yaml
     MsgCallbackHeader_V1.0.0: 
-      $ref: ../common/schema/MsgCallbackHeader_V1.0.0.yaml
+      $ref: fr/MsgCallbackHeader_V1.0.0.yaml
     MsgHeader_V1.0.0: 
-      $ref: ../common/schema/MsgHeader_V1.0.0.yaml
+      $ref: fr/MsgHeader_V1.0.0.yaml
     MsgHeaderStatusReasonCode: 
       $ref: ../common/schema/MsgHeaderStatusReasonCode.yaml
     MsgSignature: 
