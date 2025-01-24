@@ -536,7 +536,6 @@ components:
                       3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
                         - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
                         - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
-                        - search all farmers with land area less than 2 acers in district code 504
                     oneOf:
                       - type: object
                         description: Identifier type and value object

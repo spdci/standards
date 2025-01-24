@@ -22,13 +22,17 @@ properties:
         2. Query expression as a template with placeholder to pass conditional search parameters
     example:
       expression: 
+        collection: "Group"
         query: 
           $and: [
             {
-              member.disabled: { $eq: true }
+              poverty_score: { $lt: 5 }
             },
             {
               location: { $eq: "central_region" }
             },
+            {
+              group_size: { $lt: 5 }
+            }
           ]
     

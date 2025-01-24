@@ -26,11 +26,11 @@ properties:
             reg_event_type:
               $ref: ./RegistryEventType.yaml
             query_type:
-              $ref: ../../common/schema/QueryType.yaml
+              $ref: ./QueryType.yaml
             response_entity:
               $ref: ../../common/schema/ResponseEntity.yaml
             query:
-              $ref: ../schema/RegistryQueries.yaml
+              $ref: ../social/RegistryQueries.yaml
             sort:
               $ref: ../../common/schema/SearchSortList.yaml
             pagination:

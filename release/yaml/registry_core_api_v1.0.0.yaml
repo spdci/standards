@@ -1570,20 +1570,12 @@ components:
                     default: 1.0.0
                   reg_type:
                     $ref: '#/components/schemas/RegistryType'
-                  reg_event_type:
-                    $ref: '#/components/schemas/RegistryEventType'
-                  response_entity:
-                    type: enum
-                    description: |
-                      Define the type of response to have when executing the search
-                    enum:
-                      - Household
-                      - Family
-                      - Member
+                  reg_record_type:
+                    $ref: '#/components/schemas/RegistryRecordType'
                   reg_records:
                     $ref: '#/components/schemas/RegistryRecord'
                 required:
-                  - response_entity
+                  - reg_record_type
                   - reg_records
               locale:
                 $ref: '#/components/schemas/LanguageCode'
@@ -1603,83 +1595,17 @@ components:
         **Notes:**
           1. Registry event type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable identifiers.
-          3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
-      example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
+          3. example: "spdci-common:RegistryEventType:LiveBirth"
+      example: 'spdci-common:RegistryEventType:LiveBirth'
     RegistryRecord:
       type: object
       description: |
-        The "Household" object contains fields expected in response of search
+        The "person" object contains fields expected in response of search
         @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
-        @type: "Household" <br>
+        @type: "Person" <br>
         @container: "@set" <br> 
       example:
-        type: object
-        description: |
-          1. Attributes of a household to create fetch records, create verifiable credentials or use in search criteria.
-          3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-
-          @context: https://schema.spdci.org/extensions/social/v1/Household.jsonld <br>
-          @type: "@context" <br>
-        example:
-          '@context':
-            '@vocab': 'https://schema.spdci.org/extensions/social/v1'
-            xsd: 'http://www.w3.org/2001/XMLSchema#'
-            schema: 'http://schema.org/'
-            rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-            owl: 'http://www.w3.org/2002/07/owl#'
-          '@id': Household
-          '@type': Household
-          household_identifier: HS02052024
-          address:
-            geo_location: ''
-          poverty_score: '4.0'
-          poverty_score_type: ''
-          household_size: '1'
-          household_head_info:
-            person:
-              identifier_type: NID
-              identifier_value: '0205202401'
-              name:
-                first_name: Test
-                second_name: Test2
-                surname: Test3
-              sex: F
-              birth_date: 02.05.2004
-              death_date: ' '
-              address: ' '
-              phone_number: ''
-              email: ' '
-          member_list:
-            - household_member:
-                member_identifier: HS0205202401
-                demographic_info:
-                  person:
-                    identifier_type: NID
-                    identifier_value: '0205202401'
-                    name:
-                      first_name: Test
-                      second_name: Test2
-                      surname: Test3
-                    sex: F
-                    birth_date: 02.05.2004
-                    death_date: ' '
-                    address: {}
-                    phone_number: ''
-                    email: ' '
-                relationship_head: self
-                related_person: {}
-                is_disabled: '0'
-                disability_info: ' '
-                marital_status: Single
-                employment_status: employed
-                occupation: Caregiver
-                income_level: ' '
-                language_code: Eng
-                education_level: Highschool
-                registration_date: 02.05.2024
-          additional_attributes: []
-          registration_date: 02.05.2024
-          last_update: ' '
+        $ref: '#/components/schemas/dci_Person'
     RegistryRecordType:
       type: string
       description: |
@@ -1701,8 +1627,8 @@ components:
         **Notes:**
           1. Registry type values defined as per implementation context.
           2. Usually a list of **enum** values of all possible queryable functional registries 
-          3. example: "ns:org:RegistryType:Social"
-      example: 'ns:org:RegistryType:Social'
+          3. example: "ns:org:RegistryType:Civil"
+      example: 'ns:org:RegistryType:Civil'
     SearchRequest:
       type: object
       description: |
@@ -1900,7 +1826,7 @@ components:
               status_reason_code:
                 $ref: '#/components/schemas/SubscribeStatusReasonCode'
               status_reason_message:
-                description: Status reason code message. Helps actionanble messaging for systems/end users
+                description: Status reason code message. Helps actionable messaging for systems/end users
                 type: string
                 maxLength: 999
               subscriptions:
@@ -2372,7 +2298,7 @@ components:
             **Notes:**
               1. Query types that helps decode query expressions
               2. Sample query type enums: "GraphQl", "Sql", "NoSql"
-          example: 'ns:org:QueryType:NoSql'
+          example: 'ns:org:QueryType:GraphQl'
         value:
           type: object
           description: |
@@ -2383,22 +2309,13 @@ components:
               1. Query expression's syntax / format is determined based on query-type.
               2. Query expression as a template with placeholder to pass conditional search parameters
           example:
-            expression:
-              collection: HouseHold
-              query:
-                $and:
-                  - poverty_score:
-                      $lt: 5
-                  - location:
-                      $eq: central_region
-                  - household_size:
-                      $lt: 5
+            expression: ' query GeBirthRecordById: { person: (UIN: "1") { BRN, name, gender, birthDate, birthPlace, parents } } '
     FileInfo:
       type: object
       description: File info. Used in file upload feature using HTTPS
       properties:
         action:
-          description: G2P Connect specific actions. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
+          description: SPDCI Connect specific actions. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
           type: string
         fileName:
           description: Disbursement instruction file representing Disburse or OnDisburse end point elements i.e signature/header/message entities as a file record
@@ -2445,7 +2362,7 @@ components:
           example: '12314567890'
     LanguageCode:
       type: string
-      description: indicates language code. G2P Connect supports country codes as per ISO 639.3 standard
+      description: indicates language code. SPDCI Connect supports country codes as per ISO 639.3 standard
       pattern: '^[a-z]{3,3}$'
       example: en
     LatLong:
@@ -2485,7 +2402,7 @@ components:
         message_ts:
           $ref: '#/components/schemas/DateTime'
         action:
-          description: G2P Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
+          description: SPDCI Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
           type: string
         status:
           $ref: '#/components/schemas/RequestStatus'
@@ -2561,7 +2478,7 @@ components:
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
-          example: pymts.example.org
+          example: civilregistry.example.org
         total_count:
           description: Total no of requests present in the message request
           type: integer
@@ -2638,7 +2555,7 @@ components:
         - idtype-value
         - expression
         - predicate
-      example: expression
+      example: idtype-value
     ReferenceId:
       type: string
       description: Unique reference_id set by txn initiating system for each request in a batch

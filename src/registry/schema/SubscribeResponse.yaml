@@ -19,7 +19,7 @@ properties:
         status_reason_code:
           $ref: "./SubscribeStatusReasonCode.yaml" 
         status_reason_message:
-          description: "Status reason code message. Helps actionanble messaging for systems/end users"
+          description: "Status reason code message. Helps actionable messaging for systems/end users"
           type: string
           maxLength: 999
         subscriptions:

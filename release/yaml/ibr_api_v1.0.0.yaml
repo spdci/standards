@@ -999,19 +999,12 @@ components:
                     default: 1.0.0
                   reg_type:
                     $ref: '#/components/schemas/SubscriptionInfo/properties/reg_type'
-                  reg_event_type:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/reg_event_type'
-                  response_entity:
-                    type: string
-                    description: |
-                      Define the type of response to have when executing the search
-                    enum:
-                      - Group
-                      - Member
+                  reg_record_type:
+                    $ref: '#/components/schemas/RegistryRecordType'
                   reg_records:
                     $ref: '#/components/schemas/RegistryRecord'
                 required:
-                  - response_entity
+                  - reg_record_type
                   - reg_records
               locale:
                 $ref: '#/components/schemas/LanguageCode'
@@ -1036,196 +1029,12 @@ components:
     RegistryRecord:
       type: object
       description: |
-        The "group" object contains fields expected in response of search
+        The "person" object contains fields expected in response of search
         @context: https://schema.spdci.org/extensions/dci/v1/Person.jsonld <br>
-        @type: "Group" <br>
+        @type: "Person" <br>
         @container: "@set" <br> 
       example:
-        type: object
-        description: |
-          1. Attributes of a group to create fetch records, create verifiable credentials or use in search criteria.
-          3. Allows Country/Registry specific implementation extensions using Attribute Name/Value pairs.
-
-          @context: https://schema.spdci.org/extensions/social/v1/Group.jsonld <br>
-          @type: "@context" <br>
-        example:
-          '@context':
-            spdci: 'https://schema.spdci.org/extensions/social/v1/'
-            rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
-            xsd: 'http://www.w3.org/2001/XMLSchema#'
-            owl: 'http://www.w3.org/2002/07/owl#'
-            common: 'https://schema.spdci.org/common/v1/'
-          '@id': 'https://example.org/group/001'
-          '@type': 'spdci:Group'
-          group_identifier:
-            - '@type': Identifier
-              identifier_type: NationalID
-              identifier_value: G9876543210
-          group_type: family
-          place:
-            '@type': Place
-            geo:
-              '@type': GeoCoordinates
-              latitude: '40.712776'
-              longitude: '-74.005974'
-            address: '123 Main St, Anytown, CountryName'
-          place_address: 1
-          poverty_score: 45.2
-          poverty_score_type: income-based
-          group_head_info:
-            '@type': 'spdci:Member'
-            '@id': 'https://example.org/member/987654321'
-            member_identifier:
-              - '@type': Identifier
-                identifier_type: NationalID
-                identifier_value: M9876543210
-            demographic_info:
-              '@type': SRPerson
-              identifier:
-                - '@type': Identifier
-                  identifier_type: NationalID
-                  identifier_value: '9876543210'
-              name:
-                '@type': Name
-                surname: Smith
-                given_name: Alice
-                prefix: Ms.
-                suffix: ''
-              sex: female
-              address:
-                '@type': Address
-                street_address: 123 Main St
-                city: Anytown
-                postal_code: '12345'
-                country: CountryName
-              birth_date: '1985-05-20T00:00:00Z'
-              registration_date: '2022-01-10T08:00:00Z'
-            is_disabled: false
-            marital_status: married
-            registration_date: '2022-01-10T08:00:00Z'
-          group_size: 4
-          member_list:
-            - '@type': Member
-              '@id': 'https://example.org/member/987654321'
-              member_identifier:
-                - '@type': Identifier
-                  identifier_type: NationalID
-                  identifier_value: M9876543210
-              demographic_info:
-                '@type': SRPerson
-                identifier:
-                  - '@type': Identifier
-                    identifier_type: NationalID
-                    identifier_value: '9876543210'
-                name:
-                  '@type': Name
-                  surname: Smith
-                  given_name: Alice
-                  prefix: Ms.
-                  suffix: ''
-                sex: female
-                address:
-                  '@type': Address
-                  street_address: 123 Main St
-                  city: Anytown
-                  postal_code: '12345'
-                  country: CountryName
-                birth_date: '1985-05-20T00:00:00Z'
-                registration_date: '2022-01-10T08:00:00Z'
-              is_disabled: false
-              marital_status: married
-              registration_date: '2022-01-10T08:00:00Z'
-            - '@type': Member
-              '@id': 'https://example.org/member/123456789'
-              member_identifier:
-                - '@type': Identifier
-                  identifier_type: NationalID
-                  identifier_value: M9876543210
-              demographic_info:
-                '@type': SRPerson
-                'spdci:identifier':
-                  - '@type': Identifier
-                    identifier_type: NationalID
-                    identifier_value: '1234567890'
-                name:
-                  '@type': Name
-                  surname: Smith
-                  given_name: Bob
-                  prefix: Mr.
-                  suffix: ''
-                sex: male
-                address:
-                  '@type': Address
-                  street_address: 123 Main St
-                  city: Anytown
-                  postal_code: '12345'
-                  country: CountryName
-                birth_date: '1982-03-15T00:00:00Z'
-                registration_date: '2022-01-10T08:00:00Z'
-              is_disabled: false
-              marital_status: married
-              registration_date: '2022-01-10T08:00:00Z'
-            - '@type': Member
-              '@id': 'https://example.org/member/987654322'
-              member_identifier:
-                - '@type': Identifier
-                  identifier_type: NationalID
-                  identifier_value: '9876543210'
-              demographic_info:
-                '@type': SRPerson
-                ':identifier':
-                  - '@type': Identifier
-                    identifier_type: NationalID
-                    identifier_value: '9876543221'
-                name:
-                  '@type': cName
-                  surname: Smith
-                  given_name: Charlie
-                  prefix: ''
-                  suffix: ''
-                sex: male
-                address:
-                  '@type': Address
-                  street_address: 123 Main St
-                  city: Anytown
-                  postal_code: '12345'
-                  country: CountryName
-                birth_date: '2010-07-05T00:00:00Z'
-                registration_date: '2022-01-10T08:00:00Z'
-              is_disabled: false
-              marital_status: single
-              registration_date: '2022-01-10T08:00:00Z'
-            - '@type': Member
-              '@id': 'https://example.org/member/987654323'
-              member_identifier: M987654323
-              demographic_info:
-                '@type': SRPerson
-                identifier:
-                  - '@type': Identifier
-                    identifier_type: NationalID
-                    identifier_value: '9876543232'
-                name:
-                  '@type': Name
-                  surname: Smith
-                  given_name: Daisy
-                  prefix: ''
-                  suffix: ''
-                sex: female
-                address:
-                  '@type': Address
-                  street_address: 123 Main St
-                  city: Anytown
-                  postal_code: '12345'
-                  country: CountryName
-                birth_date: '2012-09-22T00:00:00Z'
-                sregistration_date: '2022-01-10T08:00:00Z'
-              is_disabled: false
-              marital_status: single
-              'spdci:registration_date': '2022-01-10T08:00:00Z'
-          registration_date: '2022-01-10T08:00:00Z'
-          last_updated: '2023-06-15T10:00:00Z'
-          additional_attributes:
-            - services: receives_subsidy
+        $ref: '#/components/schemas/dci_Person'
     RegistryRecordType:
       type: string
       description: |
@@ -1278,9 +1087,58 @@ components:
                   reg_event_type:
                     $ref: '#/components/schemas/RegistryEventType'
                   query_type:
-                    $ref: '#/components/schemas/QueryType'
+                    type: string
+                    description: |
+                      1. Query format allow multiple ways to search registry
+                      2. Templatized query expressions with placeholder for conditional values
+                    enum:
+                      - idtype-value
+                      - expression
+                      - predicate
+                    example: expression
                   query:
-                    $ref: '#/components/schemas/SubscriptionInfo/properties/filter'
+                    description: |
+                      1. Implementing systems can define schemas.
+                      2. Based on context, pre defined named queries can also help as part of ExpTemplate construct.
+                      3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
+                        - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
+                        - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
+                    oneOf:
+                      - type: object
+                        description: Identifier type and value object
+                        properties:
+                          type:
+                            type: string
+                            description: |
+                              @context: https://schema.spdci.org/common/v1/QueryTypeEnum.jsonld <br>
+                              @type: "QueryType" <br>
+
+                              **Notes:**
+                                1. Query types that helps decode query expressions
+                                2. Sample query type enums: "GraphQl", "Sql", "NoSql"
+                            example: 'ns:org:QueryType:NoSql'
+                          value:
+                            type: object
+                            description: |
+                              @context: https://schema.spdci.org/common/v1/QueryExpression.jsonld <br>
+                              @type: "QueryExpression" <br>
+
+                              **Notes:**
+                                1. Query expression's syntax / format is determined based on query-type.
+                                2. Query expression as a template with placeholder to pass conditional search parameters
+                            example:
+                              expression:
+                                collection: Group
+                                query:
+                                  $and:
+                                    - poverty_score:
+                                        $lt: 5
+                                    - location:
+                                        $eq: central_region
+                                    - group_size:
+                                        $lt: 5
+                      - $ref: '#/components/schemas/IdentifierTypeValue'
+                      - $ref: '#/components/schemas/ExpPredicateWithConditionList'
                   sort:
                     $ref: '#/components/schemas/SearchSortList'
                   pagination:
@@ -1517,9 +1375,39 @@ components:
               subscriptions:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SubscriptionInfo'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      default: 1.0.0
+                    code:
+                      $ref: '#/components/schemas/SubscriptionCode'
+                    status:
+                      $ref: '#/components/schemas/SubscriptionStatus'
+                    timestamp:
+                      $ref: '#/components/schemas/DateTime'
+                    reg_type:
+                      $ref: '#/components/schemas/RegistryType'
+                    reg_event_type:
+                      $ref: '#/components/schemas/RegistryEventType'
+                    frequency:
+                      $ref: '#/components/schemas/EventFrequency'
+                    filter_type:
+                      $ref: '#/components/schemas/QueryType'
+                    filter:
+                      $ref: '#/components/schemas/SubscriptionInfo/properties/filter'
+                    notify_record_type:
+                      $ref: '#/components/schemas/SubscribeRequest/properties/subscribe_request/items/properties/subscribe_criteria/properties/notify_record_type'
+                      required:
+                        - reg_event_type
+                        - filter
+                        - notify_record_type
+                    locale:
+                      $ref: '#/components/schemas/LanguageCode'
+                  required:
+                    - subscription_code
+                    - timestamp
+                    - subscribe_criteria
               locale:
                 $ref: '#/components/schemas/LanguageCode'
             required:
@@ -1571,8 +1459,8 @@ components:
             **Notes:**
               1. Registry type values defined as per implementation context.
               2. Usually a list of **enum** values of all possible queryable functional registries 
-              3. example: "ns:org:RegistryType:Social"
-          example: 'ns:org:RegistryType:Social'
+              3. example: "ns:org:RegistryType:Civil"
+          example: 'ns:org:RegistryType:Civil'
         reg_event_type:
           type: string
           description: |
@@ -1582,8 +1470,8 @@ components:
             **Notes:**
               1. Registry event type values defined as per implementation context.
               2. Usually a list of **enum** values of all possible queryable identifiers.
-              3. example: "spdci-common:RegistryEventType:NewHouseHoldMember"
-          example: 'spdci-common:RegistryEventType:NewHouseHoldMember'
+              3. example: "spdci-common:RegistryEventType:LiveBirth"
+          example: 'spdci-common:RegistryEventType:LiveBirth'
         frequency:
           $ref: '#/components/schemas/EventFrequency'
         filter_type:
@@ -1595,7 +1483,6 @@ components:
             3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
               - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
               - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
-              - search all farmers with land area less than 2 acers in district code 504
           oneOf:
             - type: object
               description: Identifier type and value object
@@ -1609,7 +1496,7 @@ components:
                     **Notes:**
                       1. Query types that helps decode query expressions
                       2. Sample query type enums: "GraphQl", "Sql", "NoSql"
-                  example: 'ns:org:QueryType:NoSql'
+                  example: 'ns:org:QueryType:GraphQl'
                 value:
                   type: object
                   description: |
@@ -1620,16 +1507,7 @@ components:
                       1. Query expression's syntax / format is determined based on query-type.
                       2. Query expression as a template with placeholder to pass conditional search parameters
                   example:
-                    expression:
-                      collection: Group
-                      query:
-                        $and:
-                          - poverty_score:
-                              $lt: 5
-                          - location:
-                              $eq: central_region
-                          - group_size:
-                              $lt: 5
+                    expression: ' query GeBirthRecordById: { person: (UIN: "1") { BRN, name, gender, birthDate, birthPlace, parents } } '
             - $ref: '#/components/schemas/IdentifierTypeValue'
             - $ref: '#/components/schemas/ExpPredicateWithConditionList'
         notify_record_type:
@@ -1782,8 +1660,13 @@ components:
               $ref: '#/components/schemas/QueryType'
               description: ''
             response_entity:
-              $ref: '#/components/schemas/NotifyEventRequest/properties/notify_event/items/properties/data/properties/response_entity'
               example: Beneficiary
+              type: string
+              description: |
+                Define the type of response to have when executing the search
+              enum:
+                - Group
+                - Member
             query:
               type: object
               description: Query expression for the enrolled query
@@ -2324,7 +2207,7 @@ components:
         - idtype-value
         - expression
         - predicate
-      example: expression
+      example: idtype-value
     ReferenceId:
       type: string
       description: Unique reference_id set by txn initiating system for each request in a batch

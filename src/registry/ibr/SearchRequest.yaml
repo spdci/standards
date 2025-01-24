@@ -26,9 +26,9 @@ properties:
             reg_event_type:
               $ref: ./RegistryEventType.yaml
             query_type:
-              $ref: ../../common/schema/QueryType.yaml
+              $ref: ../social/QueryType.yaml
             query:
-              $ref: ../schema/RegistryQueries.yaml
+              $ref: ../ibr/RegistryQueries.yaml
             sort:
               $ref: ../../common/schema/SearchSortList.yaml
             pagination:

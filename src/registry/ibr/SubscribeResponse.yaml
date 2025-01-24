@@ -25,9 +25,7 @@ properties:
         subscriptions:
           type: array
           items: 
-            $ref: ../schema/SubscriptionInfo.yaml
-        pagination: 
-          $ref: "../../common/schema/Pagination.yaml"
+            $ref: SubscriptionInfo.yaml
         locale:
           $ref: "../../common/schema/LanguageCode.yaml"
       required:
