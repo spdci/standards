@@ -2,7 +2,7 @@ type: object
 description: 'Message header'
 properties:
   version:  
-    description: "Messaing protocol specification version being used"
+    description: "Messaging protocol specification version being used"
     type: string
     default: 1.0.0
   message_id: 
@@ -13,14 +13,14 @@ properties:
     type: string
     example: "789"
   message_ts:
-    $ref: DateTime.yaml
+    $ref: ../../common/schema/DateTime.yaml
   action:
     description: SPDCI Connect specific action. Usually verb from the URI should go here to help store and fwd kind of processing requirements.
     type: string
   status:
-    $ref: "./RequestStatus.yaml"
+    $ref: "../../common/schema/RequestStatus.yaml"
   status_reason_code:
-    $ref: "./MsgHeaderStatusReasonCode.yaml"
+    $ref: "../../common/schema/MsgHeaderStatusReasonCode.yaml"
   status_reason_message:
     description: "Status reascon code message, if any, Helps actionable messaging for system/end users"
     type: string
@@ -30,7 +30,7 @@ properties:
     type: integer
     example: 21800
   completed_count:
-    description: "No of requests in complteed state. Complete includes success and error requests due to funcational errors"
+    description: "No of requests in completed state. Complete includes success and error requests due to funcational errors"
     type: integer
     example: 50
   sender_id:
@@ -38,7 +38,7 @@ properties:
       1. sender_id registered with the receiving system or gateway. 
       2. Used for authorization, encryption, digital sign verfication, etc., 
     type: string
-    example: 'dr.example.org'
+    example: 'fr.example.org'
   receiver_id:
     description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
     type: string
@@ -48,7 +48,7 @@ properties:
     type: boolean
     default: false
   meta:
-    $ref: Meta.yaml
+    $ref: ../../common/schema/Meta.yaml
 required:
   - message_id
   - message_ts

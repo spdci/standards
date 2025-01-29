@@ -13,7 +13,7 @@ properties:
     type: string
     example: "123"
   message_ts:
-    $ref: DateTime.yaml
+    $ref: ../../common/schema/DateTime.yaml
   action:
     description: spdci Connect specific action. Usually verb from the URI. Helps in sync, async, store/fwd processing. Helps to identify payload type in message property.
     type: string
@@ -34,7 +34,7 @@ properties:
   receiver_id:
     description: receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.
     type: string
-    example: 'dr.example.org'
+    example: 'farmer.example.org'
   total_count:
     description: Total no of requests present in the message request
     type: integer
@@ -44,7 +44,7 @@ properties:
     type: boolean
     default: false
   meta:
-    $ref: Meta.yaml
+    $ref: ../../common/schema/Meta.yaml
 required:
   - message_id
   - message_ts

@@ -25,10 +25,7 @@ properties:
         query: 
           $and: [
             {
-              member.disabled: { $eq: true }
-            },
-            {
-              location: { $eq: "central_region" }
+              land_details.address.region_code: { $eq: "A205" }
             },
           ]
     

@@ -23,14 +23,14 @@ properties:
             version:
               type: string
               default: 1.0.0
+            reg_type:
+              $ref: RegistryType.yaml
             reg_event_type:
-              $ref: ./RegistryEventType.yaml
+              $ref: RegistryEventType.yaml
             query_type:
-              $ref: ./QueryType.yaml
-            response_entity:
-              $ref: ../../common/schema/ResponseEntity.yaml
+              $ref: ../../common/schema/QueryType.yaml
             query:
-              $ref: ../social/RegistryQueries.yaml
+              $ref: RegistryQueries.yaml
             sort:
               $ref: ../../common/schema/SearchSortList.yaml
             pagination:

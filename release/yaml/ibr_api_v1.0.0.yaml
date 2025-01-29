@@ -11,7 +11,7 @@ info:
     That way, with time, we can improve the API in general, and expose some of the new features in upcoming version.
 
     1. Search: The Search API provides functionality to search based on demographic, identifiers and custom query
-    2. Enrollment updates: The enrollment updates API send  details of beneficiaries enrolled in programs  from SP-System system
+    2. Enrollment updates: The enrollment updates API send  details of beneficiaries enrolled in programs  from SP-System
     3. Enrolled : the enrolled API is a special type of search to return the programs a beneficiary is enrolled in
 
     Gitbook reference link[WIP]:
@@ -139,7 +139,7 @@ paths:
     post:
       summary: /registry/search
       description: |-
-        The async search api will accept request and will send response to on-search endpoint. The IBR will implement /registry/search endpoint and SP-System shall implement /registry/on-search to receive data from IBR.
+        The async search api will accept request and will send response to on-search endpoint. The IBR will implement /registry/search endpoint and the SP-System shall implement /registry/on-search to receive data from IBR.
         The search request message consist of reg_event_type, query_type, query, sort, pagination, consent, authorize, locale. The IBR will validate the request and will send response to on-search endpoint. 
         Information for each field is given below.
           - reg_event_type: The event type for which search to be performed, this can be any of event type explained in RegistryEventType.yaml
@@ -427,7 +427,7 @@ paths:
     post:
       summary: /registry/sync/enrollment/updates
       description: |-
-        The /registry/enrollments/updates endpoint will be implemented by IBR to receive details of beneficiaries enrolled in programs  from SP-System.
+        The /registry/enrollments/updates endpoint will be implemented by IBR to receive details of beneficiaries enrolled in programs from SP-System.
         The receipt_type and beneficiaries will be required to make request. 
         Three receipt types are supported as of now, they are 
           1) Enrolled beneficiaries 
@@ -712,7 +712,6 @@ components:
                       3. ExpressionWithConditionList is simple generic search query construct to solve for majority of search conditons. few examples: <br>
                         - search or subscribe to update events; e.g any updates in postal_code 12345 between 1/jan/2020 and 31/dec/2020
                         - search or subscribe to birth, death events; e.g any new birth in postal_code 12345 after 1/jan/2023
-                        - search all farmers with land area less than 2 acers in district code 504
                     oneOf:
                       - type: object
                         description: Identifier type and value object
@@ -1149,7 +1148,7 @@ components:
         - txnstatus_response
     EnrolledRequest:
       type: object
-      description: Registry to notify a event to subscrbiers
+      description: Registry to notify a event to subscribers
       properties:
         transaction_id:
           $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
@@ -1159,8 +1158,13 @@ components:
             Enrolled query
           properties:
             query_type:
-              $ref: '#/components/schemas/SearchRequest/properties/search_request/items/properties/search_criteria/properties/query_type'
               description: ''
+              type: string
+              enum:
+                - idtype-value
+                - expression
+                - predicate
+              example: idtype-value
             response_entity:
               example: Beneficiary
               type: string
@@ -1175,18 +1179,20 @@ components:
               example:
                 person_identifier:
                   eq: ABC451123
+                programme_identifier.program.programme_identifier:
+                  eq: DCI001
       required:
         - transaction_id
         - enrolled_criteria
     EnrolledResponse:
       type: object
-      description: Response to search request. Multiple repsonses for each page can be pushed to the caller as an implementation!
+      description: Response to verify enrollment status request.
       properties:
         transaction_id:
           $ref: '#/components/schemas/SearchRequest/properties/transaction_id'
         correlation_id:
           $ref: '#/components/schemas/SearchResponse/properties/correlation_id'
-        search_response:
+        enrolled_response:
           type: array
           items:
             type: object
@@ -1197,43 +1203,25 @@ components:
                 $ref: '#/components/schemas/MsgHeader_V1.0.0/properties/message_ts'
               status:
                 $ref: '#/components/schemas/MsgCallbackHeader_V1.0.0/properties/status'
-              status_reason_code:
-                $ref: '#/components/schemas/SearchStatusReasonCode'
               status_reason_message:
                 description: Status reason code message. Helps actionable messaging for systems/end users
                 type: string
                 maxLength: 999
-              data:
-                type: object
-                description: |
-                  Search result record as an outcome of search/subscribe action
-                properties:
-                  version:
-                    type: string
-                    default: 1.0.0
-                  reg_records:
-                    description: |
-                      The "Beneficiary" object contains fields expected in response of search
-                      @context: https://schema.spdci.org/extensions/ibr/v1/Beneficiary.jsonld <br>
-                      @type: "@context" <br>
-                      @container: "@set" <br>
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/data/properties/reg_records/items'
-                required:
-                  - reg_records
-              pagination:
-                $ref: '#/components/schemas/SearchResponse/properties/search_response/items/properties/pagination'
-              locale:
-                $ref: '#/components/schemas/TxnStatusRequest/properties/txnstatus_request/properties/locale'
+              enrolled_status:
+                description: Indicates whether the individual is registered as beneficiary ('yes') or not ('no').
+                type: string
+                enum:
+                  - 'yes'
+                  - 'no'
             required:
               - reference_id
               - timestamp
               - status
+              - enrolled_status
       required:
         - transaction_id
         - correlation_id
-        - search_response
+        - enrolled_response
     EncryptedMessage:
       description: Encrypted payload
       type: object
@@ -1326,7 +1314,7 @@ components:
       description: Message header
       properties:
         version:
-          description: Messaing protocol specification version being used
+          description: Messaging protocol specification version being used
           type: string
           default: 1.0.0
         message_id:
@@ -1368,11 +1356,11 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verfication, etc., 
           type: string
-          example: civilregistry.example.org
+          example: ibr.example.org
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verfication, etc., functions.'
           type: string
-          example: registry.example.org
+          example: spmis.example.org
         is_msg_encrypted:
           description: Is message encrypted?
           type: boolean
@@ -1389,7 +1377,7 @@ components:
       description: Message header
       properties:
         version:
-          description: Messaing protocol specification version being used
+          description: Messaging protocol specification version being used
           type: string
           default: 1.0.0
         message_id:
@@ -1413,7 +1401,7 @@ components:
             1. sender_id registered with the receiving system or gateway. 
             2. Used for authorization, encryption, digital sign verification, etc.,
           type: string
-          example: spp.example.org
+          example: spmis.example.org
         sender_uri:
           description: |
             1. sender url to accept callbacks. Applicable only for async communications and if response ack_status is ACK.
@@ -1421,11 +1409,11 @@ components:
             3. For SFTP based communications, this shall be set to server/folder details.
           type: string
           format: uri
-          example: 'https://spp.example.org/{namespace}/callback/on-search'
+          example: 'https://spmis.example.org/{namespace}/callback/on-search'
         receiver_id:
           description: 'receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.'
           type: string
-          example: pymts.example.org
+          example: ibr.example.org
         total_count:
           description: Total no of requests present in the message request
           type: integer

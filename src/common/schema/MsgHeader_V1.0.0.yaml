@@ -34,7 +34,7 @@ properties:
   receiver_id:
     description: receiver id registered with the calling system. Used for authorization, encryption, digital sign verification, etc., functions.
     type: string
-    example: 'pymts.example.org'
+    example: 'civilregistry.example.org'
   total_count:
     description: Total no of requests present in the message request
     type: integer

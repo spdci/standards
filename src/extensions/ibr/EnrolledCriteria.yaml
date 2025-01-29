@@ -13,6 +13,8 @@ properties:
     description: "Query expression for the enrolled query"
     example: 
       {
-         "person_identifier": { "eq": "ABC451123" }
+         "person_identifier": { "eq": "ABC451123" },
+         "programme_identifier.program.programme_identifier":{"eq":"DCI001"}
+
           
       }
